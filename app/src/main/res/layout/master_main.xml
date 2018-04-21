@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--CoordinatorLayout當其一view變動,其餘view特定移動-->
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator_master"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--AppBarLayout继承LinerLayout實現ViewGroup容器,支持手勢滑動-->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_master"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--scroll滾動設定-->
+        <!--enterAlways快速返回模式-->
+        <include
+            layout="@layout/master_toolbar_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|enterAlways" />
+
+        <!--tabGravity:fill將TabLayout的各item填滿-->
+        <!--tabMode:設置fixed表TabLayout固定各item-->
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_master"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabMode="fixed" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!--使用CoordinatorLayout實現Toolbar滾動,則須在滾動的view中設置layout_behavior,即會觸發layout_scrollFlags的改變-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_master"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</android.support.design.widget.CoordinatorLayout>
