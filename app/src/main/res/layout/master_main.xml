@@ -13,14 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--&lt;!&ndash;scroll滾動設定&ndash;&gt;-->
-        <!--&lt;!&ndash;enterAlways快速返回模式&ndash;&gt;-->
-        <!--<include-->
-            <!--layout="@layout/master_toolbar_item"-->
-            <!--android:id="@+id/toolbar_master"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--app:layout_scrollFlags="scroll|enterAlways" />-->
+        <!--?是特殊字符,意味是Android内部功能。-->
+        <!--?attr/actionBarSize為Android預設ActionBar的大小-->
+        <!--enterAlways快速返回模式-->
+        <!--snap滾動時要馬全部顯示要馬縮合,如ViewPager左右吸附效果-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_master"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
+        </android.support.v7.widget.Toolbar>
 
         <!--tabGravity:fill將TabLayout的各item填滿-->
         <!--tabMode:設置fixed表TabLayout固定各item-->

@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,8 @@ import java.util.List;
 //Master APP Activity
 public class Master extends AppCompatActivity {
     //置入主頁面所需元件
+    Toolbar toolbar_master;
+
     TabLayout tab_master;
     ViewPager viewpager_master;
     SearchView search_master;
@@ -45,10 +48,13 @@ public class Master extends AppCompatActivity {
 
         //初始化元件
         findViews();
+        setSupportActionBar(toolbar_master);
         //主功能頁面Fragment與搭載在TabLayout內ViewPager的橋接設定
         setViewPager();
         //設定置入TabLayout的圖片
         setTabLayout();
+
+
 
 
     }
@@ -101,6 +107,7 @@ public class Master extends AppCompatActivity {
 
     //初始化元件-TabLayout, ViewPager
     private void findViews() {
+        toolbar_master=(Toolbar)findViewById(R.id.toolbar_master);
         tab_master = (TabLayout) findViewById(R.id.tab_master);
         viewpager_master = (ViewPager) findViewById(R.id.viewpager_master);
     }
