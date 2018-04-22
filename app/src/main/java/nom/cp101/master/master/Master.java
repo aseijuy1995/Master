@@ -6,8 +6,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-
+import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +21,9 @@ public class Master extends AppCompatActivity {
     //置入主頁面所需元件
     TabLayout tab_master;
     ViewPager viewpager_master;
+    SearchView search_master;
+    AutoCompleteTextView autoCompleteTextView_master;
+
     //文章frag
     ArticleFragment articleFragment;
     //私訊frag
@@ -41,12 +49,26 @@ public class Master extends AppCompatActivity {
         setViewPager();
         //設定置入TabLayout的圖片
         setTabLayout();
+
+
+    }
+
+    //設置SearcjAutoComplete
+    private void setSearchAutoComplete() {
+        String[] searchContent=getResources().getStringArray(R.array.languages);
+        //autoCompleteTextView橋接自定viewItem
+        autoCompleteTextView_master.setAdapter(new ArrayAdapter<>(this,
+                                                                        R.layout.master_search_autocomplete_item,
+                                                                        R.id.tv_autocomplete,
+                                                                        searchContent));
+        //設置提示條件-輸入長度取決於何時顯示
+        autoCompleteTextView_master.setThreshold(1);
     }
 
 
     //設定置入TabLayout的圖片
     private void setTabLayout() {
-
+        //TabLayout接上viewPager
         tab_master.setupWithViewPager(viewpager_master, true);
         //暫先設置數字1~4
         for (int i = 0; i < list_master.size(); i++) {
@@ -81,5 +103,44 @@ public class Master extends AppCompatActivity {
     private void findViews() {
         tab_master = (TabLayout) findViewById(R.id.tab_master);
         viewpager_master = (ViewPager) findViewById(R.id.viewpager_master);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        //取得toolbar的menu樣式檔
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+
+        //通過getActionView()將menu上的item轉為view使用
+        search_master=(SearchView)menu.findItem(R.id.search_master).getActionView();
+        //抓取隱藏在searchView內的AuyoCompleteTextView
+        autoCompleteTextView_master=(AutoCompleteTextView)search_master.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        //設定置入於SearchView內的AutoCompleteTextView橋接器
+        setSearchAutoComplete();
+
+        autoCompleteTextView_master.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //取得點擊autoCompleteTextView內的Item值
+                String searchContent=parent.getItemAtPosition(position).toString();
+                //設置查詢數據給予searchView並提交(true)
+                search_master.setQuery(searchContent,true);
+            }
+        });
+
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            //item為addText時(新增文章),先做Toast
+            case R.id.addText_master:
+                Toast.makeText(getApplicationContext(),"Click addText",Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
