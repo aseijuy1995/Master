@@ -13,13 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--scroll滾動設定-->
-        <!--enterAlways快速返回模式-->
-        <include
-            layout="@layout/master_toolbar_item"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|enterAlways" />
+        <!--&lt;!&ndash;scroll滾動設定&ndash;&gt;-->
+        <!--&lt;!&ndash;enterAlways快速返回模式&ndash;&gt;-->
+        <!--<include-->
+            <!--layout="@layout/master_toolbar_item"-->
+            <!--android:id="@+id/toolbar_master"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--app:layout_scrollFlags="scroll|enterAlways" />-->
 
         <!--tabGravity:fill將TabLayout的各item填滿-->
         <!--tabMode:設置fixed表TabLayout固定各item-->
