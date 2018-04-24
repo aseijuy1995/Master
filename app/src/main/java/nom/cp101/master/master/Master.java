@@ -1,5 +1,7 @@
 package nom.cp101.master.master;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -53,7 +55,7 @@ public class Master extends AppCompatActivity {
         setViewPager();
         //設定置入TabLayout的圖片
         setTabLayout();
-
+        
 
 
 
