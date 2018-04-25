@@ -1,59 +1,91 @@
 package nom.cp101.master.master;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by yujie on 2018/4/22.
  */
-
+//文章列表內專業類別選項與GridView的橋接器
 public class ArticleGridViewAdapter extends BaseAdapter {
+    //MasterActivity.this
+    Context context;
+    //專業類別陣列,其用於類別點選之圖片與名稱
+    List<ProjectData> projectList;
 
+    public ArticleGridViewAdapter(Context context) {
+        this.context = context;
+        this.projectList = getProjectListData();
+    }
 
+    //依照專業類別筆數實作次數
     @Override
     public int getCount() {
-        return 8;
+        return projectList.size();
     }
 
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return projectList.get(position);
     }
 
-    /**
-     * Get the row id associated with the specified position in the list.
-     *
-     * @param position The position of the item within the adapter's data set whose row id we want.
-     * @return The id of the item at the specified position.
-     */
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
-    /**
-     * Get a View that displays the data at the specified position in the data set. You can either
-     * create a View manually or inflate it from an XML layout file. When the View is inflated, the
-     * parent View (GridView, ListView...) will apply default layout parameters unless you use
-     * {@link LayoutInflater#inflate(int, ViewGroup, boolean)}
-     * to specify a root view and to prevent attachment to the root.
-     *
-     * @param position    The position of the item within the adapter's data set of the item whose view
-     *                    we want.
-     * @param convertView The old view to reuse, if possible. Note: You should check that this view
-     *                    is non-null and of an appropriate type before using. If it is not possible to convert
-     *                    this view to display the correct data, this method can create a new view.
-     *                    Heterogeneous lists can specify their number of view types, so that this View is
-     *                    always of the right type (see {@link #getViewTypeCount()} and
-     *                    {@link #getItemViewType(int)}).
-     * @param parent      The parent that this view will eventually be attached to
-     * @return A View corresponding to the data at the specified position.
-     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        //當convertView為null時,實作置入gridView的item-xml檔
+        if(convertView==null){
+            convertView=LayoutInflater.from(context).inflate(R.layout.article_recyclerview_gridview_item, parent,false);
+        }
+        //依照position抓取顯示的專業類別內之數據
+        ProjectData project=projectList.get(position);
+
+        ImageView iv_gridView=(ImageView)convertView.findViewById(R.id.iv_gridView);
+        TextView tv_gridView=(TextView)convertView.findViewById(R.id.tv_gridView);
+        //取得螢幕寬度的四分之一,並將此item的長同樣設置
+        int w=context.getResources().getDisplayMetrics().widthPixels/4;
+        convertView.setMinimumHeight(w);
+        //設置專業類別的圖與名稱
+        iv_gridView.setImageResource(project.getImgId());
+        tv_gridView.setText(project.getTv());
+        //取得放置item的ViewGroup-GridView
+        //取得LayoutParams,可獲得關於GridView的訊息內容
+        ViewGroup.LayoutParams params=parent.getLayoutParams();
+        //將gridView的高度設為從螢幕解析出來寬度/4設給各item使用的高度,取得＊2給予GirdView使用
+        //直接將抓取的高度社給params.height即可採用
+        //不太優的用法
+        params.height=w*2;
+
+
+
+        return convertView;
+    }
+
+    //db抓取專業類別之數據
+    public List<ProjectData> getProjectListData() {
+
+        projectList=new ArrayList<>();
+
+        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "1"));
+        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "2"));
+        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "3"));
+        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "4"));
+        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "5"));
+        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "6"));
+        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "7"));
+        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "8"));
+
+        return projectList;
     }
 }

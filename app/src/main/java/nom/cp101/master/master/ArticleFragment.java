@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //文章frag
 public class ArticleFragment extends Fragment {
     RecyclerView rv;
@@ -22,8 +25,11 @@ public class ArticleFragment extends Fragment {
         view = inflater.inflate(R.layout.article_frag, container, false);
         //取得RecyclerView並接上ArticleAdapter
         setRecyclerView();
+
         return view;
     }
+
+
 
     //取得RecyclerView並接上ArticleAdapter
     private void setRecyclerView() {

@@ -58,7 +58,6 @@ public class Master extends AppCompatActivity {
         
 
 
-
     }
 
     //設置SearcjAutoComplete
@@ -119,7 +118,6 @@ public class Master extends AppCompatActivity {
 
         //取得toolbar的menu樣式檔
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-
         //通過getActionView()將menu上的item轉為view使用
         search_master=(SearchView)menu.findItem(R.id.search_master).getActionView();
         //抓取隱藏在searchView內的AuyoCompleteTextView
