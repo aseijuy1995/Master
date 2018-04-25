@@ -34,7 +34,7 @@ public class Master extends AppCompatActivity {
     //私訊frag
     MessageFragment messageFragment;
     //通知frag
-    NoticeFragment noticeFragment;
+    NotificationFragment notificationFragment;
     //資料frag
     InformationFragment informationFragment;
 
@@ -92,13 +92,13 @@ public class Master extends AppCompatActivity {
         //此區添加個主功能的Fragment,設置完成請將替代的Fragment移除
         articleFragment = new ArticleFragment();
         messageFragment = new MessageFragment();
-        noticeFragment = new NoticeFragment();
+        notificationFragment = new NotificationFragment();
         informationFragment = new InformationFragment();
 
         //此區置換個主功能的Fragment,設置完成請將添加對應的Fragment移除
         list_master.add(articleFragment);
         list_master.add(messageFragment);
-        list_master.add(noticeFragment);
+        list_master.add(notificationFragment);
         list_master.add(informationFragment);
 
         //主畫面Master-期內掛載在TabLayout內的ViewPager與包裝過的list橋接設置
