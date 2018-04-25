@@ -17,7 +17,6 @@ import java.util.List;
 public class ArticleFragment extends Fragment {
     RecyclerView rv;
     View view;
-    List<ProjectData> projectList;
 
     @Nullable
     @Override
@@ -36,23 +35,8 @@ public class ArticleFragment extends Fragment {
     private void setRecyclerView() {
         rv = (RecyclerView) view.findViewById(R.id.rv_article);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv.setAdapter(new ArticleAdapter(getActivity(), getFragmentManager(), getProjectData()));
+        rv.setAdapter(new ArticleAdapter(getActivity(), getFragmentManager()));
     }
 
-    //載入專業類別的數據
-    private List<ProjectData> getProjectData() {
-        projectList=new ArrayList<>();
-
-        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "1"));
-        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "2"));
-        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "3"));
-        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "4"));
-        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "5"));
-        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "6"));
-        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "7"));
-        projectList.add(new ProjectData(android.R.drawable.sym_action_email, "8"));
-
-        return projectList;
-    }
 }
 
