@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="nf_rv_itemview">#999797</color>
+    <color name="mg_rv_itemview">#a3c2c1c1</color>
+    <color name="mg_rv_underline">#22000000</color>
+    <color name="mg_chatroom_context">#c4bcbc</color>
+    <color name="mg_chatroom_editext">#9f9b9b</color>
 </resources>

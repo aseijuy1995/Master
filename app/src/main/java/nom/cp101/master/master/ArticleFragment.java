@@ -21,15 +21,13 @@ public class ArticleFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+//        getActivity().setTitle("Article");
         view = inflater.inflate(R.layout.article_frag, container, false);
         //取得RecyclerView並接上ArticleAdapter
         setRecyclerView();
 
         return view;
     }
-
-
 
     //取得RecyclerView並接上ArticleAdapter
     private void setRecyclerView() {

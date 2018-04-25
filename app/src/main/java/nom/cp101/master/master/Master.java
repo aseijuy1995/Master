@@ -29,12 +29,14 @@ public class Master extends AppCompatActivity {
     SearchView search_master;
     AutoCompleteTextView autoCompleteTextView_master;
 
-    //文章frag
+    //課程文章frag
     ArticleFragment articleFragment;
+    //心得文章frag
+    ExperienceFragment experienceFragment;
     //私訊frag
     MessageFragment messageFragment;
     //通知frag
-    NoticeFragment noticeFragment;
+    NotificationFragment notificationFragment;
     //資料frag
     InformationFragment informationFragment;
 
@@ -84,20 +86,23 @@ public class Master extends AppCompatActivity {
     }
 
 
+
     //主功能頁面Fragment與搭載在TabLayout內ViewPager的橋接設定
     private void setViewPager() {
         list_master = new ArrayList<>();
 
         //此區添加個主功能的Fragment,設置完成請將替代的Fragment移除
         articleFragment = new ArticleFragment();
+        experienceFragment=new ExperienceFragment();
         messageFragment = new MessageFragment();
-        noticeFragment = new NoticeFragment();
+        notificationFragment = new NotificationFragment();
         informationFragment = new InformationFragment();
 
         //此區置換個主功能的Fragment,設置完成請將添加對應的Fragment移除
         list_master.add(articleFragment);
+        list_master.add(experienceFragment);
         list_master.add(messageFragment);
-        list_master.add(noticeFragment);
+        list_master.add(notificationFragment);
         list_master.add(informationFragment);
 
         //主畫面Master-期內掛載在TabLayout內的ViewPager與包裝過的list橋接設置

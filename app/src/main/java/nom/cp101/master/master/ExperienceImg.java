@@ -6,10 +6,10 @@ import java.io.Serializable;
  * Created by yujie on 2018/4/25.
  */
 
-public class ArticleImg implements Serializable {
+public class ExperienceImg implements Serializable {
     int Img;
 
-    public ArticleImg(int img) {
+    public ExperienceImg(int img) {
         Img = img;
     }
 
