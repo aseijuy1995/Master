@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
  */
 
 public class ArticleGridViewAdapter extends BaseAdapter {
-    List<>
+
 
     @Override
     public int getCount() {
