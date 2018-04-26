@@ -13,6 +13,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Collections;
+
 //ArticleAdapter繼承RecyclerView.Adapter顯示文章首頁樣式
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
     Context context;
@@ -43,7 +45,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         View view = null;
         ViewHolder holder;
         //當種類為對等時,載入相對應的xml檔,轉為view使用
-            //position=0,置入gridView,數據為專案類別名稱與圖
+        //position=0,置入gridView,數據為專案類別名稱與圖
         if (viewType == TYPE_GRIDLAYOUT_FOR_RECYCLERVIEW) {
             view = LayoutInflater.from(context).inflate(R.layout.article_recyclerview_gridview, parent, false);
             holder = new ViewHolder(view);
@@ -53,8 +55,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         } else {
 
             view = LayoutInflater.from(context).inflate(R.layout.article_experience_item, parent, false);
-            holder = new ViewHolder(view);
-
         }
         return new ViewHolder(view);
     }
@@ -63,10 +63,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        if(getItemViewType(position)!=TYPE_GRIDLAYOUT_FOR_RECYCLERVIEW){
-            ArticleExperienceData articleExperienceData=new ArticleExperienceData(position-1);
-
-            holder.ivPictureAE.setImageResource(articleExperienceData.getImg());
+        if (getItemViewType(position) != TYPE_GRIDLAYOUT_FOR_RECYCLERVIEW) {
+            //取得存有課程文章之所有數據
+            ArticleData articleData = new ArticleData();
+            //將數據倒序排列
+            Collections.reverse(articleData.imgList);
+            //因position=0時,因有置入gridView所以position需-1來帶入,否則會導致IndexOutOfBoundsException超出index的例外
+            holder.ivPictureAE.setImageResource(articleData.imgList.get(position - 1));
         }
     }
 
@@ -90,12 +93,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
             super(itemView);
             gv_article = (GridView) itemView.findViewById(R.id.gv_article);
 
-            cvAE=(CardView)itemView.findViewById(R.id.cvAE);
-            ivHeadAE=(ImageView)itemView.findViewById(R.id.ivHeadAE);
-            ivPictureAE=(ImageView)itemView.findViewById(R.id.ivPictureAE);
+            cvAE = (CardView) itemView.findViewById(R.id.cvAE);
+            ivHeadAE = (ImageView) itemView.findViewById(R.id.ivHeadAE);
+            ivPictureAE = (ImageView) itemView.findViewById(R.id.ivPictureAE);
             tvHeadAE = (TextView) itemView.findViewById(R.id.tvHeadAE);
             tvContentAE = (TextView) itemView.findViewById(R.id.tvContentAE);
-            cbAE=(CheckBox)itemView.findViewById(R.id.cbAE);
+            cbAE = (CheckBox) itemView.findViewById(R.id.cbAE);
         }
     }
 }
