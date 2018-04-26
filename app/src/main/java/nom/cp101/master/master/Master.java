@@ -2,8 +2,10 @@ package nom.cp101.master.master;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +25,6 @@ import java.util.List;
 public class Master extends AppCompatActivity {
     //置入主頁面所需元件
     Toolbar toolbar_master;
-
     TabLayout tab_master;
     ViewPager viewpager_master;
     SearchView search_master;
@@ -49,17 +50,14 @@ public class Master extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.master_main);
-
         //初始化元件
         findViews();
+        //設定自訂ToolBar套為ActionBar
         setSupportActionBar(toolbar_master);
         //主功能頁面Fragment與搭載在TabLayout內ViewPager的橋接設定
         setViewPager();
         //設定置入TabLayout的圖片
         setTabLayout();
-        
-
-
     }
 
     //設置SearcjAutoComplete
@@ -77,15 +75,20 @@ public class Master extends AppCompatActivity {
 
     //設定置入TabLayout的圖片
     private void setTabLayout() {
+        //tablayout圖示
+        int[] imgs={R.drawable.tab_article,
+                R.drawable.tab_experience,
+                R.drawable.tab_message,
+                R.drawable.tab_notice,
+                R.drawable.tab_information};
         //TabLayout接上viewPager
         tab_master.setupWithViewPager(viewpager_master, true);
-        //暫先設置數字1~4
+        //設置tablayout圖示
         for (int i = 0; i < list_master.size(); i++) {
-            tab_master.getTabAt(i).setText(String.valueOf(i + 1));
+            tab_master.getTabAt(i).setIcon(imgs[i]);
         }
+
     }
-
-
 
     //主功能頁面Fragment與搭載在TabLayout內ViewPager的橋接設定
     private void setViewPager() {
@@ -120,7 +123,6 @@ public class Master extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         //取得toolbar的menu樣式檔
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         //通過getActionView()將menu上的item轉為view使用
