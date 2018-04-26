@@ -1,15 +1,15 @@
 package nom.cp101.master.master;
 
-import java.io.Serializable;
+
 
 /**
  * Created by yujie on 2018/4/25.
  */
 
-public class ExperienceImg implements Serializable {
+public class ExperienceData{
     int Img;
 
-    public ExperienceImg(int img) {
+    public ExperienceData(int img) {
         Img = img;
     }
 

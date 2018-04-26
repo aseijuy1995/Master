@@ -19,7 +19,7 @@ public class ExperienceViewPagerFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //將Article列表內的ViewPager每一頁面呈現的frag實體化
-        View view=inflater.inflate(R.layout.experiencerecyclerview_viewpager_frag,container,false);
+        View view=inflater.inflate(R.layout.experience_recyclerview_viewpager_frag,container,false);
         //取得傳進的每一張圖片id
         int articleImg=getArguments().getInt("experienceImg");
 
