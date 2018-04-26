@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 //ArticleAdapter繼承RecyclerView.Adapter顯示文章首頁樣式
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
@@ -21,12 +24,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     FragmentManager fragmentManager;
     //position為0時,帶入RecyclerView其顯現樣式為GridLayouy
     static final int TYPE_GRIDLAYOUT_FOR_RECYCLERVIEW = 0;
-    //
-    static final int TYPE_ARTICLE = 1;
+    //取得存有課程文章之所有數據
+    List<ArticleCourseData> articleCourseDataList;
 
     public ArticleAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
         this.fragmentManager = fragmentManager;
+        articleCourseDataList = ArticleData.takeArticleCourseDataList();
     }
 
     //依靠position置入相對的ViewType
@@ -64,19 +68,33 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         if (getItemViewType(position) != TYPE_GRIDLAYOUT_FOR_RECYCLERVIEW) {
-            //取得存有課程文章之所有數據
-            ArticleData articleData = new ArticleData();
             //將數據倒序排列
-            Collections.reverse(articleData.imgList);
+            //排序過後有數據亂掉的問題
+
+//            Collections.sort(articleCourseDataList);
+//            Collections.reverse(articleCourseDataList);
+
+            Iterator iterator=((LinkedList)articleCourseDataList).descendingIterator();
+
             //因position=0時,因有置入gridView所以position需-1來帶入,否則會導致IndexOutOfBoundsException超出index的例外
-            holder.ivPictureAE.setImageResource(articleData.imgList.get(position - 1));
+            ArticleCourseData articleCourseData = articleCourseDataList.get(position - 1);
+
+            //將list存放各ArticleCourseData物件內的各文章資料取出顯示
+            holder.ivHeadAE.setImageResource(articleCourseData.getArticleHeadImg());
+            holder.tvHeadAE.setText(articleCourseData.getArticleHeadName());
+            holder.ivPictureAE.setImageResource(articleCourseData.getArticleImg());
+            //先將各篇文章的讚涉違false,當被按下有事件需處理時,再進行運算
+            //
+            holder.cbAE.setChecked(false);
+            holder.tvContentAE.setText(articleCourseData.getArticleContent());
         }
     }
 
 
+    //回傳次數須為所有課程文章總數以及第一position放置的gridView
     @Override
     public int getItemCount() {
-        return 6;
+        return ArticleData.takeArticleCourseDataList().size() + 1;
     }
 
 

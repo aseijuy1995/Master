@@ -154,7 +154,6 @@ public class Master extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Click addText",Toast.LENGTH_SHORT).show();
                 break;
         }
-
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 }

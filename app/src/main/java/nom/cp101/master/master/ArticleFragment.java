@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,10 @@ public class ArticleFragment extends Fragment {
     //取得RecyclerView並接上ArticleAdapter
     private void setRecyclerView() {
         rv = (RecyclerView) view.findViewById(R.id.rv_article);
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
+//        layout.setStackFromEnd(true);//列表再底部开始展示，反转后由上面开始展示
+//        layout.setReverseLayout(true);//列表翻转
+        rv.setLayoutManager(layoutManager);
         rv.setAdapter(new ArticleAdapter(getActivity(), getFragmentManager()));
     }
 
