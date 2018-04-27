@@ -15,22 +15,22 @@ import java.util.List;
 //心得文章列表,position=0
 public class ExperienceViewPagerFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     //心得文章列表內,置入ExperienceImg的圖片數據
-    List<ExperienceData> experienceImgList;
+    List<ExperienceViewPagerData> experienceViewPagerDataList;
 
     public ExperienceViewPagerFragmentStatePagerAdapter(FragmentManager fm) {
         super(fm);
         //傳進viewPager所需圖片陣列
-        experienceImgList=getProjectData();
+        experienceViewPagerDataList=ExperienceData.takeExperienceViewPagerDataList();
     }
 
     @Override
     public Fragment getItem(int position) {
-        //取得當前顯示的ArticleImg內存放的數據
-        ExperienceData experienceImg= experienceImgList.get(position);
+        //取得experienceViewPagerDataList每一index內的物件ExperienceViewPagerData
+        ExperienceViewPagerData experienceViewPagerData= experienceViewPagerDataList.get(position);
         ExperienceViewPagerFragment experienceViewPagerFragment=new ExperienceViewPagerFragment();
-        //使用bundle傳進數據進articleViewPagerFrag內
+        //使用bundle將數據傳進articleViewPagerFrag內
         Bundle bundle=new Bundle();
-        bundle.putInt("experienceImg", experienceImg.getImg());
+        bundle.putInt("experienceViewPagerDataImg", experienceViewPagerData.getExperienceImg());
         experienceViewPagerFragment.setArguments(bundle);
 
         return experienceViewPagerFragment;
@@ -39,21 +39,7 @@ public class ExperienceViewPagerFragmentStatePagerAdapter extends FragmentStateP
     //viewPager筆數
     @Override
     public int getCount() {
-        return  experienceImgList.size();
+        return  experienceViewPagerDataList.size();
     }
 
-
-    //取得db存放之圖片
-    private List<ExperienceData> getProjectData() {
-        experienceImgList=new ArrayList<>();
-
-        experienceImgList.add(new ExperienceData(R.drawable.ic_launcher_background));
-        experienceImgList.add(new ExperienceData(R.drawable.ic_launcher_foreground));
-        experienceImgList.add(new ExperienceData(R.drawable.ic_launcher_background));
-        experienceImgList.add(new ExperienceData(R.drawable.ic_launcher_foreground));
-        experienceImgList.add(new ExperienceData(R.drawable.ic_launcher_background));
-        experienceImgList.add(new ExperienceData(R.drawable.ic_launcher_foreground));
-
-        return  experienceImgList;
-    }
 }

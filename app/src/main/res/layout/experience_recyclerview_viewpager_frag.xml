@@ -8,5 +8,6 @@
         android:id="@+id/iv_experience"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scaleType="matrix"
         app:srcCompat="@mipmap/ic_launcher" />
 </FrameLayout>
