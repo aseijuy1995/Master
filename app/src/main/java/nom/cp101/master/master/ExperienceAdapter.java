@@ -32,8 +32,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Vi
     public ExperienceAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
         this.fragmentManager = fragmentManager;
-        experienceArticleDataList=ExperienceData.takeExperienceArticleDataList();
-
+        experienceArticleDataList = ExperienceData.takeExperienceArticleDataList();
     }
 
     //依靠position置入相對的ViewType
@@ -59,7 +58,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Vi
             holder.vp_experience.setAdapter(new ExperienceViewPagerFragmentStatePagerAdapter(fragmentManager));
 
             //剩下設置為心得文章顯示區
-        }else {
+        } else {
 
             view = LayoutInflater.from(context).inflate(R.layout.article_experience_item, parent, false);
 
@@ -81,11 +80,12 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Vi
 //            Iterator iterator=((LinkedList)articleCourseDataList).descendingIterator();
 
             //因position=0時,因有置入gridView所以position需-1來帶入,否則會導致IndexOutOfBoundsException超出index的例外
-            ExperienceArticleData experienceArticleData=experienceArticleDataList.get(position);
+            ExperienceArticleData experienceArticleData = experienceArticleDataList.get(position-1);
 
             //將list存放各ArticleCourseData物件內的各文章資料取出顯示
             holder.ivHeadAE.setImageResource(experienceArticleData.getExperienceHeadImg());
             holder.tvHeadAE.setText(experienceArticleData.getExperienceHeadName());
+            holder.tvProject.setText(experienceArticleData.getExperienceproject());
             holder.ivPictureAE.setImageResource(experienceArticleData.getExperienceImg());
             //Date轉成String?
             //
@@ -100,7 +100,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 1+experienceArticleDataList.size();
     }
 
 
@@ -110,7 +110,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Vi
 
         CardView cvAE;
         ImageView ivHeadAE, ivPictureAE;
-        TextView tvHeadAE, tvTime, tvContentAE;
+        TextView tvHeadAE, tvProject, tvTime, tvContentAE;
         CheckBox cbAE;
 
         public ViewHolder(View itemView) {
@@ -119,9 +119,11 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Vi
 
             cvAE = (CardView) itemView.findViewById(R.id.cvAE);
             ivHeadAE = (ImageView) itemView.findViewById(R.id.ivHeadAE);
-            ivPictureAE = (ImageView) itemView.findViewById(R.id.ivPictureAE);
             tvHeadAE = (TextView) itemView.findViewById(R.id.tvHeadAE);
-            tvTime=(TextView)itemView.findViewById(R.id.tvTime);
+            tvProject = (TextView) itemView.findViewById(R.id.tvProject);
+
+            ivPictureAE = (ImageView) itemView.findViewById(R.id.ivPictureAE);
+            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
             tvContentAE = (TextView) itemView.findViewById(R.id.tvContentAE);
             cbAE = (CheckBox) itemView.findViewById(R.id.cbAE);
         }

@@ -38,12 +38,12 @@ public class ArticleData {
 //        List articleCourseDataList = new ArrayList<>();
         List<ArticleCourseData> articleCourseDataList = new LinkedList();
 
-        articleCourseDataList.add(new ArticleCourseData(android.R.drawable.sym_action_email, "1",R.drawable.a1, 0, "111"));
-        articleCourseDataList.add(new ArticleCourseData(android.R.drawable.sym_action_email, "2",R.drawable.a1, 0, "777"));
-        articleCourseDataList.add(new ArticleCourseData(android.R.drawable.sym_action_email, "3",R.drawable.a2, 0, "555"));
-        articleCourseDataList.add(new ArticleCourseData(android.R.drawable.sym_action_email, "4",R.drawable.a2, 0, "111"));
-        articleCourseDataList.add(new ArticleCourseData(android.R.drawable.sym_action_email, "5",R.drawable.a3, 0, "222"));
-        articleCourseDataList.add(new ArticleCourseData(android.R.drawable.sym_action_email, "6",R.drawable.a3, 0, "333"));
+        articleCourseDataList.add(new ArticleCourseData(android.R.drawable.sym_action_email, "1","類別1",R.drawable.a1, "111" ,0));
+        articleCourseDataList.add(new ArticleCourseData(android.R.drawable.sym_action_email, "2","類別2",R.drawable.a1, "777",0));
+        articleCourseDataList.add(new ArticleCourseData(android.R.drawable.sym_action_email, "3","類別3",R.drawable.a2, "555",0));
+        articleCourseDataList.add(new ArticleCourseData(android.R.drawable.sym_action_email, "4","類別4",R.drawable.a2, "111",0));
+        articleCourseDataList.add(new ArticleCourseData(android.R.drawable.sym_action_email, "5","類別5",R.drawable.a3, "222",0));
+        articleCourseDataList.add(new ArticleCourseData(android.R.drawable.sym_action_email, "6","類別6",R.drawable.a3, "333",0));
 
         return articleCourseDataList;
     }

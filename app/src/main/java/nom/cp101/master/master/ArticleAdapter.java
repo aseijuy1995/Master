@@ -82,6 +82,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
             //將list存放各ArticleCourseData物件內的各文章資料取出顯示
             holder.ivHeadAE.setImageResource(articleCourseData.getArticleHeadImg());
             holder.tvHeadAE.setText(articleCourseData.getArticleHeadName());
+            holder.tvProject.setText(articleCourseData.getArticleProject());
+
             holder.ivPictureAE.setImageResource(articleCourseData.getArticleImg());
             holder.tvTime.setVisibility(View.GONE);
             holder.tvContentAE.setText(articleCourseData.getArticleContent());
@@ -105,7 +107,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
         CardView cvAE;
         ImageView ivHeadAE, ivPictureAE;
-        TextView tvHeadAE, tvTime, tvContentAE;
+        TextView tvHeadAE, tvProject, tvTime, tvContentAE;
         CheckBox cbAE;
 
         public ViewHolder(View itemView) {
@@ -114,8 +116,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
             cvAE = (CardView) itemView.findViewById(R.id.cvAE);
             ivHeadAE = (ImageView) itemView.findViewById(R.id.ivHeadAE);
-            ivPictureAE = (ImageView) itemView.findViewById(R.id.ivPictureAE);
             tvHeadAE = (TextView) itemView.findViewById(R.id.tvHeadAE);
+            tvProject= (TextView) itemView.findViewById(R.id.tvProject);
+
+            ivPictureAE = (ImageView) itemView.findViewById(R.id.ivPictureAE);
             tvTime=(TextView)itemView.findViewById(R.id.tvTime);
             tvContentAE = (TextView) itemView.findViewById(R.id.tvContentAE);
             cbAE = (CheckBox) itemView.findViewById(R.id.cbAE);

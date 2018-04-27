@@ -12,22 +12,27 @@ public class ExperienceArticleData {
     int experienceHeadImg;
     //發文者名
     String experienceHeadName;
+    //文章類別
+    String experienceproject;
+
     //發文者圖片
     int experienceImg;
     //發文時間
     Date experienceTime;
-    //文章讚
-    int experienceLaud;
     //文章內容
     String experienceContent;
+    //文章讚
+    int experienceLaud;
 
-    public ExperienceArticleData(int experienceHeadImg, String experienceHeadName, int experienceImg, Date experienceTime, int experienceLaud, String experienceContent) {
+
+    public ExperienceArticleData(int experienceHeadImg, String experienceHeadName, String experienceproject, int experienceImg, Date experienceTime, String experienceContent, int experienceLaud) {
         this.experienceHeadImg = experienceHeadImg;
         this.experienceHeadName = experienceHeadName;
+        this.experienceproject = experienceproject;
         this.experienceImg = experienceImg;
         this.experienceTime = experienceTime;
-        this.experienceLaud = experienceLaud;
         this.experienceContent = experienceContent;
+        this.experienceLaud = experienceLaud;
     }
 
     public int getExperienceHeadImg() {
@@ -46,6 +51,14 @@ public class ExperienceArticleData {
         this.experienceHeadName = experienceHeadName;
     }
 
+    public String getExperienceproject() {
+        return experienceproject;
+    }
+
+    public void setExperienceproject(String experienceproject) {
+        this.experienceproject = experienceproject;
+    }
+
     public int getExperienceImg() {
         return experienceImg;
     }
@@ -62,19 +75,19 @@ public class ExperienceArticleData {
         this.experienceTime = experienceTime;
     }
 
-    public int getExperienceLaud() {
-        return experienceLaud;
-    }
-
-    public void setExperienceLaud(int experienceLaud) {
-        this.experienceLaud = experienceLaud;
-    }
-
     public String getExperienceContent() {
         return experienceContent;
     }
 
     public void setExperienceContent(String experienceContent) {
         this.experienceContent = experienceContent;
+    }
+
+    public int getExperienceLaud() {
+        return experienceLaud;
+    }
+
+    public void setExperienceLaud(int experienceLaud) {
+        this.experienceLaud = experienceLaud;
     }
 }

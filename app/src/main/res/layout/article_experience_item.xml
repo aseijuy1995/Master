@@ -56,6 +56,17 @@
                         android:textColor="#ffffff"
                         android:textSize="14sp" />
 
+                    <TextView
+                        android:id="@+id/tvProject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="TextView"
+                        android:textColor="#888888"
+                        android:textSize="12sp" />
+
                 </LinearLayout>
 
             </FrameLayout>

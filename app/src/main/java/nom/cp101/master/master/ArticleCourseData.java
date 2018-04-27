@@ -13,19 +13,23 @@ public class ArticleCourseData {
     int articleHeadImg;
     //發文者名
     String articleHeadName;
+    //文章類別
+    String articleProject;
+
     //發文者圖片
     int articleImg;
-    //文章讚
-    int articleLaud;
     //文章內容
     String articleContent;
+    //文章讚
+    int articleLaud;
 
-    public ArticleCourseData(int articleHeadImg, String articleHeadName, int articleImg, int articleLaud, String articleContent) {
+    public ArticleCourseData(int articleHeadImg, String articleHeadName, String articleProject, int articleImg, String articleContent, int articleLaud) {
         this.articleHeadImg = articleHeadImg;
         this.articleHeadName = articleHeadName;
+        this.articleProject = articleProject;
         this.articleImg = articleImg;
-        this.articleLaud = articleLaud;
         this.articleContent = articleContent;
+        this.articleLaud = articleLaud;
     }
 
     public int getArticleHeadImg() {
@@ -44,6 +48,14 @@ public class ArticleCourseData {
         this.articleHeadName = articleHeadName;
     }
 
+    public String getArticleProject() {
+        return articleProject;
+    }
+
+    public void setArticleProject(String articleProject) {
+        this.articleProject = articleProject;
+    }
+
     public int getArticleImg() {
         return articleImg;
     }
@@ -52,19 +64,19 @@ public class ArticleCourseData {
         this.articleImg = articleImg;
     }
 
-    public int getArticleLaud() {
-        return articleLaud;
-    }
-
-    public void setArticleLaud(int articleLaud) {
-        this.articleLaud = articleLaud;
-    }
-
     public String getArticleContent() {
         return articleContent;
     }
 
     public void setArticleContent(String articleContent) {
         this.articleContent = articleContent;
+    }
+
+    public int getArticleLaud() {
+        return articleLaud;
+    }
+
+    public void setArticleLaud(int articleLaud) {
+        this.articleLaud = articleLaud;
     }
 }

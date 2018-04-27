@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -51,7 +52,8 @@ public class ArticleGridViewAdapter extends BaseAdapter {
         //依照position抓取顯示的專業類別內之數據
         ArticleGridViewData articleViewPagerData = articleViewPagerDataList.get(position);
 
-
+        LinearLayout layout_gridView=(LinearLayout)convertView.findViewById(R.id.layout_gridView);
+        
         ImageView iv_gridView = (ImageView) convertView.findViewById(R.id.iv_gridView);
         TextView tv_gridView = (TextView) convertView.findViewById(R.id.tv_gridView);
         //取得螢幕寬度的四分之一,並將此item的長同樣設置
