@@ -1,24 +1,26 @@
 package nom.cp101.master.master.Notification;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-//notificaiton recycerview 用到的屬性
+// notificaiton recycerview 用到的屬性
 public class Notification_rv_item {
-    //留言回覆者,發文者的姓名
+    // 留言回覆者,發文者的姓名
     String name;
-    //留言內容,發文內容
+    // 留言內容,發文內容
     String content;
-    //留言回覆者,發文者的圖片
-    int pictureID;
-    //通知類型
+    // 通知類型
     int nf_type;
-    //通知時間
-    String time;
+    // 通知時間
+    Date time;
+    //通知對應的文章
+    int post_id;
 
-    public Notification_rv_item(String name, String content, int pictureID, String time) {
+    public Notification_rv_item(String name, String content, Date time,int post_id) {
         this.name = name;
         this.content = content;
-        this.pictureID = pictureID;
         this.time = time;
+        this.post_id = post_id;
     }
 
     public String getName() {
@@ -34,37 +36,46 @@ public class Notification_rv_item {
     }
 
     public void setContent(String content) {
-        String text = "";
         this.content = content;
-        switch (nf_type) {
-            case 0:
-                text = getName() + "發表了新的文章";
-                break;
-            case 1:
-                text = getName() + "回應了你的貼文";
+    }
+
+    public String getNf_type() {
+        String text = null;
+        switch (nf_type){
+            case 1 :
+                text = name + " 發出了新的文章";
                 break;
             case 2:
-                text = getName() + "也回應了你關注的貼文";
-            default:
+                text = name + " 回覆了你的貼文";
                 break;
-
+            case 3:
+                text = name + " 也回覆了你的留言";
+                break;
         }
 
+        return text;
     }
 
-    public int getPictureID() {
-        return pictureID;
-    }
-
-    public void setPictureID(int pictureID) {
-        this.pictureID = pictureID;
+    public void setNf_type(int nf_type) {
+        this.nf_type = nf_type;
     }
 
     public String getTime() {
-        return time;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd HH:mm:ss");
+        String formatetime = simpleDateFormat.format(time);
+        return formatetime;
     }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
+
+    public int getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(int post_id) {
+        this.post_id = post_id;
+    }
+
 }
