@@ -37,6 +37,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     @Override
     public int getItemViewType(int position) {
         if (position == 0)
+//        if (position == articleCourseDataList.size())
             return TYPE_GRIDLAYOUT_FOR_RECYCLERVIEW;
         else
             return position;
@@ -73,8 +74,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
 //            Collections.sort(articleCourseDataList);
 //            Collections.reverse(articleCourseDataList);
-
-            Iterator iterator=((LinkedList)articleCourseDataList).descendingIterator();
 
             //因position=0時,因有置入gridView所以position需-1來帶入,否則會導致IndexOutOfBoundsException超出index的例外
             ArticleCourseData articleCourseData = articleCourseDataList.get(position - 1);
@@ -117,10 +116,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
             cvAE = (CardView) itemView.findViewById(R.id.cvAE);
             ivHeadAE = (ImageView) itemView.findViewById(R.id.ivHeadAE);
             tvHeadAE = (TextView) itemView.findViewById(R.id.tvHeadAE);
-            tvProject= (TextView) itemView.findViewById(R.id.tvProject);
+            tvProject = (TextView) itemView.findViewById(R.id.tvProject);
 
             ivPictureAE = (ImageView) itemView.findViewById(R.id.ivPictureAE);
-            tvTime=(TextView)itemView.findViewById(R.id.tvTime);
+            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
             tvContentAE = (TextView) itemView.findViewById(R.id.tvContentAE);
             cbAE = (CheckBox) itemView.findViewById(R.id.cbAE);
         }
