@@ -1,4 +1,24 @@
 <resources>
+
+
+    <!--專業類別名稱-->
+    <string name="water_sports">水類運動</string>
+    <string name="extreme_sport">極限運動</string>
+    <string name="work_out">運動健身</string>
+    <string name="ball_sports">球類運動</string>
+    <string name="musical_instrument">音樂樂器</string>
+    <string name="language_learning">語言學習</string>
+    <string name="leisure_talent">休閒才藝</string>
+    <string name="programming">程式設計</string>
+
+
+
+
+
+
+
+
+
     <string name="app_name">Master</string>
     <string name="addText">add_text</string>
     <string name="searchData">search_data</string>

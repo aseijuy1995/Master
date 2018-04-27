@@ -18,7 +18,7 @@ public class ArticleGridViewAdapter extends BaseAdapter {
     //MasterActivity.this
     Context context;
     //專業類別陣列,其用於類別點選之圖片與名稱
-    List<ArticleViewPagerData> articleViewPagerDataList;
+    List<ArticleGridViewData> articleViewPagerDataList;
 
     public ArticleGridViewAdapter(Context context) {
         this.context = context;
@@ -49,7 +49,7 @@ public class ArticleGridViewAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.article_recyclerview_gridview_item, parent, false);
         }
         //依照position抓取顯示的專業類別內之數據
-        ArticleViewPagerData articleViewPagerData = articleViewPagerDataList.get(position);
+        ArticleGridViewData articleViewPagerData = articleViewPagerDataList.get(position);
 
 
         ImageView iv_gridView = (ImageView) convertView.findViewById(R.id.iv_gridView);

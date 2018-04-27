@@ -5,11 +5,11 @@ package nom.cp101.master.master;
  */
 
 //此類別為將專業類別名稱與圖示
-public class ArticleViewPagerData {
+public class ArticleGridViewData {
     int projectImg;
-    String projectName;
+    int projectName;
 
-    public ArticleViewPagerData(int projectImg, String projectName) {
+    public ArticleGridViewData(int projectImg, int projectName) {
         this.projectImg = projectImg;
         this.projectName = projectName;
     }
@@ -22,11 +22,11 @@ public class ArticleViewPagerData {
         this.projectImg = projectImg;
     }
 
-    public String getProjectName() {
+    public int getProjectName() {
         return projectName;
     }
 
-    public void setProjectName(String projectName) {
+    public void setProjectName(int projectName) {
         this.projectName = projectName;
     }
 }

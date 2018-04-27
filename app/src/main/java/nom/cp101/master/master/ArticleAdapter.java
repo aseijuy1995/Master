@@ -83,10 +83,11 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
             holder.ivHeadAE.setImageResource(articleCourseData.getArticleHeadImg());
             holder.tvHeadAE.setText(articleCourseData.getArticleHeadName());
             holder.ivPictureAE.setImageResource(articleCourseData.getArticleImg());
+            holder.tvTime.setVisibility(View.GONE);
+            holder.tvContentAE.setText(articleCourseData.getArticleContent());
             //先將各篇文章的讚涉違false,當被按下有事件需處理時,再進行運算
             //
             holder.cbAE.setChecked(false);
-            holder.tvContentAE.setText(articleCourseData.getArticleContent());
         }
     }
 
@@ -104,7 +105,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
         CardView cvAE;
         ImageView ivHeadAE, ivPictureAE;
-        TextView tvHeadAE, tvContentAE;
+        TextView tvHeadAE, tvTime, tvContentAE;
         CheckBox cbAE;
 
         public ViewHolder(View itemView) {
@@ -115,6 +116,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
             ivHeadAE = (ImageView) itemView.findViewById(R.id.ivHeadAE);
             ivPictureAE = (ImageView) itemView.findViewById(R.id.ivPictureAE);
             tvHeadAE = (TextView) itemView.findViewById(R.id.tvHeadAE);
+            tvTime=(TextView)itemView.findViewById(R.id.tvTime);
             tvContentAE = (TextView) itemView.findViewById(R.id.tvContentAE);
             cbAE = (CheckBox) itemView.findViewById(R.id.cbAE);
         }
