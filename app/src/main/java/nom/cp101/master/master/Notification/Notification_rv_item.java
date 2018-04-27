@@ -1,4 +1,4 @@
-package nom.cp101.master.master;
+package nom.cp101.master.master.Notification;
 
 
 //notificaiton recycerview 用到的屬性

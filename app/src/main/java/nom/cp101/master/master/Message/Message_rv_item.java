@@ -1,4 +1,4 @@
-package nom.cp101.master.master;
+package nom.cp101.master.master.Message;
 
 
 //message recyclerview 用到的屬性

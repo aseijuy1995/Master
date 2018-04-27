@@ -1,4 +1,4 @@
-package nom.cp101.master.master;
+package nom.cp101.master.master.Message;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import nom.cp101.master.master.R;
 
 public class MessageFragment extends Fragment {
     @Nullable

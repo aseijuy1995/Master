@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MessageChatroom"
+            android:name=".Message.MessageChatroom"
             android:theme="@style/MessageTheme" />
     </application>
 
