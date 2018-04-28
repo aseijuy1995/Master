@@ -1,4 +1,4 @@
-package nom.cp101.master.master;
+package nom.cp101.master.master.Master;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -16,9 +16,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
-
+import nom.cp101.master.master.CourseArticle.CourseArticleFragment;
+import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
+import nom.cp101.master.master.InformationFragment;
 import nom.cp101.master.master.Message.MessageFragment;
 import nom.cp101.master.master.Notification.NotificationFragment;
+import nom.cp101.master.master.R;
 
 //Master APP Activity
 public class Master extends AppCompatActivity {
@@ -30,9 +33,9 @@ public class Master extends AppCompatActivity {
     AutoCompleteTextView autoCompleteTextView_master;
 
     //課程文章frag
-    ArticleFragment articleFragment;
+    CourseArticleFragment courseArticleFragment;
     //心得文章frag
-    ExperienceFragment experienceFragment;
+    ExperienceArticleFragment experienceArticleFragment;
     //私訊frag
     MessageFragment messageFragment;
     //通知frag
@@ -59,26 +62,13 @@ public class Master extends AppCompatActivity {
         setTabLayout();
     }
 
-    //設置SearcjAutoComplete
-    private void setSearchAutoComplete() {
-        String[] searchContent=getResources().getStringArray(R.array.languages);
-        //autoCompleteTextView橋接自定viewItem
-        autoCompleteTextView_master.setAdapter(new ArrayAdapter<>(this,
-                                                                        R.layout.master_search_autocomplete_item,
-                                                                        R.id.tv_autocomplete,
-                                                                        searchContent));
-        //設置提示條件-輸入長度取決於何時顯示
-        autoCompleteTextView_master.setThreshold(1);
-    }
-
-
     //設定置入TabLayout的圖片
     private void setTabLayout() {
         //tablayout圖示
         int[] imgs={R.drawable.tab_article,
                 R.drawable.tab_experience,
                 R.drawable.tab_message,
-                R.drawable.tab_notice,
+//                R.drawable.tab_notice,
                 R.drawable.tab_information};
         //TabLayout接上viewPager
         tab_master.setupWithViewPager(viewpager_master, true);
@@ -86,6 +76,23 @@ public class Master extends AppCompatActivity {
         for (int i = 0; i < list_master.size(); i++) {
             tab_master.getTabAt(i).setIcon(imgs[i]);
         }
+        //取得tabLayout各鈕的position以便判斷顯示或隱藏toolBar,並設其標題名
+        tab_master.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewpager_master){
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                super.onTabSelected(tab);
+                int position=tab.getPosition();
+                if(position==0){
+                    toolbar_master.setVisibility(View.VISIBLE);
+                    setTitle(R.string.courseArticle);
+                }else if(position==1){
+                    toolbar_master.setVisibility(View.VISIBLE);
+                    setTitle(R.string.experienceArticle);
+                }
+                else
+                    toolbar_master.setVisibility(View.GONE);
+            }
+        });
 
     }
 
@@ -94,17 +101,17 @@ public class Master extends AppCompatActivity {
         list_master = new ArrayList<>();
 
         //此區添加個主功能的Fragment,設置完成請將替代的Fragment移除
-        articleFragment = new ArticleFragment();
-        experienceFragment=new ExperienceFragment();
+        courseArticleFragment = new CourseArticleFragment();
+        experienceArticleFragment=new ExperienceArticleFragment();
         messageFragment = new MessageFragment();
         notificationFragment = new NotificationFragment();
         informationFragment = new InformationFragment();
 
         //此區置換個主功能的Fragment,設置完成請將添加對應的Fragment移除
-        list_master.add(articleFragment);
-        list_master.add(experienceFragment);
+        list_master.add(courseArticleFragment);
+        list_master.add(experienceArticleFragment);
         list_master.add(messageFragment);
-        list_master.add(notificationFragment);
+//        list_master.add(notificationFragment);
         list_master.add(informationFragment);
 
         //主畫面Master-期內掛載在TabLayout內的ViewPager與包裝過的list橋接設置
@@ -144,6 +151,17 @@ public class Master extends AppCompatActivity {
         return true;
     }
 
+    //設置SearcjAutoComplete
+    private void setSearchAutoComplete() {
+        String[] searchContent=getResources().getStringArray(R.array.languages);
+        //autoCompleteTextView橋接自定viewItem
+        autoCompleteTextView_master.setAdapter(new ArrayAdapter<>(this,
+                R.layout.master_search_autocomplete_item,
+                R.id.tv_autocomplete,
+                searchContent));
+        //設置提示條件-輸入長度取決於何時顯示
+        autoCompleteTextView_master.setThreshold(1);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

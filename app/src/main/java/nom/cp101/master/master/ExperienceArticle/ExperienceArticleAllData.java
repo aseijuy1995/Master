@@ -1,4 +1,4 @@
-package nom.cp101.master.master;
+package nom.cp101.master.master.ExperienceArticle;
 
 
 import java.util.ArrayList;
@@ -6,28 +6,30 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import nom.cp101.master.master.R;
+
 /**
  * Created by yujie on 2018/4/25.
  */
 
 //此類別為心得文章需呼叫的各method
-public class ExperienceData{
+public class ExperienceArticleAllData {
 
-    static List<ExperienceViewPagerData> experienceViewPagerDataList;
+    static List<ExperienceArticleViewPagerData> experienceArticleViewPagerDataList;
     static List<ExperienceArticleData> experienceArticleDataList;
 
     //db存著置在ExperienceViewPager內的ExperienceViewPagerData陣列
-    public static List<ExperienceViewPagerData> takeExperienceViewPagerDataList() {
-        experienceViewPagerDataList=new ArrayList<>();
+    public static List<ExperienceArticleViewPagerData> takeExperienceViewPagerDataList() {
+        experienceArticleViewPagerDataList =new ArrayList<>();
 
-        experienceViewPagerDataList.add(new ExperienceViewPagerData(R.drawable.a1));
-        experienceViewPagerDataList.add(new ExperienceViewPagerData(R.drawable.a2));
-        experienceViewPagerDataList.add(new ExperienceViewPagerData(R.drawable.a3));
-        experienceViewPagerDataList.add(new ExperienceViewPagerData(R.drawable.a1));
-        experienceViewPagerDataList.add(new ExperienceViewPagerData(R.drawable.a2));
-        experienceViewPagerDataList.add(new ExperienceViewPagerData(R.drawable.a3));
+        experienceArticleViewPagerDataList.add(new ExperienceArticleViewPagerData(R.drawable.a1));
+        experienceArticleViewPagerDataList.add(new ExperienceArticleViewPagerData(R.drawable.a2));
+        experienceArticleViewPagerDataList.add(new ExperienceArticleViewPagerData(R.drawable.a3));
+        experienceArticleViewPagerDataList.add(new ExperienceArticleViewPagerData(R.drawable.a1));
+        experienceArticleViewPagerDataList.add(new ExperienceArticleViewPagerData(R.drawable.a2));
+        experienceArticleViewPagerDataList.add(new ExperienceArticleViewPagerData(R.drawable.a3));
 
-        return  experienceViewPagerDataList;
+        return experienceArticleViewPagerDataList;
     }
 
 

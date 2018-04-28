@@ -1,11 +1,11 @@
-package nom.cp101.master.master;
+package nom.cp101.master.master.Master;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
-//橋接ArticleFragment, MessageFragment, NoticeFragment, InformationFragment各個主功能Fragment的橋接器
+//橋接CourseArticleFragment, ExperienceArticleFragment, MessageFragment, NoticeFragment, InformationFragment各個主功能Fragment的橋接器
 public class MasterFragmentPagerAdapter extends FragmentPagerAdapter {
 
     List<Fragment> list_master;

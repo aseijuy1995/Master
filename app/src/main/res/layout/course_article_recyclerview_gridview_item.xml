@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_gridView"
+    android:id="@+id/layoutGridView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
 
     <ImageView
-        android:id="@+id/iv_gridView"
+        android:id="@+id/ivGridView"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_weight="4" />
 
     <TextView
-        android:id="@+id/tv_gridView"
+        android:id="@+id/tvGridView"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_weight="1"

@@ -1,4 +1,4 @@
-package nom.cp101.master.master;
+package nom.cp101.master.master.CourseArticle;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,21 +9,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import java.util.ArrayList;
-import java.util.List;
+import nom.cp101.master.master.R;
 
-//文章frag
-public class ArticleFragment extends Fragment {
+//課程文章frag
+public class CourseArticleFragment extends Fragment {
     RecyclerView rv;
     View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        getActivity().setTitle("Article");
-        view = inflater.inflate(R.layout.article_frag, container, false);
+        view = inflater.inflate(R.layout.course_article_frag, container, false);
         //取得RecyclerView並接上ArticleAdapter
         setRecyclerView();
 
@@ -32,12 +29,10 @@ public class ArticleFragment extends Fragment {
 
     //取得RecyclerView並接上ArticleAdapter
     private void setRecyclerView() {
-        rv = (RecyclerView) view.findViewById(R.id.rv_article);
+        rv = (RecyclerView) view.findViewById(R.id.rvCourseArticle);
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
-//        layoutManager.setStackFromEnd(true);//列表再底部开始展示，反转后由上面开始展示
-//        layoutManager.setReverseLayout(true);//列表翻转
         rv.setLayoutManager(layoutManager);
-        rv.setAdapter(new ArticleAdapter(getActivity(), getFragmentManager()));
+        rv.setAdapter(new CourseArticleAdapter(getActivity(), getFragmentManager()));
     }
 
 }

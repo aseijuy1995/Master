@@ -1,15 +1,15 @@
-package nom.cp101.master.master;
+package nom.cp101.master.master.CourseArticle;
 
 /**
  * Created by yujie on 2018/4/22.
  */
 
 //此類別為將專業類別名稱與圖示
-public class ArticleGridViewData {
+public class CourseArticleGridViewData {
     int projectImg;
     int projectName;
 
-    public ArticleGridViewData(int projectImg, int projectName) {
+    public CourseArticleGridViewData(int projectImg, int projectName) {
         this.projectImg = projectImg;
         this.projectName = projectName;
     }

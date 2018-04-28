@@ -11,12 +11,9 @@
     <string name="leisure_talent">休閒才藝</string>
     <string name="programming">程式設計</string>
 
-
-
-
-
-
-
+    <!--標題顯示名稱-->
+    <string name="courseArticle">課程文章</string>
+    <string name="experienceArticle">心得文章</string>
 
 
     <string name="app_name">Master</string>

@@ -1,13 +1,13 @@
-package nom.cp101.master.master;
+package nom.cp101.master.master.ExperienceArticle;
 
 /**
  * Created by yujie on 2018/4/27.
  */
 
-public class ExperienceViewPagerData {
+public class ExperienceArticleViewPagerData {
     int experienceImg;
 
-    public ExperienceViewPagerData(int experienceImg) {
+    public ExperienceArticleViewPagerData(int experienceImg) {
         this.experienceImg = experienceImg;
     }
 
