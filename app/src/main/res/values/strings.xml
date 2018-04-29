@@ -1,8 +1,6 @@
 <resources>
 
 
-
-
     <!--標題顯示名稱-->
     <string name="courseArticle">課程文章</string>
     <string name="experienceArticle">心得文章</string>
@@ -100,7 +98,6 @@
     </string-array>
 
 
-
     <array name="waterSportsImg">
         <item>@drawable/a1</item>
         <item>@drawable/a2</item>
@@ -119,20 +116,6 @@
     </array>
 
 
-    <string name="app_name">Master</string>
-    <string name="addText">add_text</string>
-    <string name="searchData">search_data</string>
-    <string name="nf_title">Notification</string>
-    <string name="nf_frag_time">11:00 AM</string>
-    <string name="nf_frag_content">某某某學員也想要參加你的揪團</string>
-    <string name="mg_title">Message</string>
-    <string name="mg_frag_name">邊緣人</string>
-    <string name="mg_frag_time">10:50 PM</string>
-    <string name="mg_frag_content">你好你好你好你</string>
-    <string name="mg_chatroom_send">send</string>
-    <string name="mg_chatroom_etmessage">Enter a message</string>
-    <string name="NoConnection">NoNetworkConnection</string>
-
     <string-array name="languages">
         <item>JAVA</item>
         <item>Android </item>
@@ -150,4 +133,23 @@
         <item>Swift</item>
         <item>Srevlet</item>
     </string-array>
+
+    <!--////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
+    <string name="app_name">Master</string>
+    <string name="addText">add_text</string>
+    <string name="searchData">search_data</string>
+    <string name="nf_title">Notification</string>
+    <string name="nf_frag_time">11:00 AM</string>
+    <string name="nf_frag_content">某某某學員也想要參加你的揪團</string>
+    <string name="mg_title">Message</string>
+    <string name="mg_frag_name">邊緣人</string>
+    <string name="mg_frag_time">10:50 PM</string>
+    <string name="mg_frag_content">你好你好你好你</string>
+    <string name="mg_chatroom_send">send</string>
+    <string name="mg_chatroom_etmessage">Enter a message</string>
+    <string name="NoConnection">NoNetworkConnection</string>
+
+
 </resources>

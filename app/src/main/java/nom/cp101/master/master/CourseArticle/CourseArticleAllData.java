@@ -3,7 +3,6 @@ package nom.cp101.master.master.CourseArticle;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.icu.text.LocaleDisplayNames;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -58,69 +57,32 @@ public class CourseArticleAllData {
         return courseArticleDataList;
     }
 
+    //給予點擊之專業類別名稱,返回相對應之專業項目數據
     public static List<CourseArticleCategoryData> takeCourseArticleCategoryDataList(Context context, String categoryName) {
+
         List<CourseArticleCategoryData> courseArticleCategoryDataList = new ArrayList<>();
         int[] projectImg;
         String[] projectName = null;
-
-//        if (categoryName.equals(context.getResources().getString(R.string.water_sports))) {
-//            projectImg = new int[]{R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1,};
-//            projectName = context.getResources().getStringArray(R.array.waterSportsName);
-//
-//        } else if (categoryName.equals(context.getResources().getString(R.string.water_sports))) {
-//            projectImg = new int[]{R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1,};
-//            projectName = context.getResources().getStringArray(R.array.extremeSportName);
-//
-//        } else if (categoryName.equals(context.getResources().getString(R.string.water_sports))) {
-//            projectImg = new int[]{R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1,};
-//            projectName = context.getResources().getStringArray(R.array.workOutName);
-//
-//        } else if (categoryName.equals(context.getResources().getString(R.string.water_sports))) {
-//            projectImg = new int[]{R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1,};
-//            projectName = context.getResources().getStringArray(R.array.ballSportsName);
-//
-//        } else if (categoryName.equals(context.getResources().getString(R.string.water_sports))) {
-//            projectImg = new int[]{R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1,};
-//            projectName = context.getResources().getStringArray(R.array.musicalInstrumentName);
-//
-//        } else if (categoryName.equals(context.getResources().getString(R.string.water_sports))) {
-//            projectImg = new int[]{R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1,};
-//            projectName = context.getResources().getStringArray(R.array.languageLearning);
-//
-//        } else if (categoryName.equals(context.getResources().getString(R.string.water_sports))) {
-//            projectImg = new int[]{R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1,};
-//            projectName = context.getResources().getStringArray(R.array.leisureTalentName);
-//
-//        } else if (categoryName.equals(context.getResources().getString(R.string.water_sports))) {
-//            projectImg = new int[]{R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1, R.drawable.a1,};
-//            projectName = context.getResources().getStringArray(R.array.programmingName);
-//        }
+        TypedArray t=null;
 
         if (categoryName.equals(context.getResources().getString(R.string.water_sports))) {
-//            projectImg = context.getResources().obtainTypedArray(R.array.waterSportsImg);
-//            for(int i=0;i<context.getResources().obtainTypedArray(R.array.waterSportsImg).length();i++){
-//                projectImg[0]=context.getResources().obtainTypedArray(R.array.waterSportsImg).getResourceId(0,-1);
-//                projectImg[1]=context.getResources().obtainTypedArray(R.array.waterSportsImg).getResourceId(1,-1);
-//            projectImg=context.getResources().getIntArray(R.array.waterSportsImg);
-            Resources res = context.getResources();
-            TypedArray icons = res.obtainTypedArray(R.array.waterSportsImg);
-            projectImg = new int[8];
-            for (int i = 0; i < projectImg.length; i++) {
-                projectImg[i] = icons.getResourceId(i, -1);
-//                courseArticleCategoryDataList.add(new CourseArticleCategoryData(projectImg[0], projectName[0]));
-                Log.d("aaa","aaa");
 
-            }
-//            Log.d("tag", "ccc" + projectImg[0]);
-
-
-//            Log.d("tag", "" + context.getResources().obtainTypedArray(R.array.waterSportsImg).length());
-//            }
+            t= context.getResources().obtainTypedArray(R.array.waterSportsImg);
             projectName = context.getResources().getStringArray(R.array.waterSportsName);
+        }
+
+        projectImg = new int[projectName.length];
+        for (int i = 0; i < projectImg.length; i++) {
+            projectImg[i] = t.getResourceId(i, -1);
+//                courseArticleCategoryDataList.add(new CourseArticleCategoryData(projectImg[0], projectName[0]));
+            Log.d("aaa", "aaa");
+
+        }
+
+
 //
-            for (int i = 0; i < projectName.length; i++) {
-                courseArticleCategoryDataList.add(new CourseArticleCategoryData(projectImg[i], projectName[i]));
-            }
+        for (int i = 0; i < projectName.length; i++) {
+            courseArticleCategoryDataList.add(new CourseArticleCategoryData(projectImg[i], projectName[i]));
         }
         return courseArticleCategoryDataList;
 
