@@ -6,16 +6,16 @@
     <!--showAsAction表此view在actionBar中隱藏顯示的方式-->
     <item
         android:id="@+id/searchMaster"
-        android:title="@string/searchData"
         android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/searchData"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
 
 
     <item
         android:id="@+id/addTextMaster"
-        android:title="@string/addText"
         android:icon="@android:drawable/ic_input_add"
-        app:showAsAction="always|collapseActionView"/>
+        android:title="@string/addText"
+        app:showAsAction="always|collapseActionView" />
 
 </menu>

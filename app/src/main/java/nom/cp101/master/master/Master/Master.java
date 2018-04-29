@@ -14,8 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import nom.cp101.master.master.CourseArticle.CourseArticleFragment;
 import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
 import nom.cp101.master.master.InformationFragment;
@@ -65,7 +67,7 @@ public class Master extends AppCompatActivity {
     //設定置入TabLayout的圖片
     private void setTabLayout() {
         //tablayout圖示
-        int[] imgs={R.drawable.tab_article,
+        int[] imgs = {R.drawable.tab_article,
                 R.drawable.tab_experience,
                 R.drawable.tab_message,
 //                R.drawable.tab_notice,
@@ -77,20 +79,19 @@ public class Master extends AppCompatActivity {
             tabMaster.getTabAt(i).setIcon(imgs[i]);
         }
         //取得tabLayout各鈕的position以便判斷顯示或隱藏toolBar,並設其標題名
-        tabMaster.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewpagerMaster){
+        tabMaster.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewpagerMaster) {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 super.onTabSelected(tab);
-                int position=tab.getPosition();
-                if(position==0){
+                int position = tab.getPosition();
+                if (position == 0) {
                     toolbarMaster.setVisibility(View.VISIBLE);
                     setTitle(R.string.courseArticle);
 
-                }else if(position==1){
+                } else if (position == 1) {
                     toolbarMaster.setVisibility(View.VISIBLE);
                     setTitle(R.string.experienceArticle);
-                }
-                else
+                } else
                     toolbarMaster.setVisibility(View.GONE);
             }
         });
@@ -103,7 +104,7 @@ public class Master extends AppCompatActivity {
 
         //此區添加個主功能的Fragment,設置完成請將替代的Fragment移除
         courseArticleFragment = new CourseArticleFragment();
-        experienceArticleFragment=new ExperienceArticleFragment();
+        experienceArticleFragment = new ExperienceArticleFragment();
         messageFragment = new MessageFragment();
         notificationFragment = new NotificationFragment();
         informationFragment = new InformationFragment();
@@ -120,10 +121,9 @@ public class Master extends AppCompatActivity {
         viewpagerMaster.setAdapter(masterFragmentPagerAdapter);
     }
 
-
     //初始化元件-TabLayout, ViewPager
     private void findViews() {
-        toolbarMaster=(Toolbar)findViewById(R.id.toolbarMaster);
+        toolbarMaster = (Toolbar) findViewById(R.id.toolbarMaster);
         tabMaster = (TabLayout) findViewById(R.id.tabMaster);
         viewpagerMaster = (ViewPager) findViewById(R.id.viewpagerMaster);
     }
@@ -133,9 +133,9 @@ public class Master extends AppCompatActivity {
         //取得toolbar的menu樣式檔
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         //通過getActionView()將menu上的item轉為view使用
-        searchMaster=(SearchView)menu.findItem(R.id.searchMaster).getActionView();
+        searchMaster = (SearchView) menu.findItem(R.id.searchMaster).getActionView();
         //抓取隱藏在searchView內的AuyoCompleteTextView
-        autoCompleteTextViewMaster=(AutoCompleteTextView)searchMaster.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        autoCompleteTextViewMaster = (AutoCompleteTextView) searchMaster.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         //設定置入於SearchView內的AutoCompleteTextView橋接器
         setSearchAutoComplete();
 
@@ -143,9 +143,9 @@ public class Master extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //取得點擊autoCompleteTextView內的Item值
-                String searchContent=parent.getItemAtPosition(position).toString();
+                String searchContent = parent.getItemAtPosition(position).toString();
                 //設置查詢數據給予searchView並提交(true)
-                searchMaster.setQuery(searchContent,true);
+                searchMaster.setQuery(searchContent, true);
             }
         });
 
@@ -154,7 +154,7 @@ public class Master extends AppCompatActivity {
 
     //設置SearcjAutoComplete
     private void setSearchAutoComplete() {
-        String[] searchContent=getResources().getStringArray(R.array.languages);
+        String[] searchContent = getResources().getStringArray(R.array.languages);
         //autoCompleteTextView橋接自定viewItem
         autoCompleteTextViewMaster.setAdapter(new ArrayAdapter<>(this,
                 R.layout.master_search_autocomplete_item,
@@ -166,10 +166,10 @@ public class Master extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             //item為addText時(新增文章),先做Toast
             case R.id.addTextMaster:
-                Toast.makeText(getApplicationContext(),"Click addText",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Click addText", Toast.LENGTH_SHORT).show();
                 break;
         }
         return true;

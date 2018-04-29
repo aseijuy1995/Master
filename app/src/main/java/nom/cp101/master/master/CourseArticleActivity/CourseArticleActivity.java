@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import nom.cp101.master.master.R;
 
+//課程文章切換類別之分頁
 public class CourseArticleActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
@@ -15,18 +16,17 @@ public class CourseArticleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_article_act);
-
-        String categoryName=getIntent().getStringExtra("categoryName");
+        //取得點選之類別名稱並呈現於標題列
+        String categoryName = getIntent().getStringExtra("categoryName");
         setTitle(categoryName);
-
-        CourseArticleCategoryFragment courseArticleCategoryFragment=new CourseArticleCategoryFragment();
-
-        Bundle bundle=new Bundle();
+        //將取得之雷別名稱傳入CourseArticleCategoryFragment上,以便辨識需呈獻是項目
+        CourseArticleCategoryFragment courseArticleCategoryFragment = new CourseArticleCategoryFragment();
+        Bundle bundle = new Bundle();
         bundle.putString("categoryName", categoryName);
         courseArticleCategoryFragment.setArguments(bundle);
-
-        fragmentManager=getSupportFragmentManager();
-        fragmentTransaction=fragmentManager.beginTransaction();
+        //將指定之courseArticleCategoryFragment嵌在此CourseArticleCategoryActivity上
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.layoutCategory, courseArticleCategoryFragment).commit();
     }
 }

@@ -30,7 +30,7 @@ public class CourseArticleFragment extends Fragment {
     //取得RecyclerView並接上ArticleAdapter
     private void setRecyclerView() {
         rvCourseArticle = (RecyclerView) view.findViewById(R.id.rvCourseArticle);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rvCourseArticle.setLayoutManager(layoutManager);
         rvCourseArticle.setAdapter(new CourseArticleAdapter(getActivity(), getFragmentManager()));
     }

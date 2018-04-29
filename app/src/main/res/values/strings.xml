@@ -101,6 +101,22 @@
 
 
 
+    <array name="waterSportsImg">
+        <item>@drawable/a1</item>
+        <item>@drawable/a2</item>
+        <item>@drawable/a3</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a2</item>
+        <item>@drawable/a3</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a2</item>
+        <item>@drawable/a3</item>
+        <!--<item>@drawable/a1</item>-->
+        <!--<item>@drawable/a2</item>-->
+        <!--<item>@drawable/a3</item>-->
+        <!--<item>@drawable/a1</item>-->
+        <!--<item>@drawable/a2</item>-->
+    </array>
 
 
     <string name="app_name">Master</string>

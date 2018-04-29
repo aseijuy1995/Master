@@ -56,8 +56,8 @@ public class CourseArticleGridViewAdapter extends BaseAdapter {
         //依照position抓取顯示的專業類別內之數據
         CourseArticleGridViewData courseArticleGridViewData = courseArticleGridViewDataList.get(position);
 
-        LinearLayout layoutGridView=(LinearLayout)convertView.findViewById(R.id.layoutGridView);
-        
+        LinearLayout layoutGridView = (LinearLayout) convertView.findViewById(R.id.layoutGridView);
+
         ImageView ivGridView = (ImageView) convertView.findViewById(R.id.ivGridView);
         TextView tvGridView = (TextView) convertView.findViewById(R.id.tvGridView);
         //取得螢幕寬度的四分之一,並將此item的長同樣設置
@@ -85,7 +85,7 @@ public class CourseArticleGridViewAdapter extends BaseAdapter {
         layoutGridView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, CourseArticleActivity.class);
+                Intent intent = new Intent(context, CourseArticleActivity.class);
                 intent.putExtra("categoryName", categoryName);
                 context.startActivity(intent);
             }

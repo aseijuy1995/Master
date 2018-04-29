@@ -10,20 +10,5 @@
     <color name="mg_chatroom_editext">#9f9b9b</color>
 
 
-    <array name="waterSportsImg">
-        <item>@drawable/a1</item>
-        <item>@drawable/a2</item>
-        <item>@drawable/a3</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a2</item>
-        <item>@drawable/a3</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a2</item>
-        <item>@drawable/a3</item>
-        <!--<item>@drawable/a1</item>-->
-        <!--<item>@drawable/a2</item>-->
-        <!--<item>@drawable/a3</item>-->
-        <!--<item>@drawable/a1</item>-->
-        <!--<item>@drawable/a2</item>-->
-    </array>
+
 </resources>

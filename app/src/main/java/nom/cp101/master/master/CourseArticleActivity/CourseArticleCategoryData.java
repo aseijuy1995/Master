@@ -4,6 +4,7 @@ package nom.cp101.master.master.CourseArticleActivity;
  * Created by yujie on 2018/4/29.
  */
 
+//專業類別中之項目class
 public class CourseArticleCategoryData {
     int projectImg;
     String projectName;

@@ -25,7 +25,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     Context context;
     FragmentManager fragmentManager;
     //position為0時,帶入RecyclerView其顯現樣式為GridLayouy
-    static final int TYPE_GRIDLAYOUT_FOR_RECYCLERVIEW = 0;
+    static final int TYPE_GRIDLAYOUT = 0;
     //取得存有課程文章之所有數據
     List<CourseArticleData> courseArticleDataList;
 
@@ -39,7 +39,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     @Override
     public int getItemViewType(int position) {
         if (position == 0)
-            return TYPE_GRIDLAYOUT_FOR_RECYCLERVIEW;
+            return TYPE_GRIDLAYOUT;
         else
             return position;
     }
@@ -52,7 +52,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
         ViewHolder holder;
         //當種類為對等時,載入相對應的xml檔,轉為view使用
         //position=0,置入gridView,數據為專案類別名稱與圖
-        if (viewType == TYPE_GRIDLAYOUT_FOR_RECYCLERVIEW) {
+        if (viewType == TYPE_GRIDLAYOUT) {
             view = LayoutInflater.from(context).inflate(R.layout.course_article_recyclerview_gridview, parent, false);
             holder = new ViewHolder(view);
             holder.gvCourseArticle.setAdapter(new CourseArticleGridViewAdapter(context));
@@ -69,7 +69,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        if (getItemViewType(position) != TYPE_GRIDLAYOUT_FOR_RECYCLERVIEW) {
+        if (getItemViewType(position) != TYPE_GRIDLAYOUT) {
 
             //因position=0時,因有置入gridView所以position需-1來帶入,否則會導致IndexOutOfBoundsException超出index的例外
             final CourseArticleData courseArticleData = courseArticleDataList.get(position - 1);
@@ -79,11 +79,11 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
             holder.tvNumber.setText(courseArticleData.getCourseArticleNumber());
             holder.tvAddress.setText(courseArticleData.getCourseArticleAddress());
             holder.tvTime.setText(courseArticleData.getCourseArticleTime());
-
+            //點擊課程文章內之各篇文章,切換至教練開課之詳細內容中
             holder.cvCourseArticle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(context, Master.class);
+                    Intent intent = new Intent(context, Master.class);
                     context.startActivity(intent);
                 }
             });
@@ -94,7 +94,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     //回傳次數須為所有課程總數以及第一position放置的gridView
     @Override
     public int getItemCount() {
-        return CourseArticleAllData.takeArticleCourseDataList().size() + 1;
+        return courseArticleDataList.size() + 1;
     }
 
 
@@ -109,7 +109,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
             super(itemView);
             gvCourseArticle = (GridView) itemView.findViewById(R.id.gvCourseArticle);
 
-            cvCourseArticle=(CardView)itemView.findViewById(R.id.cvCourseArticle);
+            cvCourseArticle = (CardView) itemView.findViewById(R.id.cvCourseArticle);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvNumber = (TextView) itemView.findViewById(R.id.tvNumber);
             tvAddress = (TextView) itemView.findViewById(R.id.tvAddress);
