@@ -6,74 +6,51 @@ package nom.cp101.master.master.CourseArticle;
 
 //各課程文章將包成此一類別
 public class CourseArticleData {
-    //發文者頭貼
-    int courseArticleHeadImg;
-    //發文者名
-    String courseArticleHeadName;
-    //文章類別
-    String courseArticleProject;
+    //課程名稱
+    String courseArticleName;
+    //課程人數比
+    String courseArticleNumber;
+    //課程地點
+    String courseArticleAddress;
+    //課程時間
+    String courseArticleTime;
 
-    //發文者圖片
-    int courseArticleleImg;
-    //文章內容
-    String courseArticleContent;
-    //文章讚
-    int courseArticleLaud;
-
-    public CourseArticleData(int courseArticleHeadImg, String courseArticleHeadName, String courseArticleProject, int courseArticleImg, String courseArticleContent, int courseArticleLaud) {
-        this.courseArticleHeadImg = courseArticleHeadImg;
-        this.courseArticleHeadName = courseArticleHeadName;
-        this.courseArticleProject = courseArticleProject;
-        this.courseArticleleImg = courseArticleImg;
-        this.courseArticleContent = courseArticleContent;
-        this.courseArticleLaud = courseArticleLaud;
+    public CourseArticleData(String courseArticleName, String courseArticleNumber, String courseArticleAddress, String courseArticleTime) {
+        this.courseArticleName = courseArticleName;
+        this.courseArticleNumber = courseArticleNumber;
+        this.courseArticleAddress = courseArticleAddress;
+        this.courseArticleTime = courseArticleTime;
     }
 
-    public int getCourseArticleHeadImg() {
-        return courseArticleHeadImg;
+    public String getCourseArticleName() {
+        return courseArticleName;
     }
 
-    public void setCourseArticleHeadImg(int courseArticleHeadImg) {
-        this.courseArticleHeadImg = courseArticleHeadImg;
+    public void setCourseArticleName(String courseArticleName) {
+        this.courseArticleName = courseArticleName;
     }
 
-    public String getCourseArticleHeadName() {
-        return courseArticleHeadName;
+    public String getCourseArticleNumber() {
+        return courseArticleNumber;
     }
 
-    public void setCourseArticleHeadName(String courseArticleHeadName) {
-        this.courseArticleHeadName = courseArticleHeadName;
+    public void setCourseArticleNumber(String courseArticleNumber) {
+        this.courseArticleNumber = courseArticleNumber;
     }
 
-    public String getCourseArticleProject() {
-        return courseArticleProject;
+    public String getCourseArticleAddress() {
+        return courseArticleAddress;
     }
 
-    public void setCourseArticleProject(String courseArticleProject) {
-        this.courseArticleProject = courseArticleProject;
+    public void setCourseArticleAddress(String courseArticleAddress) {
+        this.courseArticleAddress = courseArticleAddress;
     }
 
-    public int getCourseArticleImg() {
-        return courseArticleleImg;
+    public String getCourseArticleTime() {
+        return courseArticleTime;
     }
 
-    public void setCourseArticleleImg(int courseArticleleImg) {
-        this.courseArticleleImg = courseArticleleImg;
-    }
-
-    public String getCourseArticleContent() {
-        return courseArticleContent;
-    }
-
-    public void setCourseArticleContent(String courseArticleContent) {
-        this.courseArticleContent = courseArticleContent;
-    }
-
-    public int getCourseArticleLaud() {
-        return courseArticleLaud;
-    }
-
-    public void setCourseArticleLaud(int courseArticleLaud) {
-        this.courseArticleLaud = courseArticleLaud;
+    public void setCourseArticleTime(String courseArticleTime) {
+        this.courseArticleTime = courseArticleTime;
     }
 }

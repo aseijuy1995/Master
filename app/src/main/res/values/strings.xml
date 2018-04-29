@@ -1,7 +1,13 @@
 <resources>
 
 
-    <!--專業類別名稱-->
+
+
+    <!--標題顯示名稱-->
+    <string name="courseArticle">課程文章</string>
+    <string name="experienceArticle">心得文章</string>
+
+    <!--categoryName-->
     <string name="water_sports">水類運動</string>
     <string name="extreme_sport">極限運動</string>
     <string name="work_out">運動健身</string>
@@ -11,9 +17,90 @@
     <string name="leisure_talent">休閒才藝</string>
     <string name="programming">程式設計</string>
 
-    <!--標題顯示名稱-->
-    <string name="courseArticle">課程文章</string>
-    <string name="experienceArticle">心得文章</string>
+    <!--projectNameList-->
+    <string-array name="waterSportsName">
+        <item>水肺潛水</item>
+        <item>自由潛水</item>
+        <item>衝浪</item>
+        <item>水上瑜伽</item>
+        <item>獨木舟</item>
+        <item>游泳</item>
+        <item>風帆衝浪</item>
+        <item>水上摩托車</item>
+    </string-array>
+    <string-array name="extremeSportName">
+        <item>攀岩</item>
+        <item>滑雪</item>
+        <item>滑板</item>
+        <item>跑酷</item>
+        <item>單車</item>
+        <item>跳傘</item>
+        <item>越野摩托車</item>
+        <item>生存遊戲</item>
+    </string-array>
+    <string-array name="workOutName">
+        <item>健美運動</item>
+        <item>健身運動</item>
+        <item>TRX懸吊系統訓練</item>
+        <item>馬拉松</item>
+        <item>有氧運動</item>
+        <item>瑜珈</item>
+        <item>防身術</item>
+    </string-array>
+    <string-array name="ballSportsName">
+        <item>籃球</item>
+        <item>排球</item>
+        <item>桌球</item>
+        <item>羽球</item>
+        <item>網球</item>
+        <item>足球</item>
+        <item>棒球</item>
+        <item>撞球</item>
+        <item>高爾夫球</item>
+        <item>保齡球</item>
+    </string-array>
+    <string-array name="musicalInstrumentName">
+        <item>鋼琴</item>
+        <item>吉他</item>
+        <item>小提琴</item>
+        <item>貝斯</item>
+        <item>爵士鼓</item>
+        <item>豎笛</item>
+        <item>薩克斯風</item>
+        <item>琵琶</item>
+        <item>二胡</item>
+    </string-array>
+    <string-array name="languageLearning">
+        <item>英文</item>
+        <item>日文</item>
+        <item>韓文</item>
+        <item>法文</item>
+        <item>德文</item>
+        <item>俄文</item>
+        <item>義大利文</item>
+    </string-array>
+    <string-array name="leisureTalentName">
+        <item>攝影</item>
+        <item>陶藝</item>
+        <item>烹飪</item>
+        <item>裁縫</item>
+        <item>書法</item>
+        <item>街舞</item>
+        <item>繪畫</item>
+        <item>睡覺</item>
+    </string-array>
+    <string-array name="programmingName">
+        <item>Java</item>
+        <item>JavaScript</item>
+        <item>JavaServlet</item>
+        <item>MySQL</item>
+        <item>Kotlin</item>
+        <item>Objective-C</item>
+        <item>Swift</item>
+    </string-array>
+
+
+
 
 
     <string name="app_name">Master</string>

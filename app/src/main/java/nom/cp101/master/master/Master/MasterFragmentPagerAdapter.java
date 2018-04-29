@@ -8,24 +8,24 @@ import java.util.List;
 //橋接CourseArticleFragment, ExperienceArticleFragment, MessageFragment, NoticeFragment, InformationFragment各個主功能Fragment的橋接器
 public class MasterFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    List<Fragment> list_master;
+    List<Fragment> listMaster;
 
     //建構子
-    public MasterFragmentPagerAdapter(FragmentManager fm, List<Fragment> list_master) {
+    public MasterFragmentPagerAdapter(FragmentManager fm, List<Fragment> listMaster) {
         super(fm);
-        this.list_master=list_master;
+        this.listMaster=listMaster;
     }
 
     //回傳當前呈現之frag
     @Override
     public Fragment getItem(int position) {
-        return list_master.get(position);
+        return listMaster.get(position);
     }
 
 
     //回傳數量
     @Override
     public int getCount() {
-        return list_master.size();
+        return listMaster.size();
     }
 }

@@ -1,6 +1,7 @@
 package nom.cp101.master.master.CourseArticle;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import nom.cp101.master.master.Master.Master;
 import nom.cp101.master.master.R;
 
 //CourseArticleAdapter繼承RecyclerView.Adapter顯示文章首頁樣式
@@ -55,10 +57,10 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
             holder = new ViewHolder(view);
             holder.gvCourseArticle.setAdapter(new CourseArticleGridViewAdapter(context));
 
-            //剩下設置為課程文章顯示區
+            //剩下設置為課程顯示區
         } else {
 
-            view = LayoutInflater.from(context).inflate(R.layout.course_experience_article_item, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.course_article_item, parent, false);
         }
         return new ViewHolder(view);
     }
@@ -70,25 +72,26 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
         if (getItemViewType(position) != TYPE_GRIDLAYOUT_FOR_RECYCLERVIEW) {
 
             //因position=0時,因有置入gridView所以position需-1來帶入,否則會導致IndexOutOfBoundsException超出index的例外
-            CourseArticleData courseArticleData = courseArticleDataList.get(position - 1);
+            final CourseArticleData courseArticleData = courseArticleDataList.get(position - 1);
 
-            //將list存放各ArticleCourseData物件內的各文章資料取出顯示
-            holder.ivHeadCEA.setImageResource(courseArticleData.getCourseArticleHeadImg());
-            holder.tvHeadCEA.setText(courseArticleData.getCourseArticleHeadName());
-            holder.tvProjectCEA.setText(courseArticleData.getCourseArticleProject());
+            //將list存放各ArticleCourseData物件內的各資料取出顯示
+            holder.tvName.setText(courseArticleData.getCourseArticleName());
+            holder.tvNumber.setText(courseArticleData.getCourseArticleNumber());
+            holder.tvAddress.setText(courseArticleData.getCourseArticleAddress());
+            holder.tvTime.setText(courseArticleData.getCourseArticleTime());
 
-            holder.ivPictureCEA.setImageResource(courseArticleData.getCourseArticleImg());
-            holder.tvTimeCEA.setVisibility(View.GONE);
-            holder.tvContentCEA.setText(courseArticleData.getCourseArticleContent());
-            //先將各篇文章的讚涉違false,當被按下有事件需處理時,再進行運算
-            //
-            holder.cbCEA.setChecked(false);
-            holder.cbCEA.setText(String.valueOf(courseArticleData.getCourseArticleLaud()));
+            holder.cvCourseArticle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context, Master.class);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 
 
-    //回傳次數須為所有課程文章總數以及第一position放置的gridView
+    //回傳次數須為所有課程總數以及第一position放置的gridView
     @Override
     public int getItemCount() {
         return CourseArticleAllData.takeArticleCourseDataList().size() + 1;
@@ -99,26 +102,18 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         GridView gvCourseArticle;
 
-        CardView cvCEA;
-        ImageView ivHeadCEA, ivPictureCEA;
-        TextView tvHeadCEA, tvProjectCEA, tvTimeCEA, tvContentCEA;
-        CheckBox cbCEA;
-        ImageButton ibLeaveMessageCEA;
+        CardView cvCourseArticle;
+        TextView tvName, tvNumber, tvAddress, tvTime;
 
         public ViewHolder(View itemView) {
             super(itemView);
             gvCourseArticle = (GridView) itemView.findViewById(R.id.gvCourseArticle);
 
-            cvCEA = (CardView) itemView.findViewById(R.id.cvCEA);
-            ivHeadCEA = (ImageView) itemView.findViewById(R.id.ivHeadCEA);
-            tvHeadCEA = (TextView) itemView.findViewById(R.id.tvHeadCEA);
-            tvProjectCEA = (TextView) itemView.findViewById(R.id.tvProjectCEA);
-
-            ivPictureCEA = (ImageView) itemView.findViewById(R.id.ivPictureCEA);
-            tvTimeCEA = (TextView) itemView.findViewById(R.id.tvTimeCEA);
-            tvContentCEA = (TextView) itemView.findViewById(R.id.tvContentCEA);
-            cbCEA = (CheckBox) itemView.findViewById(R.id.cbCEA);
-            ibLeaveMessageCEA=(ImageButton)itemView.findViewById(R.id.ibLeaveMessageCEA);
+            cvCourseArticle=(CardView)itemView.findViewById(R.id.cvCourseArticle);
+            tvName = (TextView) itemView.findViewById(R.id.tvName);
+            tvNumber = (TextView) itemView.findViewById(R.id.tvNumber);
+            tvAddress = (TextView) itemView.findViewById(R.id.tvAddress);
+            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
         }
     }
 }

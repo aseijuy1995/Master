@@ -2,8 +2,6 @@ package nom.cp101.master.master.CourseArticle;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.sax.StartElementListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import nom.cp101.master.master.Master.Master;
+import nom.cp101.master.master.CourseArticleActivity.CourseArticleActivity;
 import nom.cp101.master.master.R;
 
 /**
@@ -56,7 +54,7 @@ public class CourseArticleGridViewAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.course_article_recyclerview_gridview_item, parent, false);
         }
         //依照position抓取顯示的專業類別內之數據
-        CourseArticleGridViewData articleViewPagerData = courseArticleGridViewDataList.get(position);
+        CourseArticleGridViewData courseArticleGridViewData = courseArticleGridViewDataList.get(position);
 
         LinearLayout layoutGridView=(LinearLayout)convertView.findViewById(R.id.layoutGridView);
         
@@ -66,8 +64,8 @@ public class CourseArticleGridViewAdapter extends BaseAdapter {
         int w = context.getResources().getDisplayMetrics().widthPixels / 4;
         convertView.setMinimumHeight(w);
         //設置專業類別的圖與名稱
-        ivGridView.setImageResource(articleViewPagerData.getProjectImg());
-        tvGridView.setText(articleViewPagerData.getProjectName());
+        ivGridView.setImageResource(courseArticleGridViewData.getCategorytImg());
+        tvGridView.setText(courseArticleGridViewData.getCategoryName());
         //取得放置item的ViewGroup-GridView
         //取得LayoutParams,可獲得關於GridView的訊息內容
         ViewGroup.LayoutParams params = parent.getLayoutParams();
@@ -76,19 +74,19 @@ public class CourseArticleGridViewAdapter extends BaseAdapter {
         //不太優的用法
         params.height = w * 2;
         //自訂點擊專業類別method
-        setProjectClick(context, layoutGridView, context.getResources().getString(articleViewPagerData.getProjectName()));
+        setCategoryClick(context, layoutGridView, context.getResources().getString(courseArticleGridViewData.getCategoryName()));
 
 
         return convertView;
     }
 
-    private void setProjectClick(final Context context, LinearLayout layoutGridView, final String projectName) {
+    private void setCategoryClick(final Context context, LinearLayout layoutGridView, final String categoryName) {
         //將選擇的專業類別名稱一併帶入CourseArticleActivity頁面
         layoutGridView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, CourseArticleActivity.class);
-                intent.putExtra("projectName", projectName);
+                intent.putExtra("categoryName", categoryName);
                 context.startActivity(intent);
             }
         });

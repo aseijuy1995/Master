@@ -22,7 +22,10 @@
         <activity
             android:name=".Message.MessageChatroom"
             android:theme="@style/MessageTheme" />
-        <activity android:name=".CourseArticle.CourseArticleActivity"></activity>
+
+        <activity
+            android:name=".CourseArticleActivity.CourseArticleActivity"
+            android:theme="@style/CourseArticleCategoryTheme"></activity>
     </application>
 
 </manifest>

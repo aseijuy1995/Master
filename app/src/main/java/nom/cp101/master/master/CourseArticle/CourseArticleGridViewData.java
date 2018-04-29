@@ -6,27 +6,27 @@ package nom.cp101.master.master.CourseArticle;
 
 //此類別為將專業類別名稱與圖示
 public class CourseArticleGridViewData {
-    int projectImg;
-    int projectName;
+    int categorytImg;
+    int categoryName;
 
-    public CourseArticleGridViewData(int projectImg, int projectName) {
-        this.projectImg = projectImg;
-        this.projectName = projectName;
+    public CourseArticleGridViewData(int categorytImg, int categoryName) {
+        this.categorytImg = categorytImg;
+        this.categoryName = categoryName;
     }
 
-    public int getProjectImg() {
-        return projectImg;
+    public int getCategorytImg() {
+        return categorytImg;
     }
 
-    public void setProjectImg(int projectImg) {
-        this.projectImg = projectImg;
+    public void setCategorytImg(int categorytImg) {
+        this.categorytImg = categorytImg;
     }
 
-    public int getProjectName() {
-        return projectName;
+    public int getCategoryName() {
+        return categoryName;
     }
 
-    public void setProjectName(int projectName) {
-        this.projectName = projectName;
+    public void setCategoryName(int categoryName) {
+        this.categoryName = categoryName;
     }
 }

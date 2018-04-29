@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--CoordinatorLayout當其一view變動,其餘view特定移動-->
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coordinator_master"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <!--AppBarLayout继承LinerLayout實現ViewGroup容器,支持手勢滑動-->
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar_master"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -20,16 +17,15 @@
         <!--enterAlways快速返回模式-->
         <!--snap滾動時要馬全部顯示要馬縮合,如ViewPager左右吸附效果-->
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_master"
+            android:id="@+id/toolbarMaster"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways|snap">
-        </android.support.v7.widget.Toolbar>
+            app:layout_scrollFlags="scroll|enterAlways|snap" />
 
         <!--tabGravity:fill將TabLayout的各item填滿-->
         <!--tabMode:設置fixed表TabLayout固定各item-->
         <android.support.design.widget.TabLayout
-            android:id="@+id/tab_master"
+            android:id="@+id/tabMaster"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"
@@ -39,7 +35,7 @@
 
     <!--使用CoordinatorLayout實現Toolbar滾動,則須在滾動的view中設置layout_behavior,即會觸發layout_scrollFlags的改變-->
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager_master"
+        android:id="@+id/viewpagerMaster"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

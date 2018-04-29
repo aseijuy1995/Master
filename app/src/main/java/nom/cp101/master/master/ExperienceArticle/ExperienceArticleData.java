@@ -13,10 +13,12 @@ public class ExperienceArticleData {
     //發文者名
     String experienceArticleHeadName;
     //文章類別
-    String experienceArticleProject;
+    String experienceArticleCategory;
 
     //發文者圖片
     int experienceArticleImg;
+    //課程名稱
+    String experienceArticleName;
     //發文時間
     Date experienceArticleTime;
     //文章內容
@@ -24,16 +26,16 @@ public class ExperienceArticleData {
     //文章讚
     int experienceArticleLaud;
 
-    public ExperienceArticleData(int experienceArticleHeadImg, String experienceArticleHeadName, String experienceArticleProject, int experienceArticleImg, Date experienceArticleTime, String experienceArticleContent, int experienceArticleLaud) {
+    public ExperienceArticleData(int experienceArticleHeadImg, String experienceArticleHeadName, String experienceArticleCategory, int experienceArticleImg, String experienceArticleName, Date experienceArticleTime, String experienceArticleContent, int experienceArticleLaud) {
         this.experienceArticleHeadImg = experienceArticleHeadImg;
         this.experienceArticleHeadName = experienceArticleHeadName;
-        this.experienceArticleProject = experienceArticleProject;
+        this.experienceArticleCategory = experienceArticleCategory;
         this.experienceArticleImg = experienceArticleImg;
+        this.experienceArticleName = experienceArticleName;
         this.experienceArticleTime = experienceArticleTime;
         this.experienceArticleContent = experienceArticleContent;
         this.experienceArticleLaud = experienceArticleLaud;
     }
-
 
     public int getExperienceArticleHeadImg() {
         return experienceArticleHeadImg;
@@ -51,12 +53,12 @@ public class ExperienceArticleData {
         this.experienceArticleHeadName = experienceArticleHeadName;
     }
 
-    public String getExperienceArticleProject() {
-        return experienceArticleProject;
+    public String getExperienceArticleCategory() {
+        return experienceArticleCategory;
     }
 
-    public void setExperienceArticleProject(String experienceArticleProject) {
-        this.experienceArticleProject = experienceArticleProject;
+    public void setExperienceArticleCategory(String experienceArticleCategory) {
+        this.experienceArticleCategory = experienceArticleCategory;
     }
 
     public int getExperienceArticleImg() {
@@ -65,6 +67,14 @@ public class ExperienceArticleData {
 
     public void setExperienceArticleImg(int experienceArticleImg) {
         this.experienceArticleImg = experienceArticleImg;
+    }
+
+    public String getExperienceArticleName() {
+        return experienceArticleName;
+    }
+
+    public void setExperienceArticleName(String experienceArticleName) {
+        this.experienceArticleName = experienceArticleName;
     }
 
     public Date getExperienceArticleTime() {

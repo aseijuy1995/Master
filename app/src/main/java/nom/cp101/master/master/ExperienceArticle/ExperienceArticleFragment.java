@@ -15,9 +15,9 @@ import nom.cp101.master.master.R;
 /**
  * Created by yujie on 2018/4/25.
  */
-
+//心得文章frag
 public class ExperienceArticleFragment extends Fragment {
-    RecyclerView rv;
+    RecyclerView rvExperienceArticle;
     View view;
 
     @Nullable
@@ -33,9 +33,9 @@ public class ExperienceArticleFragment extends Fragment {
 
     //取得RecyclerView並接上ExperienceAdapter
     private void setRecyclerView() {
-        rv = (RecyclerView) view.findViewById(R.id.rvExperienceArticle);
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv.setAdapter(new ExperienceArticleAdapter(getActivity(), getFragmentManager()));
+        rvExperienceArticle = (RecyclerView) view.findViewById(R.id.rvExperienceArticle);
+        rvExperienceArticle.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvExperienceArticle.setAdapter(new ExperienceArticleAdapter(getActivity(), getFragmentManager()));
     }
 }
 

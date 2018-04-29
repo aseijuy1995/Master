@@ -39,12 +39,12 @@ public class ExperienceArticleAllData {
 
         experienceArticleDataList = new LinkedList();
 
-        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "7","1",R.drawable.a1, new Date(), "111",0));
-        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "8","2",R.drawable.a1, new Date(), "777",0));
-        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "9","3",R.drawable.a2, new Date(), "555",0));
-        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "10","4",R.drawable.a2, new Date(), "111",0));
-        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "11","5",R.drawable.a3, new Date(), "222",0));
-        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "12","6",R.drawable.a3, new Date(), "333",0));
+        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "7","1",R.drawable.a1,"11", new Date(), "111",0));
+        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "8","2",R.drawable.a1,"22", new Date(), "777",0));
+        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "9","3",R.drawable.a2,"33", new Date(), "555",0));
+        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "10","4",R.drawable.a2,"44", new Date(), "111",0));
+        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "11","5",R.drawable.a3,"55", new Date(), "222",0));
+        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "12","6",R.drawable.a3,"66", new Date(), "333",0));
 
         return experienceArticleDataList;
     }

@@ -26,11 +26,11 @@ import nom.cp101.master.master.R;
 //Master APP Activity
 public class Master extends AppCompatActivity {
     //置入主頁面所需元件
-    Toolbar toolbar_master;
-    TabLayout tab_master;
-    ViewPager viewpager_master;
-    SearchView search_master;
-    AutoCompleteTextView autoCompleteTextView_master;
+    Toolbar toolbarMaster;
+    TabLayout tabMaster;
+    ViewPager viewpagerMaster;
+    SearchView searchMaster;
+    AutoCompleteTextView autoCompleteTextViewMaster;
 
     //課程文章frag
     CourseArticleFragment courseArticleFragment;
@@ -44,7 +44,7 @@ public class Master extends AppCompatActivity {
     InformationFragment informationFragment;
 
     //記錄置入TabLayout內,與Viewpager橋接的個主功能Fragment
-    List<Fragment> list_master;
+    List<Fragment> listMaster;
     //連接ViewPager與主功能Fragment的橋接器
     MasterFragmentPagerAdapter masterFragmentPagerAdapter;
 
@@ -55,7 +55,7 @@ public class Master extends AppCompatActivity {
         //初始化元件
         findViews();
         //設定自訂ToolBar套為ActionBar
-        setSupportActionBar(toolbar_master);
+        setSupportActionBar(toolbarMaster);
         //主功能頁面Fragment與搭載在TabLayout內ViewPager的橋接設定
         setViewPager();
         //設定置入TabLayout的圖片
@@ -71,26 +71,27 @@ public class Master extends AppCompatActivity {
 //                R.drawable.tab_notice,
                 R.drawable.tab_information};
         //TabLayout接上viewPager
-        tab_master.setupWithViewPager(viewpager_master, true);
+        tabMaster.setupWithViewPager(viewpagerMaster, true);
         //設置tablayout圖示
-        for (int i = 0; i < list_master.size(); i++) {
-            tab_master.getTabAt(i).setIcon(imgs[i]);
+        for (int i = 0; i < listMaster.size(); i++) {
+            tabMaster.getTabAt(i).setIcon(imgs[i]);
         }
         //取得tabLayout各鈕的position以便判斷顯示或隱藏toolBar,並設其標題名
-        tab_master.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewpager_master){
+        tabMaster.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewpagerMaster){
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 super.onTabSelected(tab);
                 int position=tab.getPosition();
                 if(position==0){
-                    toolbar_master.setVisibility(View.VISIBLE);
+                    toolbarMaster.setVisibility(View.VISIBLE);
                     setTitle(R.string.courseArticle);
+
                 }else if(position==1){
-                    toolbar_master.setVisibility(View.VISIBLE);
+                    toolbarMaster.setVisibility(View.VISIBLE);
                     setTitle(R.string.experienceArticle);
                 }
                 else
-                    toolbar_master.setVisibility(View.GONE);
+                    toolbarMaster.setVisibility(View.GONE);
             }
         });
 
@@ -98,7 +99,7 @@ public class Master extends AppCompatActivity {
 
     //主功能頁面Fragment與搭載在TabLayout內ViewPager的橋接設定
     private void setViewPager() {
-        list_master = new ArrayList<>();
+        listMaster = new ArrayList<>();
 
         //此區添加個主功能的Fragment,設置完成請將替代的Fragment移除
         courseArticleFragment = new CourseArticleFragment();
@@ -108,23 +109,23 @@ public class Master extends AppCompatActivity {
         informationFragment = new InformationFragment();
 
         //此區置換個主功能的Fragment,設置完成請將添加對應的Fragment移除
-        list_master.add(courseArticleFragment);
-        list_master.add(experienceArticleFragment);
-        list_master.add(messageFragment);
-//        list_master.add(notificationFragment);
-        list_master.add(informationFragment);
+        listMaster.add(courseArticleFragment);
+        listMaster.add(experienceArticleFragment);
+        listMaster.add(messageFragment);
+//        listMaster.add(notificationFragment);
+        listMaster.add(informationFragment);
 
         //主畫面Master-期內掛載在TabLayout內的ViewPager與包裝過的list橋接設置
-        masterFragmentPagerAdapter = new MasterFragmentPagerAdapter(getSupportFragmentManager(), list_master);
-        viewpager_master.setAdapter(masterFragmentPagerAdapter);
+        masterFragmentPagerAdapter = new MasterFragmentPagerAdapter(getSupportFragmentManager(), listMaster);
+        viewpagerMaster.setAdapter(masterFragmentPagerAdapter);
     }
 
 
     //初始化元件-TabLayout, ViewPager
     private void findViews() {
-        toolbar_master=(Toolbar)findViewById(R.id.toolbar_master);
-        tab_master = (TabLayout) findViewById(R.id.tab_master);
-        viewpager_master = (ViewPager) findViewById(R.id.viewpager_master);
+        toolbarMaster=(Toolbar)findViewById(R.id.toolbarMaster);
+        tabMaster = (TabLayout) findViewById(R.id.tabMaster);
+        viewpagerMaster = (ViewPager) findViewById(R.id.viewpagerMaster);
     }
 
     @Override
@@ -132,19 +133,19 @@ public class Master extends AppCompatActivity {
         //取得toolbar的menu樣式檔
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         //通過getActionView()將menu上的item轉為view使用
-        search_master=(SearchView)menu.findItem(R.id.search_master).getActionView();
+        searchMaster=(SearchView)menu.findItem(R.id.searchMaster).getActionView();
         //抓取隱藏在searchView內的AuyoCompleteTextView
-        autoCompleteTextView_master=(AutoCompleteTextView)search_master.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        autoCompleteTextViewMaster=(AutoCompleteTextView)searchMaster.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         //設定置入於SearchView內的AutoCompleteTextView橋接器
         setSearchAutoComplete();
 
-        autoCompleteTextView_master.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        autoCompleteTextViewMaster.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //取得點擊autoCompleteTextView內的Item值
                 String searchContent=parent.getItemAtPosition(position).toString();
                 //設置查詢數據給予searchView並提交(true)
-                search_master.setQuery(searchContent,true);
+                searchMaster.setQuery(searchContent,true);
             }
         });
 
@@ -155,19 +156,19 @@ public class Master extends AppCompatActivity {
     private void setSearchAutoComplete() {
         String[] searchContent=getResources().getStringArray(R.array.languages);
         //autoCompleteTextView橋接自定viewItem
-        autoCompleteTextView_master.setAdapter(new ArrayAdapter<>(this,
+        autoCompleteTextViewMaster.setAdapter(new ArrayAdapter<>(this,
                 R.layout.master_search_autocomplete_item,
                 R.id.tv_autocomplete,
                 searchContent));
         //設置提示條件-輸入長度取決於何時顯示
-        autoCompleteTextView_master.setThreshold(1);
+        autoCompleteTextViewMaster.setThreshold(1);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             //item為addText時(新增文章),先做Toast
-            case R.id.addText_master:
+            case R.id.addTextMaster:
                 Toast.makeText(getApplicationContext(),"Click addText",Toast.LENGTH_SHORT).show();
                 break;
         }

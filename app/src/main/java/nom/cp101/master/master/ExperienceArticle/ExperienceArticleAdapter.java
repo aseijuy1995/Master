@@ -59,7 +59,7 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
             //剩下設置為心得文章顯示區
         } else {
 
-            view = LayoutInflater.from(context).inflate(R.layout.course_experience_article_item, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.experience_article_item, parent, false);
 
         }
         return new ViewHolder(view);
@@ -75,18 +75,19 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
             ExperienceArticleData experienceArticleData = experienceArticleDataList.get(position-1);
 
             //將list存放各ArticleCourseData物件內的各文章資料取出顯示
-            holder.ivHeadCEA.setImageResource(experienceArticleData.getExperienceArticleHeadImg());
-            holder.tvHeadCEA.setText(experienceArticleData.getExperienceArticleHeadName());
-            holder.tvProjectCEA.setText(experienceArticleData.getExperienceArticleProject());
-            holder.ivPictureCEA.setImageResource(experienceArticleData.getExperienceArticleImg());
+            holder.ivHead.setImageResource(experienceArticleData.getExperienceArticleHeadImg());
+            holder.tvHead.setText(experienceArticleData.getExperienceArticleHeadName());
+            holder.tvCategory.setText(experienceArticleData.getExperienceArticleCategory());
+            holder.ivPicture.setImageResource(experienceArticleData.getExperienceArticleImg());
+            holder.tvName.setText(experienceArticleData.getExperienceArticleName());
             //Date轉成String?
             //
-            holder.tvTimeCEA.setText(experienceArticleData.getExperienceArticleTime().toString());
-            holder.tvContentCEA.setText(experienceArticleData.getExperienceArticleContent());
+            holder.tvTime.setText(experienceArticleData.getExperienceArticleTime().toString());
+            holder.tvContent.setText(experienceArticleData.getExperienceArticleContent());
             //先將各篇文章的讚涉違false,當被按下有事件需處理時,再進行運算
             //
-            holder.cbCEA.setChecked(false);
-            holder.cbCEA.setText(String.valueOf(experienceArticleData.getExperienceArticleLaud()));
+            holder.cbLaud.setChecked(false);
+            holder.cbLaud.setText(String.valueOf(experienceArticleData.getExperienceArticleLaud()));
         }
     }
 
@@ -101,24 +102,24 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
     public class ViewHolder extends RecyclerView.ViewHolder {
         ViewPager vpExperienceArticle;
 
-        CardView cvCEA;
-        ImageView ivHeadCEA, ivPictureCEA;
-        TextView tvHeadCEA, tvProjectCEA, tvTimeCEA, tvContentCEA;
-        CheckBox cbCEA;
+        CardView cvExperienceArticle;
+        ImageView ivHead, ivPicture;
+        TextView tvHead, tvCategory, tvName, tvTime, tvContent;
+        CheckBox cbLaud;
 
         public ViewHolder(View itemView) {
             super(itemView);
             vpExperienceArticle = (ViewPager) itemView.findViewById(R.id.vpExperienceArticle);
 
-            cvCEA = (CardView) itemView.findViewById(R.id.cvCEA);
-            ivHeadCEA = (ImageView) itemView.findViewById(R.id.ivHeadCEA);
-            tvHeadCEA = (TextView) itemView.findViewById(R.id.tvHeadCEA);
-            tvProjectCEA = (TextView) itemView.findViewById(R.id.tvProjectCEA);
-
-            ivPictureCEA = (ImageView) itemView.findViewById(R.id.ivPictureCEA);
-            tvTimeCEA = (TextView) itemView.findViewById(R.id.tvTimeCEA);
-            tvContentCEA = (TextView) itemView.findViewById(R.id.tvContentCEA);
-            cbCEA = (CheckBox) itemView.findViewById(R.id.cbCEA);
+            cvExperienceArticle = (CardView) itemView.findViewById(R.id.cvExperienceArticle);
+            ivHead = (ImageView) itemView.findViewById(R.id.ivHead);
+            tvHead = (TextView) itemView.findViewById(R.id.tvHead);
+            tvCategory = (TextView) itemView.findViewById(R.id.tvCategory);
+            tvName=(TextView)itemView.findViewById(R.id.tvName);
+            ivPicture = (ImageView) itemView.findViewById(R.id.ivPicture);
+            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
+            tvContent = (TextView) itemView.findViewById(R.id.tvContent);
+            cbLaud = (CheckBox) itemView.findViewById(R.id.cbLaud);
         }
     }
 }

@@ -14,14 +14,14 @@ import nom.cp101.master.master.R;
 
 //課程文章frag
 public class CourseArticleFragment extends Fragment {
-    RecyclerView rv;
+    RecyclerView rvCourseArticle;
     View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.course_article_frag, container, false);
-        //取得RecyclerView並接上ArticleAdapter
+        //取得RecyclerView並接上CourseArticleAdapter
         setRecyclerView();
 
         return view;
@@ -29,10 +29,10 @@ public class CourseArticleFragment extends Fragment {
 
     //取得RecyclerView並接上ArticleAdapter
     private void setRecyclerView() {
-        rv = (RecyclerView) view.findViewById(R.id.rvCourseArticle);
+        rvCourseArticle = (RecyclerView) view.findViewById(R.id.rvCourseArticle);
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
-        rv.setLayoutManager(layoutManager);
-        rv.setAdapter(new CourseArticleAdapter(getActivity(), getFragmentManager()));
+        rvCourseArticle.setLayoutManager(layoutManager);
+        rvCourseArticle.setAdapter(new CourseArticleAdapter(getActivity(), getFragmentManager()));
     }
 
 }

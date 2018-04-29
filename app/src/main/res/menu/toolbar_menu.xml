@@ -5,7 +5,7 @@
     <!--app:actionViewClass表指向某個指定的view文件-->
     <!--showAsAction表此view在actionBar中隱藏顯示的方式-->
     <item
-        android:id="@+id/search_master"
+        android:id="@+id/searchMaster"
         android:title="@string/searchData"
         android:icon="@android:drawable/ic_menu_search"
         app:actionViewClass="android.support.v7.widget.SearchView"
@@ -13,7 +13,7 @@
 
 
     <item
-        android:id="@+id/addText_master"
+        android:id="@+id/addTextMaster"
         android:title="@string/addText"
         android:icon="@android:drawable/ic_input_add"
         app:showAsAction="always|collapseActionView"/>
