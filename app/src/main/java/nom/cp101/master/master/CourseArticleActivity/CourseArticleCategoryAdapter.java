@@ -1,7 +1,10 @@
 package nom.cp101.master.master.CourseArticleActivity;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,11 +24,13 @@ import nom.cp101.master.master.R;
 //rvCategory搭載在CourseArticleCategoryFragment上與之橋接器
 class CourseArticleCategoryAdapter extends RecyclerView.Adapter<CourseArticleCategoryAdapter.ViewHolder> {
     Context context;
+    FragmentManager fm;
     //載入為點選之特定專業類別中,所有的專業項目
     List<CourseArticleCategoryData> courseArticleCategoryDataList;
 
-    public CourseArticleCategoryAdapter(Context context, List<CourseArticleCategoryData> courseArticleCategoryDataList) {
+    public CourseArticleCategoryAdapter(Context context, FragmentManager fm, List<CourseArticleCategoryData> courseArticleCategoryDataList) {
         this.context = context;
+        this.fm = fm;
         this.courseArticleCategoryDataList = courseArticleCategoryDataList;
     }
 
@@ -55,10 +60,19 @@ class CourseArticleCategoryAdapter extends RecyclerView.Adapter<CourseArticleCat
         holder.cvCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //???
-//                Intent intent = new Intent(context, CourseArticleActivity.class);
-//                context.startActivity(intent);
-                Toast.makeText(context, "successed!", Toast.LENGTH_SHORT).show();
+                //若想切換至指定項目之所有課程頁面,需透過setArguments()將項目名稱帶入bundle傳遞
+                CourseArticleProjectFragment courseArticleProjectFragment = new CourseArticleProjectFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("projectName", courseArticleCategoryData.getProjectName());
+                courseArticleProjectFragment.setArguments(bundle);
+                //並要讓他可返回上一個CourseArticleCategoryFragment
+                FragmentTransaction ft=fm.beginTransaction();
+                //fragment轉場動畫
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+//                fm.popBackStack();
+                ft.addToBackStack(null);
+                ft.replace(R.id.layoutCategory, courseArticleProjectFragment).commit();
+
             }
         });
     }
@@ -80,8 +94,6 @@ class CourseArticleCategoryAdapter extends RecyclerView.Adapter<CourseArticleCat
             layoutCategory = (LinearLayout) itemView.findViewById(R.id.layoutCategory);
             cvCategory = (CardView) itemView.findViewById(R.id.cvCategory);
             tvCategory = (TextView) itemView.findViewById(R.id.tvCategory);
-
-
         }
     }
 }

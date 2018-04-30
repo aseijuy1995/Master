@@ -1,7 +1,11 @@
 package nom.cp101.master.master.CourseArticle;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,20 +78,31 @@ public class CourseArticleGridViewAdapter extends BaseAdapter {
         //不太優的用法
         params.height = w * 2;
         //自訂點擊專業類別method
-        setCategoryClick(context, layoutGridView, context.getResources().getString(courseArticleGridViewData.getCategoryName()));
+        setCategoryClick(context, layoutGridView, context.getResources().getString(courseArticleGridViewData.getCategoryName()), convertView);
 
 
         return convertView;
     }
 
-    private void setCategoryClick(final Context context, LinearLayout layoutGridView, final String categoryName) {
+    private void setCategoryClick(final Context context, LinearLayout layoutGridView, final String categoryName, final View convertView) {
         //將選擇的專業類別名稱一併帶入CourseArticleActivity頁面
         layoutGridView.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CourseArticleActivity.class);
                 intent.putExtra("categoryName", categoryName);
-                context.startActivity(intent);
+//                context.startActivity(intent,
+//                        ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, convertView.findViewById(v.getId()), v.getTag().toString()).toBundle());
+//                context.startActivity(intent,
+//                        ActivityOptionsCompat.makeClipRevealAnimation(convertView.findViewById(v.getId()), v.getWidth(), v.getHeight(), v.getWidth(), v.getHeight()).toBundle());
+                context.startActivity(intent,
+                        ActivityOptionsCompat.makeScaleUpAnimation(convertView.findViewById(v.getId()),
+                                context.getResources().getDisplayMetrics().widthPixels/2,
+                                context.getResources().getDisplayMetrics().heightPixels/2,
+                                0,500).toBundle());
+//                context.startActivity(intent);
+
             }
         });
     }

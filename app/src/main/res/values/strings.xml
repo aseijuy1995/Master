@@ -68,7 +68,7 @@
         <item>琵琶</item>
         <item>二胡</item>
     </string-array>
-    <string-array name="languageLearning">
+    <string-array name="languageLearningName">
         <item>英文</item>
         <item>日文</item>
         <item>韓文</item>
@@ -97,7 +97,7 @@
         <item>Swift</item>
     </string-array>
 
-
+    <!--projectImgList-->
     <array name="waterSportsImg">
         <item>@drawable/a1</item>
         <item>@drawable/a2</item>
@@ -107,13 +107,82 @@
         <item>@drawable/a3</item>
         <item>@drawable/a1</item>
         <item>@drawable/a2</item>
-        <item>@drawable/a3</item>
-        <!--<item>@drawable/a1</item>-->
-        <!--<item>@drawable/a2</item>-->
-        <!--<item>@drawable/a3</item>-->
-        <!--<item>@drawable/a1</item>-->
-        <!--<item>@drawable/a2</item>-->
     </array>
+    <array name="extremeSportImg">
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+    </array>
+    <array name="workOutImg">
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+    </array>
+    <array name="ballSportsImg">
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+    </array>
+    <array name="musicalInstrumentImg">
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+    </array>
+    <array name="languageLearningImg">
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+    </array>
+    <array name="leisureTalentImg">
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+    </array>
+    <array name="programmingImg">
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+        <item>@drawable/a1</item>
+    </array>
+
+
+
+
+
 
 
     <string-array name="languages">

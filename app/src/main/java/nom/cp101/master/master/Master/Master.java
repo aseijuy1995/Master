@@ -70,7 +70,7 @@ public class Master extends AppCompatActivity {
         int[] imgs = {R.drawable.tab_article,
                 R.drawable.tab_experience,
                 R.drawable.tab_message,
-//                R.drawable.tab_notice,
+                R.drawable.tab_notice,
                 R.drawable.tab_information};
         //TabLayout接上viewPager
         tabMaster.setupWithViewPager(viewpagerMaster, true);
@@ -113,7 +113,7 @@ public class Master extends AppCompatActivity {
         listMaster.add(courseArticleFragment);
         listMaster.add(experienceArticleFragment);
         listMaster.add(messageFragment);
-//        listMaster.add(notificationFragment);
+        listMaster.add(notificationFragment);
         listMaster.add(informationFragment);
 
         //主畫面Master-期內掛載在TabLayout內的ViewPager與包裝過的list橋接設置
