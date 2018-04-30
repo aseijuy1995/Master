@@ -64,7 +64,7 @@ public class CourseArticleAllData {
         int[] projectImg;
         String[] projectName = null;
         TypedArray t=null;
-
+        //將傳進的專案類別先做比對,相輔則給予對應之陣列數據
         if (categoryName.equals(context.getResources().getString(R.string.water_sports))) {
 
             t= context.getResources().obtainTypedArray(R.array.waterSportsImg);
