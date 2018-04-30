@@ -43,15 +43,7 @@ public class CourseArticleAllData {
         List courseArticleDataList = new ArrayList<>();
 
         courseArticleDataList.add(new CourseArticleData("Name1", "11/22", "Taipei", "2018/05/22"));
-        courseArticleDataList.add(new CourseArticleData("Name2", "11/22", "Taipei", "2018/05/22"));
-        courseArticleDataList.add(new CourseArticleData("Name3", "11/22", "Taipei", "2018/05/22"));
-        courseArticleDataList.add(new CourseArticleData("Name4", "11/22", "Taipei", "2018/05/22"));
-        courseArticleDataList.add(new CourseArticleData("Name5", "11/22", "Taipei", "2018/05/22"));
-        courseArticleDataList.add(new CourseArticleData("Name6", "11/22", "Taipei", "2018/05/22"));
-        courseArticleDataList.add(new CourseArticleData("Name7", "11/22", "Taipei", "2018/05/22"));
-        courseArticleDataList.add(new CourseArticleData("Name8", "11/22", "Taipei", "2018/05/22"));
-        courseArticleDataList.add(new CourseArticleData("Name9", "11/22", "Taipei", "2018/05/22"));
-        courseArticleDataList.add(new CourseArticleData("Name10", "11/22", "Taipei", "2018/05/22"));
+
         return courseArticleDataList;
     }
 
