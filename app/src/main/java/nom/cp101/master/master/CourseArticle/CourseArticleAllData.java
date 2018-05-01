@@ -3,9 +3,13 @@ package nom.cp101.master.master.CourseArticle;
 import android.content.Context;
 import android.content.res.TypedArray;
 
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import nom.cp101.master.master.Common;
 import nom.cp101.master.master.CourseArticleActivity.CourseArticleCategoryData;
 import nom.cp101.master.master.R;
 
@@ -15,7 +19,6 @@ import nom.cp101.master.master.R;
 
 //此類別為課程文章需呼叫的各method
 public class CourseArticleAllData {
-
 
     //專業類別之名稱與圖示,將ArticleViewPagerProjectData的物件包裝成一個ArticleViewPagerData內的陣列便於呼叫
     //回傳list為顯示於課程文章上ViewPager中
@@ -36,14 +39,22 @@ public class CourseArticleAllData {
     }
 
 
-    //專業類別之名稱與圖示,將ArticleViewPagerProjectData的物件包裝成一個ArticleViewPagerData內的陣列便於呼叫
-    //回傳list為顯示於課程文章上ViewPager中
+    //從server連db抓取所有課程文章數據
     public static final List<CourseArticleData> takeArticleCourseDataList() {
+        JsonObject jsonObject=new JsonObject();
+        //抓取所有文章values
+        jsonObject.addProperty("courseArticle","courseArticleAll");
+        CourseArticleTask courseArticleTask=new CourseArticleTask(jsonObject.toString());
+        //宣告一個List<CourseArticleData>接server回傳之數據
+        List<CourseArticleData> courseArticleDataList= null;
+        try {
+            courseArticleDataList = courseArticleTask.execute(Common.URL+"/CourseArticleServlet").get();
 
-        List courseArticleDataList = new ArrayList<>();
-
-        courseArticleDataList.add(new CourseArticleData("Name1", "11/22", "Taipei", "2018/05/22"));
-
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         return courseArticleDataList;
     }
 
@@ -106,6 +117,24 @@ public class CourseArticleAllData {
 
         List<CourseArticleData> courseArticleProjectDataList = new ArrayList<>();
 
+        JsonObject jsonObject=new JsonObject();
+        //設定屬性為項目名稱
+            jsonObject.addProperty("courseArticle", projectName);
+        CourseArticleTask courseArticleTask=new CourseArticleTask(jsonObject.toString());
+        //宣告一個List<CourseArticleData>接server回傳之數據
+        List<CourseArticleData> courseArticleDataList= null;
+        try {
+            courseArticleDataList = courseArticleTask.execute(Common.URL+"/CourseArticleServlet").get();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return courseArticleDataList;
+
+
+
 //        //將傳進的專案類別先做比對,相輔則給予對應之陣列數據
 //        if (projectName.equals(context.getResources())) {
 //
@@ -124,7 +153,6 @@ public class CourseArticleAllData {
 //        for (int i = 0; i < projectName.length; i++) {
 //            courseArticleCategoryDataList.add(new CourseArticleCategoryData(projectImg[i], projectName[i]));
 //        }
-        return courseArticleProjectDataList;
     }
 }
 
