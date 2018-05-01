@@ -139,6 +139,9 @@ public class Master extends AppCompatActivity {
         //設定置入於SearchView內的AutoCompleteTextView橋接器
         setSearchAutoComplete();
 
+
+
+
         autoCompleteTextViewMaster.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -154,12 +157,12 @@ public class Master extends AppCompatActivity {
 
     //設置SearcjAutoComplete
     private void setSearchAutoComplete() {
-        String[] searchContent = getResources().getStringArray(R.array.languages);
+//        String[] searchContent = getResources().getStringArray(R.array.languages);
         //autoCompleteTextView橋接自定viewItem
         autoCompleteTextViewMaster.setAdapter(new ArrayAdapter<>(this,
                 R.layout.master_search_autocomplete_item,
                 R.id.tv_autocomplete,
-                searchContent));
+                MasterAllData.getProjectNameList()));
         //設置提示條件-輸入長度取決於何時顯示
         autoCompleteTextViewMaster.setThreshold(1);
     }

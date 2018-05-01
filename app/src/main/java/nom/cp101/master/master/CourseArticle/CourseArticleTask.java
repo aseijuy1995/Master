@@ -45,7 +45,7 @@ public class CourseArticleTask extends AsyncTask<String, Integer, List<CourseArt
             //請求內容長度未知時,可將數據切割多塊來傳輸,以免上傳之文件過大而遭損毀
             conn.setChunkedStreamingMode(0);
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("charType", "UTF-8");
+            conn.setRequestProperty("charset", "UTF-8");
 
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             bw.write(outPutCourseArticle);

@@ -115,10 +115,8 @@ public class CourseArticleAllData {
 
     public static List<CourseArticleData> takeCourseArticleProjectDataList(Context context, String projectName) {
 
-        List<CourseArticleData> courseArticleProjectDataList = new ArrayList<>();
-
         JsonObject jsonObject=new JsonObject();
-        //設定屬性為項目名稱
+        //設定屬性傳入項目名稱
             jsonObject.addProperty("courseArticle", projectName);
         CourseArticleTask courseArticleTask=new CourseArticleTask(jsonObject.toString());
         //宣告一個List<CourseArticleData>接server回傳之數據
@@ -154,5 +152,8 @@ public class CourseArticleAllData {
 //            courseArticleCategoryDataList.add(new CourseArticleCategoryData(projectImg[i], projectName[i]));
 //        }
     }
+
+
+
 }
 
