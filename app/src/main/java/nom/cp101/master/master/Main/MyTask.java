@@ -1,4 +1,4 @@
-package nom.cp101.master.master;
+package nom.cp101.master.master.Main;
 
 import android.os.AsyncTask;
 import android.util.Log;

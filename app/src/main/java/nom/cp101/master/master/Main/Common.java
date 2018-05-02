@@ -1,4 +1,4 @@
-package nom.cp101.master.master;
+package nom.cp101.master.master.Main;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

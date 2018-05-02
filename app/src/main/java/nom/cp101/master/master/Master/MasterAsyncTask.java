@@ -1,15 +1,11 @@
 package nom.cp101.master.master.Master;
 
 import android.os.AsyncTask;
-import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.util.Log;
-import android.widget.TableRow;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -18,8 +14,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-
-import nom.cp101.master.master.Common;
 
 /**
  * Created by yujie on 2018/5/1.
