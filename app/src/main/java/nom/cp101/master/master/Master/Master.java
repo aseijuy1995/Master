@@ -20,7 +20,7 @@ import java.util.List;
 
 import nom.cp101.master.master.CourseArticle.CourseArticleFragment;
 import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
-import nom.cp101.master.master.InformationFragment;
+import nom.cp101.master.master.Account.InformationFragment;
 import nom.cp101.master.master.Message.MessageFragment;
 import nom.cp101.master.master.Notification.NotificationFragment;
 import nom.cp101.master.master.R;

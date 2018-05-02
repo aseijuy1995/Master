@@ -24,8 +24,8 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import nom.cp101.master.master.Common;
-import nom.cp101.master.master.MyTask;
+import nom.cp101.master.master.Main.Common;
+import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
 
 public class NotificationFragment extends Fragment {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import nom.cp101.master.master.Common;
+import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.CourseArticleActivity.CourseArticleCategoryData;
 import nom.cp101.master.master.R;
 

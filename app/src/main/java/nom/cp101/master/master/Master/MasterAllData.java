@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import nom.cp101.master.master.Common;
+import nom.cp101.master.master.Main.Common;
 
 /**
  * Created by yujie on 2018/5/1.
