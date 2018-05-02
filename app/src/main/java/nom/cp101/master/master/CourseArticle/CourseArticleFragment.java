@@ -15,10 +15,9 @@ import nom.cp101.master.master.R;
 
 //課程文章frag
 public class CourseArticleFragment extends Fragment {
-    RecyclerView rvCourseArticle;
     View view;
+    RecyclerView rvCourseArticle;
     CourseArticleAdapter courseArticleAdapter;
-
     SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
@@ -29,14 +28,13 @@ public class CourseArticleFragment extends Fragment {
         rvCourseArticle = (RecyclerView) view.findViewById(R.id.rvCourseArticle);
         //取得RecyclerView並接上CourseArticleAdapter
         setRecyclerView();
+        //設置SwipeRefreshLayout,上滑更新課程文章
         setSwipeRefreshLayout();
-
-        swipeRefreshLayout.setVisibility(View.VISIBLE);//資料呈現
         return view;
     }
 
+    //設置SwipeRefreshLayout,上滑更新課程文章
     private void setSwipeRefreshLayout() {
-        swipeRefreshLayout.setVisibility(View.VISIBLE);
         //設置下拉圈大小
         swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
         //設置下拉圈顏色

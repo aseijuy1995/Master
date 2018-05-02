@@ -9,10 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -32,7 +29,6 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     public CourseArticleAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
         this.fragmentManager = fragmentManager;
-//        this.courseArticleDataList = CourseArticleAllData.takeArticleCourseDataList();
     }
 
     //依靠position置入相對的ViewType
@@ -43,7 +39,6 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
         else
             return position;
     }
-
 
     @NonNull
     @Override
@@ -72,7 +67,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
         if (getItemViewType(position) != TYPE_GRIDLAYOUT) {
 
             //因position=0時,因有置入gridView所以position需-1來帶入,否則會導致IndexOutOfBoundsException超出index的例外
-            final CourseArticleData courseArticleData = CourseArticleAllData.takeArticleCourseDataList().get(position - 1);
+            CourseArticleData courseArticleData = courseArticleDataList.get(position - 1);
 
             //將list存放各ArticleCourseData物件內的各資料取出顯示
             holder.tvName.setText(courseArticleData.getCourseArticleName());
@@ -96,7 +91,6 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     public int getItemCount() {
         return courseArticleDataList.size() + 1;
     }
-
 
     //將會使用到的view包崇一個viewHolder,便於使用
     public class ViewHolder extends RecyclerView.ViewHolder {

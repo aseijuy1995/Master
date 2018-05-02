@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -38,6 +37,7 @@ class CourseArticleCategoryAdapter extends RecyclerView.Adapter<CourseArticleCat
     @Override
     public CourseArticleCategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //將R.layout.course_article_category_cardview_item轉為view
+        //實體化專業類別xml檔
         View view = LayoutInflater.from(context).inflate(R.layout.course_article_category_cardview_item, parent, false);
         return new ViewHolder(view);
     }
@@ -66,7 +66,7 @@ class CourseArticleCategoryAdapter extends RecyclerView.Adapter<CourseArticleCat
                 bundle.putString("projectName", courseArticleCategoryData.getProjectName());
                 courseArticleProjectFragment.setArguments(bundle);
                 //並要讓他可返回上一個CourseArticleCategoryFragment
-                FragmentTransaction ft=fm.beginTransaction();
+                FragmentTransaction ft = fm.beginTransaction();
                 //fragment轉場動畫
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
 //                fm.popBackStack();

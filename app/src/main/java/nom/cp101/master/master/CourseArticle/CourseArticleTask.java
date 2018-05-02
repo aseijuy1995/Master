@@ -15,12 +15,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-//用於抓取課程文章之數據
+//用於抓取db課程文章之數據
 public class CourseArticleTask extends AsyncTask<String, Integer, List<CourseArticleData>> {
-
     static final String TAG_COURSE_ARTICLE = "CourseArticleTask";
-
-
     String outPutCourseArticle;
 
     public CourseArticleTask(String outPutCourseArticle) {
@@ -29,7 +26,6 @@ public class CourseArticleTask extends AsyncTask<String, Integer, List<CourseArt
 
     @Override
     protected List<CourseArticleData> doInBackground(String... strings) {
-
         HttpURLConnection conn = null;
         StringBuilder sb = new StringBuilder();
         Gson gson = new Gson();

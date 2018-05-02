@@ -31,4 +31,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.0'
     api 'com.daasuu:BubbleLayout:1.2.0'
     implementation 'com.google.code.gson:gson:2.8.2'
+    compile 'com.github.linger1216:labelview:v1.1.0'
 }

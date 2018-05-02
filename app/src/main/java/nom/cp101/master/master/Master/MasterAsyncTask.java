@@ -1,4 +1,4 @@
-package nom.cp101.master.master.CourseArticle;
+package nom.cp101.master.master.Master;
 
 import android.os.AsyncTask;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;

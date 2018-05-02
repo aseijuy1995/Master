@@ -80,10 +80,10 @@ public class CourseArticleGridViewAdapter extends BaseAdapter {
         //自訂點擊專業類別method
         setCategoryClick(context, layoutGridView, context.getResources().getString(courseArticleGridViewData.getCategoryName()), convertView);
 
-
         return convertView;
     }
 
+    //自訂點擊專業類別method
     private void setCategoryClick(final Context context, LinearLayout layoutGridView, final String categoryName, final View convertView) {
         //將選擇的專業類別名稱一併帶入CourseArticleActivity頁面
         layoutGridView.setOnClickListener(new View.OnClickListener() {
@@ -92,17 +92,9 @@ public class CourseArticleGridViewAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, CourseArticleActivity.class);
                 intent.putExtra("categoryName", categoryName);
-//                context.startActivity(intent,
-//                        ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, convertView.findViewById(v.getId()), v.getTag().toString()).toBundle());
-//                context.startActivity(intent,
-//                        ActivityOptionsCompat.makeClipRevealAnimation(convertView.findViewById(v.getId()), v.getWidth(), v.getHeight(), v.getWidth(), v.getHeight()).toBundle());
-                context.startActivity(intent,
-                        ActivityOptionsCompat.makeScaleUpAnimation(convertView.findViewById(v.getId()),
-                                context.getResources().getDisplayMetrics().widthPixels/2,
-                                context.getResources().getDisplayMetrics().heightPixels/2,
-                                0,500).toBundle());
-//                context.startActivity(intent);
-
+                context.startActivity(intent);
+                //設置轉場動畫,又出左進
+                ((Activity) context).overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             }
         });
     }
