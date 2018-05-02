@@ -22,10 +22,13 @@
         <activity
             android:name=".Message.MessageChatroom"
             android:theme="@style/MessageTheme" />
-
         <activity
             android:name=".CourseArticleActivity.CourseArticleActivity"
-            android:theme="@style/CourseArticleCategoryTheme"></activity>
+            android:theme="@style/CourseArticleCategoryTheme" />
+        <activity
+            android:name=".ExperienceArticleActivity"
+            android:label="@string/title_activity_experience_article"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

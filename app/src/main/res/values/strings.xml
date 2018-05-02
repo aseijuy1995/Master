@@ -180,11 +180,6 @@
     </array>
 
 
-
-
-
-
-
     <string-array name="languages">
         <item>JAVA</item>
         <item>Android </item>
@@ -220,6 +215,41 @@
     <string name="mg_chatroom_etmessage">Enter a message</string>
     <string name="NoConnection">NoNetworkConnection</string>
     <string name="featured">精選</string>
+    <string name="title_activity_experience_article">ExperienceArticleActivity</string>
+
+
+    <string name="str">Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+        Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+        Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+        Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+        Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+        Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive
+    </string>
 
 
 </resources>

@@ -1,6 +1,7 @@
 package nom.cp101.master.master.ExperienceArticle;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import nom.cp101.master.master.ExperienceArticleActivity;
 import nom.cp101.master.master.R;
 
 /**
@@ -88,6 +90,16 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
             //
             holder.cbLaud.setChecked(false);
             holder.cbLaud.setText(String.valueOf(experienceArticleData.getExperienceArticleLaud()));
+
+
+            holder.ivPicture.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context, ExperienceArticleActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+
         }
     }
 
