@@ -17,7 +17,7 @@ import nom.cp101.master.master.R;
 public class CourseArticleFragment extends Fragment {
     RecyclerView rvCourseArticle;
     View view;
-    CourseArticleAdapter adapter;
+    CourseArticleAdapter courseArticleAdapter;
 
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -25,45 +25,46 @@ public class CourseArticleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.course_article_frag, container, false);
-        swipeRefreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayoutCourseArticle);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutCourseArticle);
+        rvCourseArticle = (RecyclerView) view.findViewById(R.id.rvCourseArticle);
         //取得RecyclerView並接上CourseArticleAdapter
         setRecyclerView();
         setSwipeRefreshLayout();
 
+        swipeRefreshLayout.setVisibility(View.VISIBLE);//資料呈現
         return view;
     }
 
     private void setSwipeRefreshLayout() {
-
+        swipeRefreshLayout.setVisibility(View.VISIBLE);
+        //設置下拉圈大小
+        swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
+        //設置下拉圈顏色
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_purple,
+                android.R.color.holo_blue_light,
+                android.R.color.holo_red_light,
+                android.R.color.holo_green_light);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                adapter.notifyDataSetChanged();//更新RecyclerView
-
-
-//                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//                rvCourseArticle.setLayoutManager(layoutManager);
-//                adapter=new CourseArticleAdapter(getActivity(), getFragmentManager());
-//                rvCourseArticle.setAdapter(adapter);
-//                swipeRefreshLayout.setVisibility(View.VISIBLE);//資料呈現
-
-                setRecyclerView();
-                swipeRefreshLayout.setRefreshing(false);//移除SwipeRefreshLayout更新時的loading圖示
-
-
+                courseArticleAdapter.setData();
+                //使其getItemCount()從新呼叫
+                courseArticleAdapter.notifyDataSetChanged();
+                //移除SwipeRefreshLayout更新時的loading圖示
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
     //取得RecyclerView並接上ArticleAdapter
     private void setRecyclerView() {
-        rvCourseArticle = (RecyclerView) view.findViewById(R.id.rvCourseArticle);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rvCourseArticle.setLayoutManager(layoutManager);
-        adapter=new CourseArticleAdapter(getActivity(), getFragmentManager());
-        rvCourseArticle.setAdapter(adapter);
-        swipeRefreshLayout.setVisibility(View.VISIBLE);//資料呈現
+        courseArticleAdapter = new CourseArticleAdapter(getActivity(), getFragmentManager());
+        //自訂setData-method以便刷新給予數據
+        courseArticleAdapter.setData();
+        rvCourseArticle.setAdapter(courseArticleAdapter);
     }
 
 }

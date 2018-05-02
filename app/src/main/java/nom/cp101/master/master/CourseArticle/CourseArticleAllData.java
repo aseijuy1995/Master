@@ -41,14 +41,14 @@ public class CourseArticleAllData {
 
     //從server連db抓取所有課程文章數據
     public static final List<CourseArticleData> takeArticleCourseDataList() {
-        JsonObject jsonObject=new JsonObject();
+        JsonObject jsonObject = new JsonObject();
         //抓取所有文章values
-        jsonObject.addProperty("courseArticle","courseArticleAll");
-        CourseArticleTask courseArticleTask=new CourseArticleTask(jsonObject.toString());
+        jsonObject.addProperty("courseArticle", "courseArticleAll");
+        CourseArticleTask courseArticleTask = new CourseArticleTask(jsonObject.toString());
         //宣告一個List<CourseArticleData>接server回傳之數據
-        List<CourseArticleData> courseArticleDataList= null;
+        List<CourseArticleData> courseArticleDataList = null;
         try {
-            courseArticleDataList = courseArticleTask.execute(Common.URL+"/CourseArticleServlet").get();
+            courseArticleDataList = courseArticleTask.execute(Common.URL + "/CourseArticleServlet").get();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -70,15 +70,15 @@ public class CourseArticleAllData {
             typedArray = context.getResources().obtainTypedArray(R.array.waterSportsImg);
             projectName = context.getResources().getStringArray(R.array.waterSportsName);
 
-        }else if (categoryName.equals(context.getResources().getString(R.string.extreme_sport))) {
+        } else if (categoryName.equals(context.getResources().getString(R.string.extreme_sport))) {
             typedArray = context.getResources().obtainTypedArray(R.array.extremeSportImg);
             projectName = context.getResources().getStringArray(R.array.extremeSportName);
 
-        }else if (categoryName.equals(context.getResources().getString(R.string.work_out))) {
+        } else if (categoryName.equals(context.getResources().getString(R.string.work_out))) {
             typedArray = context.getResources().obtainTypedArray(R.array.workOutImg);
             projectName = context.getResources().getStringArray(R.array.workOutName);
 
-        }else if (categoryName.equals(context.getResources().getString(R.string.ball_sports))) {
+        } else if (categoryName.equals(context.getResources().getString(R.string.ball_sports))) {
             typedArray = context.getResources().obtainTypedArray(R.array.ballSportsImg);
             projectName = context.getResources().getStringArray(R.array.ballSportsName);
 
@@ -115,14 +115,14 @@ public class CourseArticleAllData {
 
     public static List<CourseArticleData> takeCourseArticleProjectDataList(Context context, String projectName) {
 
-        JsonObject jsonObject=new JsonObject();
+        JsonObject jsonObject = new JsonObject();
         //設定屬性傳入項目名稱
-            jsonObject.addProperty("courseArticle", projectName);
-        CourseArticleTask courseArticleTask=new CourseArticleTask(jsonObject.toString());
+        jsonObject.addProperty("courseArticle", projectName);
+        CourseArticleTask courseArticleTask = new CourseArticleTask(jsonObject.toString());
         //宣告一個List<CourseArticleData>接server回傳之數據
-        List<CourseArticleData> courseArticleDataList= null;
+        List<CourseArticleData> courseArticleDataList = null;
         try {
-            courseArticleDataList = courseArticleTask.execute(Common.URL+"/CourseArticleServlet").get();
+            courseArticleDataList = courseArticleTask.execute(Common.URL + "/CourseArticleServlet").get();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -130,7 +130,6 @@ public class CourseArticleAllData {
             e.printStackTrace();
         }
         return courseArticleDataList;
-
 
 
 //        //將傳進的專案類別先做比對,相輔則給予對應之陣列數據
@@ -152,7 +151,6 @@ public class CourseArticleAllData {
 //            courseArticleCategoryDataList.add(new CourseArticleCategoryData(projectImg[i], projectName[i]));
 //        }
     }
-
 
 
 }

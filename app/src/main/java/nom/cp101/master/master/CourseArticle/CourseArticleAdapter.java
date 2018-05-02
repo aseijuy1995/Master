@@ -27,7 +27,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     //position為0時,帶入RecyclerView其顯現樣式為GridLayouy
     static final int TYPE_GRIDLAYOUT = 0;
     //取得存有課程文章之所有數據
-//    List<CourseArticleData> courseArticleDataList;
+    List<CourseArticleData> courseArticleDataList;
 
     public CourseArticleAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
@@ -94,7 +94,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     //回傳次數須為所有課程總數以及第一position放置的gridView
     @Override
     public int getItemCount() {
-        return CourseArticleAllData.takeArticleCourseDataList().size() + 1;
+        return courseArticleDataList.size() + 1;
     }
 
 
@@ -115,5 +115,10 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
             tvAddress = (TextView) itemView.findViewById(R.id.tvAddress);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
         }
+    }
+
+    //自訂setData-method以便刷新再次給予數據
+    public void setData() {
+        this.courseArticleDataList = CourseArticleAllData.takeArticleCourseDataList();
     }
 }
