@@ -10,6 +10,16 @@
     android:fitsSystemWindows="true"
     tools:context="nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleActivity">
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        app:backgroundTint="?attr/colorPrimaryDark"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="right" />
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -44,9 +54,15 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
+
+
     </android.support.design.widget.AppBarLayout>
 
+
+
+
     <include
-        layout="@layout/experience_article_act" />
+        layout="@layout/experience_article_act"
+        android:id="@+id/item"/>
 
 </android.support.design.widget.CoordinatorLayout>

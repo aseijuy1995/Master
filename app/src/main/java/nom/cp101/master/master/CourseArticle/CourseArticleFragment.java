@@ -46,11 +46,25 @@ public class CourseArticleFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                courseArticleAdapter.setData();
-                //使其getItemCount()從新呼叫
-                courseArticleAdapter.notifyDataSetChanged();
-                //移除SwipeRefreshLayout更新時的loading圖示
-                swipeRefreshLayout.setRefreshing(false);
+
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        courseArticleAdapter.setData();
+                        //使其getItemCount()從新呼叫
+                        courseArticleAdapter.notifyDataSetChanged();
+                        //移除SwipeRefreshLayout更新時的loading圖示
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+
             }
         });
     }
