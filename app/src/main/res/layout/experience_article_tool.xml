@@ -1,30 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--fitsSystemWindows=true表通过子View设置和系统窗口一样高度邊框(padding)确保内容不会出现到系统窗口下面-->
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="nom.cp101.master.master.ExperienceArticleActivity">
+    tools:context="nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="250dp"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
+        <!--contentScrim設置縮何時該顯示之顏色-->
+        <!--layout_scrollFlags:exitUntilCollapsed設置最小高度-->
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+            android:id="@+id/ctlEAA"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
+            app:toolbarId="@+id/tbEAA">
 
+            <ImageView
+                android:id="@+id/ivEAA"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/a1" />
+
+            <!--app:layout_collapseMode="pin"表toolbar在view縮何時,會固定在頂部-->
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/tbEAA"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
@@ -33,6 +46,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/experience_article_act" />
+    <include
+        layout="@layout/experience_article_act" />
 
 </android.support.design.widget.CoordinatorLayout>

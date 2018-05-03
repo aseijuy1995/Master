@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import nom.cp101.master.master.ExperienceArticleActivity;
+import nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleActivity;
 import nom.cp101.master.master.R;
 
 /**
