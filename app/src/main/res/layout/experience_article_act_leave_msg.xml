@@ -22,20 +22,35 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvMsgName"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="20sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvMsgName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tvMsgTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="TextView" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tvMsg"
+                android:id="@+id/tvMsgContent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:layout_weight="1"
                 android:text="TextView" />
+
         </LinearLayout>
 
     </LinearLayout>

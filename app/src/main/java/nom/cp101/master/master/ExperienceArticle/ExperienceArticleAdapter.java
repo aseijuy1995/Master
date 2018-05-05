@@ -77,19 +77,23 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
             ExperienceArticleData experienceArticleData = experienceArticleDataList.get(position-1);
 
             //將list存放各ArticleCourseData物件內的各文章資料取出顯示
-            holder.ivHead.setImageResource(experienceArticleData.getExperienceArticleHeadImg());
-            holder.tvHead.setText(experienceArticleData.getExperienceArticleHeadName());
-            holder.tvCategory.setText(experienceArticleData.getExperienceArticleCategory());
-            holder.ivPicture.setImageResource(experienceArticleData.getExperienceArticleImg());
-            holder.tvName.setText(experienceArticleData.getExperienceArticleName());
+//            holder.ivHead.setImageBitmap();
+            holder.tvHead.setText(experienceArticleData.getUserName());
+            holder.tvCategory.setText(experienceArticleData.getPostCategoryName());
+//            holder.ivPicture.setImageBitmap();
+            holder.tvName.setText(experienceArticleData.getPostCategoryName());
             //Date轉成String?
             //
-            holder.tvTime.setText(experienceArticleData.getExperienceArticleTime().toString());
-            holder.tvContent.setText(experienceArticleData.getExperienceArticleContent());
+            holder.tvTime.setText(experienceArticleData.getPostTime());
+            holder.tvContent.setText(experienceArticleData.getPostContent());
             //先將各篇文章的讚涉違false,當被按下有事件需處理時,再進行運算
             //
-            holder.cbLaud.setChecked(false);
-            holder.cbLaud.setText(String.valueOf(experienceArticleData.getExperienceArticleLaud()));
+//            if(experienceArticleData.getExperienceArticleLaud()==0){
+//                holder.cbLaud.setChecked(false);
+//            }else if(experienceArticleData.getExperienceArticleLaud()==1){
+//                holder.cbLaud.setChecked(true);
+//            }
+//            holder.cbLaud.setText();
 
 
             holder.ivPicture.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +110,7 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
 
     @Override
     public int getItemCount() {
-        return 1+experienceArticleDataList.size();
+        return 1+ experienceArticleDataList.size();
     }
 
 

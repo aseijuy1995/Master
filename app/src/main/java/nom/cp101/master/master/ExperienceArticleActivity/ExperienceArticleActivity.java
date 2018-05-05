@@ -20,7 +20,7 @@ public class ExperienceArticleActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        rv=(RecyclerView)findViewById(R.id.rv);
+        rv=(RecyclerView)findViewById(R.id.rvLeaveMsg);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new ExperienceArticleRecyclerViewAdapter(this));
 

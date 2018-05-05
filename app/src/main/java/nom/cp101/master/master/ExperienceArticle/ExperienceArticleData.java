@@ -1,5 +1,7 @@
 package nom.cp101.master.master.ExperienceArticle;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 
 /**
@@ -8,96 +10,84 @@ import java.util.Date;
 //各心得文章將包成此一類別
 public class ExperienceArticleData {
 
-    //發文者頭貼
-    int experienceArticleHeadImg;
-    //發文者名
-    String experienceArticleHeadName;
-    //文章類別
-    String experienceArticleCategory;
+    int postId;
+    String userId;
+    String userName;
+    String postCategoryName;
+    int postPhotoId;
+    String postTime;
+    String postContent;
 
-    //發文者圖片
-    int experienceArticleImg;
-    //課程名稱
-    String experienceArticleName;
-    //發文時間
-    Date experienceArticleTime;
-    //文章內容
-    String experienceArticleContent;
-    //文章讚
-    int experienceArticleLaud;
 
-    public ExperienceArticleData(int experienceArticleHeadImg, String experienceArticleHeadName, String experienceArticleCategory, int experienceArticleImg, String experienceArticleName, Date experienceArticleTime, String experienceArticleContent, int experienceArticleLaud) {
-        this.experienceArticleHeadImg = experienceArticleHeadImg;
-        this.experienceArticleHeadName = experienceArticleHeadName;
-        this.experienceArticleCategory = experienceArticleCategory;
-        this.experienceArticleImg = experienceArticleImg;
-        this.experienceArticleName = experienceArticleName;
-        this.experienceArticleTime = experienceArticleTime;
-        this.experienceArticleContent = experienceArticleContent;
-        this.experienceArticleLaud = experienceArticleLaud;
+
+    public ExperienceArticleData(int postId, String userId, String userName, String postCategoryName, int postPhotoId,
+                                     String postTime, String postContent) {
+        super();
+        this.postId = postId;
+        this.userId = userId;
+        this.userName = userName;
+        this.postCategoryName = postCategoryName;
+        this.postPhotoId = postPhotoId;
+        this.postTime = postTime;
+        this.postContent = postContent;
     }
 
-    public int getExperienceArticleHeadImg() {
-        return experienceArticleHeadImg;
+
+
+    public int getPostId() {
+        return postId;
     }
 
-    public void setExperienceArticleHeadImg(int experienceArticleHeadImg) {
-        this.experienceArticleHeadImg = experienceArticleHeadImg;
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
-    public String getExperienceArticleHeadName() {
-        return experienceArticleHeadName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setExperienceArticleHeadName(String experienceArticleHeadName) {
-        this.experienceArticleHeadName = experienceArticleHeadName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getExperienceArticleCategory() {
-        return experienceArticleCategory;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setExperienceArticleCategory(String experienceArticleCategory) {
-        this.experienceArticleCategory = experienceArticleCategory;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public int getExperienceArticleImg() {
-        return experienceArticleImg;
+    public String getPostCategoryName() {
+        return postCategoryName;
     }
 
-    public void setExperienceArticleImg(int experienceArticleImg) {
-        this.experienceArticleImg = experienceArticleImg;
+    public void setPostCategoryName(String postCategoryName) {
+        this.postCategoryName = postCategoryName;
     }
 
-    public String getExperienceArticleName() {
-        return experienceArticleName;
+    public int getPostPhotoId() {
+        return postPhotoId;
     }
 
-    public void setExperienceArticleName(String experienceArticleName) {
-        this.experienceArticleName = experienceArticleName;
+    public void setPostPhotoId(int postPhotoId) {
+        this.postPhotoId = postPhotoId;
     }
 
-    public Date getExperienceArticleTime() {
-        return experienceArticleTime;
+    public String getPostTime() {
+        return postTime;
     }
 
-    public void setExperienceArticleTime(Date experienceArticleTime) {
-        this.experienceArticleTime = experienceArticleTime;
+    public void setPostTime(String postTime) {
+        this.postTime = postTime;
     }
 
-    public String getExperienceArticleContent() {
-        return experienceArticleContent;
+    public String getPostContent() {
+        return postContent;
     }
 
-    public void setExperienceArticleContent(String experienceArticleContent) {
-        this.experienceArticleContent = experienceArticleContent;
+    public void setPostContent(String postContent) {
+        this.postContent = postContent;
     }
 
-    public int getExperienceArticleLaud() {
-        return experienceArticleLaud;
-    }
-
-    public void setExperienceArticleLaud(int experienceArticleLaud) {
-        this.experienceArticleLaud = experienceArticleLaud;
-    }
 }

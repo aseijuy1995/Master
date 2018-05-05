@@ -1,11 +1,14 @@
 package nom.cp101.master.master.ExperienceArticle;
 
 
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.R;
 
 /**
@@ -37,14 +40,28 @@ public class ExperienceArticleAllData {
     //回傳list為顯示於心得文章中
     public static final List<ExperienceArticleData> takeExperienceArticleDataList() {
 
-        experienceArticleDataList = new LinkedList();
+//        experienceArticleDataList = new LinkedList();
+//
+//        experienceArticleDataList.add(new ExperienceArticleData(0,0,"111","1111",111,"111","111"));
+//        experienceArticleDataList.add(new ExperienceArticleData(0,0,"111","1111",111,"111","111"));
+//        experienceArticleDataList.add(new ExperienceArticleData(0,0,"111","1111",111,"111","111"));
+//        experienceArticleDataList.add(new ExperienceArticleData(0,0,"111","1111",111,"111","111"));
 
-        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "7","1",R.drawable.a1,"11", new Date(), "111",0));
-        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "8","2",R.drawable.a1,"22", new Date(), "777",0));
-        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "9","3",R.drawable.a2,"33", new Date(), "555",0));
-        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "10","4",R.drawable.a2,"44", new Date(), "111",0));
-        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "11","5",R.drawable.a3,"55", new Date(), "222",0));
-        experienceArticleDataList.add(new ExperienceArticleData(android.R.drawable.sym_action_email, "12","6",R.drawable.a3,"66", new Date(), "333",0));
+
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("experienceArticle", "experienceArticleText");
+
+        ExperienceArticleTask experienceArticleTask=new ExperienceArticleTask(jsonObject.toString());
+
+        try {
+
+            experienceArticleDataList =experienceArticleTask.execute(Common.URL+"/ExperienceArticleServlet").get();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
         return experienceArticleDataList;
     }
