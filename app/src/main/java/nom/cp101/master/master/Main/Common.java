@@ -5,8 +5,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 public class Common {
-//    public static String URL = "http://10.0.2.2:8080/Master";
-public static String URL = "http://192.168.43.89:8080/Master";
+    public static String URL = "http://10.0.2.2:8080/Master";
+
+//    public static String URL = "http://192.168.43.89:8080/Master";
 
     public static String user_id = "girl";
 

@@ -19,6 +19,7 @@ import nom.cp101.master.master.R;
 public class CourseArticleCategoryFragment extends Fragment {
     View view;
     List<CourseArticleCategoryData> courseArticleCategoryDataList;
+    RecyclerView rvCategory;
 
     @Nullable
     @Override
@@ -37,9 +38,9 @@ public class CourseArticleCategoryFragment extends Fragment {
 
     //設置課程類別的recyclerView
     private void setRecyclerView() {
-        RecyclerView rvCategory = (RecyclerView) view.findViewById(R.id.rvCategory);
+        rvCategory = (RecyclerView) view.findViewById(R.id.rvCategory);
         //此使用GridLayoutManager,其改變列數
-        rvCategory.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        rvCategory.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         //帶入指定類別內之項目List,以便塞入
         rvCategory.setAdapter(new CourseArticleCategoryAdapter(getContext(), getFragmentManager(), courseArticleCategoryDataList));
     }

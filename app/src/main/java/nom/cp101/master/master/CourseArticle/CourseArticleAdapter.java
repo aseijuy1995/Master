@@ -83,8 +83,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
             //將list存放各ArticleCourseData物件內的各資料取出顯示
             holder.tvName.setText(courseArticleData.getCourseArticleName());
 
-            holder.tvNumber.setText(
-                    courseArticleJoin + "/" + courseArticleData.getCourseArticleNumber());
+            holder.tvNumber.setText(courseArticleJoin + "/" + courseArticleData.getCourseArticleNumber());
 
             holder.tvAddress.setText(courseArticleData.getCourseArticleAddress());
             holder.tvTime.setText(courseArticleData.getCourseArticleTime());
@@ -93,6 +92,8 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, Master.class);
+                    //各課程文章id
+//                    courseArticleData.getCourseArticleId();
                     context.startActivity(intent);
                 }
             });

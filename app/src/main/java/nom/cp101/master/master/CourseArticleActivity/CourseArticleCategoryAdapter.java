@@ -45,7 +45,7 @@ class CourseArticleCategoryAdapter extends RecyclerView.Adapter<CourseArticleCat
 
     @Override
     public void onBindViewHolder(@NonNull CourseArticleCategoryAdapter.ViewHolder holder, int position) {
-        //取得點選之專業項目
+        //取得點選之各類別專業項目
         final CourseArticleCategoryData courseArticleCategoryData = courseArticleCategoryDataList.get(position);
 
         holder.layoutCategory.setBackgroundResource(courseArticleCategoryData.getProjectImg());
@@ -69,7 +69,6 @@ class CourseArticleCategoryAdapter extends RecyclerView.Adapter<CourseArticleCat
                 FragmentTransaction ft = fm.beginTransaction();
                 //fragment轉場動畫
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
-//                fm.popBackStack();
                 ft.addToBackStack(null);
                 ft.replace(R.id.layoutCategory, courseArticleProjectFragment).commit();
 
@@ -77,7 +76,7 @@ class CourseArticleCategoryAdapter extends RecyclerView.Adapter<CourseArticleCat
         });
     }
 
-    //實作該類別需顯示隻項目筆數
+    //實作該類別需顯示之項目筆數
     @Override
     public int getItemCount() {
         return courseArticleCategoryDataList.size();
@@ -96,4 +95,6 @@ class CourseArticleCategoryAdapter extends RecyclerView.Adapter<CourseArticleCat
             tvCategory = (TextView) itemView.findViewById(R.id.tvCategory);
         }
     }
+
+
 }

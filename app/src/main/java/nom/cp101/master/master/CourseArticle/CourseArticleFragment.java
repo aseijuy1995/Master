@@ -38,7 +38,7 @@ public class CourseArticleFragment extends Fragment {
         //設置下拉圈大小
         swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
         //設置下拉圈顏色
-        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_orange_dark);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

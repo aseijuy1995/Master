@@ -23,24 +23,23 @@ import nom.cp101.master.master.R;
 //此類別為課程文章需呼叫的各method
 public class CourseArticleAllData {
 
-    //專業類別之名稱與圖示,將ArticleViewPagerProjectData的物件包裝成一個ArticleViewPagerData內的陣列便於呼叫
-    //回傳list為顯示於課程文章上ViewPager中
-    public static final List<CourseArticleGridViewData> takeArticleViewPagerDataList() {
+    //ˇ專業類別名稱與圖示,將CourseArticleGridViewData的物件包裝成一個ArticleViewPagerData內的陣列便於呼叫
+    //回傳list為顯示於課程文章上GridView中
+    public static final List<CourseArticleGridViewData> takeCourseArticleGridViewDataList() {
 
-        List courseArticleViewPagerDataList = new ArrayList<>();
+        List<CourseArticleGridViewData> courseArticleGridViewDataList = new ArrayList<>();
 
-        courseArticleViewPagerDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.water_sports));
-        courseArticleViewPagerDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.extreme_sport));
-        courseArticleViewPagerDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.work_out));
-        courseArticleViewPagerDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.ball_sports));
-        courseArticleViewPagerDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.musical_instrument));
-        courseArticleViewPagerDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.language_learning));
-        courseArticleViewPagerDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.leisure_talent));
-        courseArticleViewPagerDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.programming));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.water_sports));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.extreme_sport));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.work_out));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.ball_sports));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.musical_instrument));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.language_learning));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.leisure_talent));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.programming));
 
-        return courseArticleViewPagerDataList;
+        return courseArticleGridViewDataList;
     }
-
 
     //ˇ從server連至db抓取所有課程文章數據
     public static final List<CourseArticleData> takeCourseArticleAllList() {
@@ -98,7 +97,7 @@ public class CourseArticleAllData {
     }
 
 
-    //給予點擊之專業類別名稱,返回相對應之專業項目數據
+    //ˇ給予點擊之專業類別名稱,返回相對應之專業項目數據
     public static List<CourseArticleCategoryData> takeCourseArticleCategoryDataList(Context context, String categoryName) {
 
         List<CourseArticleCategoryData> courseArticleCategoryDataList = new ArrayList<>();
@@ -143,7 +142,7 @@ public class CourseArticleAllData {
         for (int i = 0; i < projectImg.length; i++) {
             projectImg[i] = typedArray.getResourceId(i, -1);
         }
-        //使用完android文件表示需釣譽recycler(),要不可能會出現OutOfMemory內存不足之錯誤訊息
+        //使用完android文件表示需調用recycler(),要不可能會出現OutOfMemory內存不足之錯誤訊息
         typedArray.recycle();
         //將專業項目名稱與圖片包成各個CourseArticleCategoryData,並添加至courseArticleCategoryDataList中
         for (int i = 0; i < projectName.length; i++) {
@@ -153,21 +152,22 @@ public class CourseArticleAllData {
     }
 
 
-    public static List<CourseArticleData> takeCourseArticleProjectDataList(Context context, String projectName) {
-
+    //給予專業項目名,回傳相關之所有課程文章
+    public static List<CourseArticleData> takeCourseArticleProjectDataList(String projectName) {
         JsonObject jsonObject = new JsonObject();
         //設定屬性傳入項目名稱
-        jsonObject.addProperty("courseArticle", projectName);
+        jsonObject.addProperty("courseArticle", "projectName");
+        jsonObject.addProperty("projectName", projectName);
         CourseArticleTask courseArticleTask = new CourseArticleTask(jsonObject.toString());
         //宣告一個List<CourseArticleData>接server回傳之數據
         List<CourseArticleData> courseArticleDataList = null;
-        String jsonstr = "";
+        String jsonStr = "";
         Gson gson=new Gson();
 
         try {
-            jsonstr = courseArticleTask.execute(Common.URL + "/CourseArticleServlet").get();
+            jsonStr = courseArticleTask.execute(Common.URL + "/CourseArticleServlet").get();
 
-            courseArticleDataList=gson.fromJson(jsonstr, new TypeToken<List<CourseArticleData>>(){}.getType());
+            courseArticleDataList=gson.fromJson(jsonStr, new TypeToken<List<CourseArticleData>>(){}.getType());
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -175,29 +175,7 @@ public class CourseArticleAllData {
             e.printStackTrace();
         }
         return courseArticleDataList;
-
-
-//        //將傳進的專案類別先做比對,相輔則給予對應之陣列數據
-//        if (projectName.equals(context.getResources())) {
-//
-//
-//        }
-//
-//
-//        //依照各專業項目的總數給予相對之圖片陣列空間,以便跑迴圈將typedArray內的值取出並帶入int[]的projectImg內
-//        projectImg = new int[projectName.length];
-//        for (int i = 0; i < projectImg.length; i++) {
-//            projectImg[i] = typedArray.getResourceId(i, -1);
-//        }
-//        //使用完android文件表示需釣譽recycler(),要不可能會出現OutOfMemory內存不足之錯誤訊息
-//        typedArray.recycle();
-//        //將專業項目名稱與圖片包成各個CourseArticleCategoryData,並添加至courseArticleCategoryDataList中
-//        for (int i = 0; i < projectName.length; i++) {
-//            courseArticleCategoryDataList.add(new CourseArticleCategoryData(projectImg[i], projectName[i]));
-//        }
     }
-
-
 
 }
 

@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ public class CourseArticleGridViewAdapter extends BaseAdapter {
 
     public CourseArticleGridViewAdapter(Context context) {
         this.context = context;
-        this.courseArticleGridViewDataList = CourseArticleAllData.takeArticleViewPagerDataList();
+        this.courseArticleGridViewDataList = CourseArticleAllData.takeCourseArticleGridViewDataList();
     }
 
     //依照專業類別筆數實作次數
@@ -93,7 +92,7 @@ public class CourseArticleGridViewAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, CourseArticleActivity.class);
                 intent.putExtra("categoryName", categoryName);
                 context.startActivity(intent);
-                //設置轉場動畫,又出左進
+                //設置轉場動畫,右出左進
                 ((Activity) context).overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             }
         });
