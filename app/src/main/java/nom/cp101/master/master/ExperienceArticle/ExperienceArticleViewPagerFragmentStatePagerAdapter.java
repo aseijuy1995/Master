@@ -1,9 +1,17 @@
 package nom.cp101.master.master.ExperienceArticle;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.List;
 
@@ -12,33 +20,42 @@ import java.util.List;
  */
 
 //心得文章列表,position=0
-public class ExperienceArticleViewPagerFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
+public class ExperienceArticleViewPagerFragmentStatePagerAdapter extends PagerAdapter {
     //心得文章列表內,置入ExperienceImg的圖片數據
-    List<ExperienceArticleViewPagerData> experienceArticleViewPagerDataList;
+    List<ImageView> experienceArticleViewPagerDataList;
+    int num = 300;
 
-    public ExperienceArticleViewPagerFragmentStatePagerAdapter(FragmentManager fm) {
-        super(fm);
-        //傳進viewPager所需圖片陣列
-        experienceArticleViewPagerDataList = ExperienceArticleAllData.takeExperienceViewPagerDataList();
+    public ExperienceArticleViewPagerFragmentStatePagerAdapter(Context context) {
+        experienceArticleViewPagerDataList = ExperienceArticleAllData.takeExperienceViewPagerDataList(context);
     }
 
-    @Override
-    public Fragment getItem(int position) {
-        //取得experienceViewPagerDataList每一index內的物件ExperienceViewPagerData
-        ExperienceArticleViewPagerData experienceArticleViewPagerData = experienceArticleViewPagerDataList.get(position);
-        ExperienceArticleViewPagerFragment experienceArticleViewPagerFragment =new ExperienceArticleViewPagerFragment();
-        //使用bundle將數據傳進articleViewPagerFrag內
-        Bundle bundle=new Bundle();
-        bundle.putInt("experienceArticleViewPagerDataImg", experienceArticleViewPagerData.getExperienceImg());
-        experienceArticleViewPagerFragment.setArguments(bundle);
 
-        return experienceArticleViewPagerFragment;
-    }
-
-    //viewPager筆數
     @Override
     public int getCount() {
-        return  experienceArticleViewPagerDataList.size();
+        return Integer.MAX_VALUE;
+    }
+
+    @Override
+    public boolean isViewFromObject(View view, Object object) {
+        return view == object;
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return super.getItemPosition(object);
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+    }
+
+    @Override
+    public Object instantiateItem(View container, int position) {
+        try {
+            ((ViewPager) container).addView((View) experienceArticleViewPagerDataList.get(position % experienceArticleViewPagerDataList.size()), 0);
+        } catch (Exception e) {
+        }
+        return experienceArticleViewPagerDataList.get(position % experienceArticleViewPagerDataList.size());
     }
 
 }

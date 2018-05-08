@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.lid.lib.LabelTextView;
+
 import java.util.List;
 
 import nom.cp101.master.master.Master.Master;
@@ -21,7 +23,7 @@ import nom.cp101.master.master.R;
 public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdapter.ViewHolder> {
     Context context;
     FragmentManager fragmentManager;
-    //position為0時,帶入RecyclerView其顯現樣式為GridLayouy
+    //position為0時,帶入RecyclerView其顯現樣式為GridLayout
     static final int TYPE_GRIDLAYOUT = 0;
     //取得存有課程文章之所有數據
     List<CourseArticleData> courseArticleDataList;
@@ -29,6 +31,11 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     public CourseArticleAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
         this.fragmentManager = fragmentManager;
+    }
+
+    //自訂setData-method以便刷新再次給予數據
+    public void setData() {
+        this.courseArticleDataList = CourseArticleAllData.takeCourseArticleAllList();
     }
 
     //依靠position置入相對的ViewType
@@ -69,9 +76,16 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
             //因position=0時,因有置入gridView所以position需-1來帶入,否則會導致IndexOutOfBoundsException超出index的例外
             CourseArticleData courseArticleData = courseArticleDataList.get(position - 1);
 
+            //給予課程文章編號對server端db發出請求,回傳每筆課程之參加人數
+            String courseArticleJoin = CourseArticleAllData.takeCourseArticleJoin(courseArticleData.getCourseArticleId());
+
+
             //將list存放各ArticleCourseData物件內的各資料取出顯示
             holder.tvName.setText(courseArticleData.getCourseArticleName());
-            holder.tvNumber.setText(courseArticleData.getCourseArticleNumber());
+
+            holder.tvNumber.setText(
+                    courseArticleJoin + "/" + courseArticleData.getCourseArticleNumber());
+
             holder.tvAddress.setText(courseArticleData.getCourseArticleAddress());
             holder.tvTime.setText(courseArticleData.getCourseArticleTime());
             //點擊課程文章內之各篇文章,切換至教練開課之詳細內容中
@@ -82,6 +96,16 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
                     context.startActivity(intent);
                 }
             });
+
+            //取得當前課程文章參加人數做不同標籤分類
+            int i = Integer.parseInt(courseArticleJoin);
+
+            if(i>2 && i<5){
+                holder.tvLabel.setLabelBackgroundColor(context.getResources().getColor(android.R.color.holo_purple));
+            }else if(i>=5 && i<10){
+                holder.tvLabel.setLabelBackgroundColor(context.getResources().getColor(android.R.color.holo_green_light));
+            }
+
         }
     }
 
@@ -98,6 +122,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
 
         CardView cvCourseArticle;
         TextView tvName, tvNumber, tvAddress, tvTime;
+        LabelTextView tvLabel;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -108,11 +133,9 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
             tvNumber = (TextView) itemView.findViewById(R.id.tvNumber);
             tvAddress = (TextView) itemView.findViewById(R.id.tvAddress);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
+            tvLabel = (LabelTextView) itemView.findViewById(R.id.tvLabel);
         }
     }
 
-    //自訂setData-method以便刷新再次給予數據
-    public void setData() {
-        this.courseArticleDataList = CourseArticleAllData.takeArticleCourseDataList();
-    }
+
 }

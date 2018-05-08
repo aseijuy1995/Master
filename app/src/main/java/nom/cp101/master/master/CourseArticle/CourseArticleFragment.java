@@ -38,10 +38,7 @@ public class CourseArticleFragment extends Fragment {
         //設置下拉圈大小
         swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
         //設置下拉圈顏色
-        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_purple,
-                android.R.color.holo_blue_light,
-                android.R.color.holo_red_light,
-                android.R.color.holo_green_light);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -52,16 +49,13 @@ public class CourseArticleFragment extends Fragment {
                 courseArticleAdapter.notifyDataSetChanged();
                 //移除SwipeRefreshLayout更新時的loading圖示
                 swipeRefreshLayout.setRefreshing(false);
-
-
             }
         });
     }
 
     //取得RecyclerView並接上ArticleAdapter
     private void setRecyclerView() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        rvCourseArticle.setLayoutManager(layoutManager);
+        rvCourseArticle.setLayoutManager(new LinearLayoutManager(getActivity()));
         courseArticleAdapter = new CourseArticleAdapter(getActivity(), getFragmentManager());
         //自訂setData-method以便刷新給予數據
         courseArticleAdapter.setData();

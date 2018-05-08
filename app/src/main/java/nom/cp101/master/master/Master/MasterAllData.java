@@ -14,22 +14,19 @@ import nom.cp101.master.master.Main.Common;
 
 public class MasterAllData {
 
-    public static final List<String> getProjectNameList(){
-        List<String> projectNameList=new ArrayList<>();
+    //ˇ請求server端連至db回傳專業項目之所有名稱
+    public static final List<String> takeProjectNameList() {
+        List<String> projectNameList = new ArrayList<>();
 
-        JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("master","projectName");
-        MasterAsyncTask masterAsyncTask=new MasterAsyncTask(jsonObject.toString());
-
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("master", "projectName");
+        MasterAsyncTask masterAsyncTask = new MasterAsyncTask(jsonObject.toString());
         try {
-            projectNameList=masterAsyncTask.execute(Common.URL + "/MasterServlet").get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+            projectNameList = masterAsyncTask.execute(Common.URL + "/MasterServlet").get();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         return projectNameList;
     }
 }

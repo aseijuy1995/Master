@@ -2,8 +2,11 @@ package nom.cp101.master.master.CourseArticle;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.util.Log;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,16 +42,26 @@ public class CourseArticleAllData {
     }
 
 
-    //從server連db抓取所有課程文章數據
-    public static final List<CourseArticleData> takeArticleCourseDataList() {
+    //ˇ從server連至db抓取所有課程文章數據
+    public static final List<CourseArticleData> takeCourseArticleAllList() {
+
         JsonObject jsonObject = new JsonObject();
         //抓取所有文章values
         jsonObject.addProperty("courseArticle", "courseArticleAll");
         CourseArticleTask courseArticleTask = new CourseArticleTask(jsonObject.toString());
-        //宣告一個List<CourseArticleData>接server回傳之數據
+
+        Gson gson = new Gson();
+        //jsonStr接server回傳json
+        String jsonStr = "";
+        //List<CourseArticleData>接json轉為所需型態
         List<CourseArticleData> courseArticleDataList = null;
+
         try {
-            courseArticleDataList = courseArticleTask.execute(Common.URL + "/CourseArticleServlet").get();
+            jsonStr = courseArticleTask.execute(Common.URL + "/CourseArticleServlet").get();
+
+            //將json字串轉成List<CourseArticleData>匯出
+            courseArticleDataList = gson.fromJson(jsonStr, new TypeToken<List<CourseArticleData>>() {
+            }.getType());
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -57,6 +70,33 @@ public class CourseArticleAllData {
         }
         return courseArticleDataList;
     }
+
+    //ˇ發出課程文章id,請求各課程目前參加人數
+    public static final String takeCourseArticleJoin(int courseArticleId) {
+
+        JsonObject jsonObject = new JsonObject();
+        //設定屬性傳入項目名稱
+        jsonObject.addProperty("courseArticle", "courseArticleJoin");
+        jsonObject.addProperty("courseArticleJoin", courseArticleId);
+        CourseArticleTask courseArticleTask = new CourseArticleTask(jsonObject.toString());
+
+        Gson gson = new Gson();
+        //jsonStr接server回傳之數據
+        String jsonStr = "";
+
+        try {
+            jsonStr = courseArticleTask.execute(Common.URL + "/CourseArticleServlet").get();
+            //傳進之課程文章的參加人數json轉為string
+            jsonStr=gson.fromJson(jsonStr, String.class);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return jsonStr;
+    }
+
 
     //給予點擊之專業類別名稱,返回相對應之專業項目數據
     public static List<CourseArticleCategoryData> takeCourseArticleCategoryDataList(Context context, String categoryName) {
@@ -121,8 +161,13 @@ public class CourseArticleAllData {
         CourseArticleTask courseArticleTask = new CourseArticleTask(jsonObject.toString());
         //宣告一個List<CourseArticleData>接server回傳之數據
         List<CourseArticleData> courseArticleDataList = null;
+        String jsonstr = "";
+        Gson gson=new Gson();
+
         try {
-            courseArticleDataList = courseArticleTask.execute(Common.URL + "/CourseArticleServlet").get();
+            jsonstr = courseArticleTask.execute(Common.URL + "/CourseArticleServlet").get();
+
+            courseArticleDataList=gson.fromJson(jsonstr, new TypeToken<List<CourseArticleData>>(){}.getType());
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -151,6 +196,7 @@ public class CourseArticleAllData {
 //            courseArticleCategoryDataList.add(new CourseArticleCategoryData(projectImg[i], projectName[i]));
 //        }
     }
+
 
 
 }

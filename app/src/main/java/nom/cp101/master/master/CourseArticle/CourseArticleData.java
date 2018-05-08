@@ -8,19 +8,23 @@ package nom.cp101.master.master.CourseArticle;
 public class CourseArticleData {
     //課程名稱
     String courseArticleName;
-    //課程人數比
+    //課程招生人數
     String courseArticleNumber;
     //課程地點
     String courseArticleAddress;
     //課程時間
     String courseArticleTime;
+    //課程流水編號
+    int courseArticleId;
 
-    public CourseArticleData(String courseArticleName, String courseArticleNumber, String courseArticleAddress, String courseArticleTime) {
+    public CourseArticleData(String courseArticleName, String courseArticleNumber, String courseArticleAddress, String courseArticleTime, int courseArticleId) {
         this.courseArticleName = courseArticleName;
         this.courseArticleNumber = courseArticleNumber;
         this.courseArticleAddress = courseArticleAddress;
         this.courseArticleTime = courseArticleTime;
+        this.courseArticleId = courseArticleId;
     }
+
 
     public String getCourseArticleName() {
         return courseArticleName;
@@ -53,4 +57,14 @@ public class CourseArticleData {
     public void setCourseArticleTime(String courseArticleTime) {
         this.courseArticleTime = courseArticleTime;
     }
+
+    public int getCourseArticleId() {
+        return courseArticleId;
+    }
+
+    public void setCourseArticleId(int courseArticleId) {
+        this.courseArticleId = courseArticleId;
+    }
+
+
 }

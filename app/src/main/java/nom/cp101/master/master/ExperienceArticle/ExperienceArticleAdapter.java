@@ -2,6 +2,8 @@ package nom.cp101.master.master.ExperienceArticle;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -23,17 +25,22 @@ import nom.cp101.master.master.R;
  * Created by yujie on 2018/4/25.
  */
 
-public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArticleAdapter.ViewHolder> {
+public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArticleAdapter.ViewHolder> implements ViewPager.OnPageChangeListener{
     Context context;
     FragmentManager fragmentManager;
     //position為0時,帶入ViewPager其輪播照片
     static final int TYPE_VIEWPAGER = 0;
-    List<ExperienceArticleData> experienceArticleDataList;
+    List<ExperienceArticleData> experienceArticleDataTextList;
+    int num=300;
+    Handler mHandler;
+    Runnable mRunnable;
+    Handler viewHandler;
+
 
     public ExperienceArticleAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
         this.fragmentManager = fragmentManager;
-        experienceArticleDataList = ExperienceArticleAllData.takeExperienceArticleDataList();
+        experienceArticleDataTextList = ExperienceArticleAllData.takeExperienceArticleDataList();
     }
 
     //依靠position置入相對的ViewType
@@ -50,13 +57,36 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
     @Override
     public ExperienceArticleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = null;
-        ViewHolder holder;
+        final ViewHolder holder;
         //當種類為對等時,載入相對應的xml檔,轉為view使用
         //position=0,置入viewPager,數據為文章圖片
         if (viewType == TYPE_VIEWPAGER) {
             view = LayoutInflater.from(context).inflate(R.layout.experience_article_recyclerview_viewpager_item, parent, false);
             holder = new ViewHolder(view);
-            holder.vpExperienceArticle.setAdapter(new ExperienceArticleViewPagerFragmentStatePagerAdapter(fragmentManager));
+            holder.vpExperienceArticle.setAdapter(new ExperienceArticleViewPagerFragmentStatePagerAdapter(context));
+
+            mHandler = new Handler();
+            mRunnable = new Runnable() {
+                public void run() {
+                    // 每隔多长时间执行一次
+                    mHandler.postDelayed(this, 1000 * 5);
+                    num++;
+                    viewHandler.sendEmptyMessage(num);
+                }
+            };
+            viewHandler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    holder.vpExperienceArticle.setCurrentItem(msg.what);
+                    super.handleMessage(msg);
+                }
+            };
+
+            holder.vpExperienceArticle.setOnPageChangeListener(this);
+            holder.vpExperienceArticle.setCurrentItem(num);
+            mHandler.postDelayed(mRunnable, 200);
+
+
 
             //剩下設置為心得文章顯示區
         } else {
@@ -64,28 +94,39 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
             view = LayoutInflater.from(context).inflate(R.layout.experience_article_item, parent, false);
 
         }
+
         return new ViewHolder(view);
     }
 
 
+
     @Override
-    public void onBindViewHolder(@NonNull ExperienceArticleAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ExperienceArticleAdapter.ViewHolder holder, int position) {
 
         if (getItemViewType(position) != TYPE_VIEWPAGER) {
 
             //因position=0時,因有置入gridView所以position需-1來帶入,否則會導致IndexOutOfBoundsException超出index的例外
-            ExperienceArticleData experienceArticleData = experienceArticleDataList.get(position-1);
+            ExperienceArticleData experienceArticleTextData = experienceArticleDataTextList.get(position-1);
+
+
+
+            ExperienceArticleAllData.takeExperienceArticleImgData(experienceArticleTextData.getPostId(),
+                    holder.ivHead,
+                    context.getResources().getDisplayMetrics().widthPixels/5,
+                    0);
+            ExperienceArticleAllData.takeExperienceArticleImgData(experienceArticleTextData.getPostId(),
+                    holder.ivPicture,
+                    context.getResources().getDisplayMetrics().widthPixels,
+                    1);
 
             //將list存放各ArticleCourseData物件內的各文章資料取出顯示
-//            holder.ivHead.setImageBitmap();
-            holder.tvHead.setText(experienceArticleData.getUserName());
-            holder.tvCategory.setText(experienceArticleData.getPostCategoryName());
-//            holder.ivPicture.setImageBitmap();
-            holder.tvName.setText(experienceArticleData.getPostCategoryName());
+            holder.tvHead.setText(experienceArticleTextData.getUserName());
+            holder.tvCategory.setText(experienceArticleTextData.getPostCategoryName());
+
+            holder.tvName.setText(experienceArticleTextData.getPostCategoryName());
             //Date轉成String?
-            //
-            holder.tvTime.setText(experienceArticleData.getPostTime());
-            holder.tvContent.setText(experienceArticleData.getPostContent());
+            holder.tvTime.setText(experienceArticleTextData.getPostTime());
+            holder.tvContent.setText(experienceArticleTextData.getPostContent());
             //先將各篇文章的讚涉違false,當被按下有事件需處理時,再進行運算
             //
 //            if(experienceArticleData.getExperienceArticleLaud()==0){
@@ -110,7 +151,23 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
 
     @Override
     public int getItemCount() {
-        return 1+ experienceArticleDataList.size();
+        return 1+ experienceArticleDataTextList.size();
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
 
@@ -138,4 +195,6 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
             cbLaud = (CheckBox) itemView.findViewById(R.id.cbLaud);
         }
     }
+
+
 }

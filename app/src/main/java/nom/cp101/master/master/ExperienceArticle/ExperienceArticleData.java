@@ -2,13 +2,14 @@ package nom.cp101.master.master.ExperienceArticle;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by yujie on 2018/4/27.
  */
 //各心得文章將包成此一類別
-public class ExperienceArticleData {
+public class ExperienceArticleData implements Serializable{
 
     int postId;
     String userId;
@@ -19,9 +20,8 @@ public class ExperienceArticleData {
     String postContent;
 
 
-
     public ExperienceArticleData(int postId, String userId, String userName, String postCategoryName, int postPhotoId,
-                                     String postTime, String postContent) {
+                                 String postTime, String postContent) {
         super();
         this.postId = postId;
         this.userId = userId;
@@ -31,7 +31,6 @@ public class ExperienceArticleData {
         this.postTime = postTime;
         this.postContent = postContent;
     }
-
 
 
     public int getPostId() {
@@ -89,5 +88,13 @@ public class ExperienceArticleData {
     public void setPostContent(String postContent) {
         this.postContent = postContent;
     }
+
+
+
+
+
+
+
+
 
 }

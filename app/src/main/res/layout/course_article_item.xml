@@ -24,15 +24,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <!--label_distance視圖點與設置的標籤距離-->
-                <com.lid.lib.LabelTextView
+
+                <TextView
                     android:id="@+id/tvName"
+
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
                     android:padding="5dp"
                     android:text="TextView"
-                    android:textSize="30sp"
+                    android:textSize="30sp" />
+
+                <!--label_distance視圖點與設置的標籤距離-->
+                <com.lid.lib.LabelTextView
+                    android:id="@+id/tvLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:padding="5dp"
                     app:label_backgroundColor="#03A9F4"
                     app:label_distance="20dp"
                     app:label_orientation="RIGHT_TOP"

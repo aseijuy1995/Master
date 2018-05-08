@@ -17,7 +17,7 @@
         <!--enterAlways快速返回模式-->
         <!--snap滾動時要馬全部顯示要馬縮合,如ViewPager左右吸附效果-->
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarMaster"
+            android:id="@+id/toolBarMaster"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways|snap" />
@@ -35,7 +35,7 @@
 
     <!--使用CoordinatorLayout實現Toolbar滾動,則須在滾動的view中設置layout_behavior,即會觸發layout_scrollFlags的改變-->
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewpagerMaster"
+        android:id="@+id/viewPagerMaster"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
