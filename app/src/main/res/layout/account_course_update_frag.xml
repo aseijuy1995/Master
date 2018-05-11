@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/update_course_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/account_add_image"
+            android:layout_marginTop="20dp"/>
+            android:text="@string/updateImage" />
+
+        <EditText
+            android:id="@+id/update_course_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="@string/course_name" />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp">
+
+            <EditText
+                android:id="@+id/update_course_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/account_rec_shape"
+                android:ems="10"
+                android:gravity="top"
+                android:hint="@string/course_detail"
+                android:inputType="textMultiLine"
+                android:lines="7"
+                android:padding="8dp" />
+        </FrameLayout>
+
+
+        <EditText
+            android:id="@+id/update_course_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:hint="@string/course_date"
+            android:inputType="date"
+            android:focusable="false"/>
+
+        <EditText
+            android:id="@+id/update_course_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:hint="@string/course_price"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/update_course_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:hint="@string/course_location" />
+
+        <EditText
+            android:id="@+id/update_course_need"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:hint="@string/course_need" />
+
+        <EditText
+            android:id="@+id/update_course_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:hint="@string/course_number"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/update_course_qualification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="@string/course_qualification"
+            android:inputType="textMultiLine" />
+
+        <EditText
+            android:id="@+id/update_course_apply_deadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="@string/course_deadline"
+            android:inputType="date"
+            android:focusable="false"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp">
+
+            <EditText
+                android:id="@+id/update_course_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/account_rec_shape"
+                android:ems="10"
+                android:gravity="top"
+                android:hint="@string/course_note"
+                android:inputType="textMultiLine"
+                android:lines="7"
+                android:padding="8dp" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/update_course_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="@string/course_update" />
+    </LinearLayout>
+
+
+</ScrollView>
