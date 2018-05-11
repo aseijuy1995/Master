@@ -1,4 +1,4 @@
-package nom.cp101.master.master.Account.MyCourse.CLASS;
+package nom.cp101.master.master.Account.MyCourse;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -107,7 +107,7 @@ public class MyCourseUpdateFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         setInfo();
         imageClick();
         dateClick();

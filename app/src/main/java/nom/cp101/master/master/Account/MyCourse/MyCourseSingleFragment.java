@@ -1,4 +1,4 @@
-package nom.cp101.master.master.Account.MyCourse.CLASS;
+package nom.cp101.master.master.Account.MyCourse;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;

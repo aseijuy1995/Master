@@ -1,4 +1,4 @@
-package nom.cp101.master.master.Account.MyCourse.CLASS;
+package nom.cp101.master.master.Account.MyCourse;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

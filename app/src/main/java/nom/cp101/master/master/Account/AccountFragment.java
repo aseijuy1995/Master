@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import nom.cp101.master.master.Account.MyAccount.MyAccountFragment;
-import nom.cp101.master.master.Account.MyCourse.CLASS.MyCourseMainFragment;
+import nom.cp101.master.master.Account.MyCourse.MyCourseMainFragment;
 import nom.cp101.master.master.Account.MyPhoto.MyPhotoFragment;
 import nom.cp101.master.master.R;
 

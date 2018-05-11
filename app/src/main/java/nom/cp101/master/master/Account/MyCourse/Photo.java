@@ -1,4 +1,4 @@
-package nom.cp101.master.master.Account.MyCourse.CLASS;
+package nom.cp101.master.master.Account.MyCourse;
 
 /**
  * Created by chunyili on 2018/5/1.
