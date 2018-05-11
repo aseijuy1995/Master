@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +18,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import nom.cp101.master.master.Account.AccountFragment;
 import nom.cp101.master.master.CourseArticle.CourseArticleFragment;
 import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
-import nom.cp101.master.master.Account.InformationFragment;
 import nom.cp101.master.master.Message.MessageFragment;
 import nom.cp101.master.master.Notification.NotificationFragment;
 import nom.cp101.master.master.R;
@@ -44,7 +43,7 @@ public class Master extends AppCompatActivity {
     //通知frag
     NotificationFragment notificationFragment;
     //資料frag
-    InformationFragment informationFragment;
+    AccountFragment accountFragment;
 
     //記錄置入TabLayout內,與Viewpager橋接的個主功能Fragment
     List<Fragment> listMaster;
@@ -112,14 +111,14 @@ public class Master extends AppCompatActivity {
         experienceArticleFragment = new ExperienceArticleFragment();
         messageFragment = new MessageFragment();
         notificationFragment = new NotificationFragment();
-        informationFragment = new InformationFragment();
+        accountFragment = new AccountFragment();
 
         //此區置換個主功能的Fragment,設置完成請將添加對應的Fragment移除
         listMaster.add(courseArticleFragment);
         listMaster.add(experienceArticleFragment);
         listMaster.add(messageFragment);
         listMaster.add(notificationFragment);
-        listMaster.add(informationFragment);
+        listMaster.add(accountFragment);
 
         //主畫面Master-其內掛載TabLayout內的ViewPager與裝有Fragment的list橋接設置
         masterFragmentPagerAdapter = new MasterFragmentPagerAdapter(getSupportFragmentManager(), listMaster);
