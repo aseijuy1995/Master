@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--clipChildren:當子控件高度高於父控間高度時,會完全顯示也不會遭壓縮-->
+<!--layerType="software"關閉硬體加速,因怕會有渲染錯誤-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="#FFFFFF"
+    android:clipChildren="false"
+    android:gravity="center_horizontal"
+    android:layerType="software"
     android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vpExperienceArticle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v4.view.ViewPager>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clipChildren="false"/>
 
 </LinearLayout>

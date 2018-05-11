@@ -6,7 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import java.util.List;
+
+import nom.cp101.master.master.ExperienceArticle.ExperienceArticleData;
 import nom.cp101.master.master.R;
 
 /**
@@ -17,8 +22,12 @@ import nom.cp101.master.master.R;
 public class ExperienceArticleRecyclerViewAdapter extends RecyclerView.Adapter<ExperienceArticleRecyclerViewAdapter.ViewHolder> {
     Context context;
 
-    public ExperienceArticleRecyclerViewAdapter(Context context) {
+    List<Comment> commentList;
+
+    public ExperienceArticleRecyclerViewAdapter(Context context,ExperienceArticleData experienceArticleData) {
         this.context = context;
+        this.commentList=experienceArticleData.getCommentList();
+
     }
 
     @NonNull
@@ -32,16 +41,29 @@ public class ExperienceArticleRecyclerViewAdapter extends RecyclerView.Adapter<E
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+//        Comment comment=commentList.get(position);
+//
+//
+//////        holder.ivMsgHead.setImageBitmap();
+//        holder.tvMsgName.setText(comment.getUser_id());
+//        holder.tvMsgTime.setText(comment.getComment_time().toString());
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return 1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView ivMsgHead;
+        TextView tvMsgName, tvMsgTime;
         public ViewHolder(View itemView) {
             super(itemView);
+            ivMsgHead=(ImageView)itemView.findViewById(R.id.ivMsgHead);
+            tvMsgName=(TextView)itemView.findViewById(R.id.tvMsgName);
+            tvMsgTime=(TextView)itemView.findViewById(R.id.tvMsgTime);
         }
     }
 }

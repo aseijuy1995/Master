@@ -2,14 +2,19 @@ package nom.cp101.master.master.ExperienceArticle;
 
 import android.graphics.Bitmap;
 
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import nom.cp101.master.master.ExperienceArticleActivity.Comment;
+import nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleLeaveMsgData;
 
 /**
  * Created by yujie on 2018/4/27.
  */
 //各心得文章將包成此一類別
-public class ExperienceArticleData implements Serializable{
+public class ExperienceArticleData {
 
     int postId;
     String userId;
@@ -32,6 +37,57 @@ public class ExperienceArticleData implements Serializable{
         this.postContent = postContent;
     }
 
+    byte[] imgPictureByte;
+    boolean isCheckable;
+    byte[] imgHeadByte;
+    List<Comment> commentList;
+
+
+    //單一心得文章之所有數據
+    public ExperienceArticleData(byte[] imgPictureByte, boolean isCheckable, byte[] imgHeadByte, String postUserName, String postTime,
+                                 String postContent , List<Comment> commentList) {
+        super();
+        this.imgPictureByte = imgPictureByte;
+        this.isCheckable = isCheckable;
+        this.imgHeadByte = imgHeadByte;
+        this.userName = postUserName;
+        this.postTime = postTime;
+        this.postContent = postContent;
+        this.commentList = commentList;
+    }
+
+    public byte[] getImgPictureByte() {
+        return imgPictureByte;
+    }
+
+    public void setImgPictureByte(byte[] imgPictureByte) {
+        this.imgPictureByte = imgPictureByte;
+    }
+
+    public boolean isCheckable() {
+        return isCheckable;
+    }
+
+    public void setCheckable(boolean checkable) {
+        isCheckable = checkable;
+    }
+
+    public byte[] getImgHeadByte() {
+        return imgHeadByte;
+    }
+
+    public void setImgHeadByte(byte[] imgHeadByte) {
+        this.imgHeadByte = imgHeadByte;
+    }
+
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
 
     public int getPostId() {
         return postId;
@@ -88,13 +144,6 @@ public class ExperienceArticleData implements Serializable{
     public void setPostContent(String postContent) {
         this.postContent = postContent;
     }
-
-
-
-
-
-
-
 
 
 }

@@ -4,43 +4,34 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Base64;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 
 /**
  * Created by yujie on 2018/5/4.
  */
-
+//給與文章ID來對DB請求,回傳頭貼與文章圖片
 public class ExperienceArticleImgTask extends AsyncTask<String, Integer, Bitmap> {
-    static final String EAIT_TAG = "ExperienceArticleImgTask";
+    static final String tag = "ExperienceArticleImgTask";
     String outStr;
     ImageView iv;
-    int imageviewSize;
+    int imageViewSize;
     int i;
 
     private WeakReference<ImageView> imageViewWeakReference;
 
-    public ExperienceArticleImgTask(String outStr, ImageView iv, int imageviewSize, int i) {
+    public ExperienceArticleImgTask(String outStr, ImageView iv, int imageViewSize, int i) {
         this.outStr = outStr;
         this.iv = iv;
-        this.imageviewSize = imageviewSize;
+        this.imageViewSize = imageViewSize;
         this.i = i;
         imageViewWeakReference = new WeakReference<>(iv);
     }
@@ -61,7 +52,7 @@ public class ExperienceArticleImgTask extends AsyncTask<String, Integer, Bitmap>
 
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             bw.write(outStr);
-            Log.d(EAIT_TAG, "outPut:" + outStr);
+            Log.d(tag, "outPut:" + outStr);
             bw.close();
 
 
@@ -69,23 +60,23 @@ public class ExperienceArticleImgTask extends AsyncTask<String, Integer, Bitmap>
                 BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
 
                 bitmap = BitmapFactory.decodeStream(bis);
-
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+
         } finally {
             if (conn != null) {
                 conn.disconnect();
             }
         }
-
         return bitmap;
     }
 
     @Override
     protected void onPostExecute(Bitmap bitmap) {
         super.onPostExecute(bitmap);
+
         ImageView imageView = imageViewWeakReference.get();
         if (isCancelled() || imageView == null) {
             return;

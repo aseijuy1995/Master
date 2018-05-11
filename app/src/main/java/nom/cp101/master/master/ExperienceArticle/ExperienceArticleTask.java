@@ -19,23 +19,21 @@ import java.util.List;
  * Created by yujie on 2018/5/4.
  */
 
-public class ExperienceArticleTask extends AsyncTask<String, Integer,List<ExperienceArticleData>> {
-    static final String tag="ExperienceArticleTask";
-    String outStr;
-    Gson gson=new Gson();
+public class ExperienceArticleTask extends AsyncTask<String, Integer, String> {
+    static final String tag = "ExperienceArticleTask";
+    String outStr="";
 
     public ExperienceArticleTask(String outStr) {
         this.outStr = outStr;
     }
 
     @Override
-    protected List<ExperienceArticleData> doInBackground(String... strings) {
-        HttpURLConnection conn=null;
-        StringBuilder sb=new StringBuilder();
-        List<ExperienceArticleData> experienceArticleDataList;
+    protected String doInBackground(String... strings) {
+        HttpURLConnection conn = null;
+        StringBuilder sb = new StringBuilder();
 
         try {
-            conn=(HttpURLConnection) new URL(strings[0]).openConnection();
+            conn = (HttpURLConnection) new URL(strings[0]).openConnection();
             conn.setDoInput(true);
             conn.setDoOutput(true);
             conn.setUseCaches(false);
@@ -43,34 +41,33 @@ public class ExperienceArticleTask extends AsyncTask<String, Integer,List<Experi
             conn.setRequestMethod("POST");
             conn.setRequestProperty("charset", "UTF-8");
 
-            BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             bw.write(outStr);
-            Log.d(tag, "ExperienceArticleTextOutPut:"+outStr);
+            Log.d(tag, "outPut:" + outStr);
             bw.close();
 
+            if (conn.getResponseCode() == 200) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String line = "";
 
-            if(conn.getResponseCode()==200){
-                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-                String inStr="";
-
-                while((inStr=br.readLine())!=null){
-                    sb.append(inStr);
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
                 }
+                Log.d(tag, "ExperienceArticleTextInput:" + sb.toString());
+
+            } else {
+                Log.d(tag, "responseCode:" + conn.getResponseCode());
             }
 
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            Log.d(tag, "ExperienceArticleTextInput:" + sb.toString());
 
-            //將json字串轉成List<ExperienceArticleData>匯出
-            experienceArticleDataList = gson.fromJson(sb.toString(), new TypeToken<List<ExperienceArticleData>>() {
-            }.getType());
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
 
         }
-
-
-        return experienceArticleDataList;
+        return sb.toString();
     }
 }

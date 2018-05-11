@@ -40,7 +40,7 @@ public class CourseArticleCategoryFragment extends Fragment {
     private void setRecyclerView() {
         rvCategory = (RecyclerView) view.findViewById(R.id.rvCategory);
         //此使用GridLayoutManager,其改變列數
-        rvCategory.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        rvCategory.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         //帶入指定類別內之項目List,以便塞入
         rvCategory.setAdapter(new CourseArticleCategoryAdapter(getContext(), getFragmentManager(), courseArticleCategoryDataList));
     }

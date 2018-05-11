@@ -7,10 +7,11 @@ import android.net.NetworkInfo;
 public class Common {
     public static String URL = "http://10.0.2.2:8080/Master";
 
-//    public static String URL = "http://192.168.43.89:8080/Master";
+//    public static String URL = "http://192.168.196.77:8080/Master";
 
-    public static String user_id = "girl";
+//    public static String user_id = "yujie1";
 
+    public static String user_id = "aaa123";
 
     public static boolean networkConnected(Context context) {
         ConnectivityManager conManager =
