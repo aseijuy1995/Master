@@ -32,4 +32,9 @@ dependencies {
     api 'com.daasuu:BubbleLayout:1.2.0'
     implementation 'com.google.code.gson:gson:2.8.2'
     compile 'com.github.linger1216:labelview:v1.1.0'
+
+
+//    峻亦
+    compile 'com.github.devlight:infinitecycleviewpager:1.0.2'
+//    峻亦
 }

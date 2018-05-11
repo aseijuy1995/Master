@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_account"
+        android:icon="@drawable/account_box_black"
+        android:title="@string/account" />
+    <item
+        android:id="@+id/menu_photo"
+        android:icon="@drawable/account_image_black"
+        android:title="@string/photo" />
+    <item
+        android:id="@+id/menu_course"
+        android:icon="@drawable/account_run_black"
+        android:title="@string/course" />
+</menu>

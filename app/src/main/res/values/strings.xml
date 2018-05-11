@@ -200,6 +200,66 @@
     <string name="title_activity_experience_article">ExperienceArticleActivity</string>
 
 
+    <!--峻亦-->
+    <!--不准動-->
+    <!--警告-->
+    <!--////////////////////////////////////////////////////////////////////////////////////////////-->
+    <string name="account">My Account</string>
+    <string name="photo">My Photo</string>
+    <string name="course">My Course</string>
+    <string name="Mycourse">COURSE</string>
+    <string name="courseName">COURSE</string>
+    <string name="status">status</string>
+    <string name="courseClass">course class</string>
+    <string name="addImage">add Image</string>
+    <string name="course_name">Name: </string>
+    <string name="course_detail">Detail: </string>
+    <string name="course_date">Date: </string>
+    <string name="course_number">Number of People: </string>
+    <string name="course_price">Price: </string>
+    <string name="course_location">Location: </string>
+    <string name="course_need">Need: </string>
+    <string name="course_qualification">Qualification: </string>
+    <string name="course_note">Note: </string>
+    <string name="course_send">Send</string>
+    <string name="course_single">course</string>
+    <string name="date">2018-02-18</string>
+    <string name="single_name">Diving</string>
+    <string name="single_price">$2000</string>
+    <string name="course_deadline">Regiter Deadline</string>
+    <string name="msg_NoSpotsFound">No Course Found</string>
+    <string name="msg_NoNetwork">No NetWork</string>
+    <string name="msg_NoCoursesFound">No Courses Found</string>
+    <string name="InsertFail">Fail</string>
+    <string name="InsertSuccess">Success</string>
+    <string name="msg_NoCourseFound">No Course</string>
+    <string name="findSuccess">Find Success</string>
+    <string name="msg_DeleteFail">Delete Faild</string>
+    <string name="msg_DeleteSuccess">Delete Success</string>
+    <string name="confirm">Please confirm</string>
+    <string name="alert_name">Course Name</string>
+    <string name="confirm_content">You want to add a new course in your Course?</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+    <string name="course_update">update</string>
+    <string name="updateImage">update Image</string>
+    <string name="updateSuccess">update success</string>
+    <string name="updateFailed">update failed</string>
+    <string name="student_name">STUDENT</string>
+    <string name="register_status">STATUS</string>
+    <string name="total">Total 10 People</string>
+    <string name="camera">Camera</string>
+    <string name="albums">Pick from albums</string>
+    <string name="picture">PICTURE</string>
+    <string name="msg_InsertFail">insert fail</string>
+    <string name="msg_InsertSuccess">insert Success</string>
+    <string name="apply">Apply</string>
+    <string name="contectCoach">Contect</string>
+    <string name="courseNotFound">Course Not Found</string>
+    <string name="checkNetWork">Please check your network</string>
+    <!--峻亦結束-->
+    <!--////////////////////////////////////////////////////////////////////////////////////////////-->
+
 
 
 

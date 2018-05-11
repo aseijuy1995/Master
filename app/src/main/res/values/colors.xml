@@ -8,6 +8,10 @@
     <color name="mg_rv_underline">#22000000</color>
     <color name="mg_chatroom_context">#c4bcbc</color>
     <color name="mg_chatroom_editext">#9f9b9b</color>
+    <color name="white">#fff</color>
+    <color name="bg_gray">#f4f4f4</color>
+    <color name="text_gray">#BABABA</color>
+    <color name="gray">#898989</color>
 
 
 
