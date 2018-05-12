@@ -19,7 +19,7 @@ import nom.cp101.master.master.R;
 import static android.content.Context.MODE_PRIVATE;
 
 public class Common {
-    public static String URL = "http://10.0.2.2:8080/Course_MySQL_WEB";
+    public static String URL = "http://10.0.2.2:8080/Master";
 
 //    public static String URL = "http://192.168.196.77:8080/Master";
 
