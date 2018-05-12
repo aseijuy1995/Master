@@ -294,9 +294,9 @@ public class AddCourseFragment extends Fragment {
         final Gson gson = new Gson();
         final Gson gsonWithDate = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
-        Course courseDetail = new Course(0,name,detail,price,need,qualification,location,note);
+        Course courseDetail = new Course(0,2,name,detail,price,need,qualification,location,note);
         final int detail_id = insertUpdateCourseServlet(getActivity(),TAG,"CourseDetailServlet","insert",gson,courseDetail);
-        Course courseProfile = new Course(0,"billy",detail_id, date, deadline,number,0,photo_id,1);
+        Course courseProfile = new Course(0,"billy",detail_id, date, deadline,number,photo_id,1);
         final int courseInsertFinish = insertUpdateCourseServlet(getActivity(),TAG,"CourseServlet","insert",gsonWithDate,courseProfile);
 
         if(courseInsertFinish != 0){

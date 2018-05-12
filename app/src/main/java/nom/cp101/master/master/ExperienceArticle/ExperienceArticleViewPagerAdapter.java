@@ -45,13 +45,15 @@ public class ExperienceArticleViewPagerAdapter extends PagerAdapter {
 
         ImageView iv = new ImageView(context);
         //因要做輪播,則讓size到最後時會回到前一item,則須內做判斷position % list.size()
-
-        Bitmap bitmap=BitmapFactory.decodeByteArray(list.get(position % list.size()), 0,list.get(position % list.size()).length);
-        iv.setImageBitmap(bitmap);
+        if(list.size() != 0){
+            Bitmap bitmap=BitmapFactory.decodeByteArray(list.get(position % list.size()), 0,list.get(position % list.size()).length);
+            iv.setImageBitmap(bitmap);
 //        iv.setImageResource(list.get(position % list.size()));
-        iv.setScaleType(ImageView.ScaleType.FIT_XY);
-        container.addView(iv);
-        return iv;
+            iv.setScaleType(ImageView.ScaleType.FIT_XY);
+            container.addView(iv);
+            return iv;
+        }
+        return null;
     }
 
     //若滑動的page超過預載的樹糧食,則採用此method

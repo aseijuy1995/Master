@@ -10,7 +10,7 @@ import java.util.Date;
 public class Course implements Serializable {
     private int course_id;
     private String user_id;
-//    private int profession_id;
+    private int profession_id;
     private int course_category_id;
     private String course_name;
     private Date course_date;
@@ -21,7 +21,7 @@ public class Course implements Serializable {
     private String course_location;
     private Date course_apply_deadline;
     private int course_people_number;
-    private int course_applied_number;
+//    private int course_applied_number;
     private int course_image_id;
     private String course_note;
     private int course_status_id;
@@ -31,26 +31,27 @@ public class Course implements Serializable {
     public Course(int course_id, String user_id,
                   int course_category_id, Date course_date,
                   Date course_apply_deadline, int course_people_number,
-                  int course_applied_number, int course_image_id, int course_status_id) {
+//                  int course_applied_number,
+                  int course_image_id, int course_status_id) {
         this.course_id = course_id;
         this.user_id = user_id;
         this.course_category_id = course_category_id;
         this.course_date = course_date;
         this.course_apply_deadline = course_apply_deadline;
         this.course_people_number = course_people_number;
-        this.course_applied_number = course_applied_number;
+//        this.course_applied_number = course_applied_number;
         this.course_image_id = course_image_id;
         this.course_status_id = course_status_id;
     }
 
     //Update courseDetail
     public Course(int course_category_id,
-//                  int profession_id,
+                  int profession_id,
                   String course_name, String course_content, int course_price,
                   String course_need, String course_qualification,
                   String course_location, String course_note) {
         this.course_category_id = course_category_id;
-//        this.profession_id = profession_id;
+        this.profession_id = profession_id;
         this.course_name = course_name;
         this.course_content = course_content;
         this.course_price = course_price;
@@ -62,12 +63,14 @@ public class Course implements Serializable {
     }
 
     public Course(int course_id, String user_id,
-                  int profession_id, int course_category_id, int course_status_id,
+//                  int profession_id,
+                  int course_category_id, int course_status_id,
                   String course_name, Date course_date,
                   String course_content, int course_price,
                   String course_need, String course_qualification,
                   String course_location, Date course_apply_deadline,
-                  int course_people_number, int course_applied_number,
+                  int course_people_number,
+//                  int course_applied_number,
                   int course_image_id, String course_note) {
         this.course_id = course_id;
         this.user_id = user_id;
@@ -83,7 +86,7 @@ public class Course implements Serializable {
         this.course_location = course_location;
         this.course_apply_deadline = course_apply_deadline;
         this.course_people_number = course_people_number;
-        this.course_applied_number = course_applied_number;
+//        this.course_applied_number = course_applied_number;
         this.course_image_id = course_image_id;
         this.course_note = course_note;
     }
@@ -104,13 +107,13 @@ public class Course implements Serializable {
         this.user_id = user_id;
     }
 
-//    public int getProfession_id() {
-//        return profession_id;
-//    }
-//
-//    public void setProfession_id(int profession_id) {
-//        this.profession_id = profession_id;
-//    }
+    public int getProfession_id() {
+        return profession_id;
+    }
+
+    public void setProfession_id(int profession_id) {
+        this.profession_id = profession_id;
+    }
 
     public int getCourse_category_id() {
         return course_category_id;
@@ -191,14 +194,14 @@ public class Course implements Serializable {
     public void setCourse_people_number(int course_people_number) {
         this.course_people_number = course_people_number;
     }
-
-    public int getCourse_applied_number() {
-        return course_applied_number;
-    }
-
-    public void setCourse_applied_number(int course_applied_number) {
-        this.course_applied_number = course_applied_number;
-    }
+//
+//    public int getCourse_applied_number() {
+//        return course_applied_number;
+//    }
+//
+//    public void setCourse_applied_number(int course_applied_number) {
+//        this.course_applied_number = course_applied_number;
+//    }
 
     public int getCourse_image_id() {
         return course_image_id;

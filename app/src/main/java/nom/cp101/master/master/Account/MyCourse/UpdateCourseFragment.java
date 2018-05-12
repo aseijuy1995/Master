@@ -285,8 +285,8 @@ public class UpdateCourseFragment extends Fragment {
         final Gson gson = new Gson();
         final Gson gsonWithDate = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
-        Course courseDetail = new Course(categoryID,name,detail,price,need,qualification,location,note);
-        Course courseProfile = new Course(courseID,accountID,categoryID, date, deadline,number,appliedNumber,photo_id,status_id);
+        Course courseDetail = new Course(categoryID,2,name,detail,price,need,qualification,location,note);
+        Course courseProfile = new Course(courseID,accountID,categoryID, date, deadline,number,photo_id,status_id);
 
         int result1 = Common.insertUpdateCourseServlet(getActivity(),TAG,"CourseServlet","update",gsonWithDate,courseProfile);
         int result2 = Common.insertUpdateCourseServlet(getActivity(),TAG,"CourseDetailServlet","update",gson,courseDetail);
@@ -325,10 +325,11 @@ public class UpdateCourseFragment extends Fragment {
         categoryID = course.getCourse_category_id();
         courseID = course.getCourse_id();
         accountID = course.getUser_id();
-        appliedNumber = course.getCourse_applied_number();
-//        professionID = course.getProfession_id();
+//        appliedNumber = course.getCourse_applied_number();
+        professionID = course.getProfession_id();
         photo_id = course.getCourse_image_id();
         status_id = course.getCourse_status_id();
+
 
 
         number = Integer.valueOf(numberStr);

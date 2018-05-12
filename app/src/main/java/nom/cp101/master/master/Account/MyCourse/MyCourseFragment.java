@@ -70,7 +70,7 @@ public class MyCourseFragment extends Fragment {
             public void onClick(View view) {
                 Fragment addCourseFragment = new AddCourseFragment();
                 transaction = getFragmentManager().beginTransaction();
-                transaction.add(R.id.fragment_container, addCourseFragment).commit();
+                transaction.replace(R.id.fragment_container, addCourseFragment).commit();
                 transaction.addToBackStack(null);
             }
         });
