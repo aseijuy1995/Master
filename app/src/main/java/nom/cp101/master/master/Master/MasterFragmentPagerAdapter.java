@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-//橋接CourseArticleFragment, ExperienceArticleFragment, MessageFragment, NoticeFragment, InformationFragment各個主功能Fragment的橋接器
+//橋接CourseArticleFragment, ExperienceArticleFragment, ChatRoomFragment, NoticeFragment, InformationFragment各個主功能Fragment的橋接器
 public class MasterFragmentPagerAdapter extends FragmentPagerAdapter {
 
     List<Fragment> listMaster;

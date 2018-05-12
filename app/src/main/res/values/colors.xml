@@ -12,7 +12,8 @@
     <color name="bg_gray">#f4f4f4</color>
     <color name="text_gray">#BABABA</color>
     <color name="gray">#898989</color>
-
+    <color name="orange">#F26419</color>
+    <color name="purple">#736CED</color>
 
 
 </resources>

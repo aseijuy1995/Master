@@ -257,6 +257,10 @@
     <string name="contectCoach">Contect</string>
     <string name="courseNotFound">Course Not Found</string>
     <string name="checkNetWork">Please check your network</string>
+    <string name="insert">Insert Your Name</string>
+    <string name="user_name">User Name</string>
+    <string name="last_sentance">last santance</string>
+    <string name="last_message">last message</string>
     <!--峻亦結束-->
     <!--////////////////////////////////////////////////////////////////////////////////////////////-->
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <ImageView
+        android:id="@+id/received_image"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_launcher_background"
+        />
+    <TextView
+        android:id="@+id/received_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user_name"
+        android:textSize="14sp"
+        android:layout_toEndOf="@id/received_image"
+        android:layout_marginStart="10dp"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/received_name"
+        android:layout_toEndOf="@+id/received_image"
+        >
+        <TextView
+            android:id="@+id/received_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:maxWidth="240dp"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="text over hear"
+            android:textColor="@color/white"
+            android:background="@drawable/received_container"/>
+
+    </FrameLayout>
+
+
+</RelativeLayout>

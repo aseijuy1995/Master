@@ -1,12 +1,22 @@
 package nom.cp101.master.master.Master;
 
+import android.app.Notification;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,52 +25,64 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import nom.cp101.master.master.Account.AccountFragment;
 import nom.cp101.master.master.CourseArticle.CourseArticleFragment;
 import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
-import nom.cp101.master.master.Message.MessageFragment;
+import nom.cp101.master.master.Main.BroadCastService;
+import nom.cp101.master.master.Main.Common;
+import nom.cp101.master.master.Main.MyTask;
+import nom.cp101.master.master.Main.NotificationHelper;
+import nom.cp101.master.master.Message.CLASS.ChatMessage;
+import nom.cp101.master.master.Message.CLASS.ChatRoomFragment;
 import nom.cp101.master.master.Notification.NotificationFragment;
 import nom.cp101.master.master.R;
 
-//首頁Activity
+import static nom.cp101.master.master.Main.Common.user_id;
+
 public class Master extends AppCompatActivity {
-    //置入主頁面所需元件
+    private String TAG = "MasterActivity";
     Toolbar toolbarMaster;
     TabLayout tabMaster;
     ViewPager viewPagerMaster;
     SearchView searchMaster;
     AutoCompleteTextView autoCompleteTextViewMaster;
-
-    //課程文章frag
     CourseArticleFragment courseArticleFragment;
-    //心得文章frag
     ExperienceArticleFragment experienceArticleFragment;
-    //私訊frag
-    MessageFragment messageFragment;
-    //通知frag
+    ChatRoomFragment chatRoomFragment;
     NotificationFragment notificationFragment;
-    //資料frag
     AccountFragment accountFragment;
     //記錄置入TabLayout內,與Viewpager橋接的個主功能Fragment
     List<Fragment> listMaster;
     //連接ViewPager與主功能Fragment的橋接器
     MasterFragmentPagerAdapter masterFragmentPagerAdapter;
 
+    private boolean isBound;
+    private BroadCastService broadCastService;
+    private LocalBroadcastManager broadcastManager;
+    private NotificationHelper helper;
+    public static int atRoom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.master_main);
-        //初始化元件
         findViews();
-        //設定自訂ToolBar套為主頁面之ActionBar
         setSupportActionBar(toolbarMaster);
-        //主功能頁面Fragment與搭載在TabLayout內ViewPager的橋接設定
         setViewPager();
-        //設定置入TabLayout的圖片
         setTabLayout();
+        doBindService();
+        broadcastManager = LocalBroadcastManager.getInstance(this);
+        registerChatReceiver();
+        connecServer();
+        atRoom = 0;
+        helper = new NotificationHelper(this);
     }
 
     //設定置入TabLayout的圖片
@@ -107,14 +129,14 @@ public class Master extends AppCompatActivity {
         //此區添加個主功能的Fragment,設置完成請將替代的Fragment移除
         courseArticleFragment = new CourseArticleFragment();
         experienceArticleFragment = new ExperienceArticleFragment();
-        messageFragment = new MessageFragment();
+        chatRoomFragment = new ChatRoomFragment();
         notificationFragment = new NotificationFragment();
         accountFragment = new AccountFragment();
 
         //此區置換個主功能的Fragment,設置完成請將添加對應的Fragment移除
         listMaster.add(courseArticleFragment);
         listMaster.add(experienceArticleFragment);
-        listMaster.add(messageFragment);
+        listMaster.add(chatRoomFragment);
         listMaster.add(notificationFragment);
         listMaster.add(accountFragment);
 
@@ -185,5 +207,101 @@ public class Master extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+
+    private void connecServer() {
+        String user_id = Common.getUserName(this);
+        if(user_id != null){
+            Common.connectServer(this,user_id);
+        }
+    }
+
+    void doBindService() {
+        if (!isBound) {
+            Intent intent = new Intent(this, BroadCastService.class);
+            bindService(intent, serviceCon, Context.BIND_AUTO_CREATE);
+            isBound = true;
+        }
+    }
+
+    void doUnbindService() {
+        if (isBound) {
+            unbindService(serviceCon);
+            isBound = false;
+        }
+    }
+
+    private ServiceConnection serviceCon = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder binder) {
+            broadCastService = ((BroadCastService.ServiceBinder) binder).getService();
+        }
+        @Override
+        public void onServiceDisconnected(ComponentName className) {
+            broadCastService = null;
+        }
+    };
+
+    private void registerChatReceiver() {
+        IntentFilter chatFilter = new IntentFilter("chat");
+        ChatReceiver chatReceiver = new ChatReceiver();
+        broadcastManager.registerReceiver(chatReceiver, chatFilter);
+    }
+
+    private class ChatReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String message = intent.getStringExtra("message");
+            ChatMessage chatMessage = new Gson().fromJson(message, ChatMessage.class);
+            String lastMessage = chatMessage.getMessage();
+            String sender = chatMessage.getSender();
+            String friend_name = findRoomName(user_id,sender);
+            Log.d(TAG, String.valueOf(atRoom)+"  "+friend_name);
+
+            if(atRoom == 0 && sender.equals(friend_name)){
+                notification(friend_name,lastMessage);
+            }
+        }
+    }
+
+    private void notification(String friend_name,String message) {
+        Notification.Builder builder =  helper.getChannelNotification(friend_name,message);
+        helper.getManager().notify(new Random().nextInt(),builder.build());
+        Log.d(TAG,"notify created");
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        doUnbindService();
+    }
+
+    public String findRoomName(String user_id,String room_name){
+        if (Common.networkConnected(this)) {
+            String url = Common.URL + "/chatRoomServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "findRoomName");
+            jsonObject.addProperty("user_id", user_id );
+            jsonObject.addProperty("room_name",room_name);
+            String result = null;
+            try {
+                result = new MyTask(url, jsonObject.toString()).execute().get();
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+            if (result.isEmpty()) {
+                Log.d(TAG,"Find room name 失敗");
+                return null;
+            } else {
+                Log.d(TAG,"Find room name 成功");
+                return  result;
+            }
+        } else {
+            Log.d(TAG,"沒有網路");
+            Common.showToast(this, "no network");
+            return null;
+        }
     }
 }

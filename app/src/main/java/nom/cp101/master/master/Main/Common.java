@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Calendar;
 import nom.cp101.master.master.R;
 
@@ -38,6 +41,34 @@ public class Common {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //    峻亦
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private final static String TAG = "Common";
+    public static final String SERVER_URI = "ws://10.0.2.2:8080/WSChatBasic_Web/TwoChatServer/";
+    public static ChatWebSocket chatWebSocket;
+
+    // 建立WebSocket連線
+    public static void connectServer(Context context, String userName) {
+        URI uri = null;
+        try {
+            uri = new URI(SERVER_URI + userName);
+        } catch (URISyntaxException e) {
+            Log.e(TAG, e.toString());
+        }
+        if (chatWebSocket == null) {
+            chatWebSocket = new ChatWebSocket(uri, context);
+            chatWebSocket.connect();
+        }
+    }
+
+    // 中斷WebSocket連線
+    public static void disconnectServer() {
+        if (chatWebSocket != null) {
+            chatWebSocket.close();
+            chatWebSocket = null;
+        }
+    }
+
+
     public static boolean networkConnected(Activity activity) {
         ConnectivityManager conManager =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);

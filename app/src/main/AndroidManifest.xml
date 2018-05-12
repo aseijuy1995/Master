@@ -20,9 +20,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Message.MessageChatroom"
-            android:theme="@style/MessageTheme" />
-        <activity
             android:name=".CourseArticleActivity.CourseArticleActivity"
             android:theme="@style/CourseArticleCategoryTheme" />
         <activity
