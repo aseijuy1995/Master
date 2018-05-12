@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -26,7 +25,7 @@ import nom.cp101.master.master.R;
  * Created by chunyili on 2018/4/26.
  */
 
-public class MyCourseStudentManageAdapter extends RecyclerView.Adapter<MyCourseStudentManageAdapter.myViewHolder> {
+public class studentManageAdapter extends RecyclerView.Adapter<studentManageAdapter.myViewHolder> {
 
     List<Apply> applies;
     Context context;
@@ -34,7 +33,7 @@ public class MyCourseStudentManageAdapter extends RecyclerView.Adapter<MyCourseS
     LayoutInflater inflater;
     View frView;
 
-    public MyCourseStudentManageAdapter(List<Apply> applies, Context context, Activity activity, LayoutInflater inflater, View frView) {
+    public studentManageAdapter(List<Apply> applies, Context context, Activity activity, LayoutInflater inflater, View frView) {
         this.applies = applies;
         this.context = context;
         this.activity = activity;
@@ -137,7 +136,7 @@ public class MyCourseStudentManageAdapter extends RecyclerView.Adapter<MyCourseS
     @Override
     public myViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        final View itemView = layoutInflater.inflate(R.layout.account_course_student_item,parent,false);
+        final View itemView = layoutInflater.inflate(R.layout.account_course_item,parent,false);
         return new myViewHolder(itemView);
     }
     @Override
@@ -153,7 +152,7 @@ public class MyCourseStudentManageAdapter extends RecyclerView.Adapter<MyCourseS
     }
 
     public int updateApplyStatus(Activity activity, Apply apply, int status_id){
-        String TAG = "MyCourseStudentManage";
+        String TAG = "studentManageAdapter";
         if (Common.networkConnected(activity)) {
             String url = Common.URL + "/applyServlet";
             JsonObject jsonObject = new JsonObject();
@@ -177,7 +176,7 @@ public class MyCourseStudentManageAdapter extends RecyclerView.Adapter<MyCourseS
     }
 
     public int deleteApply(Activity activity, int apply_id){
-        String TAG = "MyCourseStudentManage";
+        String TAG = "studentManageAdapter";
         if (Common.networkConnected(activity)) {
             String url = Common.URL + "/applyServlet";
             JsonObject jsonObject = new JsonObject();

@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.gigamole.infinitecycleviewpager.VerticalInfiniteCycleViewPager;
 import com.google.gson.Gson;
@@ -24,16 +23,15 @@ import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
 
 
-public class MyCourseMainFragment extends Fragment {
+public class MyCourseFragment extends Fragment {
 
     FloatingActionButton fabBtn;
     FragmentTransaction transaction;
     private MyTask courseGetAllTask;
-    private static String TAG = "MyCourseMainFragment";
+    private static String TAG = "MyCourseFragment";
     VerticalInfiniteCycleViewPager pager;
     private int identity;
-    private TextView course_not_found;
-    Boolean bool;
+    private String user_id;
 
     @Nullable
     @Override
@@ -43,7 +41,14 @@ public class MyCourseMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.account_course_my_course_frag, container, false);
         pager = (VerticalInfiniteCycleViewPager)view.findViewById(R.id.verticle_cycle);
         fabBtn = view.findViewById(R.id.fab_btn_add);
-        course_not_found = view.findViewById(R.id.course_not_found);
+        user_id = "billy";
+        Common.setUserName(getContext(),user_id);
+//        if(user_id.isEmpty()){
+//
+//        }else{
+//
+//        }
+
 //        identity = 0;
 //        if(identity == 0){
 //            fabBtn.hide();
@@ -56,37 +61,27 @@ public class MyCourseMainFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        bool = findCourse();
-        if(bool == false){
-            course_not_found.setVisibility(View.VISIBLE);
-        }
+        connectServlet("finalCourseServlet","getAll");
     }
 
     private void addClick() {
         fabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(bool == false){
-                    Common.showToast(getContext(),R.string.checkNetWork);
-                }else{
-                    Fragment addCourseFragment = new MyCourseAddCourseFragment();
-                    transaction = getFragmentManager().beginTransaction();
-                    transaction.add(R.id.fragment_container, addCourseFragment).commit();
-                    transaction.addToBackStack(null);
-                }
-
+                Fragment addCourseFragment = new AddCourseFragment();
+                transaction = getFragmentManager().beginTransaction();
+                transaction.add(R.id.fragment_container, addCourseFragment).commit();
+                transaction.addToBackStack(null);
             }
         });
     }
 
-    private Boolean findCourse(){
+    private void connectServlet(String servletStr, String value){
         if (Common.networkConnected(getActivity())){
-            String url = Common.URL + "/finalCourseServlet";
+            String url = Common.URL + "/" + servletStr;
             List<Course> courses = null;
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action","getAll");
+            jsonObject.addProperty("action",value);
             String jsonOut = jsonObject.toString();
             courseGetAllTask = new MyTask(url,jsonOut);
             try {
@@ -99,14 +94,11 @@ public class MyCourseMainFragment extends Fragment {
             }
             if (courses == null || courses.isEmpty()) {
                 Common.showToast(getActivity(), R.string.msg_NoCoursesFound);
-                return false;
             } else {
-                pager.setAdapter(new InfiniteAdapter(courses, getContext(),getActivity()));
-                return true;
+                pager.setAdapter(new MyAdapter(courses, getContext(),getActivity()));
             }
         } else {
             Common.showToast(getActivity(), R.string.msg_NoNetwork);
-            return false;
         }
     }
 }

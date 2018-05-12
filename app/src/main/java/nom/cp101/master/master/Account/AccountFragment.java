@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import nom.cp101.master.master.Account.MyAccount.MyAccountFragment;
-import nom.cp101.master.master.Account.MyCourse.MyCourseMainFragment;
+import nom.cp101.master.master.Account.MyCourse.MyCourseFragment;
 import nom.cp101.master.master.Account.MyPhoto.MyPhotoFragment;
 import nom.cp101.master.master.R;
 
@@ -43,7 +43,7 @@ public class AccountFragment extends Fragment {
                             selectedFragment = new MyPhotoFragment();
                             break;
                         case R.id.menu_course:
-                            selectedFragment = new MyCourseMainFragment();
+                            selectedFragment = new MyCourseFragment();
                             break;
                     }
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();

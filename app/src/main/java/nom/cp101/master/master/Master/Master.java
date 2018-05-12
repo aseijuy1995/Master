@@ -44,7 +44,6 @@ public class Master extends AppCompatActivity {
     NotificationFragment notificationFragment;
     //資料frag
     AccountFragment accountFragment;
-
     //記錄置入TabLayout內,與Viewpager橋接的個主功能Fragment
     List<Fragment> listMaster;
     //連接ViewPager與主功能Fragment的橋接器
@@ -95,7 +94,6 @@ public class Master extends AppCompatActivity {
 
                 } else {
                     toolbarMaster.setVisibility(View.GONE);
-
                 }
             }
         });

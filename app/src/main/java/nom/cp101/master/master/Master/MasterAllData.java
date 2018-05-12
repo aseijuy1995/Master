@@ -14,7 +14,7 @@ import nom.cp101.master.master.Main.Common;
 
 public class MasterAllData {
 
-    //ˇ請求server端連至db回傳專業項目之所有名稱
+    //請求server端連至db回傳專業項目之所有名稱
     public static final List<String> takeProjectNameList() {
         List<String> projectNameList = new ArrayList<>();
 

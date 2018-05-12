@@ -3,6 +3,7 @@ package nom.cp101.master.master.Main;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
@@ -15,8 +16,10 @@ import com.google.gson.JsonObject;
 import java.util.Calendar;
 import nom.cp101.master.master.R;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class Common {
-    public static String URL = "http://10.0.2.2:8080/Master";
+    public static String URL = "http://10.0.2.2:8080/Course_MySQL_WEB";
 
 //    public static String URL = "http://192.168.196.77:8080/Master";
 
@@ -94,6 +97,20 @@ public class Common {
         datePicker.setTitle("日期");
         datePicker.getDatePicker().setMinDate(System.currentTimeMillis());
         datePicker.show();
+    }
+
+    public static void setUserName(Context context, String userName) {
+        SharedPreferences preferences =
+                context.getSharedPreferences("user", MODE_PRIVATE);
+        preferences.edit().putString("userName", userName).apply();
+    }
+
+    public static String getUserName(Context context) {
+        SharedPreferences preferences =
+                context.getSharedPreferences("user", MODE_PRIVATE);
+        String userName = preferences.getString("userName", "");
+        Log.d("Common", "userName = " + userName);
+        return userName;
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //    峻亦

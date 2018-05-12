@@ -39,7 +39,7 @@ import nom.cp101.master.master.R;
 
 
 
-public class MyCourseSingleFragment extends Fragment {
+public class SingleCourseFragment  extends Fragment {
     private static final String TAG = "Single Course Fragment";
     private MyTask deleteTask,findByCourseIdTask;
     private TextView single_name,single_date,single_summary,single_location,single_need,single_qualification,single_note;
@@ -48,32 +48,42 @@ public class MyCourseSingleFragment extends Fragment {
     private ImageView single_image;
     Course course ;
     Button single_contect,single_apply;
-
-
+    String user_id;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_course_single_course_frag,container,false);
-        single_name = view.findViewById(R.id.single_name);
-        single_date = view.findViewById(R.id.single_date);
-        single_summary = view.findViewById(R.id.single_summary);
-        single_location = view.findViewById(R.id.single_location);
-        single_need = view.findViewById(R.id.single_need);
-        single_qualification = view.findViewById(R.id.single_qualification);
-        single_note = view.findViewById(R.id.single_note);
-        single_price = view.findViewById(R.id.single_price);
-        single_number = view.findViewById(R.id.single_number);
-        single_note = view.findViewById(R.id.single_note);
-        single_manage_btn = view.findViewById(R.id.single_course_manage_btn);
-        single_image = view.findViewById(R.id.single_image);
-        single_apply = view.findViewById(R.id.single_apply);
-        single_contect = view.findViewById(R.id.single_contect);
+        findView(view);
+        user_id = Common.getUserName(getContext());
+        getBundle();
+        setImage();
+        manageBtnClick();
+        applyClick();
+        return view;
+    }
 
+    private void setImage() {
+        int imageSize = getActivity().getResources().getDisplayMetrics().widthPixels;
+        String url = Common.URL + "/photoServlet";
+        int photo_id = course.getCourse_image_id();
+        Bitmap bitmap = null;
+        ImageTask imageTask = new ImageTask(url, photo_id, imageSize);
+        try {
+            bitmap = imageTask.execute().get();
+            if(bitmap == null){
+                single_image.setImageResource(R.drawable.account_bulldog);
+            }else{
+                single_image.setImageBitmap(bitmap);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void getBundle() {
         Bundle bundle = getArguments();
-
         if(bundle != null){
             course =(Course)bundle.getSerializable("course");
 
@@ -94,33 +104,29 @@ public class MyCourseSingleFragment extends Fragment {
             single_note.setText(course.getCourse_note());
         }
 
-        int imageSize = getActivity().getResources().getDisplayMetrics().widthPixels;
-        String url = Common.URL + "/photoServlet";
-        int photo_id = course.getCourse_image_id();
-        Bitmap bitmap = null;
-        ImageTask imageTask = new ImageTask(url, photo_id, imageSize);
-        try {
-            bitmap = imageTask.execute().get();
-            if(bitmap == null){
-                single_image.setImageResource(R.drawable.account_bulldog);
-            }else{
-                single_image.setImageBitmap(bitmap);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    }
 
-        manageBtnClick();
-        applyClick();
-        return view;
+    private void findView(View view) {
+        single_name = view.findViewById(R.id.single_name);
+        single_date = view.findViewById(R.id.single_date);
+        single_summary = view.findViewById(R.id.single_summary);
+        single_location = view.findViewById(R.id.single_location);
+        single_need = view.findViewById(R.id.single_need);
+        single_qualification = view.findViewById(R.id.single_qualification);
+        single_note = view.findViewById(R.id.single_note);
+        single_price = view.findViewById(R.id.single_price);
+        single_number = view.findViewById(R.id.single_number);
+        single_note = view.findViewById(R.id.single_note);
+        single_manage_btn = view.findViewById(R.id.single_course_manage_btn);
+        single_image = view.findViewById(R.id.single_image);
+        single_apply = view.findViewById(R.id.single_apply);
+        single_contect = view.findViewById(R.id.single_contect);
     }
 
     private void applyClick() {
-
         single_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user_id = "123";
                 if(checkApply(course.getCourse_id(),user_id) == true){
                     Apply apply = new Apply(0,course.getCourse_id(),user_id,1,null);
                     insertApply(apply);
@@ -151,7 +157,7 @@ public class MyCourseSingleFragment extends Fragment {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch(menuItem.getItemId()){
                             case R.id.menu_manage_course:
-                                Fragment fragment = new MyCourseUpdateFragment();
+                                Fragment fragment = new UpdateCourseFragment();
                                 Bundle bundle = new Bundle();
                                 bundle.putSerializable("course",course);
                                 fragment.setArguments(bundle);
@@ -160,7 +166,7 @@ public class MyCourseSingleFragment extends Fragment {
                                 transaction.addToBackStack(null);
                                 break;
                             case R.id.menu_manage_student:
-                                Fragment studentFragment = new MyCourseStudentManageFragment();
+                                Fragment studentFragment = new StudentManageFragment();
 
                                 if(applies != null){
                                     Bundle applyBundle = new Bundle();
@@ -209,7 +215,7 @@ public class MyCourseSingleFragment extends Fragment {
                                                 Common.showToast(getActivity(), R.string.msg_DeleteFail);
                                             }
                                         }
-                                        Fragment myCourseFragment = new MyCourseMainFragment();
+                                        Fragment myCourseFragment = new MyCourseFragment();
                                         getFragmentManager().beginTransaction().replace(R.id.fragment_container,myCourseFragment).commit();
                                         alertDialog.dismiss();
                                     }
@@ -367,6 +373,5 @@ public class MyCourseSingleFragment extends Fragment {
             return false;
         }
     }
-
 
 }

@@ -10,7 +10,7 @@ import java.util.Date;
 public class Course implements Serializable {
     private int course_id;
     private String user_id;
-    private int profession_id;
+//    private int profession_id;
     private int course_category_id;
     private String course_name;
     private Date course_date;
@@ -44,11 +44,13 @@ public class Course implements Serializable {
     }
 
     //Update courseDetail
-    public Course(int course_category_id, int profession_id, String course_name, String course_content, int course_price,
+    public Course(int course_category_id,
+//                  int profession_id,
+                  String course_name, String course_content, int course_price,
                   String course_need, String course_qualification,
                   String course_location, String course_note) {
         this.course_category_id = course_category_id;
-        this.profession_id = profession_id;
+//        this.profession_id = profession_id;
         this.course_name = course_name;
         this.course_content = course_content;
         this.course_price = course_price;
@@ -69,7 +71,7 @@ public class Course implements Serializable {
                   int course_image_id, String course_note) {
         this.course_id = course_id;
         this.user_id = user_id;
-        this.profession_id = profession_id;
+//        this.profession_id = profession_id;
         this.course_category_id = course_category_id;
         this.course_status_id = course_status_id;
         this.course_name = course_name;
@@ -102,13 +104,13 @@ public class Course implements Serializable {
         this.user_id = user_id;
     }
 
-    public int getProfession_id() {
-        return profession_id;
-    }
-
-    public void setProfession_id(int profession_id) {
-        this.profession_id = profession_id;
-    }
+//    public int getProfession_id() {
+//        return profession_id;
+//    }
+//
+//    public void setProfession_id(int profession_id) {
+//        this.profession_id = profession_id;
+//    }
 
     public int getCourse_category_id() {
         return course_category_id;

@@ -53,8 +53,8 @@ import static nom.cp101.master.master.Main.Common.showToast;
  * Created by chunyili on 2018/4/25.
  */
 
-public class MyCourseUpdateFragment extends Fragment {
-    private String TAG = "MyCourseUpdateFragment";
+public class UpdateCourseFragment extends Fragment {
+    private String TAG = "UpdateCourseFragment";
     private EditText update_course_name,update_course_detail,
             update_course_date,update_course_location,update_course_need,
             update_course_qualification,update_course_note,
@@ -78,20 +78,15 @@ public class MyCourseUpdateFragment extends Fragment {
         View view = inflater.inflate(R.layout.account_course_update_frag,container,false);
         Bundle bundle = getArguments();
         course = (Course) bundle.getSerializable("course");
-        update_course_name = (EditText) view.findViewById(R.id.update_course_name);
-        update_course_detail = (EditText) view.findViewById(R.id.update_course_detail);
-        update_course_date = (EditText) view.findViewById(R.id.update_course_date);
-        update_course_location = (EditText) view.findViewById(R.id.update_course_location);
-        update_course_need = (EditText) view.findViewById(R.id.update_course_need);
-        update_course_qualification = (EditText) view.findViewById(R.id.update_course_qualification);
-        update_course_note = (EditText) view.findViewById(R.id.update_course_note);
-        update_course_price = (EditText) view.findViewById(R.id.update_course_price);
-        update_course_number = (EditText) view.findViewById(R.id.update_course_number);
-        update_course_apply_deadline = (EditText)view.findViewById(R.id.update_course_apply_deadline);
-        update_course_send = (Button) view.findViewById(R.id.update_course_send);
-        update_course_image = view.findViewById(R.id.update_course_image);
-
-
+        findView(view);
+        setImage();
+        setInfo();
+        imageClick();
+        dateClick();
+        sendBtnClick();
+        return view;
+    }
+    private void setImage() {
         int imageSize = getActivity().getResources().getDisplayMetrics().widthPixels;
         String url = Common.URL + "/photoServlet";
         int photo_id = course.getCourse_image_id();
@@ -107,12 +102,21 @@ public class MyCourseUpdateFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-        setInfo();
-        imageClick();
-        dateClick();
-        sendBtnClick();
-        return view;
+    private void findView(View view) {
+        update_course_name = (EditText) view.findViewById(R.id.update_course_name);
+        update_course_detail = (EditText) view.findViewById(R.id.update_course_detail);
+        update_course_date = (EditText) view.findViewById(R.id.update_course_date);
+        update_course_location = (EditText) view.findViewById(R.id.update_course_location);
+        update_course_need = (EditText) view.findViewById(R.id.update_course_need);
+        update_course_qualification = (EditText) view.findViewById(R.id.update_course_qualification);
+        update_course_note = (EditText) view.findViewById(R.id.update_course_note);
+        update_course_price = (EditText) view.findViewById(R.id.update_course_price);
+        update_course_number = (EditText) view.findViewById(R.id.update_course_number);
+        update_course_apply_deadline = (EditText)view.findViewById(R.id.update_course_apply_deadline);
+        update_course_send = (Button) view.findViewById(R.id.update_course_send);
+        update_course_image = view.findViewById(R.id.update_course_image);
     }
 
     private void imageClick() {
@@ -201,7 +205,7 @@ public class MyCourseUpdateFragment extends Fragment {
         try {
             Intent cropIntent = new Intent("com.android.camera.action.CROP");
             cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            cropIntent.setDataAndType(uri,"account_add_image/*");
+            cropIntent.setDataAndType(uri,"image/*");
             cropIntent.putExtra("crop","true");
             cropIntent.putExtra("aspectX", 1200);
             cropIntent.putExtra("aspectY", 900);
@@ -281,7 +285,7 @@ public class MyCourseUpdateFragment extends Fragment {
         final Gson gson = new Gson();
         final Gson gsonWithDate = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
-        Course courseDetail = new Course(categoryID,professionID,name,detail,price,need,qualification,location,note);
+        Course courseDetail = new Course(categoryID,name,detail,price,need,qualification,location,note);
         Course courseProfile = new Course(courseID,accountID,categoryID, date, deadline,number,appliedNumber,photo_id,status_id);
 
         int result1 = Common.insertUpdateCourseServlet(getActivity(),TAG,"CourseServlet","update",gsonWithDate,courseProfile);
@@ -289,7 +293,7 @@ public class MyCourseUpdateFragment extends Fragment {
 
         if(result1 != 0 || result2 != 0){
             showToast(getActivity(), R.string.updateSuccess);
-            Fragment myCourse = new MyCourseMainFragment();
+            Fragment myCourse = new MyCourseFragment();
             getFragmentManager().beginTransaction().replace(R.id.fragment_container,myCourse).commit();
         }else{
             showToast(getActivity(), R.string.updateFailed);
@@ -322,7 +326,7 @@ public class MyCourseUpdateFragment extends Fragment {
         courseID = course.getCourse_id();
         accountID = course.getUser_id();
         appliedNumber = course.getCourse_applied_number();
-        professionID = course.getProfession_id();
+//        professionID = course.getProfession_id();
         photo_id = course.getCourse_image_id();
         status_id = course.getCourse_status_id();
 
@@ -390,5 +394,4 @@ public class MyCourseUpdateFragment extends Fragment {
         }
     }
 }
-
 

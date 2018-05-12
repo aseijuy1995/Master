@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--CoordinatorLayout當其一view變動,其餘view特定移動-->
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coordinator_master"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <!--AppBarLayout继承LinerLayout實現ViewGroup容器,支持手勢滑動-->
     <android.support.design.widget.AppBarLayout
@@ -37,7 +38,9 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPagerMaster"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-</android.support.design.widget.CoordinatorLayout>
+
+
+</LinearLayout>

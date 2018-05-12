@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,7 @@ import nom.cp101.master.master.R;
  * Created by chunyili on 2018/4/17.
  */
 
-public class InfiniteAdapter extends PagerAdapter {
+public class MyAdapter extends PagerAdapter {
 
     List<Course> listCourse;
     Context context;
@@ -35,7 +36,7 @@ public class InfiniteAdapter extends PagerAdapter {
     Activity activity;
 
 
-    public InfiniteAdapter(List<Course> listCourse, Context context, Activity activity) {
+    public MyAdapter(List<Course> listCourse, Context context, Activity activity) {
         this.listCourse = listCourse;
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
@@ -99,7 +100,7 @@ public class InfiniteAdapter extends PagerAdapter {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("course",course);
-                Fragment fragment = new MyCourseSingleFragment();
+                Fragment fragment = new SingleCourseFragment();
                 fragment.setArguments(bundle);
                 FragmentActivity fragmentActivity = (FragmentActivity) context;
                 FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();

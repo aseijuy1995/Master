@@ -38,7 +38,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
@@ -53,8 +52,8 @@ import static nom.cp101.master.master.Main.Common.showToast;
  * Created by chunyili on 2018/4/18.
  */
 
-public class MyCourseAddCourseFragment extends Fragment {
-    private final String TAG = "MyCourseAddCourse";
+public class AddCourseFragment extends Fragment {
+    private final static String TAG = "AddCourseFragment";
     private MyTask insertTask;
     private ImageView add_course_image;
     private Button add_course_send;
@@ -71,6 +70,7 @@ public class MyCourseAddCourseFragment extends Fragment {
     private Uri contentUri, croppedImageUri;
     private Bitmap picture;
     private byte[] image;
+    private String user_id;
 
     @Nullable
     @Override
@@ -78,6 +78,15 @@ public class MyCourseAddCourseFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_course_add_frag,container,false);
+        findView(view);
+        user_id = Common.getUserName(getContext());
+        addImageClick();
+        dateClick();
+        sendBtnClick();
+        return view;
+    }
+
+    private void findView(View view) {
         add_course_name = (EditText) view.findViewById(R.id.add_course_name);
         add_course_detail = (EditText) view.findViewById(R.id.add_course_detail);
         add_course_date = (EditText) view.findViewById(R.id.add_course_date);
@@ -90,10 +99,6 @@ public class MyCourseAddCourseFragment extends Fragment {
         add_course_apply_deadline = (EditText)view.findViewById(R.id.add_course_apply_deadline);
         add_course_send = (Button) view.findViewById(R.id.add_course_send);
         add_course_image =  (ImageView)view.findViewById(R.id.add_course_image);
-        addImageClick();
-        dateClick();
-        sendBtnClick();
-        return view;
     }
 
     private void addImageClick() {
@@ -182,7 +187,7 @@ public class MyCourseAddCourseFragment extends Fragment {
         try {
             Intent cropIntent = new Intent("com.android.camera.action.CROP");
             cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            cropIntent.setDataAndType(uri,"account_add_image/*");
+            cropIntent.setDataAndType(uri,"image/*");
             cropIntent.putExtra("crop","true");
             cropIntent.putExtra("aspectX", 1200);
             cropIntent.putExtra("aspectY", 900);
@@ -239,7 +244,7 @@ public class MyCourseAddCourseFragment extends Fragment {
                     okBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            int photo_id = insertImage();
+                            int photo_id = insertImage(user_id);
                             if(photo_id != 0){
                                 createCourse(photo_id);
                             }
@@ -257,13 +262,13 @@ public class MyCourseAddCourseFragment extends Fragment {
         });
     }
 
-    private int insertImage() {
+    private int insertImage(String user_id) {
         if (Common.networkConnected(getActivity())) {
             String url = Common.URL + "/photoServlet";
             String imageBase64 = Base64.encodeToString(image, Base64.DEFAULT);
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "insert");
-            jsonObject.addProperty("user_id","123");
+            jsonObject.addProperty("user_id",user_id);
             jsonObject.addProperty("photo", imageBase64);
             int photo_id = 0;
             try {
@@ -280,7 +285,7 @@ public class MyCourseAddCourseFragment extends Fragment {
                 return photo_id;
             }
         } else {
-            Common.showToast(getActivity(), R.string.msg_NoNetwork);
+            showToast(getActivity(), R.string.msg_NoNetwork);
             return 0;
         }
     }
@@ -289,14 +294,14 @@ public class MyCourseAddCourseFragment extends Fragment {
         final Gson gson = new Gson();
         final Gson gsonWithDate = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
-        Course courseDetail = new Course(0,2,name,detail,price,need,qualification,location,note);
+        Course courseDetail = new Course(0,name,detail,price,need,qualification,location,note);
         final int detail_id = insertUpdateCourseServlet(getActivity(),TAG,"CourseDetailServlet","insert",gson,courseDetail);
-        Course courseProfile = new Course(0,"123",detail_id, date, deadline,number,0,photo_id,1);
+        Course courseProfile = new Course(0,"billy",detail_id, date, deadline,number,0,photo_id,1);
         final int courseInsertFinish = insertUpdateCourseServlet(getActivity(),TAG,"CourseServlet","insert",gsonWithDate,courseProfile);
 
         if(courseInsertFinish != 0){
             showToast(getActivity(), R.string.InsertSuccess);
-            Fragment myCourse = new MyCourseMainFragment();
+            Fragment myCourse = new MyCourseFragment();
             getFragmentManager().beginTransaction().replace(R.id.fragment_container,myCourse).commit();
         }else{
             showToast(getActivity(), R.string.InsertFail);
@@ -331,7 +336,7 @@ public class MyCourseAddCourseFragment extends Fragment {
             price = Integer.valueOf(priceStr);
         }
 
-        final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             date = dateFormat.parse(dateStr);
             deadline = dateFormat.parse(deadlineStr);
@@ -341,4 +346,8 @@ public class MyCourseAddCourseFragment extends Fragment {
             Log.e(TAG,"錯誤");
         }
     }
+
+
+
+
 }

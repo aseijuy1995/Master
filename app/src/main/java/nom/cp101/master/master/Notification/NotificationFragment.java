@@ -84,7 +84,9 @@ public class NotificationFragment extends Fragment {
         @Override
         public int getItemCount() {
             //position為0時為title, recyclerview內容從1開始顯示, itemcount需往後加1
-            return items.size() + 1;
+            if(items.size()!= 0){
+                return items.size() + 1;
+            }else return 0;
         }
 
         //定義recyclerview的viewtype,position等於0顯示title,其他為recyclerview內容
