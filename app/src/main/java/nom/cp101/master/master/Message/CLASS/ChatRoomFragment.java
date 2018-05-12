@@ -1,6 +1,7 @@
 package nom.cp101.master.master.Message.CLASS;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -63,21 +64,28 @@ public class ChatRoomFragment extends Fragment {
         view = inflater.inflate(R.layout.message_chat_room_frag,container,false);
         user_id = Common.getUserName(getContext());
         findView();
+
         if(user_id.isEmpty()){
             didNotSignIn.setVisibility(View.VISIBLE);
         }else{
-            rvRoomList.setLayoutManager(new LinearLayoutManager(getActivity()));
-            rvRoomList.setAdapter(new RoomListAdapter(getContext(),roomList));
-            rvRoomList.getAdapter().notifyDataSetChanged();
+            buildRecyclerView();
             createRoomClick();
         }
+
         return view;
     }
 
+    private void buildRecyclerView() {
+        rvRoomList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvRoomList.setAdapter(new RoomListAdapter(getContext(),roomList));
+        rvRoomList.getAdapter().notifyDataSetChanged();
+    }
+
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         rootAddValue();
+        buildRecyclerView();
     }
 
     private void findView() {
@@ -137,18 +145,16 @@ public class ChatRoomFragment extends Fragment {
             holder.chatRoomItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     Bundle bundle = new Bundle();
                     bundle.putString("roomName",roomList.get(position).getRoom_position());
                     bundle.putString("userName",user_id);
                     friend_name = roomList.get(position).getRoom_name();
                     bundle.putString("friendName",friend_name);
-                    Fragment fragment = new MessageFrag();
-                    fragment.setArguments(bundle);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-                    transaction.replace(R.id.chatRoomContainer,fragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
+                    Intent intent = new Intent(getContext(),MessageActivity.class);
+                    intent.putExtra("bundle",bundle);
+                    startActivity(intent);
+
                 }
             });
 
