@@ -72,13 +72,16 @@ public class studentManageAdapter extends RecyclerView.Adapter<studentManageAdap
                                     int result1 = updateApplyStatus(activity,apply,3);
                                     if(result1!= 0){
                                         tvStudentStatus.setText("報名成功");
-                                        int start = getAdapterPosition();
-                                        int end = getAdapterPosition() + (applies.size() - 1);
-                                        //重新整理applies位置
-                                        Apply newApply = apply;
-                                        applies.remove(apply);
-                                        applies.add(newApply);
-                                        notifyItemMoved(start,end);
+
+                                        if(getAdapterPosition()!= applies.size()-1){
+                                            int start = getAdapterPosition();
+                                            int end = getAdapterPosition() + (applies.size() - 1);
+                                            //重新整理applies位置
+                                            Apply newApply = apply;
+                                            applies.remove(apply);
+                                            applies.add(newApply);
+                                            notifyItemMoved(start,end);
+                                        }
                                     }
                                     break;
                                 case R.id.menu_student_unpay:

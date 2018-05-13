@@ -74,7 +74,7 @@ public class MessageActivity extends AppCompatActivity {
         btnSend = findViewById(R.id.btnSend);
 
         Bundle bundle = getIntent().getBundleExtra("bundle");
-        roomName = bundle.getString("roomName");
+        roomName = bundle.getString("room_position");
         userName = bundle.getString("userName");
         friendName = bundle.getString("friendName");
         root = FirebaseDatabase.getInstance().getReference().child(roomName);
@@ -159,7 +159,7 @@ public class MessageActivity extends AppCompatActivity {
                 etMessage.setText("");
                 adapter.notifyDataSetChanged();
                 messageList.smoothScrollToPosition(messages.size());
-                ChatMessage chatMessage = new ChatMessage("chat", userName, friendName, message);
+                ChatMessage chatMessage = new ChatMessage("message_chat_offline", userName, friendName, message);
                 String chatMessageJson = new Gson().toJson(chatMessage);
                 chatWebSocket.send(chatMessageJson);
                 Log.d(TAG, "output: " + chatMessageJson);
@@ -264,8 +264,6 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         }
-
-
 
         @Override
         public int getItemCount() {

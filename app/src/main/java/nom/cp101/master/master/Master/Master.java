@@ -84,7 +84,7 @@ public class Master extends AppCompatActivity {
         registerChatReceiver();
         connecServer();
         atRoom = 0;
-        user_id = "Cindy";
+        user_id = "kent";
         Common.setUserName(this,user_id);
         helper = new NotificationHelper(this);
     }
@@ -248,7 +248,7 @@ public class Master extends AppCompatActivity {
     };
 
     private void registerChatReceiver() {
-        IntentFilter chatFilter = new IntentFilter("chat");
+        IntentFilter chatFilter = new IntentFilter("message_chat_offline");
         ChatReceiver chatReceiver = new ChatReceiver();
         broadcastManager.registerReceiver(chatReceiver, chatFilter);
     }

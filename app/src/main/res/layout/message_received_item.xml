@@ -40,7 +40,7 @@
             android:paddingEnd="10dp"
             android:text="text over hear"
             android:textColor="@color/white"
-            android:background="@drawable/received_container"/>
+            android:background="@drawable/message_received"/>
 
     </FrameLayout>
 

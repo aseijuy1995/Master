@@ -64,14 +64,7 @@ public class ChatRoomFragment extends Fragment {
         view = inflater.inflate(R.layout.message_chat_room_frag,container,false);
         user_id = Common.getUserName(getContext());
         findView();
-
-        if(user_id.isEmpty()){
-            didNotSignIn.setVisibility(View.VISIBLE);
-        }else{
-            buildRecyclerView();
-            createRoomClick();
-        }
-
+        createRoomClick();
         return view;
     }
 
@@ -84,8 +77,13 @@ public class ChatRoomFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        rootAddValue();
-        buildRecyclerView();
+
+        if(user_id.isEmpty()){
+            didNotSignIn.setVisibility(View.VISIBLE);
+        }else{
+            rootAddValue();
+            buildRecyclerView();
+        }
     }
 
     private void findView() {
@@ -146,14 +144,9 @@ public class ChatRoomFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("roomName",roomList.get(position).getRoom_position());
-                    bundle.putString("userName",user_id);
                     friend_name = roomList.get(position).getRoom_name();
-                    bundle.putString("friendName",friend_name);
-                    Intent intent = new Intent(getContext(),MessageActivity.class);
-                    intent.putExtra("bundle",bundle);
-                    startActivity(intent);
+                    String room_position = roomList.get(position).getRoom_position();
+                    enterChatRoom(room_position,user_id);
 
                 }
             });
@@ -164,6 +157,16 @@ public class ChatRoomFragment extends Fragment {
         public int getItemCount() {
             return roomList.size();
         }
+    }
+
+    private void enterChatRoom(String room_position,String user_id) {
+        Bundle bundle = new Bundle();
+        bundle.putString("room_position",room_position);
+        bundle.putString("userName",user_id);
+        bundle.putString("friendName",friend_name);
+        Intent intent = new Intent(getContext(),MessageActivity.class);
+        intent.putExtra("bundle",bundle);
+        startActivity(intent);
     }
 
     private void rootAddValue() {

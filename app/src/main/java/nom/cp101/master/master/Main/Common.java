@@ -11,12 +11,17 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
 import nom.cp101.master.master.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -29,6 +34,8 @@ public class Common {
 //    public static String user_id = "yujie1";
 
     public static String user_id = "aaa123";
+
+
 
     public static boolean networkConnected(Context context) {
         ConnectivityManager conManager =
@@ -45,6 +52,7 @@ public class Common {
     private final static String TAG = "Common";
     public static final String SERVER_URI = "ws://10.0.2.2:8080/WSChatBasic_Web/TwoChatServer/";
     public static ChatWebSocket chatWebSocket;
+    public static DatabaseReference contectRoot = FirebaseDatabase.getInstance().getReference().getRoot();
 
     // 建立WebSocket連線
     public static void connectServer(Context context, String userName) {
@@ -142,6 +150,73 @@ public class Common {
         String userName = preferences.getString("userName", "");
         Log.d(TAG, "userName = " + userName);
         return userName;
+    }
+
+
+    public static void contectUser(String user_id,String friend_id,Context context,Activity activity){
+        String temp_key = contectRoot.push().getKey();
+        Map<String,Object> map = new HashMap<>();
+        map.put(temp_key,"");
+        contectRoot.updateChildren(map);
+        int chat_room_id = createRoom(temp_key,context,activity);
+        connectUserRoom(user_id,friend_id,chat_room_id,activity,context);
+        connectUserRoom(friend_id,user_id,chat_room_id,activity,context);
+    }
+
+    public static int createRoom(String chat_room_position, Context context, Activity activity){
+        if (Common.networkConnected(activity)) {
+            String url = Common.URL + "/chatRoomServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "createChatRoom");
+            jsonObject.addProperty("chat_room_position", chat_room_position);
+            int id = 0;
+            try {
+                String result = new MyTask(url, jsonObject.toString()).execute().get();
+                id = Integer.valueOf(result);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+            if (id == 0 ) {
+                Log.d(TAG,"create room 失敗");
+                return id;
+            } else {
+                Log.d(TAG,"create room 成功");
+                return  id;
+            }
+        } else {
+            Log.d(TAG,"沒有網路");
+            Common.showToast(context, "no network");
+            return 0;
+        }
+    }
+
+    public static int connectUserRoom(String user_id, String room_name, int chat_room_id, Activity activity, Context context){
+        if (Common.networkConnected(activity)) {
+            String url = Common.URL + "/chatRoomServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "connectUserToRoom");
+            jsonObject.addProperty("user_id", user_id );
+            jsonObject.addProperty("room_name",room_name);
+            jsonObject.addProperty("chat_room_id",chat_room_id);
+            int id = 0;
+            try {
+                String result = new MyTask(url, jsonObject.toString()).execute().get();
+                id = Integer.valueOf(result);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+            if (id == 0 ) {
+                Log.d(TAG,"connect room 失敗");
+                return id;
+            } else {
+                Log.d(TAG,"connect room 成功");
+                return  id;
+            }
+        } else {
+            Log.d(TAG,"沒有網路");
+            Common.showToast(context, "no network");
+            return 0;
+        }
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //    峻亦

@@ -41,7 +41,7 @@
             android:paddingEnd="10dp"
             android:text="text over hear"
             android:textColor="@color/white"
-            android:background="@drawable/sent_container"/>
+            android:background="@drawable/message_sent"/>
 
     </FrameLayout>
 

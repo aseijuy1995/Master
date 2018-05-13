@@ -1,5 +1,6 @@
 package nom.cp101.master.master.Account.MyCourse;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ import java.util.List;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.ImageTask;
 import nom.cp101.master.master.Main.MyTask;
+import nom.cp101.master.master.Message.CLASS.MessageActivity;
 import nom.cp101.master.master.R;
 
 /**
@@ -48,7 +50,8 @@ public class SingleCourseFragment  extends Fragment {
     private ImageView single_image;
     Course course ;
     Button single_contect,single_apply;
-    String user_id;
+    String user_id,friend_name, room_position;
+
 
 
     @Nullable
@@ -61,7 +64,36 @@ public class SingleCourseFragment  extends Fragment {
         setImage();
         manageBtnClick();
         applyClick();
+        contectClick();
         return view;
+    }
+
+    private void contectClick() {
+        single_contect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                friend_name = findUserNameById(course.getUser_id());
+                if(!friend_name.equals("")){
+                    room_position = findRoomPosition(user_id,friend_name);
+                    if(checkChatRoom(user_id,friend_name) == true){
+                        Common.contectUser(user_id,friend_name,getContext(),getActivity());
+                        enterChatRoom(room_position,user_id,friend_name);
+                    }else{
+                        enterChatRoom(room_position,user_id,friend_name);
+                    }
+                }
+            }
+        });
+    }
+
+    private void enterChatRoom(String room_position,String user_id,String friend_name) {
+        Bundle bundle = new Bundle();
+        bundle.putString("room_position",room_position);
+        bundle.putString("userName",user_id);
+        bundle.putString("friendName",friend_name);
+        Intent intent = new Intent(getContext(),MessageActivity.class);
+        intent.putExtra("bundle",bundle);
+        startActivity(intent);
     }
 
     private void setImage() {
@@ -373,5 +405,92 @@ public class SingleCourseFragment  extends Fragment {
             return false;
         }
     }
+    public String findUserNameById(String user_id){
+        if (Common.networkConnected(getActivity())) {
+            String url = Common.URL + "/chatRoomServlet";
+            Gson gson = new Gson();
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "findUserNameById");
+            jsonObject.addProperty("user_id", user_id);
+            String user_name = null;
+            try {
+                user_name = new MyTask(url, jsonObject.toString()).execute().get();
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+            if (user_name.isEmpty()) {
+                Log.d(TAG,"找不到此人");
+                Common.showToast(getContext(),"找不到此用戶");
+                return "";
+            } else {
+                Log.d(TAG,"user_id :"+user_id+"用戶名稱為"+user_name);
+                return  user_name;
+            }
+        } else {
+            Log.d(TAG,"沒有網路");
+            Common.showToast(getActivity(), R.string.msg_NoNetwork);
+            return "";
+        }
+    }
+
+    public boolean checkChatRoom(String user_id,String friend_name){
+        if (Common.networkConnected(getActivity())) {
+            String url = Common.URL + "/chatRoomServlet";
+            Gson gson = new Gson();
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "checkChatRoom");
+            jsonObject.addProperty("user_id", user_id);
+            jsonObject.addProperty("friend_name", friend_name);
+            int id = 0;
+            try {
+                String result = new MyTask(url, jsonObject.toString()).execute().get();
+                id = Integer.valueOf(result);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+            if (id == 0 ) {
+                Log.d(TAG,"聊天室沒有重複");
+
+                return true;
+            } else {
+                Log.d(TAG,"聊天室已經重複");
+                return  false;
+            }
+        } else {
+            Log.d(TAG,"沒有網路");
+            Common.showToast(getActivity(), R.string.msg_NoNetwork);
+            return false;
+        }
+    }
+
+    public String findRoomPosition(String user_id,String friend_name){
+        if (Common.networkConnected(getActivity())) {
+            String url = Common.URL + "/chatRoomServlet";
+            Gson gson = new Gson();
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "findRoomPosition");
+            jsonObject.addProperty("user_id", user_id);
+            jsonObject.addProperty("friend_name", friend_name);
+            String room_position = null;
+            try {
+                room_position = new MyTask(url, jsonObject.toString()).execute().get();
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+            if (room_position.isEmpty()) {
+                Log.d(TAG,"找不到此聊天室");
+                return "";
+            } else {
+                Log.d(TAG,"此聊天室名稱為"+room_position);
+                return  room_position;
+            }
+        } else {
+            Log.d(TAG,"沒有網路");
+            Common.showToast(getActivity(), R.string.msg_NoNetwork);
+            return "";
+        }
+    }
+
+
 
 }
