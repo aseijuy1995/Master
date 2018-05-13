@@ -47,6 +47,9 @@ import nom.cp101.master.master.R;
 import static nom.cp101.master.master.Main.Common.user_id;
 
 public class Master extends AppCompatActivity {
+
+
+
     private String TAG = "MasterActivity";
     Toolbar toolbarMaster;
     TabLayout tabMaster;

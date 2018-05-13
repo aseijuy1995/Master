@@ -33,7 +33,7 @@ public class Common {
 
 //    public static String user_id = "yujie1";
 
-    public static String user_id = "aaa123";
+    public static String user_id = "";
 
 
 
