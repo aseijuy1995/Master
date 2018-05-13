@@ -41,8 +41,7 @@ public class MyCourseFragment extends Fragment {
         View view = inflater.inflate(R.layout.account_course_my_course_frag, container, false);
         pager = (VerticalInfiniteCycleViewPager)view.findViewById(R.id.verticle_cycle);
         fabBtn = view.findViewById(R.id.fab_btn_add);
-        user_id = "Cindy";
-        Common.setUserName(getContext(),user_id);
+        user_id = Common.getUserName(getContext());
 //        if(user_id.isEmpty()){
 //
 //        }else{

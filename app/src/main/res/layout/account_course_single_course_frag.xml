@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical">
 
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,7 +50,7 @@
         <ImageView
             android:id="@+id/single_image"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:src="@drawable/account_bulldog" />
         <LinearLayout
@@ -66,7 +65,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="30dp">
 
@@ -130,23 +129,6 @@
                             android:textSize="15sp" />
                     </LinearLayout>
                 </LinearLayout>
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:background="@color/cardview_dark_background"/>-->
-
-                <TextView
-                    android:id="@+id/single_summary"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字"
-                    android:textSize="17sp"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/account_rec_black_shape"
-                    android:padding="20dp"
-                    android:gravity="center"/>
 
 
                 <LinearLayout
@@ -155,134 +137,117 @@
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/cardview_dark_background"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="內容"
+                        android:textSize="15sp"
+                        android:layout_marginTop="30dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/single_summary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:text="很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字很多字"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"/>
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="end"
-                            android:paddingEnd="12dp"
-                            android:text="地點"
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="地點"
+                        android:textSize="15sp"
+                        android:layout_marginTop="50dp"
+                        />
 
-                        <TextView
-                            android:id="@+id/single_location"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:text="這是地點"
-                            android:textSize="22sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/single_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:text="這是地點"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"/>
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="end"
-                            android:paddingEnd="12dp"
-                            android:text="課程需求"
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="12dp"
+                        android:text="課程需求"
+                        android:textSize="15sp"
+                        android:layout_marginTop="50dp"/>
 
-                        <TextView
-                            android:id="@+id/single_need"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:text="這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求"
-                            android:textSize="22sp" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/single_need"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求這是課程需求"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="招生人數"
+                        android:textSize="15sp"
+                        android:layout_marginTop="50dp" />
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/single_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:text="10人"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="參加資格"
+                        android:textSize="15sp"
+                        android:layout_marginTop="50dp"/>
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="end"
-                            android:paddingEnd="12dp"
-                            android:text="招生人數"
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/single_number"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:text="10人"
-                            android:textSize="22sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/single_qualification"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="end"
-                            android:paddingEnd="12dp"
-                            android:text="參加資格"
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/single_qualification"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:text="這是參加資格"
-                            android:textSize="22sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_weight="4"
+                        android:text="這是參加資格"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:text="注意事項"
+                        android:textSize="15sp"
+                        android:layout_marginTop="50dp"/>
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="end"
-                            android:paddingEnd="12dp"
-                            android:text="注意事項"
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/single_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="這是注意事項這是注意事項這是注意事項這是注意事項這是注意事項這是注意事項這是注意事項這是注意事項這是注意事項"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"/>
 
-                        <TextView
-                            android:id="@+id/single_note"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:text="這是注意事項這是注意事項這是注意事項這是注意事項這是注意事項這是注意事項這是注意事項這是注意事項這是注意事項"
-                            android:textSize="22sp" />
 
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
-
-
-
-
 
 </FrameLayout>

@@ -85,8 +85,8 @@ public class Common {
     }
 
     public static int insertUpdateCourseServlet(Activity activity, String TAG, String servletStr, String actionValue, Gson gson, Object course){
-        if (Common.networkConnected(activity)) {
-            String url = Common.URL + "/" + servletStr;
+        if (networkConnected(activity)) {
+            String url = URL + "/" + servletStr;
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", actionValue);
             jsonObject.addProperty("course", gson.toJson(course));
@@ -106,7 +106,7 @@ public class Common {
             }
         } else {
             Log.d(TAG,"沒有網路");
-            Common.showToast(activity, R.string.msg_NoNetwork);
+            showToast(activity, R.string.msg_NoNetwork);
             return 0;
         }
     }
@@ -140,7 +140,7 @@ public class Common {
         SharedPreferences preferences =
                 context.getSharedPreferences("user", MODE_PRIVATE);
         String userName = preferences.getString("userName", "");
-        Log.d("Common", "userName = " + userName);
+        Log.d(TAG, "userName = " + userName);
         return userName;
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -114,7 +114,12 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     //回傳次數須為所有課程總數以及第一position放置的gridView
     @Override
     public int getItemCount() {
-        return courseArticleDataList.size() + 1;
+        if(!courseArticleDataList.isEmpty() ){
+            return courseArticleDataList.size() + 1;
+        }else{
+            return 0;
+        }
+
     }
 
     //將會使用到的view包崇一個viewHolder,便於使用

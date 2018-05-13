@@ -62,6 +62,7 @@ public class Master extends AppCompatActivity {
     List<Fragment> listMaster;
     //連接ViewPager與主功能Fragment的橋接器
     MasterFragmentPagerAdapter masterFragmentPagerAdapter;
+    String user_id;
 
     private boolean isBound;
     private BroadCastService broadCastService;
@@ -77,11 +78,14 @@ public class Master extends AppCompatActivity {
         setSupportActionBar(toolbarMaster);
         setViewPager();
         setTabLayout();
+
         doBindService();
         broadcastManager = LocalBroadcastManager.getInstance(this);
         registerChatReceiver();
         connecServer();
         atRoom = 0;
+        user_id = "Cindy";
+        Common.setUserName(this,user_id);
         helper = new NotificationHelper(this);
     }
 
