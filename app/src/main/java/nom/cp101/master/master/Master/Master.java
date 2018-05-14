@@ -285,8 +285,10 @@ public class Master extends AppCompatActivity {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void notification(String friend_name, String message) {
         Notification.Builder builder =  helper.getChannelNotification(friend_name,message);
-        helper.getManager().notify(new Random().nextInt(),builder.build());
-        Log.d(TAG,"notify created");
+        if(builder != null){
+            helper.getManager().notify(new Random().nextInt(),builder.build());
+            Log.d(TAG,"notify created");
+        }
     }
 
 
