@@ -83,16 +83,18 @@ public class UserFragment extends Fragment {
         View view = inflater.inflate(R.layout.user_fragment, container, false);
         findView(view);
 
-        //拿到
+        //拿到 UserId
         String userAccount = Common.getUserName(getActivity());
-
+        // 如果沒則跳到登入畫面
         if (userAccount == "" || userAccount== null) {
 
+            // 準備跳到 Login
             Fragment fragment = new Login();
             getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
 
         } else {
 
+            // 成功則開始拿到User 資料
             getUserInfo(userAccount);
             userTextAccount.setText(userAccount);
 
@@ -127,7 +129,7 @@ public class UserFragment extends Fragment {
         return view;
     }
 
-
+    
     /* 準備相簿 */
     public void openPhotoPicker() {
         // 檔案選擇器 ...
@@ -432,13 +434,13 @@ public class UserFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                Common.user_id = "";
+                                Common.setUserName(getActivity(), "");
                                 // 清除登入資料
                                 SharedPreferences preference = getActivity().getSharedPreferences("preference", Context.MODE_PRIVATE);
                                 preference.edit().putBoolean("login",false).apply();
                                 // 切回登入畫面
                                 Fragment login = new Login();
-                                getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).replace(R.id.fragment_container, login).commit();
+                                getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).replace(R.id.fragment_container, login).addToBackStack(null).commit();
 
                             }
                         }).setNegativeButton("取消", null).show();
