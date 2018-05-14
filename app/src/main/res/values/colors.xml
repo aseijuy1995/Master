@@ -14,6 +14,7 @@
     <color name="gray">#898989</color>
     <color name="orange">#F26419</color>
     <color name="purple">#736CED</color>
+    <color name="master">#657CED</color>
 
 
 </resources>

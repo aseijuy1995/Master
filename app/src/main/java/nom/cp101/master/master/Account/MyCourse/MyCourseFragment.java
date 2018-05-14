@@ -57,24 +57,23 @@ public class MyCourseFragment extends Fragment {
             fabBtn.setVisibility(View.INVISIBLE);
         }else if(access == COACH_ACCESS){
             courses = findCourseByCoach("findCourseByCoach",user_id);
-            pager.setAdapter(new MyAdapter(courses, getContext(),getActivity()));
+            if(courses != null){
+                pager.setAdapter(new MyAdapter(courses, getContext(),getActivity()));
+            }
+
         }else if(access == STUDENT_ACCESS){
+
             courses = findCourseByStudent("findCourseByStudent",user_id);
-            pager.setAdapter(new MyAdapter(courses, getContext(),getActivity()));
+            if(courses != null){
+                pager.setAdapter(new MyAdapter(courses, getContext(),getActivity()));
+            }
+
             fabBtn.setVisibility(View.INVISIBLE);
         }
-
         addClick();
         return view;
-
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-//        courses = selectAll("finalCourseServlet","getAll");
-//        pager.setAdapter(new MyAdapter(courses, getContext(),getActivity()));
-    }
 
     private void addClick() {
         fabBtn.setOnClickListener(new View.OnClickListener() {

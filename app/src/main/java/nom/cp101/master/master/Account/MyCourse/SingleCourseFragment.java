@@ -35,6 +35,9 @@ import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.Message.CLASS.MessageActivity;
 import nom.cp101.master.master.R;
 
+import static nom.cp101.master.master.Main.Common.COACH_ACCESS;
+import static nom.cp101.master.master.Main.Common.STUDENT_ACCESS;
+
 /**
  * Created by chunyili on 2018/4/20.
  */
@@ -51,6 +54,7 @@ public class SingleCourseFragment  extends Fragment {
     Course course ;
     Button single_contect,single_apply;
     String user_id,friend_name, room_position;
+    private int access;
 
 
 
@@ -58,8 +62,9 @@ public class SingleCourseFragment  extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_course_single_course_frag,container,false);
-        findView(view);
+        access = Common.getUserAccess(getContext());
         user_id = Common.getUserName(getContext());
+        findView(view);
         getBundle();
         setImage();
         manageBtnClick();
@@ -72,14 +77,16 @@ public class SingleCourseFragment  extends Fragment {
         single_contect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                friend_name = findUserNameById(course.getUser_id());
-                if(!friend_name.equals("")){
-                    room_position = findRoomPosition(user_id,friend_name);
-                    if(checkChatRoom(user_id,friend_name) == true){
-                        Common.contectUser(user_id,friend_name,getContext(),getActivity());
-                        enterChatRoom(room_position,user_id,friend_name);
-                    }else{
-                        enterChatRoom(room_position,user_id,friend_name);
+                if(access != COACH_ACCESS){
+                    friend_name = findUserNameById(course.getUser_id());
+                    if(!friend_name.equals("")){
+                        room_position = findRoomPosition(user_id,friend_name);
+                        if(checkChatRoom(user_id,friend_name) == true){
+                            Common.contectUser(user_id,friend_name,getContext(),getActivity());
+                            enterChatRoom(room_position,user_id,friend_name);
+                        }else{
+                            enterChatRoom(room_position,user_id,friend_name);
+                        }
                     }
                 }
             }
@@ -153,31 +160,29 @@ public class SingleCourseFragment  extends Fragment {
         single_image = view.findViewById(R.id.single_image);
         single_apply = view.findViewById(R.id.single_apply);
         single_contect = view.findViewById(R.id.single_contect);
+
+        if(access == STUDENT_ACCESS){
+            single_manage_btn.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void applyClick() {
         single_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkApply(course.getCourse_id(),user_id) == true){
-                    Apply apply = new Apply(0,course.getCourse_id(),user_id,1,null);
-                    insertApply(apply);
-                    Common.showToast(getContext(),"報名成功");
-                }else{
-                    Common.showToast(getContext(),"您已經報名此課程");
+                if(access != COACH_ACCESS){
+                    if(checkApply(course.getCourse_id(),user_id) == true){
+                        Apply apply = new Apply(0,course.getCourse_id(),user_id,1,null);
+                        insertApply(apply);
+                        Common.showToast(getContext(),"報名成功");
+                    }else{
+                        Common.showToast(getContext(),"您已經報名此課程");
+                    }
                 }
             }
         });
     }
     private void manageBtnClick() {
-
-//        final Course this_course = new Course(course.getCourse_id(),course.getUser_id(),
-//                course.getProfession_id(),course.getCourse_category_id(),course.getCourse_name(),
-//                course.getCourse_date(),course.getCourse_content(),course.getCourse_price(),
-//                course.getCourse_need(),course.getCourse_qualification(),course.getCourse_location(),
-//                course.getCourse_apply_deadline(),course.getCourse_people_number(),
-//                course.getCourse_applied_number(),course.getCourse_image_id(),course.getCourse_note());
-
         single_manage_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
