@@ -51,8 +51,8 @@ public class ChatReceiver extends BroadcastReceiver {
                 notificationManager.createNotificationChannel(notificationChannel);
                 notification = new Notification.Builder(context, PRIMARY_CHANNEL)
                         .setTicker("New Notification") // ticker text is no longer displayed in Android 5.0
-                        .setContentText(friend_name)
-                        .setContentTitle(lastMessage)
+                        .setContentText(lastMessage)
+                        .setContentTitle(friend_name)
                         .setSmallIcon(R.mipmap.ic_launcher_round)
                         .setAutoCancel(true)
                         .setContentIntent(pendingIntent)
@@ -60,8 +60,8 @@ public class ChatReceiver extends BroadcastReceiver {
             } else {
                 notification = new Notification.Builder(context)
                         .setTicker("New Notification") // ticker text is no longer displayed in Android 5.0
-                        .setContentText(friend_name)
-                        .setContentTitle(lastMessage)
+                        .setContentText(lastMessage)
+                        .setContentTitle(friend_name)
                         .setSmallIcon(R.mipmap.ic_launcher_round)
                         .setAutoCancel(true)
                         .setContentIntent(pendingIntent)

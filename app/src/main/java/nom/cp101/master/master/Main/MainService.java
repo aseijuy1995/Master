@@ -22,7 +22,6 @@ public class MainService extends Service {
     private LocalBroadcastManager broadcastManager;
     private Handler handler;
     private Runnable runnable;
-
     @Override
     public void onCreate() {
         super.onCreate();
