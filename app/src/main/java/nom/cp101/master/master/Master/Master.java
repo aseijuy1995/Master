@@ -91,6 +91,9 @@ public class Master extends AppCompatActivity {
         user_id = "kent";
         Common.setUserName(this,user_id);
         helper = new NotificationHelper(this);
+        Common.connectSocket(this);
+        Intent Serviceintent = new Intent(this, Master.class);
+        startService(Serviceintent);
     }
 
     //設定置入TabLayout的圖片

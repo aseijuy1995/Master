@@ -263,6 +263,9 @@
     <string name="last_message">last message</string>
     <string name="submit">SUBMIT</string>
     <string name="input">share your experience</string>
+    <string name="NoNotifications">NoNotificationsFound</string>
+    <string name="nf_newnotificaiton">你有新的通知訊息</string>
+
     <!--峻亦結束-->
     <!--////////////////////////////////////////////////////////////////////////////////////////////-->
 

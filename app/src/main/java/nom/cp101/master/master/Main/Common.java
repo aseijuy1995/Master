@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import nom.cp101.master.master.Notification.NotificationSocket;
 import nom.cp101.master.master.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -33,7 +34,7 @@ public class Common {
 
 //    public static String user_id = "yujie1";
 
-    public static String user_id = "";
+    public static String user_id = "girl";
 
 
 
@@ -42,6 +43,32 @@ public class Common {
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = conManager != null ? conManager.getActiveNetworkInfo() : null;
         return networkInfo != null && networkInfo.isConnected();
+    }
+
+    public static final String SOCKET_URI =
+            "ws://10.0.2.2:8080/Master/NotificationSocket/";
+    public static NotificationSocket notificationSocket;
+
+
+
+    public static void connectSocket(Context context) {
+        URI uri = null;
+        try {
+            uri = new URI(SOCKET_URI + user_id);
+        } catch (URISyntaxException e) {
+            Log.e(TAG, e.toString());
+        }
+        if (notificationSocket == null) {
+            notificationSocket = new NotificationSocket(uri, context);
+            notificationSocket.connect();
+        }
+    }
+
+    public static void disconnectSocket() {
+        if (notificationSocket != null) {
+            notificationSocket.close();
+            notificationSocket = null;
+        }
     }
 
 
