@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.gigamole.infinitecycleviewpager.VerticalInfiniteCycleViewPager;
 import com.google.gson.Gson;
@@ -32,6 +33,7 @@ public class MyCourseFragment extends Fragment {
     VerticalInfiniteCycleViewPager pager;
     private int identity;
     private String user_id;
+    private ImageView course_didnot_signIn;
 
     @Nullable
     @Override
@@ -41,12 +43,14 @@ public class MyCourseFragment extends Fragment {
         View view = inflater.inflate(R.layout.account_course_my_course_frag, container, false);
         pager = (VerticalInfiniteCycleViewPager)view.findViewById(R.id.verticle_cycle);
         fabBtn = view.findViewById(R.id.fab_btn_add);
+        course_didnot_signIn = view.findViewById(R.id.course_didnot_signIn);
         user_id = Common.getUserName(getContext());
-//        if(user_id.isEmpty()){
-//
-//        }else{
-//
-//        }
+
+        if(user_id.isEmpty()){
+            course_didnot_signIn.setVisibility(View.VISIBLE);
+            pager.setVisibility(View.INVISIBLE);
+            fabBtn.setVisibility(View.INVISIBLE);
+        }
 
 //        identity = 0;
 //        if(identity == 0){
@@ -60,7 +64,7 @@ public class MyCourseFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        connectServlet("finalCourseServlet","getAll");
+        selectAll("finalCourseServlet","getAll");
     }
 
     private void addClick() {
@@ -75,7 +79,7 @@ public class MyCourseFragment extends Fragment {
         });
     }
 
-    private void connectServlet(String servletStr, String value){
+    private void selectAll(String servletStr, String value){
         if (Common.networkConnected(getActivity())){
             String url = Common.URL + "/" + servletStr;
             List<Course> courses = null;

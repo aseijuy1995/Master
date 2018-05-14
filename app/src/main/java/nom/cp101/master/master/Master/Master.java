@@ -88,7 +88,6 @@ public class Master extends AppCompatActivity {
         registerChatReceiver();
         connecServer();
         atRoom = 0;
-        user_id = "kent";
         Common.setUserName(this,user_id);
         helper = new NotificationHelper(this);
         Common.connectSocket(this);

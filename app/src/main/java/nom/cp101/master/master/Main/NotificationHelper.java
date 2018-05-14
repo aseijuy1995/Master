@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Color;
+import android.os.Build;
 
 import nom.cp101.master.master.R;
 
@@ -25,13 +26,16 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     private void createChannel() {
-        NotificationChannel channel = new NotificationChannel(CHANEL_ID,CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
-        channel.enableLights(true);
-        channel.enableVibration(true);
-        channel.setLightColor(Color.GREEN);
-        channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+        NotificationChannel channel = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            channel = new NotificationChannel(CHANEL_ID,CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+            channel.enableLights(true);
+            channel.enableVibration(true);
+            channel.setLightColor(Color.GREEN);
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+            getManager().createNotificationChannel(channel);
+        }
 
-        getManager().createNotificationChannel(channel);
     }
 
     public NotificationManager getManager() {
@@ -42,10 +46,13 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public Notification.Builder getChannelNotification(String title, String body){
-        return new Notification.Builder(getApplicationContext(),CHANEL_ID)
-                .setContentText(body)
-                .setContentTitle(title)
-                .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setAutoCancel(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return new Notification.Builder(getApplicationContext(),CHANEL_ID)
+                    .setContentText(body)
+                    .setContentTitle(title)
+                    .setSmallIcon(R.mipmap.ic_launcher_round)
+                    .setAutoCancel(true);
+        }
+        return null;
     }
 }

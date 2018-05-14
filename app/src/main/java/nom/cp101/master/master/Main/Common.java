@@ -38,6 +38,7 @@ public class Common {
 
 
 
+
     public static boolean networkConnected(Context context) {
         ConnectivityManager conManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
