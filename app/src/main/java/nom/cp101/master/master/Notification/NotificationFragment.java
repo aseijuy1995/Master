@@ -184,7 +184,7 @@ public class NotificationFragment extends Fragment {
 
     //從database取得通知的資料傳入list中
     private List<Notification_rv_item> getitems() {
-        if (Common.networkConnected(getActivity())) {
+        if (Common.networkConnected(getActivity()) && Common.user_id != null) {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAll");
             jsonObject.addProperty("user_id", Common.user_id);
@@ -204,6 +204,7 @@ public class NotificationFragment extends Fragment {
             }
 
         } else {
+
             Toast.makeText(getActivity(), R.string.NoConnection, Toast.LENGTH_SHORT);
         }
         return items;

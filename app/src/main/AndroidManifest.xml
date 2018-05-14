@@ -19,7 +19,8 @@
 
         >
 
-        <activity android:name=".Master.Master"
+        <activity
+            android:name=".Master.Master"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,11 +35,10 @@
         <activity
             android:name=".ExperienceArticleActivity.ExperienceArticleActivity"
             android:label="@string/title_activity_experience_article"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".ExperienceArticleActivity.ExperienceArticleAppendActivity"/>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ExperienceArticleActivity.ExperienceArticleAppendActivity" />
 
         <activity android:name=".Message.CLASS.MessageActivity"/>
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -48,7 +48,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
+        <service
+            android:name=".Main.MainService"
+            android:enabled="true" />
     </application>
 
 </manifest>

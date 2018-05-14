@@ -34,6 +34,7 @@ public class Common {
 
 //    public static String user_id = "yujie1";
 
+//    public static String user_id = null;
     public static String user_id = "girl";
 
 
@@ -170,6 +171,7 @@ public class Common {
         SharedPreferences preferences =
                 context.getSharedPreferences("user", MODE_PRIVATE);
         preferences.edit().putString("userName", userName).apply();
+
     }
 
     public static String getUserName(Context context) {

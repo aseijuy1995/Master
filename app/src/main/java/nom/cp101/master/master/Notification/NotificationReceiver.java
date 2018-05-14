@@ -26,7 +26,6 @@ public class NotificationReceiver extends BroadcastReceiver {
         Intent nf_intent = new Intent(context, Master.class);
         Bundle bundle = new Bundle();
         bundle.putString("type", "Notification");
-        bundle.putString("type", "Message");
         nf_intent.putExtras(bundle);
         nf_intent.setAction(Intent.ACTION_MAIN);
         nf_intent.addCategory(Intent.CATEGORY_LAUNCHER);
