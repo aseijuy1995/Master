@@ -43,6 +43,7 @@ public class Login extends Fragment {
     private TextView loginTextMessage;
     private MyTask task;
     private LinearLayout loginLinearLayout;
+    private Boolean noAnimation = false;  // 禁止第一次進入畫面就跑動畫
 
 
     @Nullable
@@ -53,7 +54,7 @@ public class Login extends Fragment {
         findView(view);
 
         // 開始監聽畫面大小變化, 並加入畫面變動
-//        loginLinearLayout.getViewTreeObserver().addOnGlobalLayoutListener(changingViewAnimation);
+        loginLinearLayout.getViewTreeObserver().addOnGlobalLayoutListener(changingViewAnimation);
 
         return view;
     }
@@ -81,7 +82,11 @@ public class Login extends Fragment {
                     SharedPreferences preference = getActivity().getSharedPreferences("preference", Context.MODE_PRIVATE);
                     preference.edit().putBoolean("login", true).putString("account", userAccount).putString("password", userPassword).apply();
                     // 將帳號存起來
-                    Common.setUserName(getActivity(),userAccount);
+                    Common.setUserName(getActivity(), userAccount);
+                    // 拿到權限
+                    int userAccess = getUserAccess(userAccount);
+                    // 儲存權限
+                    Common.setUserAccess(getActivity(), userAccess);
                     // 跳回上一頁
                     getFragmentManager().popBackStack();
                 } else {
@@ -103,7 +108,7 @@ public class Login extends Fragment {
 
     // 檢查帳號密碼, 返回Bool
     private boolean isUserValid(String userAccount, String userPassword) {
-        String url = Common.URL + URL_INTENT;
+        String url = Common.URL + URL_INTENT; // .........
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("action", "login");
         jsonObject.addProperty("account", userAccount);
@@ -119,6 +124,24 @@ public class Login extends Fragment {
         }
         return isUserValid;
     }
+
+
+    private int getUserAccess(String userAccount) {
+        String url = Common.URL + URL_INTENT;
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("action", "getUserAccess");
+        jsonObject.addProperty("account", userAccount);
+        task = new MyTask(url, jsonObject.toString());
+        int result = 0;
+        try {
+            result = Integer.valueOf(task.execute().get());
+            Log.d(TAG, "Input: " + result);
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
+        return result;
+    }
+
 
 
     private void findView(View view) {
@@ -145,8 +168,13 @@ public class Login extends Fragment {
             String userPassword = preference.getString("password", "");
 
             if (isUserValid(userAccount, userPassword)) {
+
                 // 將帳號存起來
                 Common.setUserName(getActivity(),userAccount);
+                // 拿到權限
+                int userAccess = getUserAccess(userAccount);
+                // 儲存權限
+                Common.setUserAccess(getActivity(), userAccess);
                 // 跳回上一頁
                 getFragmentManager().popBackStack();
 
@@ -176,43 +204,44 @@ public class Login extends Fragment {
 
             if (heightDifference < 300) {   // 鍵盤收起
 
-                loginImageView.setVisibility(View.VISIBLE);
-//                // 縮放動畫
-//                ScaleAnimation scaleAnimation = new ScaleAnimation(0.5f,1.0f,0.5f,1.0f,
-//                        Animation.RELATIVE_TO_SELF, 0.5f,
-//                        Animation.RELATIVE_TO_SELF, 0);
-//                scaleAnimation.setDuration(200);
-//                scaleAnimation.setFillAfter(true);
-//                loginImageView.startAnimation(scaleAnimation);
-//
-//                // 位移動畫
-//                TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, -300, 0);
-//                translateAnimation.setDuration(200);
-//                translateAnimation.setFillAfter(true);
-//                loginEditAccount.startAnimation(translateAnimation);
-//                loginEditPassword.startAnimation(translateAnimation);
-//                loginButtonLogin.startAnimation(translateAnimation);
-//                loginButtonSignup.startAnimation(translateAnimation);
+                if (noAnimation) {
+                    // 縮放動畫
+                    ScaleAnimation scaleAnimation = new ScaleAnimation(0.5f,1.0f,0.5f,1.0f,
+                            Animation.RELATIVE_TO_SELF, 0.5f,
+                            Animation.RELATIVE_TO_SELF, 0);
+                    scaleAnimation.setDuration(200);
+                    scaleAnimation.setFillAfter(true);
+                    loginImageView.startAnimation(scaleAnimation);
+                    // 位移動畫
+                    TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, -300, 0);
+                    translateAnimation.setDuration(200);
+                    translateAnimation.setFillAfter(true);
+                    loginEditAccount.startAnimation(translateAnimation);
+                    loginEditPassword.startAnimation(translateAnimation);
+                    loginButtonLogin.startAnimation(translateAnimation);
+                    loginButtonSignup.startAnimation(translateAnimation);
+                }
 
             } else { // 鍵盤升起
 
-                loginImageView.setVisibility(View.GONE);
-//                // 縮放動畫
-//                ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f,0.5f,1.0f,0.5f,
-//                        Animation.RELATIVE_TO_SELF, 0.5f,
-//                        Animation.RELATIVE_TO_SELF, 0);
-//                scaleAnimation.setDuration(200);
-//                scaleAnimation.setFillAfter(true);
-//                loginImageView.startAnimation(scaleAnimation);
-//
-//                // 位移動畫
-//                TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 0, -300);
-//                translateAnimation.setDuration(200);
-//                translateAnimation.setFillAfter(true);
-//                loginEditAccount.startAnimation(translateAnimation);
-//                loginEditPassword.startAnimation(translateAnimation);
-//                loginButtonLogin.startAnimation(translateAnimation);
-//                loginButtonSignup.startAnimation(translateAnimation);
+                // 縮放動畫
+                ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f,0.5f,1.0f,0.5f,
+                        Animation.RELATIVE_TO_SELF, 0.5f,
+                        Animation.RELATIVE_TO_SELF, 0);
+                scaleAnimation.setDuration(200);
+                scaleAnimation.setFillAfter(true);
+                loginImageView.startAnimation(scaleAnimation);
+                // 位移動畫
+                TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 0, -300);
+                translateAnimation.setDuration(200);
+                translateAnimation.setFillAfter(true);
+                loginEditAccount.startAnimation(translateAnimation);
+                loginEditPassword.startAnimation(translateAnimation);
+                loginButtonLogin.startAnimation(translateAnimation);
+                loginButtonSignup.startAnimation(translateAnimation);
+
+                // 鍵盤升起過一次, 並將 noAnimation 設成 true 開始可以跑動畫
+                noAnimation = true;
             }
         }
     };
@@ -226,6 +255,7 @@ public class Login extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             loginLinearLayout.getViewTreeObserver().removeOnGlobalLayoutListener(changingViewAnimation);
         }
+
         if (task != null) {
             task.cancel(true);
         }

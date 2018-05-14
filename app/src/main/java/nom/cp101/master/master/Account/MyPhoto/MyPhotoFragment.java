@@ -15,11 +15,8 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.R;
-
-/**
- * Created by chunyili on 2018/4/17.
- */
 
 public class MyPhotoFragment extends Fragment {
 
@@ -28,15 +25,34 @@ public class MyPhotoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.account_my_photo_frag,container,false);
+
+        // 拿到 User 帳號
+        String userAccount = Common.getUserName(getActivity());
+        // 如果沒則跳到登入畫面
+        if (!Common.checkUserName(userAccount, getFragmentManager())) {
+            return null;
+        }
+
+        // 拿到照片及照片ID...
+
+
+
+
+        // 利用照片ID去搜尋文章或者課程...
+
+
         recyclerView = view.findViewById(R.id.photoRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),4, GridLayoutManager.VERTICAL,false));
+
         List<String> strings = new ArrayList<String>();
         strings = getStrings();
         recyclerView.setAdapter(new rvAdapter(getContext(),strings));
         return view;
     }
 
+    // ...
     private List<String> getStrings() {
         String string = "123";
         List<String> strings = new ArrayList<String>();
@@ -45,6 +61,7 @@ public class MyPhotoFragment extends Fragment {
         }
         return strings;
     }
+
 
     public class rvAdapter extends RecyclerView.Adapter<rvAdapter.MyViewHolder>{
 
@@ -76,7 +93,6 @@ public class MyPhotoFragment extends Fragment {
             String string = strings.get(position);
             holder.imageView.setImageResource(R.drawable.account_bulldog);
         }
-
 
         @Override
         public int getItemCount() {
