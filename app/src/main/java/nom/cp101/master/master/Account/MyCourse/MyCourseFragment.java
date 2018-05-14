@@ -61,6 +61,7 @@ public class MyCourseFragment extends Fragment {
         }else if(access == STUDENT_ACCESS){
             courses = findCourseByStudent("findCourseByStudent",user_id);
             pager.setAdapter(new MyAdapter(courses, getContext(),getActivity()));
+            fabBtn.setVisibility(View.INVISIBLE);
         }
 
         addClick();
