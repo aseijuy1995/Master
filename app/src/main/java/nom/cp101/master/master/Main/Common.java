@@ -39,7 +39,7 @@ public class Common {
 //    public static String user_id = "yujie1";
 
 //    public static String user_id = null;
-    public static String user_id = "girl";
+    public static String user_id = "";
 
     public final static int COACH_ACCESS = 1; // 教練權限
 
@@ -176,6 +176,7 @@ public class Common {
         SharedPreferences preferences =
                 context.getSharedPreferences("user", MODE_PRIVATE);
         preferences.edit().putString("userName", userName).apply();
+        user_id = userName;
 
     }
 

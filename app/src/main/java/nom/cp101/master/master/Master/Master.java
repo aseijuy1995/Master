@@ -63,7 +63,7 @@ public class Master extends AppCompatActivity {
         setTabLayout();
 
         connecServer();
-        user_id = "kent";
+        user_id = "";
         Common.setUserName(this, user_id);
     }
 
