@@ -56,6 +56,35 @@ public class ExperienceArticleData {
         this.commentList = commentList;
     }
 
+    String user_name="";
+    byte[] user_portrait=null;
+
+    public ExperienceArticleData(String user_name, byte[] user_portrait) {
+        this.user_name = user_name;
+        this.user_portrait = user_portrait;
+    }
+
+
+
+
+
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public byte[] getUser_portrait() {
+        return user_portrait;
+    }
+
+    public void setUser_portrait(byte[] user_portrait) {
+        this.user_portrait = user_portrait;
+    }
+
     public byte[] getImgPictureByte() {
         return imgPictureByte;
     }

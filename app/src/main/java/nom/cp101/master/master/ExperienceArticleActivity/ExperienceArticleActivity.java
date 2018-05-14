@@ -13,13 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import nom.cp101.master.master.ExperienceArticle.ExperienceArticleAllData;
 import nom.cp101.master.master.ExperienceArticle.ExperienceArticleData;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.R;
 
-public class ExperienceArticleActivity extends AppCompatActivity {
+public class ExperienceArticleActivity extends AppCompatActivity implements View.OnClickListener{
     Toolbar toolbar;
     RecyclerView rv;
     View view;
@@ -28,6 +29,8 @@ public class ExperienceArticleActivity extends AppCompatActivity {
     Button btnMsg;
     TextView tvHeadName, tvTime, tvContent;
     FloatingActionButton fab;
+    ExperienceArticleData experienceArticleData=null;
+    int postId=0;
 
 
 
@@ -37,10 +40,10 @@ public class ExperienceArticleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.experience_article_tool);
 
-        int postId=getIntent().getExtras().getInt("experienceArticlePostId");
+        postId=getIntent().getExtras().getInt("experienceArticlePostId");
 
         //取得關於點擊的心得文章之所有內容
-        ExperienceArticleData experienceArticleData=ExperienceArticleAllData.takeExperienceArticlePostData(Common.user_id, postId);
+        experienceArticleData=ExperienceArticleAllData.takeExperienceArticlePostData(Common.user_id, postId);
 
         //初始化元件
         findViews();
@@ -50,11 +53,21 @@ public class ExperienceArticleActivity extends AppCompatActivity {
 
         setData(experienceArticleData);
 
+        btnMsg.setOnClickListener(this);
+
+
     }
 
 
 
     private void setData(ExperienceArticleData experienceArticleData) {
+//        int width=0,height=0;
+//        width=height=getResources().getDisplayMetrics().widthPixels/4;
+//        ivEAA.setMaxWidth(width);
+//        ivEAA.setMaxHeight(height);
+//        ivEAA.setScaleType(ImageView.ScaleType.FIT_XY);
+
+
 
         ivEAA.setImageBitmap(BitmapFactory.decodeByteArray(experienceArticleData.getImgPictureByte(),0,experienceArticleData.getImgPictureByte().length));
         ivHeadImg.setImageBitmap(BitmapFactory.decodeByteArray(experienceArticleData.getImgHeadByte(),0,experienceArticleData.getImgHeadByte().length));
@@ -87,4 +100,28 @@ public class ExperienceArticleActivity extends AppCompatActivity {
         tvContent=(TextView)view.findViewById(R.id.tvContent);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnMsg:
+
+                if(!etMsg.getText().toString().isEmpty() && etMsg.getText().toString().trim()!=null){
+
+                    String leave_Msg=etMsg.getText().toString();
+
+                    ExperienceArticleAllData.takeExperienceArticleInsertMsg(Common.user_id,
+                            postId,
+                            leave_Msg);
+
+                    etMsg.setText("");
+                    Toast.makeText(getApplicationContext(), getString(R.string.successed), Toast.LENGTH_SHORT).show();
+
+                }else{
+                    Toast.makeText(getApplicationContext(), getString(R.string.etMsg_empty), Toast.LENGTH_SHORT).show();
+                }
+
+
+                break;
+        }
+    }
 }

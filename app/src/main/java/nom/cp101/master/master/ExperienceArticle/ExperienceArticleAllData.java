@@ -1,22 +1,16 @@
 package nom.cp101.master.master.ExperienceArticle;
 
 
-import android.content.Context;
-import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import nom.cp101.master.master.Main.Common;
-import nom.cp101.master.master.R;
 
 /**
  * Created by yujie on 2018/4/25.
@@ -201,5 +195,54 @@ public class ExperienceArticleAllData {
         }
 
         return experienceArticleData;
+    }
+
+    public static ExperienceArticleData takeExperienceArticleData(String user_id) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("experienceArticle", "experienceArticleUserId");
+        jsonObject.addProperty("experienceArticleUserId", user_id);
+
+        ExperienceArticleTask experienceArticleTask=new ExperienceArticleTask(jsonObject.toString());
+        String jsonStr="";
+        Gson gson=new Gson();
+        ExperienceArticleData experienceArticleData=null;
+
+        try {
+            jsonStr=experienceArticleTask.execute(Common.URL+"/ExperienceArticleServlet").get();
+
+            experienceArticleData=gson.fromJson(jsonStr.toString(), ExperienceArticleData.class);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return experienceArticleData;
+
+
+    }
+
+    public static void takeExperienceArticleInsertMsg(String user_id, int post_id, String leave_msg) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("experienceArticle", "experienceArticleLeaveMsg");
+        jsonObject.addProperty("experienceArticleUserId", user_id);
+        jsonObject.addProperty("experienceArticlePostId", post_id);
+        jsonObject.addProperty("experienceArticleMsg", leave_msg);
+
+        ExperienceArticleTask experienceArticleTask=new ExperienceArticleTask(jsonObject.toString());
+        String jsonStr="";
+        Gson gson=new Gson();
+
+        try {
+            experienceArticleTask.execute(Common.URL+"/ExperienceArticleServlet").get();
+
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+//        return gson.fromJson(jsonStr.toString(), Integer.class);
     }
 }

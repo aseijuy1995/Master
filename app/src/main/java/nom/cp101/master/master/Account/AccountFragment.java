@@ -20,11 +20,12 @@ import nom.cp101.master.master.R;
  */
 
 public class AccountFragment extends Fragment {
+    public static BottomNavigationView bottomNavigationView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_main_frag, container, false);
-        BottomNavigationView bottomNavigationView = view.findViewById(R.id.botton_nav);
+        bottomNavigationView = view.findViewById(R.id.botton_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
         getFragmentManager().beginTransaction().replace(R.id.fragment_container, new UserFragment()).commit();
         return view;

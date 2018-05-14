@@ -25,6 +25,7 @@ import java.util.List;
 import nom.cp101.master.master.Account.AccountFragment;
 import nom.cp101.master.master.CourseArticle.CourseArticleFragment;
 import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
+import nom.cp101.master.master.ExperienceArticleActivity.Comment;
 import nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleAppendActivity;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MainService;
@@ -37,7 +38,7 @@ import nom.cp101.master.master.R;
 public class Master extends AppCompatActivity {
     private String TAG = "MasterActivity";
     Toolbar toolbarMaster;
-    TabLayout tabMaster;
+    public static TabLayout tabMaster;
     ViewPager viewPagerMaster;
     SearchView searchMaster;
     AutoCompleteTextView autoCompleteTextViewMaster;
@@ -70,7 +71,7 @@ public class Master extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (Common.user_id.trim() != null) {
+        if (Common.user_id.trim() != null && Common.user_id != "") {
             Common.connectSocket(this);
             Intent ServiceIntent = new Intent(this, MainService.class);
             startService(ServiceIntent);

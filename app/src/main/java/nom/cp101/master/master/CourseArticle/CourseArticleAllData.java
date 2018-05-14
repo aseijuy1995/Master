@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import nom.cp101.master.master.Account.MyCourse.Course;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.CourseArticleActivity.CourseArticleCategoryData;
 import nom.cp101.master.master.R;
@@ -177,5 +178,29 @@ public class CourseArticleAllData {
         return courseArticleDataList;
     }
 
+
+    public static Course takeCourseArticleOneData(int courseArticleId) {
+        JsonObject jsonObject = new JsonObject();
+        //設定屬性傳入項目名稱
+        jsonObject.addProperty("courseArticle", "courseArticleOneData");
+        jsonObject.addProperty("courseArticleId", courseArticleId);
+        CourseArticleTask courseArticleTask = new CourseArticleTask(jsonObject.toString());
+        //宣告一個List<CourseArticleData>接server回傳之數據
+        Course course=null;
+        String jsonStr = "";
+        Gson gson=new Gson();
+
+        try {
+            jsonStr = courseArticleTask.execute(Common.URL + "/CourseArticleServlet").get();
+
+            course=gson.fromJson(jsonStr, Course.class);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return course;
+    }
 }
 

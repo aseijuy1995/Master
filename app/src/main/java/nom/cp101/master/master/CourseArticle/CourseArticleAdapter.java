@@ -2,6 +2,7 @@ package nom.cp101.master.master.CourseArticle;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
@@ -16,8 +17,13 @@ import com.lid.lib.LabelTextView;
 
 import java.util.List;
 
+import nom.cp101.master.master.Account.MyCourse.Course;
+import nom.cp101.master.master.Account.MyCourse.SingleCourseFragment;
 import nom.cp101.master.master.Master.Master;
 import nom.cp101.master.master.R;
+
+import static nom.cp101.master.master.Account.AccountFragment.bottomNavigationView;
+import static nom.cp101.master.master.Master.Master.tabMaster;
 
 //CourseArticleAdapter繼承RecyclerView.Adapter顯示文章首頁樣式
 public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdapter.ViewHolder> {
@@ -74,7 +80,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
         if (getItemViewType(position) != TYPE_GRIDLAYOUT) {
 
             //因position=0時,因有置入gridView所以position需-1來帶入,否則會導致IndexOutOfBoundsException超出index的例外
-            CourseArticleData courseArticleData = courseArticleDataList.get(position - 1);
+            final CourseArticleData courseArticleData = courseArticleDataList.get(position - 1);
 
             //給予課程文章編號對server端db發出請求,回傳每筆課程之參加人數
             String courseArticleJoin = CourseArticleAllData.takeCourseArticleJoin(courseArticleData.getCourseArticleId());
@@ -83,7 +89,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
             //將list存放各ArticleCourseData物件內的各資料取出顯示
             holder.tvName.setText(courseArticleData.getCourseArticleName());
 
-            holder.tvNumber.setText(courseArticleJoin + "/" + courseArticleData.getCourseArticleNumber());
+            holder.tvNumber.setText(courseArticleJoin + "/" +  courseArticleData.getCourseArticleNumber());
 
             holder.tvAddress.setText(courseArticleData.getCourseArticleAddress());
             holder.tvTime.setText(courseArticleData.getCourseArticleTime());
@@ -91,10 +97,20 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
             holder.cvCourseArticle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, Master.class);
-                    //各課程文章id
-//                    courseArticleData.getCourseArticleId();
-                    context.startActivity(intent);
+
+                    tabMaster.getTabAt(4).select();
+                    bottomNavigationView.setSelectedItemId(R.id.menu_course);
+
+
+                    Course course=CourseArticleAllData.takeCourseArticleOneData(courseArticleData.getCourseArticleId());
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable("course", course);
+                    SingleCourseFragment singleCourseFragment=new SingleCourseFragment();
+                    singleCourseFragment.setArguments(bundle);
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container,singleCourseFragment).commit();
+
+
+
                 }
             });
 
