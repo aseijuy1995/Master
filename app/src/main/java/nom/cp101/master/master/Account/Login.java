@@ -1,5 +1,6 @@
 package nom.cp101.master.master.Account;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
@@ -51,11 +52,12 @@ public class Login extends Fragment {
         View view = inflater.inflate(R.layout.login, container, false);
         findView(view);
 
-        // 開始監聽畫面大小變化, 並加入動畫
-        loginLinearLayout.getViewTreeObserver().addOnGlobalLayoutListener(changingViewAnimation);
+        // 開始監聽畫面大小變化, 並加入畫面變動
+//        loginLinearLayout.getViewTreeObserver().addOnGlobalLayoutListener(changingViewAnimation);
 
         return view;
     }
+
 
 
     // 點擊事件處理 ...
@@ -79,7 +81,7 @@ public class Login extends Fragment {
                     SharedPreferences preference = getActivity().getSharedPreferences("preference", Context.MODE_PRIVATE);
                     preference.edit().putBoolean("login", true).putString("account", userAccount).putString("password", userPassword).apply();
                     // 將帳號存起來
-                    Common.user_id = userAccount;
+                    Common.setUserName(getActivity(),userAccount);
                     // 跳回上一頁
                     getFragmentManager().popBackStack();
                 } else {
@@ -144,7 +146,7 @@ public class Login extends Fragment {
 
             if (isUserValid(userAccount, userPassword)) {
                 // 將帳號存起來
-                Common.user_id = userAccount;
+                Common.setUserName(getActivity(),userAccount);
                 // 跳回上一頁
                 getFragmentManager().popBackStack();
 
