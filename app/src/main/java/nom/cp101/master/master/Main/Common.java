@@ -42,7 +42,6 @@ public class Common {
     public static String user_id = "";
 
     public final static int COACH_ACCESS = 1; // 教練權限
-
     public final static int STUDENT_ACCESS = 2; // 學員權限
 
 

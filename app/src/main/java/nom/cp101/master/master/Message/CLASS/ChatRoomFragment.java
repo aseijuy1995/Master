@@ -61,7 +61,7 @@ public class ChatRoomFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.message_chat_room_frag,container,false);
 
-
+        findView();
 
         return view;
     }
@@ -81,7 +81,7 @@ public class ChatRoomFragment extends Fragment {
             rvRoomList.setVisibility(View.INVISIBLE);
         }else{
             rootAddValue();
-            findView();
+
             buildRecyclerView();
         }
     }
