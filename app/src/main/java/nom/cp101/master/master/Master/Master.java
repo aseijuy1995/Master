@@ -1,5 +1,6 @@
 package nom.cp101.master.master.Master;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -7,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -35,21 +37,20 @@ import java.util.Random;
 import nom.cp101.master.master.Account.AccountFragment;
 import nom.cp101.master.master.CourseArticle.CourseArticleFragment;
 import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
+import nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleAppendActivity;
 import nom.cp101.master.master.Main.BroadCastService;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.Main.NotificationHelper;
 import nom.cp101.master.master.Message.CLASS.ChatMessage;
 import nom.cp101.master.master.Message.CLASS.ChatRoomFragment;
+import nom.cp101.master.master.Message.CLASS.MessageActivity;
 import nom.cp101.master.master.Notification.NotificationFragment;
 import nom.cp101.master.master.R;
 
 import static nom.cp101.master.master.Main.Common.user_id;
 
 public class Master extends AppCompatActivity {
-
-
-
     private String TAG = "MasterActivity";
     Toolbar toolbarMaster;
     TabLayout tabMaster;
@@ -210,10 +211,15 @@ public class Master extends AppCompatActivity {
         switch (item.getItemId()) {
             //item為addText時(新增文章),先做Toast
             case R.id.addTextMaster:
-                Toast.makeText(getApplicationContext(), "Click addText", Toast.LENGTH_SHORT).show();
+                openPost();
                 break;
         }
         return true;
+    }
+
+    private void openPost() {
+        Intent intent = new Intent(this,ExperienceArticleAppendActivity.class);
+        startActivity(intent);
     }
 
 
@@ -272,7 +278,8 @@ public class Master extends AppCompatActivity {
         }
     }
 
-    private void notification(String friend_name,String message) {
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void notification(String friend_name, String message) {
         Notification.Builder builder =  helper.getChannelNotification(friend_name,message);
         helper.getManager().notify(new Random().nextInt(),builder.build());
         Log.d(TAG,"notify created");
