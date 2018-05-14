@@ -83,18 +83,18 @@ public class UserFragment extends Fragment {
         View view = inflater.inflate(R.layout.user_fragment, container, false);
         findView(view);
 
+        //拿到
+        String userAccount = Common.getUserName(getActivity());
 
-        if (Common.user_id.trim() == "" || Common.user_id == null) {
-
+        if (userAccount == "" || userAccount== null) {
 
             Fragment fragment = new Login();
             getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
 
         } else {
 
-            String userAccount = Common.user_id;
-            getUserInfo(Common.user_id);
-            userTextAccount.setText(Common.user_id);
+            getUserInfo(userAccount);
+            userTextAccount.setText(userAccount);
 
             // 如果專業欄位沒有隱藏 執行去撈該會員的專業資料
             if (userLayoutProfession.getVisibility() != view.GONE) {
@@ -155,7 +155,7 @@ public class UserFragment extends Fragment {
             // 拿到存放路徑的Uri
             imageUri = Uri.fromFile(file);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                imageUri = FileProvider.getUriForFile(getActivity(), "com.donkor.demo.takephoto.fileprovider", file);
+                imageUri = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".provider", file);
             }
             // 儲存照片
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
@@ -187,7 +187,7 @@ public class UserFragment extends Fragment {
                         // 判斷 SDK 版本
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             // 若 ... 再做一次處理
-                            newUri = FileProvider.getUriForFile(getActivity(), "com.donkor.demo.takephoto.fileprovider", new File(newUri.getPath()));
+                            newUri = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".provider", new File(newUri.getPath()));
                         }
                         // 開始裁切圖片 ...
                         cropImageUri(newUri, cropImageUri, aspect_X, aspect_Y, output_X, output_Y);
