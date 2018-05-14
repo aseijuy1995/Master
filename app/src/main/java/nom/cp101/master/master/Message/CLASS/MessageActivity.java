@@ -98,7 +98,7 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        Master.atRoom = 0;
+        ChatReceiver.atRoom = 0;
         String message = messages.get(messages.size()-1).getMessage();
         String user = messages.get(messages.size()-1).getUserName();
         updateLastMessage(message,user,friendName);

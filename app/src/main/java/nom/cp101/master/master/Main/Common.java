@@ -169,6 +169,7 @@ public class Common {
         SharedPreferences preferences =
                 context.getSharedPreferences("user", MODE_PRIVATE);
         preferences.edit().putString("userName", userName).apply();
+
     }
 
     public static String getUserName(Context context) {

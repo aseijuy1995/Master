@@ -1,18 +1,9 @@
 package nom.cp101.master.master.Master;
 
-import android.annotation.TargetApi;
-import android.app.Notification;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.Context;
+import android.app.Service;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.ServiceConnection;
-import android.os.Build;
-import android.os.IBinder;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,30 +16,23 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import nom.cp101.master.master.Account.AccountFragment;
 import nom.cp101.master.master.CourseArticle.CourseArticleFragment;
 import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
 import nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleAppendActivity;
-import nom.cp101.master.master.Main.BroadCastService;
 import nom.cp101.master.master.Main.Common;
+import nom.cp101.master.master.Main.MainService;
 import nom.cp101.master.master.Main.MyTask;
-import nom.cp101.master.master.Main.NotificationHelper;
-import nom.cp101.master.master.Message.CLASS.ChatMessage;
 import nom.cp101.master.master.Message.CLASS.ChatRoomFragment;
-import nom.cp101.master.master.Message.CLASS.MessageActivity;
 import nom.cp101.master.master.Notification.NotificationFragment;
 import nom.cp101.master.master.R;
 
-import static nom.cp101.master.master.Main.Common.user_id;
 
 public class Master extends AppCompatActivity {
     private String TAG = "MasterActivity";
@@ -68,11 +52,6 @@ public class Master extends AppCompatActivity {
     MasterFragmentPagerAdapter masterFragmentPagerAdapter;
     String user_id;
 
-    private boolean isBound;
-    private BroadCastService broadCastService;
-    private LocalBroadcastManager broadcastManager;
-    private NotificationHelper helper;
-    public static int atRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,17 +62,17 @@ public class Master extends AppCompatActivity {
         setViewPager();
         setTabLayout();
 
-        doBindService();
-        broadcastManager = LocalBroadcastManager.getInstance(this);
-        registerChatReceiver();
-        connecServer();
-        atRoom = 0;
+//        connecServer();
         user_id = "kent";
-        Common.setUserName(this,user_id);
-        helper = new NotificationHelper(this);
+        Common.setUserName(this, user_id);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         Common.connectSocket(this);
-        Intent Serviceintent = new Intent(this, Master.class);
-        startService(Serviceintent);
+        Intent ServiceIntent = new Intent(this,MainService.class);
+        startService(ServiceIntent);
     }
 
     //設定置入TabLayout的圖片
@@ -153,6 +132,7 @@ public class Master extends AppCompatActivity {
 
         //主畫面Master-其內掛載TabLayout內的ViewPager與裝有Fragment的list橋接設置
         masterFragmentPagerAdapter = new MasterFragmentPagerAdapter(getSupportFragmentManager(), listMaster);
+        viewPagerMaster.setOffscreenPageLimit(5);
         viewPagerMaster.setAdapter(masterFragmentPagerAdapter);
     }
 
@@ -221,71 +201,16 @@ public class Master extends AppCompatActivity {
     }
 
     private void openPost() {
-        Intent intent = new Intent(this,ExperienceArticleAppendActivity.class);
+        Intent intent = new Intent(this, ExperienceArticleAppendActivity.class);
         startActivity(intent);
     }
 
 
     private void connecServer() {
         String user_id = Common.getUserName(this);
-        if(user_id != null){
-            Common.connectServer(this,user_id);
+        if (user_id != null) {
+            Common.connectServer(this, user_id);
         }
-    }
-
-    void doBindService() {
-        if (!isBound) {
-            Intent intent = new Intent(this, BroadCastService.class);
-            bindService(intent, serviceCon, Context.BIND_AUTO_CREATE);
-            isBound = true;
-        }
-    }
-
-    void doUnbindService() {
-        if (isBound) {
-            unbindService(serviceCon);
-            isBound = false;
-        }
-    }
-
-    private ServiceConnection serviceCon = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName className, IBinder binder) {
-            broadCastService = ((BroadCastService.ServiceBinder) binder).getService();
-        }
-        @Override
-        public void onServiceDisconnected(ComponentName className) {
-            broadCastService = null;
-        }
-    };
-
-    private void registerChatReceiver() {
-        IntentFilter chatFilter = new IntentFilter("message_chat_offline");
-        ChatReceiver chatReceiver = new ChatReceiver();
-        broadcastManager.registerReceiver(chatReceiver, chatFilter);
-    }
-
-    private class ChatReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String message = intent.getStringExtra("message");
-            ChatMessage chatMessage = new Gson().fromJson(message, ChatMessage.class);
-            String lastMessage = chatMessage.getMessage();
-            String sender = chatMessage.getSender();
-            String friend_name = findRoomName(user_id,sender);
-            Log.d(TAG, String.valueOf(atRoom)+"  "+friend_name);
-
-            if(atRoom == 0 && sender.equals(friend_name)){
-                notification(friend_name,lastMessage);
-            }
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void notification(String friend_name, String message) {
-        Notification.Builder builder =  helper.getChannelNotification(friend_name,message);
-        helper.getManager().notify(new Random().nextInt(),builder.build());
-        Log.d(TAG,"notify created");
     }
 
 
@@ -295,13 +220,13 @@ public class Master extends AppCompatActivity {
 //        doUnbindService();
     }
 
-    public String findRoomName(String user_id,String room_name){
+    public String findRoomName(String user_id, String room_name) {
         if (Common.networkConnected(this)) {
             String url = Common.URL + "/chatRoomServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "findRoomName");
-            jsonObject.addProperty("user_id", user_id );
-            jsonObject.addProperty("room_name",room_name);
+            jsonObject.addProperty("user_id", user_id);
+            jsonObject.addProperty("room_name", room_name);
             String result = null;
             try {
                 result = new MyTask(url, jsonObject.toString()).execute().get();
@@ -309,14 +234,14 @@ public class Master extends AppCompatActivity {
                 Log.e(TAG, e.toString());
             }
             if (result.isEmpty()) {
-                Log.d(TAG,"Find room name 失敗");
+                Log.d(TAG, "Find room name 失敗");
                 return null;
             } else {
-                Log.d(TAG,"Find room name 成功");
-                return  result;
+                Log.d(TAG, "Find room name 成功");
+                return result;
             }
         } else {
-            Log.d(TAG,"沒有網路");
+            Log.d(TAG, "沒有網路");
             Common.showToast(this, "no network");
             return null;
         }

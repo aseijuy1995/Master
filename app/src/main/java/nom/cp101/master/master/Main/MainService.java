@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.google.gson.JsonObject;
 
+import nom.cp101.master.master.Message.CLASS.ChatReceiver;
 import nom.cp101.master.master.Notification.NotificationReceiver;
 
 
@@ -44,10 +45,12 @@ public class MainService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         IntentFilter notificationfilter = new IntentFilter("newNotification");
+        IntentFilter chatFilter = new IntentFilter("message_chat_offline");
         NotificationReceiver notificationReceiver = new NotificationReceiver();
+        ChatReceiver chatReceiver = new ChatReceiver();
         broadcastManager = LocalBroadcastManager.getInstance(this);
         broadcastManager.registerReceiver(notificationReceiver, notificationfilter);
-        Log.d(TAG, "open");
+        broadcastManager.registerReceiver(chatReceiver, chatFilter);
 
 
         handler.postDelayed(runnable, 5000);
@@ -60,4 +63,8 @@ public class MainService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+
 }
+
+
