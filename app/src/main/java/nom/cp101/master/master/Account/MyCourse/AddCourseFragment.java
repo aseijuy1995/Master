@@ -212,7 +212,6 @@ public class AddCourseFragment extends Fragment {
                 showDatePicker(getContext(),add_course_date);
             }
         });
-
         add_course_apply_deadline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -346,8 +345,4 @@ public class AddCourseFragment extends Fragment {
             Log.e(TAG,"錯誤");
         }
     }
-
-
-
-
 }

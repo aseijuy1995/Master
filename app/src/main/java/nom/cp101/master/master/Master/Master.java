@@ -150,6 +150,7 @@ public class Master extends AppCompatActivity {
 
         //主畫面Master-其內掛載TabLayout內的ViewPager與裝有Fragment的list橋接設置
         masterFragmentPagerAdapter = new MasterFragmentPagerAdapter(getSupportFragmentManager(), listMaster);
+        viewPagerMaster.setOffscreenPageLimit(5);
         viewPagerMaster.setAdapter(masterFragmentPagerAdapter);
     }
 

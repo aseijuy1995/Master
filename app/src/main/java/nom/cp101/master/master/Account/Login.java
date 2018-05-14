@@ -101,7 +101,7 @@ public class Login extends Fragment {
 
     // 檢查帳號密碼, 返回Bool
     private boolean isUserValid(String userAccount, String userPassword) {
-        String url = Common.URL + URL_INTENT; // .........
+        String url = Common.URL + URL_INTENT;
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("action", "login");
         jsonObject.addProperty("account", userAccount);
@@ -143,7 +143,6 @@ public class Login extends Fragment {
             String userPassword = preference.getString("password", "");
 
             if (isUserValid(userAccount, userPassword)) {
-
                 // 將帳號存起來
                 Common.user_id = userAccount;
                 // 跳回上一頁
@@ -171,7 +170,7 @@ public class Login extends Fragment {
             int screenHeight = getActivity().getWindow().getDecorView().getRootView().getHeight();
             // 拿到變化後的高度
             int heightDifference = screenHeight - rect.bottom;
-            Log.d(TAG, "ScreenHeight: " + heightDifference);
+//            Log.d(TAG, "ScreenHeight: " + heightDifference);
 
             if (heightDifference < 300) {   // 鍵盤收起
 
@@ -225,7 +224,6 @@ public class Login extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             loginLinearLayout.getViewTreeObserver().removeOnGlobalLayoutListener(changingViewAnimation);
         }
-
         if (task != null) {
             task.cancel(true);
         }
