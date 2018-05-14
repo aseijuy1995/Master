@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -22,6 +25,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import nom.cp101.master.master.Account.Login;
 import nom.cp101.master.master.Notification.NotificationSocket;
 import nom.cp101.master.master.R;
 
@@ -37,7 +41,9 @@ public class Common {
 //    public static String user_id = null;
     public static String user_id = "girl";
 
+    public final static int COACH_ACCESS = 1; // 教練權限
 
+    public final static int STUDENT_ACCESS = 2; // 學員權限
 
     public static boolean networkConnected(Context context) {
         ConnectivityManager conManager =
@@ -250,5 +256,35 @@ public class Common {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //    峻亦
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    // 子桓的檢查是否有帳號方法, 傳入 getUserName(getActivity()) 及 getFragmentManager() 回傳布林
+    public static Boolean checkUserName(String userName, FragmentManager fragmentManager) {
+        Boolean result = false;
+        if (userName == "" || userName== null) {
+            Fragment fragment = new Login();
+            fragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+        } else {
+            result = true;
+        }
+        return result;
+    }
+
+    // 存進權限
+    public static void setUserAccess(Context context, int userAccess) {
+        SharedPreferences preferences =
+                context.getSharedPreferences("access", MODE_PRIVATE);
+        preferences.edit().putInt("userAccess", userAccess).apply();
+    }
+
+    // 拿出權限
+    public static int getUserAccess(Context context) {
+        SharedPreferences preferences =
+                context.getSharedPreferences("access", MODE_PRIVATE);
+        int userAccess = preferences.getInt("userAccess",0);
+        Log.d(TAG, "userAccess = " + userAccess);
+        return userAccess;
+    }
+
 
 }

@@ -14,7 +14,7 @@ public class UserPhotoProcessing {
 
 
     /**
-     * @param context 上下文对象
+     * @param context 上下文對象
      * @param uri     預計裁剪的圖片
      * @return 解析後的Uri對應的String
      */
