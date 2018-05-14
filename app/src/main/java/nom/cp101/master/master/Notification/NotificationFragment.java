@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import nom.cp101.master.master.Main.Common;
@@ -29,9 +30,12 @@ import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
 
 public class NotificationFragment extends Fragment {
-    MyTask myTask;
+    MyTask getItemsTask;
+    GetPostImageTask getPostImageTask;
+    GetPersonImageTask getPersonImageTask;
+    RecyclerView nf_rv;
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-    List<Notification_rv_item> items;
+    List<Notification_rv_item> items = new ArrayList<>();
     private final static String TAG = "Notification";
 
 
@@ -44,12 +48,22 @@ public class NotificationFragment extends Fragment {
         //取得notificaiton_recycerview 需要的資料
         items = getitems();
         //初始化notificaiton_recycerview
-        RecyclerView nf_rv = view.findViewById(R.id.nf_recyclerview);
+        nf_rv = view.findViewById(R.id.nf_recyclerview);
         //設定notificaiton_recycerview layout類型
-        nf_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        nf_rv.setLayoutManager(linearLayoutManager);
         //載入notificaiton_recycerview adapter
         nf_rv.setAdapter(new nf_rv_adapter(items, getActivity()));
         return view;
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        nf_rv.getAdapter().notifyDataSetChanged();
+
     }
 
     private class nf_rv_adapter extends RecyclerView.Adapter<nf_rv_adapter.nf_rv_viewholder> {
@@ -83,10 +97,11 @@ public class NotificationFragment extends Fragment {
 
         @Override
         public int getItemCount() {
+
             //position為0時為title, recyclerview內容從1開始顯示, itemcount需往後加1
-            if(items.size()!= 0){
-                return items.size() + 1;
-            }else return 0;
+            return items.size() + 1;
+
+
         }
 
         //定義recyclerview的viewtype,position等於0顯示title,其他為recyclerview內容
@@ -120,17 +135,44 @@ public class NotificationFragment extends Fragment {
 
             } else {
                 //將對應的position資料塞入view中
-                Notification_rv_item item = items.get(position - 1);
-                viewholder.item_picture.setImageResource(R.drawable.picture);
+                final Notification_rv_item item = items.get(position - 1);
+                switch (item.nf_type) {
+                    case 1:
+                        getPostImageTask = new GetPostImageTask(Common.URL + "/NotificationServlet",
+                                item.getPost_id(), getResources().getDisplayMetrics().widthPixels, viewholder.item_picture);
+                        getPostImageTask.execute();
+                        break;
+                    case 2:
+                        getPostImageTask = new GetPostImageTask(Common.URL + "/NotificationServlet",
+                                item.getPost_id(), getResources().getDisplayMetrics().widthPixels, viewholder.item_picture);
+                        getPostImageTask.execute();
+                        break;
+                    case 3:
+                        getPersonImageTask = new GetPersonImageTask(Common.URL + "/NotificationServlet",
+                                item.getName(), getResources().getDisplayMetrics().widthPixels, viewholder.item_picture);
+
+                        getPersonImageTask.execute();
+                        break;
+
+                    case 4:
+                        getPersonImageTask = new GetPersonImageTask(Common.URL + "/NotificationServlet",
+                                item.getName(), getResources().getDisplayMetrics().widthPixels, viewholder.item_picture);
+                        getPersonImageTask.execute();
+                        break;
+
+
+                }
                 viewholder.item_time.setText(item.getTime());
                 viewholder.item_content.setText(item.getNf_type());
+
+
 //                click itemview 轉頁至文章
-//                viewholder.itemView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                    }
-//                });
+                viewholder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int post_id = item.getPost_id();
+                    }
+                });
 
 
             }
@@ -138,28 +180,42 @@ public class NotificationFragment extends Fragment {
 
         }
 
-
     }
 
-    //取/master/NotificatonServlet的資料
+    //從database取得通知的資料傳入list中
     private List<Notification_rv_item> getitems() {
         if (Common.networkConnected(getActivity())) {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAll");
             jsonObject.addProperty("user_id", Common.user_id);
-            myTask = new MyTask(Common.URL + "/NotificationServlet", jsonObject.toString());
+
+            getItemsTask = new MyTask(Common.URL + "/NotificationServlet", jsonObject.toString());
             try {
-                String jsonin = myTask.execute().get();
+                String jsonin = getItemsTask.execute().get();
                 Type listtype = new TypeToken<List<Notification_rv_item>>() {
                 }.getType();
                 items = gson.fromJson(jsonin, listtype);
             } catch (Exception e) {
                 Log.d(TAG, "Error :" + e.toString());
             }
+            if (items == null || items.isEmpty()) {
+                Toast.makeText(getActivity(), R.string.NoNotifications, Toast.LENGTH_SHORT);
 
-        }else {
-            Toast.makeText(getActivity(),R.string.NoConnection,Toast.LENGTH_SHORT);
+            }
+
+        } else {
+            Toast.makeText(getActivity(), R.string.NoConnection, Toast.LENGTH_SHORT);
         }
         return items;
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (getItemsTask != null) {
+            getItemsTask.cancel(true);
+        }
+
     }
 }
