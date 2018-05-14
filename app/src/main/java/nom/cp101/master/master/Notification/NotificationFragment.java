@@ -2,6 +2,7 @@ package nom.cp101.master.master.Notification;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,6 +26,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import nom.cp101.master.master.CourseArticleActivity.CourseArticleActivity;
+import nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleActivity;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
@@ -170,7 +173,13 @@ public class NotificationFragment extends Fragment {
                 viewholder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Intent intent;
+                        Bundle bundle = new Bundle();
                         int post_id = item.getPost_id();
+                        intent = new Intent(getActivity(), ExperienceArticleActivity.class);
+                        bundle.putInt("experienceArticlePostId", post_id);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
                     }
                 });
 
