@@ -44,8 +44,6 @@ import nom.cp101.master.master.R;
  */
 
 public class ChatRoomFragment extends Fragment {
-    private EditText etChatRoom;
-    private Button btnCreateRoom;
     private ArrayList<String> rooms = new ArrayList<String>();
     private static String friend_id;
     public static String user_id,friend_name;
@@ -62,9 +60,9 @@ public class ChatRoomFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.message_chat_room_frag,container,false);
-        user_id = Common.getUserName(getContext());
+
         findView();
-        createRoomClick();
+
         return view;
     }
 
@@ -77,11 +75,13 @@ public class ChatRoomFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        user_id = Common.getUserName(getContext());
         if(user_id.isEmpty()){
             didNotSignIn.setVisibility(View.VISIBLE);
+            rvRoomList.setVisibility(View.INVISIBLE);
         }else{
             rootAddValue();
+
             buildRecyclerView();
         }
     }
@@ -89,8 +89,6 @@ public class ChatRoomFragment extends Fragment {
     private void findView() {
         rvRoomList = view.findViewById(R.id.rvRoomList);
         didNotSignIn = view.findViewById(R.id.didNotSignIn);
-        etChatRoom = view.findViewById(R.id.etChatRoom);
-        btnCreateRoom = view.findViewById(R.id.btnCreatRoom);
     }
 
 
@@ -201,21 +199,7 @@ public class ChatRoomFragment extends Fragment {
         });
     }
 
-    private void createRoomClick() {
-        btnCreateRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                friend_id = etChatRoom.getText().toString();
-                String temp_key = root.push().getKey();
-                Map<String,Object> map = new HashMap<>();
-                map.put(temp_key,"");
-                root.updateChildren(map);
-                int chat_room_id = createRoom(temp_key);
-                connectUserRoom(user_id,friend_id,chat_room_id);
-                connectUserRoom(friend_id,user_id,chat_room_id);
-            }
-        });
-    }
+
 
     public int createRoom(String chat_room_position){
         if (Common.networkConnected(getActivity())) {

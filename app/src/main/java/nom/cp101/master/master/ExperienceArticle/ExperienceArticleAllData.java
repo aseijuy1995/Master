@@ -171,7 +171,7 @@ public class ExperienceArticleAllData {
         return postLikes;
     }
 
-    //ˇ請求server端送出對應文章id回傳關於文章所有數據
+    //請求server端送出對應文章id回傳關於文章所有數據
     public static ExperienceArticleData takeExperienceArticlePostData(String userId, int postId) {
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("experienceArticle", "experienceArticlePostData");

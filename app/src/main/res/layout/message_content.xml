@@ -13,7 +13,8 @@
         android:layout_above="@+id/btnSend"
         android:layout_alignParentRight="true"
         android:layout_alignEnd="@+id/btnSend"
-        />
+        android:layout_alignRight="@+id/btnSend"
+        android:layout_alignParentLeft="true" />
 
     <EditText
         android:id="@+id/etMessage"
@@ -23,7 +24,8 @@
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/btnSend"
         android:maxLines="1"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/btnSend" />
 
     <Button
         android:id="@+id/btnSend"
@@ -32,6 +34,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:text="send"
-        />
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>

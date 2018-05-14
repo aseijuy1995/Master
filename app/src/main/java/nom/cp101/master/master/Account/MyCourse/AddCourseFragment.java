@@ -21,17 +21,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import nom.cp101.master.master.Account.MyAccount.Profession;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
@@ -61,9 +67,9 @@ public class AddCourseFragment extends Fragment {
         add_course_date,add_course_location,add_course_need,
         add_course_qualification,add_course_note,
         add_course_price,add_course_number,add_course_apply_deadline;
-    private String name,detail, dateStr,location,need,qualification,note, deadlineStr,numberStr,priceStr;
+    private String name,detail,dateStr,location,need,qualification,note, deadlineStr,numberStr,priceStr;
     private Date date,deadline;
-    private int price,number;
+    private int price,number,profession;
     private static final int REQ_TAKE_PICTURE = 0;
     private static final int REQ_PICK_PICTURE = 1;
     private static final int REQ_CROP_PICTURE = 2;
@@ -71,6 +77,9 @@ public class AddCourseFragment extends Fragment {
     private Bitmap picture;
     private byte[] image;
     private String user_id;
+    private Spinner add_course_spinner;
+    private ArrayList<Profession> professions;
+
 
     @Nullable
     @Override
@@ -83,8 +92,41 @@ public class AddCourseFragment extends Fragment {
         addImageClick();
         dateClick();
         sendBtnClick();
+        setSpinner();
         return view;
     }
+
+    private void setSpinner() {
+        ArrayList<String> professionNames = new ArrayList<String>();
+        professions = findProfessionById(user_id);
+        if(professions != null){
+            for(Profession profession:professions){
+                String proName = profession.getProfession_name();
+                professionNames.add(proName);
+            }
+            profession = professions.get(0).getProfession_id();
+        }
+        Log.d(TAG, String.valueOf(professionNames));
+        ArrayAdapter<String> adapterPlace = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, professionNames);
+        adapterPlace.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        add_course_spinner.setAdapter(adapterPlace);
+        add_course_spinner.setSelection(0,true);
+        add_course_spinner.setOnItemSelectedListener(listener);
+
+    }
+
+    Spinner.OnItemSelectedListener listener = new Spinner.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            profession = professions.get(position).getProfession_id();
+            Common.showToast(getContext(),String.valueOf(profession));
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            //TODO
+        }
+    };
 
     private void findView(View view) {
         add_course_name = (EditText) view.findViewById(R.id.add_course_name);
@@ -99,6 +141,7 @@ public class AddCourseFragment extends Fragment {
         add_course_apply_deadline = (EditText)view.findViewById(R.id.add_course_apply_deadline);
         add_course_send = (Button) view.findViewById(R.id.add_course_send);
         add_course_image =  (ImageView)view.findViewById(R.id.add_course_image);
+        add_course_spinner = view.findViewById(R.id.add_course_spinner);
     }
 
     private void addImageClick() {
@@ -212,7 +255,6 @@ public class AddCourseFragment extends Fragment {
                 showDatePicker(getContext(),add_course_date);
             }
         });
-
         add_course_apply_deadline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -294,9 +336,9 @@ public class AddCourseFragment extends Fragment {
         final Gson gson = new Gson();
         final Gson gsonWithDate = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
-        Course courseDetail = new Course(0,2,name,detail,price,need,qualification,location,note);
+        Course courseDetail = new Course(0,profession,name,detail,price,need,qualification,location,note);
         final int detail_id = insertUpdateCourseServlet(getActivity(),TAG,"CourseDetailServlet","insert",gson,courseDetail);
-        Course courseProfile = new Course(0,"billy",detail_id, date, deadline,number,photo_id,1);
+        Course courseProfile = new Course(0,user_id,detail_id, date, deadline,number,photo_id,1);
         final int courseInsertFinish = insertUpdateCourseServlet(getActivity(),TAG,"CourseServlet","insert",gsonWithDate,courseProfile);
 
         if(courseInsertFinish != 0){
@@ -347,7 +389,35 @@ public class AddCourseFragment extends Fragment {
         }
     }
 
-
-
-
+    public ArrayList<Profession> findProfessionById(String user_id){
+        if (Common.networkConnected(getActivity())) {
+            ArrayList<Profession> proList = new ArrayList<Profession>();
+            String url = Common.URL + "/UserInfo";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "findProfessionById");
+            jsonObject.addProperty("user_id", user_id );
+            String jsonOut = jsonObject.toString();
+            MyTask courseGetAllTask = new MyTask(url,jsonOut);
+            try {
+                String jsonIn = courseGetAllTask.execute().get();
+                Log.d(TAG, jsonIn);
+                Type listType = new TypeToken<List<Profession>>(){ }.getType();
+                proList = new Gson().fromJson(jsonIn, listType);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+            if (proList == null ) {
+                Log.d(TAG,"無專業項目");
+//                Common.showToast(getContext(),"還未新增專業項目");
+                return null;
+            } else {
+                Log.d(TAG,"搜尋成功");
+                return  proList;
+            }
+        } else {
+            Log.d(TAG,"沒有網路");
+            Common.showToast(getContext(), "no network");
+            return null;
+        }
+    }
 }

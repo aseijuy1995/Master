@@ -38,7 +38,7 @@ public class AccountFragment extends Fragment {
                     Fragment selectedFragment = null;
                     switch (item.getItemId()) {
                         case R.id.menu_account:
-                            selectedFragment = new UserFragment(); // 子桓的頁面
+                            selectedFragment = new UserFragment();
                             break;
                         case R.id.menu_photo:
                             selectedFragment = new MyPhotoFragment();

@@ -15,6 +15,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nom.cp101.master.master.Account.MyCourse.Apply;
+import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
@@ -50,8 +53,8 @@ public class ExperienceArticleAppendActivity extends AppCompatActivity {
     String TAG = "Experience Article Append Activity";
     ImageView article_image;
     EditText article_content;
-    Button article_submit;
     String content;
+    ImageView article_finish;
     private static final int REQ_TAKE_PICTURE = 0;
     private static final int REQ_PICK_PICTURE = 1;
     private static final int REQ_CROP_PICTURE = 2;
@@ -66,7 +69,29 @@ public class ExperienceArticleAppendActivity extends AppCompatActivity {
         setContentView(R.layout.experience_article_add);
         findView();
         article_image();
-        submitOnClick();
+        finishClick();
+    }
+
+    private void finishClick() {
+        article_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                content = article_content.getText().toString().trim();
+                Context context = ExperienceArticleAppendActivity.this;
+                user_id = Common.getUserName(context);
+                if(article_image.getDrawable() == null){
+                    Common.showToast(context,"Image can not be empty");
+                }else if(content.isEmpty()){
+                    Common.showToast(context,"Content can not be empty");
+                }else{
+                    int photo_id = insertImage(user_id);
+                    int result = insertExperienceArticle(user_id,content,photo_id);
+                    if(result != 0){
+                        finish();
+                    }
+                }
+            }
+        });
     }
 
     private void article_image() {
@@ -172,29 +197,10 @@ public class ExperienceArticleAppendActivity extends AppCompatActivity {
         }
     }
 
-    private void submitOnClick() {
-        article_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                content = article_content.getText().toString().trim();
-                Context context = ExperienceArticleAppendActivity.this;
-                user_id = Common.getUserName(context);
-                if(article_image.getDrawable() == null){
-                    Common.showToast(context,"Image can not be empty");
-                }else if(content.isEmpty()){
-                    Common.showToast(context,"Content can not be empty");
-                }else{
-                    int photo_id = insertImage(user_id);
-                    insertExperienceArticle(user_id,content,photo_id);
-                }
-            }
-        });
-    }
-
     private void findView() {
         article_image = findViewById(R.id.experience_article_image);
         article_content = findViewById(R.id.experience_article_content);
-        article_submit = findViewById(R.id.experience_article_submit);
+        article_finish = findViewById(R.id.experience_article_finish);
     }
 
     private int insertImage(String user_id) {
@@ -253,6 +259,4 @@ public class ExperienceArticleAppendActivity extends AppCompatActivity {
             return 0;
         }
     }
-
-
 }

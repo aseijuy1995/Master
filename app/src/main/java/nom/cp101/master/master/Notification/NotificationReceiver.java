@@ -13,6 +13,8 @@ import android.os.Bundle;
 import nom.cp101.master.master.Master.Master;
 import nom.cp101.master.master.R;
 
+import static nom.cp101.master.master.Master.Master.tabMaster;
+
 public class NotificationReceiver extends BroadcastReceiver {
     NotificationManager notificationManager;
 
@@ -41,7 +43,7 @@ public class NotificationReceiver extends BroadcastReceiver {
             notificationManager.createNotificationChannel(notificationChannel);
             notification = new Notification.Builder(context, PRIMARY_CHANNEL)
                     .setTicker("New Notification") // ticker text is no longer displayed in Android 5.0
-                    .setContentTitle("Master")
+                    .setContentTitle("通知訊息")
                     .setContentText(context.getString(R.string.nf_newnotificaiton))
                     .setSmallIcon(R.drawable.notification)
                     .setAutoCancel(true)
@@ -50,7 +52,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         } else {
             notification = new Notification.Builder(context)
                     .setTicker("New Notification") // ticker text is no longer displayed in Android 5.0
-                    .setContentTitle("Master")
+                    .setContentTitle("通知訊息")
                     .setContentText(context.getString(R.string.nf_newnotificaiton))
                     .setSmallIcon(R.drawable.notification)
                     .setAutoCancel(true)

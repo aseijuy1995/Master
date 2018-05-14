@@ -75,7 +75,6 @@ public class UserFragment extends Fragment {
     private int aspect_X = 1,   aspect_Y = 1; // 裁切框比例
     private Boolean imageSelect = null; // 判斷要改變大頭照還是背景圖
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -86,50 +85,44 @@ public class UserFragment extends Fragment {
         //拿到 UserId
         String userAccount = Common.getUserName(getActivity());
         // 如果沒則跳到登入畫面
-        if (userAccount == "" || userAccount== null) {
+        if (!Common.checkUserName(userAccount, getFragmentManager())) {
+            return null;
+        }
 
-            // 準備跳到 Login
-            Fragment fragment = new Login();
-            getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+        // 成功則開始拿到User 資料
+        getUserInfo(userAccount);
+        userTextAccount.setText(userAccount);
 
-        } else {
+        // 如果專業欄位沒有隱藏 執行去撈該會員的專業資料
+        if (userLayoutProfession.getVisibility() != view.GONE) {
 
-            // 成功則開始拿到User 資料
-            getUserInfo(userAccount);
-            userTextAccount.setText(userAccount);
+            List<User> userListProfession = new ArrayList<>();
+            // 字串陣列接 DB拿下來的會員專業
+            userProfessionResultList = getUserProfession(userAccount);
 
-            // 如果專業欄位沒有隱藏 執行去撈該會員的專業資料
-            if (userLayoutProfession.getVisibility() != view.GONE) {
-
-                List<User> userListProfession = new ArrayList<>();
-                // 字串陣列接 DB拿下來的會員專業
-                userProfessionResultList = getUserProfession(userAccount);
-
-                if (userProfessionResultList.size() == 0) {
+            if (userProfessionResultList.size() == 0) {
+                User user = new User();
+                user.setUserProfession("尚未擁有專業技能");
+                userListProfession.add(user);
+            } else {
+                for (String str : userProfessionResultList) {
+                    // 依序拿出來在存進User陣列裡面
                     User user = new User();
-                    user.setUserProfession("尚未擁有專業技能");
+                    user.setUserProfession(str);
                     userListProfession.add(user);
-                } else {
-                    for (String str : userProfessionResultList) {
-                        // 依序拿出來在存進User陣列裡面
-                        User user = new User();
-                        user.setUserProfession(str);
-                        userListProfession.add(user);
-                    }
                 }
-                // RecyclerView 的東西
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                userRecyclerProfession.setLayoutManager(linearLayoutManager);
-                userProfessionAdapter = new UserProfessionAdapter(userListProfession, userAccount, getActivity()); // 傳入List
-                userRecyclerProfession.setAdapter(userProfessionAdapter);
             }
-
+            // RecyclerView 的東西
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+            userRecyclerProfession.setLayoutManager(linearLayoutManager);
+            userProfessionAdapter = new UserProfessionAdapter(userListProfession, userAccount, getActivity()); // 傳入List
+            userRecyclerProfession.setAdapter(userProfessionAdapter);
         }
 
         return view;
     }
 
-    
+
     /* 準備相簿 */
     public void openPhotoPicker() {
         // 檔案選擇器 ...

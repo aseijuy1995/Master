@@ -25,7 +25,6 @@ import java.util.List;
 import nom.cp101.master.master.Account.AccountFragment;
 import nom.cp101.master.master.CourseArticle.CourseArticleFragment;
 import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
-import nom.cp101.master.master.ExperienceArticleActivity.Comment;
 import nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleAppendActivity;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MainService;
@@ -63,15 +62,13 @@ public class Master extends AppCompatActivity {
         setViewPager();
         setTabLayout();
 
-//        connecServer();
-        user_id = "kent";
-        Common.setUserName(this, user_id);
+        connecServer();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (Common.user_id.trim() != null && Common.user_id != "") {
+        if (Common.user_id != null && Common.user_id.trim() != "") {
             Common.connectSocket(this);
             Intent ServiceIntent = new Intent(this, MainService.class);
             startService(ServiceIntent);
