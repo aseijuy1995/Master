@@ -34,6 +34,7 @@ public class Common {
 
 //    public static String user_id = "yujie1";
 
+//    public static String user_id = null;
     public static String user_id = "girl";
 
 

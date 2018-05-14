@@ -70,9 +70,11 @@ public class Master extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Common.connectSocket(this);
-        Intent ServiceIntent = new Intent(this,MainService.class);
-        startService(ServiceIntent);
+        if (Common.user_id.trim() != null) {
+            Common.connectSocket(this);
+            Intent ServiceIntent = new Intent(this, MainService.class);
+            startService(ServiceIntent);
+        }
     }
 
     //設定置入TabLayout的圖片

@@ -24,7 +24,6 @@ public class ChatReceiver extends BroadcastReceiver {
     private final static int NOTIFICATON_ID = 1;
     private final static String TAG = "ChatReceiver";
     public static int atRoom = 0;
-
     public static final String PRIMARY_CHANNEL = "default";
 
 
