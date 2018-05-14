@@ -85,7 +85,7 @@ public class Common {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private final static String TAG = "Common";
-    public static final String SERVER_URI = "ws://10.0.2.2:8080/WSChatBasic_Web/TwoChatServer/";
+    public static final String SERVER_URI = "ws://10.0.2.2:8080/Master/TwoChatServer/";
     public static ChatWebSocket chatWebSocket;
     public static DatabaseReference contectRoot = FirebaseDatabase.getInstance().getReference().getRoot();
 

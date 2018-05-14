@@ -165,7 +165,6 @@ public class MessageActivity extends AppCompatActivity {
                 Log.d(TAG, "output: " + chatMessageJson);
                 updateLastMessage(message,userName,friendName);
                 updateLastMessage(message,friendName,userName);
-
             }
         });
     }

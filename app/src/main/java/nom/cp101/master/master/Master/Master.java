@@ -62,9 +62,7 @@ public class Master extends AppCompatActivity {
         setViewPager();
         setTabLayout();
 
-//        connecServer();
-        user_id = "kent";
-        Common.setUserName(this, user_id);
+        connecServer();
     }
 
     @Override
