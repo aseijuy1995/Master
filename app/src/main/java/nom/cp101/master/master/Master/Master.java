@@ -70,7 +70,7 @@ public class Master extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (Common.user_id.trim() != null) {
+        if (Common.user_id != null && Common.user_id.trim() != "") {
             Common.connectSocket(this);
             Intent ServiceIntent = new Intent(this, MainService.class);
             startService(ServiceIntent);
