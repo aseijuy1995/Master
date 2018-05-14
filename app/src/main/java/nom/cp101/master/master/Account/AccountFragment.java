@@ -1,6 +1,5 @@
 package nom.cp101.master.master.Account;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,11 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import nom.cp101.master.master.Account.MyAccount.MyAccountFragment;
 import nom.cp101.master.master.Account.MyAccount.UserFragment;
 import nom.cp101.master.master.Account.MyCourse.MyCourseFragment;
 import nom.cp101.master.master.Account.MyPhoto.MyPhotoFragment;
-import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.R;
 
 /**
