@@ -15,6 +15,7 @@ import org.java_websocket.handshake.ServerHandshake;
 import java.net.URI;
 import java.util.Locale;
 
+
 public class NotificationSocket extends WebSocketClient {
     private final static String TAG = "NotificationSocket";
     LocalBroadcastManager broadcastManager;

@@ -37,7 +37,7 @@ import nom.cp101.master.master.R;
 public class Master extends AppCompatActivity {
     private String TAG = "MasterActivity";
     Toolbar toolbarMaster;
-    TabLayout tabMaster;
+    public static TabLayout tabMaster;
     ViewPager viewPagerMaster;
     SearchView searchMaster;
     AutoCompleteTextView autoCompleteTextViewMaster;
@@ -62,7 +62,7 @@ public class Master extends AppCompatActivity {
         setViewPager();
         setTabLayout();
 
-//        connecServer();
+        connecServer();
         user_id = "kent";
         Common.setUserName(this, user_id);
     }
@@ -216,11 +216,6 @@ public class Master extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        doUnbindService();
-    }
 
     public String findRoomName(String user_id, String room_name) {
         if (Common.networkConnected(this)) {
@@ -248,4 +243,6 @@ public class Master extends AppCompatActivity {
             return null;
         }
     }
+
+
 }

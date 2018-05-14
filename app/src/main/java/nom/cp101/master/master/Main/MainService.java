@@ -14,6 +14,7 @@ import com.google.gson.JsonObject;
 
 import nom.cp101.master.master.Message.CLASS.ChatReceiver;
 import nom.cp101.master.master.Notification.NotificationReceiver;
+import nom.cp101.master.master.Notification.NotificationSocket;
 
 
 public class MainService extends Service {
@@ -52,8 +53,11 @@ public class MainService extends Service {
         broadcastManager.registerReceiver(notificationReceiver, notificationfilter);
         broadcastManager.registerReceiver(chatReceiver, chatFilter);
 
-
+        if (Common.notificationSocket != null){
         handler.postDelayed(runnable, 5000);
+        }else{
+            Common.connectSocket(this);
+        }
         return START_STICKY;
     }
 
@@ -64,7 +68,12 @@ public class MainService extends Service {
         return null;
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Intent ServiceIntent = new Intent(this, MainService.class);
+        startService(ServiceIntent);
+    }
 }
 
 
