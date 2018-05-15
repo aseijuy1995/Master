@@ -154,6 +154,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
+            android:textColor="@color/white"
+            android:background="@drawable/account_btn_style"
             android:text="@string/course_send"/>
     </LinearLayout>
 

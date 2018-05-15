@@ -30,14 +30,14 @@ public class CourseArticleAllData {
 
         List<CourseArticleGridViewData> courseArticleGridViewDataList = new ArrayList<>();
 
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.water_sports));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.extreme_sport));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.work_out));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.ball_sports));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.musical_instrument));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.language_learning));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.leisure_talent));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(android.R.drawable.sym_action_email, R.string.programming));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.swim, R.string.water_sports));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.skate, R.string.extreme_sport));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.workout, R.string.work_out));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.ball, R.string.ball_sports));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.music, R.string.musical_instrument));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.language, R.string.language_learning));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.paint, R.string.leisure_talent));
+        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.code, R.string.programming));
 
         return courseArticleGridViewDataList;
     }

@@ -12,9 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/course_offline"
-        android:layout_above="@+id/btnCreatRoom"
-        android:layout_alignEnd="@+id/btnCreatRoom"
-        android:layout_alignRight="@+id/btnCreatRoom"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:visibility="invisible"
@@ -58,7 +55,9 @@
             android:layout_marginBottom="20dp"
             android:src="@drawable/account_add_black"
             android:tint="@color/white"
-            android:layout_marginRight="20dp" />
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/master"
+            app:borderWidth="0dp"/>
     </android.support.design.widget.CoordinatorLayout>
 
 

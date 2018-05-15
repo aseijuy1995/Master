@@ -54,7 +54,7 @@ public class Login extends Fragment {
         findView(view);
 
         // 開始監聽畫面大小變化, 並加入畫面變動
-        loginLinearLayout.getViewTreeObserver().addOnGlobalLayoutListener(changingViewAnimation);
+//        loginLinearLayout.getViewTreeObserver().addOnGlobalLayoutListener(changingViewAnimation);
 
         return view;
     }
