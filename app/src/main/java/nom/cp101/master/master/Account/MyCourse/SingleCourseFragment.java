@@ -82,7 +82,8 @@ public class SingleCourseFragment  extends Fragment {
                     if(!friend_name.equals("")){
                         room_position = findRoomPosition(user_id,friend_name);
                         if(checkChatRoom(user_id,friend_name) == true){
-                            Common.contectUser(user_id,friend_name,getContext(),getActivity());
+                            String room_position;
+                            room_position = Common.contectUser(user_id,friend_name,getContext(),getActivity());
                             enterChatRoom(room_position,user_id,friend_name);
                         }else{
                             enterChatRoom(room_position,user_id,friend_name);

@@ -61,7 +61,6 @@ public class Master extends AppCompatActivity {
         setSupportActionBar(toolbarMaster);
         setViewPager();
         setTabLayout();
-
         connecServer();
     }
 
