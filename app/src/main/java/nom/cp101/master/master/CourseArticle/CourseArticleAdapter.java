@@ -114,7 +114,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     //回傳次數須為所有課程總數以及第一position放置的gridView
     @Override
     public int getItemCount() {
-        if(!courseArticleDataList.isEmpty() ){
+        if(courseArticleDataList != null){
             return courseArticleDataList.size() + 1;
         }else{
             return 0;
@@ -133,7 +133,6 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
         public ViewHolder(View itemView) {
             super(itemView);
             gvCourseArticle = (GridView) itemView.findViewById(R.id.gvCourseArticle);
-
             cvCourseArticle = (CardView) itemView.findViewById(R.id.cvCourseArticle);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvNumber = (TextView) itemView.findViewById(R.id.tvNumber);
