@@ -119,7 +119,7 @@ public class AddCourseFragment extends Fragment {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             profession = professions.get(position).getProfession_id();
-            Common.showToast(getContext(),String.valueOf(profession));
+//            Common.showToast(getContext(),String.valueOf(profession));
         }
 
         @Override

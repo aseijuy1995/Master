@@ -187,7 +187,7 @@ public class Common {
     }
 
 
-    public static void contectUser(String user_id,String friend_id,Context context,Activity activity){
+    public static String contectUser(String user_id,String friend_id,Context context,Activity activity){
         String temp_key = contectRoot.push().getKey();
         Map<String,Object> map = new HashMap<>();
         map.put(temp_key,"");
@@ -195,6 +195,7 @@ public class Common {
         int chat_room_id = createRoom(temp_key,context,activity);
         connectUserRoom(user_id,friend_id,chat_room_id,activity,context);
         connectUserRoom(friend_id,user_id,chat_room_id,activity,context);
+        return temp_key;
     }
 
     public static int createRoom(String chat_room_position, Context context, Activity activity){
