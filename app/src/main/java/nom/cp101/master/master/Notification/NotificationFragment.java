@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -40,6 +41,7 @@ public class NotificationFragment extends Fragment {
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
     List<Notification_rv_item> items = new ArrayList<>();
     private final static String TAG = "Notification";
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Nullable
@@ -57,9 +59,33 @@ public class NotificationFragment extends Fragment {
         nf_rv.setLayoutManager(linearLayoutManager);
         //載入notificaiton_recycerview adapter
         nf_rv.setAdapter(new nf_rv_adapter(items, getActivity()));
+
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutNotification);
+        //設置下拉圈大小
+        swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
+        //設置下拉圈顏色
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_orange_dark);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                items = getitems();
+                nf_rv.setAdapter(new nf_rv_adapter(items, getActivity()));
+                //移除SwipeRefreshLayout更新時的loading圖示
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
         return view;
 
     }
+
+
+
+
+
+
+
 
 
     @Override

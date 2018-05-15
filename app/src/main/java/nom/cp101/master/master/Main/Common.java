@@ -36,10 +36,9 @@ public class Common {
 
 //    public static String URL = "http://192.168.196.77:8080/Master";
 
-//    public static String user_id = "yujie1";
 
-//    public static String user_id = null;
-    public static String user_id = "girl";
+//    public static String user_id = "abc123";
+    public static String user_id = "billy";
 
     public final static int COACH_ACCESS = 1; // 教練權限
     public final static int STUDENT_ACCESS = 2; // 學員權限
@@ -84,7 +83,7 @@ public class Common {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private final static String TAG = "Common";
-    public static final String SERVER_URI = "ws://10.0.2.2:8080/WSChatBasic_Web/TwoChatServer/";
+    public static final String SERVER_URI = "ws://10.0.2.2:8080/Master/TwoChatServer/";
     public static ChatWebSocket chatWebSocket;
     public static DatabaseReference contectRoot = FirebaseDatabase.getInstance().getReference().getRoot();
 
