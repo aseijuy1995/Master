@@ -103,9 +103,9 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
 
             //將list存放各ArticleCourseData物件內的各文章資料取出顯示
             holder.tvHead.setText(experienceArticleTextData.getUserName());
-            holder.tvCategory.setText(experienceArticleTextData.getPostCategoryName());
+//            holder.tvCategory.setText(experienceArticleTextData.getPostCategoryName());
 
-            holder.tvName.setText(experienceArticleTextData.getPostCategoryName());
+//            holder.tvName.setText(experienceArticleTextData.getPostCategoryName());
             //Date轉成String?
             holder.tvTime.setText(experienceArticleTextData.getPostTime());
             holder.tvContent.setText(experienceArticleTextData.getPostContent());
