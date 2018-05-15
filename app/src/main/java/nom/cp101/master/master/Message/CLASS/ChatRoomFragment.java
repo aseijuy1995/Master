@@ -62,8 +62,22 @@ public class ChatRoomFragment extends Fragment {
         view = inflater.inflate(R.layout.message_chat_room_frag,container,false);
 
         findView();
-
+        imageClick();
         return view;
+    }
+
+    private void imageClick() {
+        didNotSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user_id = Common.getUserName(getContext());
+                didNotSignIn.setVisibility(View.INVISIBLE);
+                rvRoomList.setVisibility(View.VISIBLE);
+                rootAddValue();
+                buildRecyclerView();
+                Common.showToast(getContext(),"123");
+            }
+        });
     }
 
     private void buildRecyclerView() {
@@ -75,13 +89,12 @@ public class ChatRoomFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        user_id = Common.getUserName(getContext());
-        if(user_id.isEmpty()){
+
+        if(user_id == null){
             didNotSignIn.setVisibility(View.VISIBLE);
             rvRoomList.setVisibility(View.INVISIBLE);
         }else{
             rootAddValue();
-
             buildRecyclerView();
         }
     }
