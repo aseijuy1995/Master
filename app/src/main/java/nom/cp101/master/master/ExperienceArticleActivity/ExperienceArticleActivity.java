@@ -43,7 +43,7 @@ public class ExperienceArticleActivity extends AppCompatActivity implements View
         postId=getIntent().getExtras().getInt("experienceArticlePostId");
 
         //取得關於點擊的心得文章之所有內容
-        experienceArticleData=ExperienceArticleAllData.takeExperienceArticlePostData(Common.user_id, postId);
+        experienceArticleData=ExperienceArticleAllData.takeExperienceArticlePostData(Common.getUserName(this), postId);
 
         //初始化元件
         findViews();
@@ -109,7 +109,7 @@ public class ExperienceArticleActivity extends AppCompatActivity implements View
 
                     String leave_Msg=etMsg.getText().toString();
 
-                    ExperienceArticleAllData.takeExperienceArticleInsertMsg(Common.user_id,
+                    ExperienceArticleAllData.takeExperienceArticleInsertMsg(Common.getUserName(this),
                             postId,
                             leave_Msg);
 

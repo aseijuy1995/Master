@@ -34,7 +34,7 @@ public class ChatReceiver extends BroadcastReceiver {
         ChatMessage chatMessage = new Gson().fromJson(message, ChatMessage.class);
         String lastMessage = chatMessage.getMessage();
         String sender = chatMessage.getSender();
-        String friend_name = findRoomName(Common.user_id, sender, context);
+        String friend_name = findRoomName(Common.getUserName(context), sender, context);
         Log.d(TAG, String.valueOf(atRoom) + "  " + friend_name);
         Intent nf_intent = new Intent(context, Master.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, nf_intent, PendingIntent.FLAG_UPDATE_CURRENT);

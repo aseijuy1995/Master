@@ -22,6 +22,7 @@ public class MainService extends Service {
     private LocalBroadcastManager broadcastManager;
     private Handler handler;
     private Runnable runnable;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -52,10 +53,11 @@ public class MainService extends Service {
         broadcastManager.registerReceiver(notificationReceiver, notificationfilter);
         broadcastManager.registerReceiver(chatReceiver, chatFilter);
 
-        if (Common.notificationSocket != null){
-        handler.postDelayed(runnable, 5000);
-        }else{
+        if (Common.notificationSocket == null) {
             Common.connectSocket(this);
+        }
+        if (Common.notificationSocket != null && Common.getUserName(this) != null && !Common.getUserName(this).trim().equals("")) {
+            handler.postDelayed(runnable, 5000);
         }
         return START_STICKY;
     }
