@@ -34,7 +34,11 @@ public class MainService extends Service {
                 handler.postDelayed(this, 5000);
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("type", "checkNotification");
-                Common.notificationSocket.send(jsonObject.toString());
+                try {
+                    Common.notificationSocket.send(jsonObject.toString());
+                } catch (Exception e) {
+                    Log.e(TAG, e.toString());
+                }
             }
         };
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);

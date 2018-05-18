@@ -24,7 +24,7 @@ public class ChatReceiver extends BroadcastReceiver {
     private final static int NOTIFICATON_ID = 1;
     private final static String TAG = "ChatReceiver";
     public static int atRoom = 0;
-    public static final String PRIMARY_CHANNEL = "default";
+    public static final String SECOND_CHANNEL = "default";
 
 
     @Override
@@ -44,12 +44,12 @@ public class ChatReceiver extends BroadcastReceiver {
 
             Notification notification = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                NotificationChannel notificationChannel = new NotificationChannel(PRIMARY_CHANNEL, "channel1", NotificationManager.IMPORTANCE_HIGH);
+                NotificationChannel notificationChannel = new NotificationChannel(SECOND_CHANNEL, "channel1", NotificationManager.IMPORTANCE_HIGH);
                 notificationChannel.enableLights(true);
                 notificationChannel.setLockscreenVisibility(Notification.DEFAULT_VIBRATE);
                 notificationChannel.setLightColor(Color.GREEN);
                 notificationManager.createNotificationChannel(notificationChannel);
-                notification = new Notification.Builder(context, PRIMARY_CHANNEL)
+                notification = new Notification.Builder(context, SECOND_CHANNEL)
                         .setTicker("New Notification") // ticker text is no longer displayed in Android 5.0
                         .setContentText(lastMessage)
                         .setContentTitle(friend_name)
