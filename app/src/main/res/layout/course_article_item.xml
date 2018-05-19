@@ -14,6 +14,10 @@
         android:layout_marginRight="3dp"
         android:layout_marginTop="5dp">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></View>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,11 +53,13 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvAddress"
+                android:id="@+id/tvNumber"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:text="TextView" />
+                android:layout_weight="1"
+                android:text="TextView"
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,13 +67,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvNumber"
+                    android:id="@+id/tvAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:textSize="14sp" />
+                    android:text="TextView" />
 
                 <TextView
                     android:id="@+id/tvTime"

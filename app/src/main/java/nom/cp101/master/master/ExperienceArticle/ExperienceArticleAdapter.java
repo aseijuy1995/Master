@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import nom.cp101.master.master.CourseArticle.CourseViewPagerAdapter;
+import nom.cp101.master.master.CourseArticle.CourseViewPagerScroller;
+import nom.cp101.master.master.CourseArticle.CourseViewPagerTransformer;
 import nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleActivity;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.R;
@@ -33,7 +35,7 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
     //position為0時,帶入ViewPager其輪播照片
     static final int TYPE_VIEWPAGER = 0;
     List<ExperienceArticleData> experienceArticleDataTextList;
-    ExperienceArticleViewPagerAdapter experienceArticleViewPagerAdapter = null;
+    CourseViewPagerAdapter courseViewPagerAdapter = null;
 
 
     public ExperienceArticleAdapter(Context context, FragmentManager fragmentManager) {
@@ -203,18 +205,18 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
         //設置各pager間距
         holder.vpExperienceArticle.setPageMargin(5);
         //提供pager轉頁時的動畫
-        holder.vpExperienceArticle.setPageTransformer(true, new ExperienceArticleViewPagerTransformer());
+        holder.vpExperienceArticle.setPageTransformer(true, new CourseViewPagerTransformer());
         //連接adapter
-        experienceArticleViewPagerAdapter = new ExperienceArticleViewPagerAdapter(context);
-        experienceArticleViewPagerAdapter.setData();
-        holder.vpExperienceArticle.setAdapter(experienceArticleViewPagerAdapter);
+        courseViewPagerAdapter = new CourseViewPagerAdapter(context);
+//        courseViewPagerAdapter.setData();
+        holder.vpExperienceArticle.setAdapter(courseViewPagerAdapter);
 
-        ExperienceArticleViewPagerScroller experienceArticleViewPagerScroller = new ExperienceArticleViewPagerScroller(context);
-        experienceArticleViewPagerScroller.setScrollerDuration(3300);
-        experienceArticleViewPagerScroller.initViewPagerScroll(holder.vpExperienceArticle);
+        CourseViewPagerScroller courseViewPagerScroller = new CourseViewPagerScroller(context);
+        courseViewPagerScroller.setScrollerDuration(3300);
+        courseViewPagerScroller.initViewPagerScroll(holder.vpExperienceArticle);
 
         //另外開執行緒做page切換
-        new ExperienceArticleViewPagerThread(holder).start();
+//        new CourseViewPagerThread(vp).start();
     }
 
     //抓取在recyclerView呈現的心得文章所有文章
@@ -225,8 +227,8 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
 
     //viewPager呈現的心得文章所有文章
     public void setViewPagerData() {
-        experienceArticleViewPagerAdapter.setData();
-        experienceArticleViewPagerAdapter.notifyDataSetChanged();
+//        courseViewPagerAdapter.setData();
+        courseViewPagerAdapter.notifyDataSetChanged();
     }
 
 }

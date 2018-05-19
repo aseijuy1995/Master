@@ -1,19 +1,16 @@
-package nom.cp101.master.master.ExperienceArticle;
+package nom.cp101.master.master.CourseArticle;
 
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.view.ViewPager;
 
-/**
- * Created by yujie on 2018/5/9.
- */
-
-public class ExperienceArticleViewPagerThread extends Thread {
+public class CourseViewPagerThread extends Thread {
     //自訂常數給handler判斷msg的key值
     static final int PAGE_ITEM = 0;
-    ExperienceArticleAdapter.ViewHolder holder = null;
+    ViewPager vp;
 
-    public ExperienceArticleViewPagerThread(ExperienceArticleAdapter.ViewHolder holder) {
-        this.holder = holder;
+    public CourseViewPagerThread(ViewPager vp) {
+        this.vp = vp;
     }
 
     @Override
@@ -24,7 +21,7 @@ public class ExperienceArticleViewPagerThread extends Thread {
         //取得當前pageItem,透過handler的handleMessage讓ui thread做的事情傳回main thread
         //傳遞的值為vp.getCurrentItem(),為了以防使用者滑動pageg時,可依照當前pageItem繼續輪播
         //因目前不在main thread內,則不可對任何UI做對應處理
-        Message msg = handler.obtainMessage(PAGE_ITEM, holder.vpExperienceArticle.getCurrentItem());
+        Message msg = handler.obtainMessage(PAGE_ITEM, vp.getCurrentItem());
         //也可使用post,本質沒有太大差別,post較為簡單
         handler.sendMessage(msg);
     }
@@ -37,7 +34,7 @@ public class ExperienceArticleViewPagerThread extends Thread {
             switch (msg.what) {
                 //將傳遞來的pageItem+1,才可繼續輪播
                 case PAGE_ITEM:
-                    holder.vpExperienceArticle.setCurrentItem((int) msg.obj + 1);
+                    vp.setCurrentItem((int) msg.obj + 1);
                     break;
             }
         }

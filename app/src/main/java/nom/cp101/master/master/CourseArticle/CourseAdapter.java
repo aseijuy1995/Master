@@ -1,7 +1,6 @@
 package nom.cp101.master.master.CourseArticle;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -19,14 +18,12 @@ import java.util.List;
 
 import nom.cp101.master.master.Account.MyCourse.Course;
 import nom.cp101.master.master.Account.MyCourse.SingleCourseFragment;
-import nom.cp101.master.master.Master.Master;
 import nom.cp101.master.master.R;
 
 import static nom.cp101.master.master.Account.AccountFragment.bottomNavigationView;
-import static nom.cp101.master.master.Master.Master.tabMaster;
 
 //CourseArticleAdapter繼承RecyclerView.Adapter顯示文章首頁樣式
-public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdapter.ViewHolder> {
+public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
     Context context;
     FragmentManager fragmentManager;
     //position為0時,帶入RecyclerView其顯現樣式為GridLayout
@@ -34,7 +31,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
     //取得存有課程文章之所有數據
     List<CourseArticleData> courseArticleDataList;
 
-    public CourseArticleAdapter(Context context, FragmentManager fragmentManager) {
+    public CourseAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
         this.fragmentManager = fragmentManager;
     }
@@ -44,32 +41,14 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
         this.courseArticleDataList = CourseArticleAllData.takeCourseArticleAllList();
     }
 
-    //依靠position置入相對的ViewType
-    @Override
-    public int getItemViewType(int position) {
-        if (position == 0)
-            return TYPE_GRIDLAYOUT;
-        else
-            return position;
-    }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = null;
         ViewHolder holder;
-        //當種類為對等時,載入相對應的xml檔,轉為view使用
-        //position=0,置入gridView,數據為專案類別名稱與圖
-        if (viewType == TYPE_GRIDLAYOUT) {
-            view = LayoutInflater.from(context).inflate(R.layout.course_article_recyclerview_gridview, parent, false);
-            holder = new ViewHolder(view);
-            holder.gvCourseArticle.setAdapter(new CourseArticleGridViewAdapter(context));
-
-            //剩下設置為課程顯示區
-        } else {
 
             view = LayoutInflater.from(context).inflate(R.layout.course_article_item, parent, false);
-        }
         return new ViewHolder(view);
     }
 
@@ -98,7 +77,7 @@ public class CourseArticleAdapter extends RecyclerView.Adapter<CourseArticleAdap
                 @Override
                 public void onClick(View v) {
 
-                    tabMaster.getTabAt(4).select();
+//                    tabMaster.getTabAt(4).select();
                     bottomNavigationView.setSelectedItemId(R.id.menu_course);
 
 

@@ -13,7 +13,7 @@ import android.os.Bundle;
 import nom.cp101.master.master.Master.Master;
 import nom.cp101.master.master.R;
 
-import static nom.cp101.master.master.Master.Master.tabMaster;
+
 
 public class NotificationReceiver extends BroadcastReceiver {
     NotificationManager notificationManager;

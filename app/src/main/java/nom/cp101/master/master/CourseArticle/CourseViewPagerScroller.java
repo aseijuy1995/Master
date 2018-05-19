@@ -1,4 +1,4 @@
-package nom.cp101.master.master.ExperienceArticle;
+package nom.cp101.master.master.CourseArticle;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
@@ -6,19 +6,16 @@ import android.widget.Scroller;
 
 import java.lang.reflect.Field;
 
-/**
- * Created by yujie on 2018/5/10.
- */
 //設置viewPager輪播數度
-public class ExperienceArticleViewPagerScroller extends Scroller {
+public class CourseViewPagerScroller extends Scroller {
     //預設
-    private int scrollerDuration=2000;
+    private int scrollerDuration = 2000;
 
-    public void setScrollerDuration(int duration){
-        this.scrollerDuration=duration;
+    public void setScrollerDuration(int duration) {
+        this.scrollerDuration = duration;
     }
 
-    public ExperienceArticleViewPagerScroller(Context context) {
+    public CourseViewPagerScroller(Context context) {
         super(context);
     }
 
@@ -30,7 +27,6 @@ public class ExperienceArticleViewPagerScroller extends Scroller {
 
     //自訂套用的view
     public void initViewPagerScroll(ViewPager viewPager) {
-
         Field mScroller = null;
         try {
             //getDeclaredField(name)會回傳一個field的物件,裡面裝關於此類別的所有相關屬性
@@ -47,10 +43,6 @@ public class ExperienceArticleViewPagerScroller extends Scroller {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-
     }
-
-
-
 }
 

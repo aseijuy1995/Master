@@ -1,12 +1,13 @@
 package nom.cp101.master.master.Master;
 
-import android.app.Service;
 import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,39 +20,22 @@ import android.widget.AutoCompleteTextView;
 
 import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import nom.cp101.master.master.Account.AccountFragment;
-import nom.cp101.master.master.CourseArticle.CourseArticleFragment;
+import nom.cp101.master.master.CourseArticle.CourseFragment;
 import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
 import nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleAppendActivity;
 import nom.cp101.master.master.Main.Common;
-import nom.cp101.master.master.Main.MainService;
 import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.Message.CLASS.ChatRoomFragment;
 import nom.cp101.master.master.Notification.NotificationFragment;
 import nom.cp101.master.master.R;
 
-
-public class Master extends AppCompatActivity {
-    private String TAG = "MasterActivity";
+public class Master extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = "MasterActivity";
     Toolbar toolbarMaster;
-    public static TabLayout tabMaster;
-    ViewPager viewPagerMaster;
-    SearchView searchMaster;
-    AutoCompleteTextView autoCompleteTextViewMaster;
-    CourseArticleFragment courseArticleFragment;
-    ExperienceArticleFragment experienceArticleFragment;
-    ChatRoomFragment chatRoomFragment;
-    NotificationFragment notificationFragment;
-    AccountFragment accountFragment;
-    //記錄置入TabLayout內,與Viewpager橋接的個主功能Fragment
-    List<Fragment> listMaster;
-    //連接ViewPager與主功能Fragment的橋接器
-    MasterFragmentPagerAdapter masterFragmentPagerAdapter;
-    String user_id;
-
+    BottomNavigationView bnvMaster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,105 +43,85 @@ public class Master extends AppCompatActivity {
         setContentView(R.layout.master_main);
         findViews();
         setSupportActionBar(toolbarMaster);
-        setViewPager();
-        setTabLayout();
-        connecServer();
+
+        bnvMaster.setOnNavigationItemSelectedListener(this);
+        initContent();
+
+    }
+
+    private void findViews() {
+        toolbarMaster = (Toolbar) findViewById(R.id.toolBarMaster);
+        bnvMaster = (BottomNavigationView) findViewById(R.id.bnvMaster);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (Common.user_id != null && Common.user_id.trim() != "") {
-            Common.connectSocket(this);
-            Intent ServiceIntent = new Intent(this, MainService.class);
-            startService(ServiceIntent);
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment;
+
+        switch (item.getItemId()) {
+            case R.id.item_course:
+                fragment = new CourseFragment();
+                switchFragment(fragment);
+                setTitle(R.string.course_article);
+                return true;
+
+            case R.id.item_experience:
+                fragment = new ExperienceArticleFragment();
+                switchFragment(fragment);
+                setTitle(R.string.experience_article);
+                return true;
+
+            case R.id.item_message:
+                fragment = new ChatRoomFragment();
+                switchFragment(fragment);
+                setTitle(R.string.message);
+                return true;
+
+            case R.id.item_notification:
+                fragment = new NotificationFragment();
+                switchFragment(fragment);
+                setTitle(R.string.notification);
+                return true;
+
+            case R.id.item_information:
+                fragment = new AccountFragment();
+                switchFragment(fragment);
+                setTitle(R.string.information);
+                return true;
+
+            default:
+                initContent();
+                break;
         }
+        return false;
     }
 
-    //設定置入TabLayout的圖片
-    private void setTabLayout() {
-        //tablayout各功能圖示
-        int[] imgs = {R.drawable.tab_article,
-                R.drawable.tab_experience,
-                R.drawable.tab_message,
-                R.drawable.tab_notice,
-                R.drawable.tab_information};
-        //TabLayout接上viewPager
-        tabMaster.setupWithViewPager(viewPagerMaster, true);
-        //設置tablayout各功能圖示
-        for (int i = 0; i < listMaster.size(); i++) {
-            tabMaster.getTabAt(i).setIcon(imgs[i]);
-        }
-        //取得tabLayout各鈕的position以便判斷顯示隱藏toolBar,並設其標題名
-        tabMaster.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPagerMaster) {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                super.onTabSelected(tab);
-                int position = tab.getPosition();
-
-                if (position == 0) {
-                    toolbarMaster.setVisibility(View.VISIBLE);
-                    setTitle(R.string.courseArticle);
-
-                } else if (position == 1) {
-                    toolbarMaster.setVisibility(View.VISIBLE);
-                    setTitle(R.string.experienceArticle);
-
-                } else {
-                    toolbarMaster.setVisibility(View.GONE);
-                }
-            }
-        });
-
+    private void initContent() {
+        Fragment fragment = new CourseFragment();
+        switchFragment(fragment);
+        setTitle(R.string.course_article);
     }
 
-    //主功能頁面Fragment與搭載在TabLayout內ViewPager的橋接設定
-    private void setViewPager() {
-        listMaster = new ArrayList<>();
-
-        //此區添加個主功能的Fragment,設置完成請將替代的Fragment移除
-        courseArticleFragment = new CourseArticleFragment();
-        experienceArticleFragment = new ExperienceArticleFragment();
-        chatRoomFragment = new ChatRoomFragment();
-        notificationFragment = new NotificationFragment();
-        accountFragment = new AccountFragment();
-
-        //此區置換個主功能的Fragment,設置完成請將添加對應的Fragment移除
-        listMaster.add(courseArticleFragment);
-        listMaster.add(experienceArticleFragment);
-        listMaster.add(chatRoomFragment);
-        listMaster.add(notificationFragment);
-        listMaster.add(accountFragment);
-
-        //主畫面Master-其內掛載TabLayout內的ViewPager與裝有Fragment的list橋接設置
-        masterFragmentPagerAdapter = new MasterFragmentPagerAdapter(getSupportFragmentManager(), listMaster);
-        viewPagerMaster.setOffscreenPageLimit(5);
-        viewPagerMaster.setAdapter(masterFragmentPagerAdapter);
-    }
-
-    //初始化元件-ToolBar, TabLayout, ViewPager
-    private void findViews() {
-        toolbarMaster = (Toolbar) findViewById(R.id.toolBarMaster);
-        tabMaster = (TabLayout) findViewById(R.id.tabMaster);
-        viewPagerMaster = (ViewPager) findViewById(R.id.viewPagerMaster);
+    private void switchFragment(Fragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.frameMaster, fragment);
+        ft.commit();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //取得toolbar的menu樣式檔
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        //通過getActionView()將menu上的item轉為view使用
-        searchMaster = (SearchView) menu.findItem(R.id.searchMaster).getActionView();
+        SearchView searchMaster = (SearchView) menu.findItem(R.id.searchMaster).getActionView();
         //抓取隱藏在searchView內的AutoCompleteTextView
-        autoCompleteTextViewMaster = (AutoCompleteTextView) searchMaster.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        AutoCompleteTextView autoCompleteTextViewMaster = (AutoCompleteTextView) searchMaster.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         //設定置入於SearchView內的AutoCompleteTextView橋接器
-        setSearchAutoComplete();
-
+        setSearchAutoComplete(searchMaster, autoCompleteTextViewMaster);
         return true;
     }
 
     //設置SearcjAutoComplete
-    private void setSearchAutoComplete() {
+    private void setSearchAutoComplete(final SearchView searchMaster, AutoCompleteTextView autoCompleteTextViewMaster) {
         //取得專業項目之所有名稱
         List<String> searchContent = MasterAllData.takeProjectNameList();
         //autoCompleteTextView橋接自定viewItem
@@ -198,6 +162,7 @@ public class Master extends AppCompatActivity {
         }
         return true;
     }
+
 
     private void openPost() {
         Intent intent = new Intent(this, ExperienceArticleAppendActivity.class);
@@ -245,4 +210,7 @@ public class Master extends AppCompatActivity {
             return null;
         }
     }
+
+
 }
+

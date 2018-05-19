@@ -21,6 +21,7 @@ allprojects {
         google()
         jcenter()
         //使用LabelView相關空間需添加JitPack倉庫
+        //使用NiceSpinner相關空間需添加JitPack倉庫
         maven { url "https://jitpack.io" }
     }
 }

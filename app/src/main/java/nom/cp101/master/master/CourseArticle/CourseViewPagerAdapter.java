@@ -1,35 +1,30 @@
-package nom.cp101.master.master.ExperienceArticle;
+package nom.cp101.master.master.CourseArticle;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import nom.cp101.master.master.R;
+import nom.cp101.master.master.Account.MyCourse.Course;
 
-/**
- * Created by yujie on 2018/5/8.
- */
-
-public class ExperienceArticleViewPagerAdapter extends PagerAdapter {
-
+public class CourseViewPagerAdapter extends PagerAdapter {
     Context context;
-    List<byte[]> list;
+    List<Course> courseList = null;
 
-    public ExperienceArticleViewPagerAdapter(Context context) {
+    public CourseViewPagerAdapter(Context context) {
         this.context = context;
-
     }
 
     @Override
     public int getCount() {
-        return Integer.MAX_VALUE;
+        if (courseList.size() > 0)
+            return Integer.MAX_VALUE;
+        else
+            return 0;
     }
 
     //判斷instantiateItem返回的key是否與當前試圖為同一
@@ -38,18 +33,16 @@ public class ExperienceArticleViewPagerAdapter extends PagerAdapter {
         return view == object;
     }
 
-
     //創建欲顯示之視圖,如嵌入的view有預先加載則會在此實作
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-
         ImageView iv = new ImageView(context);
+        Bitmap bitmap = null;
         //因要做輪播,則讓size到最後時會回到前一item,則須內做判斷position % list.size()
-        if(list.size() != 0){
-            Bitmap bitmap=BitmapFactory.decodeByteArray(list.get(position % list.size()), 0,list.get(position % list.size()).length);
-            iv.setImageBitmap(bitmap);
-//        iv.setImageResource(list.get(position % list.size()));
+        if (courseList.size() != 0) {
+            bitmap = ConnectionServer.getPhotoImg(courseList, position, (int) (context.getResources().getDisplayMetrics().widthPixels / 5.0f));
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
+            iv.setImageBitmap(bitmap);
             container.addView(iv);
             return iv;
         }
@@ -62,7 +55,7 @@ public class ExperienceArticleViewPagerAdapter extends PagerAdapter {
         container.removeView((View) object);
     }
 
-    public void setData(){
-        this.list=ExperienceArticleAllData.takeExperienceViewPagerDataList();
+    public void setData() {
+        this.courseList = ConnectionServer.getCourseDatas();
     }
 }

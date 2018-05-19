@@ -1,46 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--CoordinatorLayout當其一view變動,其餘view特定移動-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/coordinator_master"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--AppBarLayout继承LinerLayout實現ViewGroup容器,支持手勢滑動-->
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <!--?是特殊字符,意味是Android内部功能。-->
-        <!--?attr/actionBarSize為Android預設ActionBar的大小-->
-        <!--enterAlways快速返回模式-->
-        <!--snap滾動時要馬全部顯示要馬縮合,如ViewPager左右吸附效果-->
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolBarMaster"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways|snap" />
-
-        <!--tabGravity:fill將TabLayout的各item填滿-->
-        <!--tabMode:設置fixed表TabLayout固定各item-->
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabMaster"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabGravity="fill"
-            app:tabMode="fixed" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <!--使用CoordinatorLayout實現Toolbar滾動,則須在滾動的view中設置layout_behavior,即會觸發layout_scrollFlags的改變-->
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPagerMaster"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBarMaster"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+         />
 
+    <FrameLayout
+        android:id="@+id/frameMaster"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bnvMaster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layoutMode="opticalBounds"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/master_bottom_navigation" />
 
 </LinearLayout>
