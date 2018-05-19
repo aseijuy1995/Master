@@ -60,7 +60,7 @@ public class ChatRoomFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.message_chat_room_frag,container,false);
-
+        user_id = Common.getUserName(getContext());
         findView();
         imageClick();
         return view;
@@ -75,7 +75,6 @@ public class ChatRoomFragment extends Fragment {
                 rvRoomList.setVisibility(View.VISIBLE);
                 rootAddValue();
                 buildRecyclerView();
-                Common.showToast(getContext(),"123");
             }
         });
     }
@@ -89,7 +88,6 @@ public class ChatRoomFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         if(user_id == null){
             didNotSignIn.setVisibility(View.VISIBLE);
             rvRoomList.setVisibility(View.INVISIBLE);

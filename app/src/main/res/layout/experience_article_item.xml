@@ -82,7 +82,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="TextView"
-                    android:textSize="30sp" />
+                    android:textSize="30sp"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <TextView
@@ -131,7 +132,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#00ffffff"
-                    app:srcCompat="@android:drawable/btn_star" />
+                    app:srcCompat="@android:drawable/btn_star"
+                    android:visibility="invisible"/>
 
             </LinearLayout>
 

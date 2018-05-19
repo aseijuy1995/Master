@@ -21,7 +21,8 @@
             android:id="@+id/toolBarMaster"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways|snap" />
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:titleTextColor="@color/white"/>
 
         <!--tabGravity:fill將TabLayout的各item填滿-->
         <!--tabMode:設置fixed表TabLayout固定各item-->
