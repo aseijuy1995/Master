@@ -219,10 +219,10 @@ public class NotificationFragment extends Fragment {
 
     //從database取得通知的資料傳入list中
     private List<Notification_rv_item> getitems() {
-        if (Common.networkConnected(getActivity()) && Common.user_id != null) {
+        if (Common.networkConnected(getActivity()) && Common.getUserName(getActivity()) != null) {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAll");
-            jsonObject.addProperty("user_id", Common.user_id);
+            jsonObject.addProperty("user_id", Common.getUserName(getActivity()));
 
             getItemsTask = new MyTask(Common.URL + "/NotificationServlet", jsonObject.toString());
             try {

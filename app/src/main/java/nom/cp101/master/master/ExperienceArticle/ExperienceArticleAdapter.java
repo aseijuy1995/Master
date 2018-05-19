@@ -96,7 +96,7 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
                     1);
 
             //判斷使用者是否有對當前文章做出按讚動作
-            boolean postLikeCheck = ExperienceArticleAllData.takeExperienceArticlePostLikeCheck(Common.user_id,
+            boolean postLikeCheck = ExperienceArticleAllData.takeExperienceArticlePostLikeCheck(Common.getUserName(context),
                     experienceArticleTextData.getPostId());
 
 
@@ -120,7 +120,7 @@ public class ExperienceArticleAdapter extends RecyclerView.Adapter<ExperienceArt
             holder.cbLaud.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    int postLikes = ExperienceArticleAllData.takeExperienceArticlePostLikeRefresh(Common.user_id,
+                    int postLikes = ExperienceArticleAllData.takeExperienceArticlePostLikeRefresh(Common.getUserName(context),
                             experienceArticleTextData.getPostId(),
                             isChecked);
                     holder.cbLaud.setText(String.valueOf(postLikes));

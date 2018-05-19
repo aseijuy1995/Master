@@ -27,6 +27,7 @@ import nom.cp101.master.master.CourseArticle.CourseFragment;
 import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
 import nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleAppendActivity;
 import nom.cp101.master.master.Main.Common;
+import nom.cp101.master.master.Main.MainService;
 import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.Message.CLASS.ChatRoomFragment;
 import nom.cp101.master.master.Notification.NotificationFragment;
@@ -44,9 +45,17 @@ public class Master extends AppCompatActivity implements BottomNavigationView.On
         findViews();
         setSupportActionBar(toolbarMaster);
 
+
         bnvMaster.setOnNavigationItemSelectedListener(this);
         initContent();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent ServiceIntent = new Intent(this, MainService.class);
+        startService(ServiceIntent);
     }
 
     private void findViews() {

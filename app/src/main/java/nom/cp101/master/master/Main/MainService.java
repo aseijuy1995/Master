@@ -22,6 +22,7 @@ public class MainService extends Service {
     private LocalBroadcastManager broadcastManager;
     private Handler handler;
     private Runnable runnable;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -33,7 +34,11 @@ public class MainService extends Service {
                 handler.postDelayed(this, 5000);
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("type", "checkNotification");
-                Common.notificationSocket.send(jsonObject.toString());
+                try {
+                    Common.notificationSocket.send(jsonObject.toString());
+                } catch (Exception e) {
+                    Log.e(TAG, e.toString());
+                }
             }
         };
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
@@ -52,10 +57,11 @@ public class MainService extends Service {
         broadcastManager.registerReceiver(notificationReceiver, notificationfilter);
         broadcastManager.registerReceiver(chatReceiver, chatFilter);
 
-        if (Common.notificationSocket != null){
-        handler.postDelayed(runnable, 5000);
-        }else{
+        if (Common.notificationSocket == null) {
             Common.connectSocket(this);
+        }
+        if (Common.notificationSocket != null && Common.getUserName(this) != null && !Common.getUserName(this).trim().equals("")) {
+            handler.postDelayed(runnable, 5000);
         }
         return START_STICKY;
     }

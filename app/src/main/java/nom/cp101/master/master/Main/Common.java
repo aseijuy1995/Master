@@ -37,7 +37,6 @@ public class Common {
 //    public static String URL = "http://192.168.196.77:8080/Master";
 
 //    public static String user_id = "abc123";
-    public static String user_id = "billy";
 
     public final static int COACH_ACCESS = 1; // 教練權限
     public final static int STUDENT_ACCESS = 2; // 學員權限
@@ -58,7 +57,7 @@ public class Common {
     public static void connectSocket(Context context) {
         URI uri = null;
         try {
-            uri = new URI(SOCKET_URI + user_id);
+            uri = new URI(SOCKET_URI + getUserName(context));
         } catch (URISyntaxException e) {
             Log.e(TAG, e.toString());
         }
