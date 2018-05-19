@@ -20,13 +20,13 @@ public class CourseArticleActivity extends AppCompatActivity {
         String categoryName = getIntent().getStringExtra("categoryName");
         setTitle(categoryName);
         //將取得之雷別名稱傳入CourseArticleCategoryFragment上,以便辨識需呈獻是項目
-        CourseArticleCategoryFragment courseArticleCategoryFragment = new CourseArticleCategoryFragment();
+        CourseProfessionFragment courseProfessionFragment = new CourseProfessionFragment();
         Bundle bundle = new Bundle();
         bundle.putString("categoryName", categoryName);
-        courseArticleCategoryFragment.setArguments(bundle);
+        courseProfessionFragment.setArguments(bundle);
         //將指定之courseArticleCategoryFragment嵌在此CourseArticleCategoryActivity上
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.layoutCategory, courseArticleCategoryFragment).commit();
+        fragmentTransaction.replace(R.id.layoutCategory, courseProfessionFragment).commit();
     }
 }

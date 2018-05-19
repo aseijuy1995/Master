@@ -28,11 +28,11 @@ public class ExperienceArticleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.experience_article_frag, container, false);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutExperienceArticle);
-        //取得RecyclerView並接上ExperienceAdapter
-        setRecyclerView();
-        //設置SwipeRefreshLayout,上滑更新課程文章
-        setSwipeRefreshLayout();
+//        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutExperienceArticle);
+//        //取得RecyclerView並接上ExperienceAdapter
+//        setRecyclerView();
+//        //設置SwipeRefreshLayout,上滑更新課程文章
+//        setSwipeRefreshLayout();
 
         return view;
     }

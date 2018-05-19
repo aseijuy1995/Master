@@ -26,21 +26,21 @@ public class CourseArticleAllData {
 
     //ˇ專業類別名稱與圖示,將CourseArticleGridViewData的物件包裝成一個ArticleViewPagerData內的陣列便於呼叫
     //回傳list為顯示於課程文章上GridView中
-    public static final List<CourseArticleGridViewData> takeCourseArticleGridViewDataList() {
-
-        List<CourseArticleGridViewData> courseArticleGridViewDataList = new ArrayList<>();
-
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.swim, R.string.water_sports));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.skate, R.string.extreme_sport));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.workout, R.string.work_out));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.ball, R.string.ball_sports));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.music, R.string.musical_instrument));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.language, R.string.language_learning));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.paint, R.string.leisure_talent));
-        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.code, R.string.programming));
-
-        return courseArticleGridViewDataList;
-    }
+//    public static final List<CourseArticleGridViewData> takeCourseArticleGridViewDataList() {
+//
+//        List<CourseArticleGridViewData> courseArticleGridViewDataList = new ArrayList<>();
+//
+//        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.swim, R.string.water_sports));
+//        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.skate, R.string.extreme_sport));
+//        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.workout, R.string.work_out));
+//        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.ball, R.string.ball_sports));
+//        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.music, R.string.musical_instrument));
+//        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.language, R.string.language_learning));
+//        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.paint, R.string.leisure_talent));
+//        courseArticleGridViewDataList.add(new CourseArticleGridViewData(R.drawable.code, R.string.programming));
+//
+//        return courseArticleGridViewDataList;
+//    }
 
     //ˇ從server連至db抓取所有課程文章數據
     public static final List<CourseArticleData> takeCourseArticleAllList() {

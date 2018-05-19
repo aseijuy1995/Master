@@ -272,6 +272,13 @@
     <string name="AddArticle">New Article</string>
 
 
+    <string name="course_article">課程</string>
+    <string name="experience_article">心得</string>
+    <string name="message">訊息</string>
+    <string name="notification">通知</string>
+    <string name="information">關於</string>
+
+
     <!--峻亦結束-->
     <!--////////////////////////////////////////////////////////////////////////////////////////////-->
 

@@ -1,4 +1,4 @@
-package nom.cp101.master.master.ExperienceArticle;
+package nom.cp101.master.master.CourseArticle;
 
 /**
  * Created by yujie on 2018/4/27.

@@ -14,35 +14,34 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import nom.cp101.master.master.CourseArticle.CourseArticleAllData;
-import nom.cp101.master.master.CourseArticle.CourseArticleData;
+import nom.cp101.master.master.Account.MyCourse.Course;
 import nom.cp101.master.master.R;
 
 /**
  * Created by yujie on 2018/4/30.
  */
 
-public class CourseArticleProjectFragment extends Fragment {
+public class CourseProfessionItemFragment extends Fragment {
     View view;
     SwipeRefreshLayout swipeRefreshLayout;
-    CourseArticleProjectAdapter courseArticleProjectAdapter;
+    CourseProfessionItemAdapter courseProfessionItemAdapter;
 
-    List<CourseArticleData> courseArticleDataList = null;
+    List<Course> courseList = null;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.course_article_project_frag, container, false);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutProject);
-
-        String projectName = getArguments().getString("projectName");
-        getActivity().setTitle(projectName);
-        //給予專案項目名稱判斷所需帶入之相關課程的所有文章
-        courseArticleDataList = CourseArticleAllData.takeCourseArticleProjectDataList(projectName);
-        //設定recyclerView內所需帶入的文章
-        setArticleRecyclerView(getContext());
-        //設置SwipeRefreshLayout,上滑更新課程文章
-        setSwipeRefreshLayout();
+//        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutProject);
+//
+//        String projectName = getArguments().getString("projectName");
+//        getActivity().setTitle(projectName);
+//        //給予專案項目名稱判斷所需帶入之相關課程的所有文章
+//        courseList = ConnectionServer.getCourseData();
+//        //設定recyclerView內所需帶入的文章
+//        setArticleRecyclerView(getContext());
+//        //設置SwipeRefreshLayout,上滑更新課程文章
+//        setSwipeRefreshLayout();
 
         return view;
     }
@@ -58,9 +57,9 @@ public class CourseArticleProjectFragment extends Fragment {
             @Override
             public void onRefresh() {
 
-                courseArticleProjectAdapter.setData(courseArticleDataList);
+                courseProfessionItemAdapter.setData(courseList);
                 //使其getItemCount()從新呼叫
-                courseArticleProjectAdapter.notifyDataSetChanged();
+                courseProfessionItemAdapter.notifyDataSetChanged();
                 //移除SwipeRefreshLayout更新時的loading圖示
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -71,9 +70,9 @@ public class CourseArticleProjectFragment extends Fragment {
     private void setArticleRecyclerView(Context context) {
         RecyclerView rvProject = view.findViewById(R.id.rvProject);
         rvProject.setLayoutManager(new LinearLayoutManager(getActivity()));
-        courseArticleProjectAdapter = new CourseArticleProjectAdapter(context);
-        courseArticleProjectAdapter.setData(courseArticleDataList);
-        rvProject.setAdapter(courseArticleProjectAdapter);
+        courseProfessionItemAdapter = new CourseProfessionItemAdapter(context);
+        courseProfessionItemAdapter.setData(courseList);
+        rvProject.setAdapter(courseProfessionItemAdapter);
     }
 
 }

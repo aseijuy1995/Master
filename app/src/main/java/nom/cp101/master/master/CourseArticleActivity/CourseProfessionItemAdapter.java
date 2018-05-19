@@ -14,42 +14,37 @@ import com.lid.lib.LabelTextView;
 
 import java.util.List;
 
+import nom.cp101.master.master.Account.MyCourse.Course;
 import nom.cp101.master.master.CourseArticle.CourseArticleAllData;
-import nom.cp101.master.master.CourseArticle.CourseArticleData;
 import nom.cp101.master.master.Master.Master;
 import nom.cp101.master.master.R;
 
-/**
- * Created by yujie on 2018/4/30.
- */
-
-class CourseArticleProjectAdapter extends RecyclerView.Adapter<CourseArticleProjectAdapter.ViewHolder> {
+public class CourseProfessionItemAdapter extends RecyclerView.Adapter<CourseProfessionItemAdapter.ViewHolder> {
     Context context;
-    List<CourseArticleData> courseArticleDataList;
+    List<Course> courseList;
 
-    public CourseArticleProjectAdapter(Context context) {
+    public CourseProfessionItemAdapter(Context context) {
         this.context = context;
     }
 
     @NonNull
     @Override
-    public CourseArticleProjectAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CourseProfessionItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.course_article_item, parent, false);
-
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseArticleProjectAdapter.ViewHolder holder, int position) {
-        CourseArticleData courseArticleData = courseArticleDataList.get(position);
+    public void onBindViewHolder(@NonNull CourseProfessionItemAdapter.ViewHolder holder, int position) {
+        Course course = courseList.get(position);
 
         //給予課程文章編號對server端db發出請求,回傳每筆課程之參加人數
-        String courseArticleJoin = CourseArticleAllData.takeCourseArticleJoin(courseArticleData.getCourseArticleId());
+        String courseArticleJoin = CourseArticleAllData.takeCourseArticleJoin(course.getCourse_id());
 
-        holder.tvName.setText(courseArticleData.getCourseArticleName());
-        holder.tvNumber.setText(courseArticleJoin+"/"+courseArticleData.getCourseArticleNumber());
-        holder.tvAddress.setText(courseArticleData.getCourseArticleAddress());
-        holder.tvTime.setText(courseArticleData.getCourseArticleTime());
+        holder.tvName.setText(course.getCourse_name());
+        holder.tvNumber.setText(courseArticleJoin + "/" + course.getCourse_people_number());
+        holder.tvAddress.setText(course.getCourse_location());
+        holder.tvTime.setText(course.getCourse_date().toString());
         //點擊課程文章內之各篇文章,切換至教練開課之詳細內容中
         holder.cvCourseArticle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,21 +55,22 @@ class CourseArticleProjectAdapter extends RecyclerView.Adapter<CourseArticleProj
                 context.startActivity(intent);
             }
         });
+        holder.cvCourseArticle.setEnabled(false);
 
 
         //取得當前課程文章參加人數做不同標籤分類
         int i = Integer.parseInt(courseArticleJoin);
 
-        if(i>2 && i<5){
+        if (i > 2 && i < 5) {
             holder.tvLabel.setLabelBackgroundColor(context.getResources().getColor(android.R.color.holo_purple));
-        }else if(i>=5 && i<10){
+        } else if (i >= 5 && i < 10) {
             holder.tvLabel.setLabelBackgroundColor(context.getResources().getColor(android.R.color.holo_green_light));
         }
     }
 
     @Override
     public int getItemCount() {
-        return courseArticleDataList.size();
+        return courseList.size();
     }
 
 
@@ -86,7 +82,7 @@ class CourseArticleProjectAdapter extends RecyclerView.Adapter<CourseArticleProj
         public ViewHolder(View itemView) {
             super(itemView);
 
-            cvCourseArticle=(CardView)itemView.findViewById(R.id.cvCourseArticle);
+            cvCourseArticle = (CardView) itemView.findViewById(R.id.cvCourseArticle);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvNumber = (TextView) itemView.findViewById(R.id.tvNumber);
             tvAddress = (TextView) itemView.findViewById(R.id.tvAddress);
@@ -95,8 +91,9 @@ class CourseArticleProjectAdapter extends RecyclerView.Adapter<CourseArticleProj
         }
     }
 
+
     //匯入數據
-    public void setData(List<CourseArticleData> courseArticleDataList) {
-        this.courseArticleDataList = courseArticleDataList;
+    public void setData(List<Course> courseList) {
+        this.courseList = courseList;
     }
 }

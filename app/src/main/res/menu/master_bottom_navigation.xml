@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--主首頁bottomNavigation-icon-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_course"
+        android:icon="@drawable/master_course"
+        android:title="@string/course_article" />
+
+    <item
+        android:id="@+id/item_experience"
+        android:icon="@drawable/master_experience"
+        android:title="@string/experience_article" />
+
+    <item
+        android:id="@+id/item_message"
+        android:icon="@drawable/master_message"
+        android:title="@string/message" />
+
+    <item
+        android:id="@+id/item_notification"
+        android:icon="@drawable/master_notification"
+        android:title="@string/notification" />
+
+    <item
+        android:id="@+id/item_information"
+        android:icon="@drawable/master_account"
+        android:title="@string/information" />
+
+</menu>
