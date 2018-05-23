@@ -48,7 +48,7 @@ public class UserLookOtherUsersFragment extends Fragment {
     private RelativeLayout otherUserLayoutProfession;
     private UserProfessionAdapter otherUserProfessionAdapter;
     private ImageView otherUserImageBackground, otherUserImagePortrait, otherUserImageFollowStar;
-    private Button otherUserButtonChat, otherUserButtonFollow, otherUserButtonCancel;
+    private Button otherUserButtonChat, otherUserButtonCancel;
     private TextView otherUserTextName, otherUserTextAccess, otherUserTextGender, otherUserTextAddress, otherUserTextTel, otherUserTextProfile;
 
     @Nullable
@@ -58,7 +58,8 @@ public class UserLookOtherUsersFragment extends Fragment {
         View view = inflater.inflate(R.layout.user_look_other_users_fragment, container, false);
         findView(view);
 
-        // 從前一頁接到"對方"的會員帳號
+
+//         //從前一頁接到"對方"的會員帳號
 //        Bundle bundle = getArguments();
 //        if (bundle != null) {
 //            String otherUserAccount = bundle.getString("account");
@@ -125,7 +126,7 @@ public class UserLookOtherUsersFragment extends Fragment {
         });
 
 
-        // 撈關注 如何拿到自己的帳號? 該會員帳號?
+        // 關注 或 尚未關注
 
         otherUserImageFollowStar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,9 +160,6 @@ public class UserLookOtherUsersFragment extends Fragment {
             }
         });
 
-
-
-
         return view;
     }
 
@@ -172,10 +170,6 @@ public class UserLookOtherUsersFragment extends Fragment {
             if (v.getId() == R.id.other_user_bt_chat){
 
                 // 聊天 ...
-            }
-            if (v.getId() == R.id.other_user_bt_follow) {
-
-                // 關注 ...
             }
             if (v.getId() == R.id.other_user_bt_cancel) {
 
@@ -287,10 +281,8 @@ public class UserLookOtherUsersFragment extends Fragment {
         otherUserTextTel = view.findViewById(R.id.other_user_tv_tel);
         otherUserTextProfile = view.findViewById(R.id.other_user_tv_profile);
         otherUserButtonChat = view.findViewById(R.id.other_user_bt_chat);
-        otherUserButtonFollow = view.findViewById(R.id.other_user_bt_follow);
         otherUserButtonCancel = view.findViewById(R.id.other_user_bt_cancel);
         otherUserButtonChat.setOnClickListener(otherUserButton);
-        otherUserButtonFollow.setOnClickListener(otherUserButton);
         otherUserButtonCancel.setOnClickListener(otherUserButton);
     }
 

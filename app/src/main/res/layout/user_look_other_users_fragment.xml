@@ -79,14 +79,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:text="chat"/>
+                android:text="Chat"/>
             <Button
-                android:id="@+id/other_user_bt_follow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="follow"/>
+                android:text="目前沒功能"/>
         </LinearLayout>
 
 
@@ -192,6 +191,7 @@
             android:id="@+id/other_user_tv_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#FFFFFF"
             android:hint="尚未編輯個人簡介"
             android:padding="10dp"
             android:textSize="18dp" />

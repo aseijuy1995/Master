@@ -55,7 +55,7 @@ public class Signup extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.signup, container, false);
+        View view = inflater.inflate(R.layout.user_signup, container, false);
 
         findView(view);
 
@@ -72,7 +72,7 @@ public class Signup extends Fragment {
             @Override
             public void afterTextChanged(Editable s) { // User 每輸入一個字都會執行 ...
 
-                checkAccountRepeat = s.toString(); // 將User輸入的字串存起來 ...
+                checkAccountRepeat = s.toString().toLowerCase(); // 將User輸入的字串存起來 ...
 
                 if (delayRun != null) {
                     // 如果EditText有變化時, 刪除上次延遲方法 ...
@@ -94,8 +94,8 @@ public class Signup extends Fragment {
             if (v.getId() == R.id.signup_bt_ok) { // 點擊確認
 
                 // 取得User輸入的資料 ...
-                String signupAccount = signupTextAccount.getText().toString().trim();
-                String signupPassword = signupTextPassword.getText().toString().trim();
+                String signupAccount = signupTextAccount.getText().toString().trim().toLowerCase();
+                String signupPassword = signupTextPassword.getText().toString().trim().toLowerCase();
                 String signupName = signupTextName.getText().toString().trim();
 
                 // 拿到身份(數字) ...
