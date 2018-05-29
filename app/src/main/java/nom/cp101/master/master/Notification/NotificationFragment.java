@@ -126,10 +126,12 @@ public class NotificationFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-
-            //position為0時為title, recyclerview內容從1開始顯示, itemcount需往後加1
-            return items.size() + 1;
-
+            if(items != null){
+                //position為0時為title, recyclerview內容從1開始顯示, itemcount需往後加1
+                return items.size() + 1;
+            }else{
+                return 0;
+            }
 
         }
 

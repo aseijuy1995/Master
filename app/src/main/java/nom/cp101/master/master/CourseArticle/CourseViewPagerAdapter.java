@@ -21,7 +21,7 @@ public class CourseViewPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        if (courseList.size() > 0)
+        if (courseList != null)
             return Integer.MAX_VALUE;
         else
             return 0;

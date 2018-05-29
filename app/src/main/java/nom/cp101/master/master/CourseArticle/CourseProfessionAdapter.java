@@ -40,7 +40,11 @@ public class CourseProfessionAdapter extends BaseAdapter {
     //依照專業類別筆數實作次數
     @Override
     public int getCount() {
-        return professionDataList.size();
+        if(professionDataList != null){
+            return professionDataList.size();
+        }else{
+            return 0;
+        }
     }
 
     @Override
