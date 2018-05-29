@@ -12,6 +12,11 @@ public class User {
     public User() {
     }
 
+    public User(String userName, String userPortraitBase64) {
+        this.userName = userName;
+        this.userPortraitBase64 = userPortraitBase64;
+    }
+
     public String getDelete() {
         return delete;
     }

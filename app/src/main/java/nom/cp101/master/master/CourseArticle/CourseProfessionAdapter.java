@@ -1,10 +1,6 @@
 package nom.cp101.master.master.CourseArticle;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,8 +14,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import nom.cp101.master.master.CourseArticleActivity.CourseArticleActivity;
-import nom.cp101.master.master.CourseArticleActivity.CourseProfessionFragment;
 import nom.cp101.master.master.R;
 
 /**

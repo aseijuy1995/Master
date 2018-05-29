@@ -1,4 +1,4 @@
-package nom.cp101.master.master.CourseArticleActivity;
+package nom.cp101.master.master.CourseArticle;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,10 +16,7 @@ import org.angmarch.views.NiceSpinner;
 import java.util.List;
 
 import nom.cp101.master.master.Account.MyCourse.Course;
-import nom.cp101.master.master.CourseArticle.ConnectionServer;
 
-import nom.cp101.master.master.CourseArticle.CourseNiceSpinnerAdapter;
-import nom.cp101.master.master.CourseArticle.ProfessionData;
 import nom.cp101.master.master.R;
 
 //顯示指定類別的各項目frag

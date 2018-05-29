@@ -31,7 +31,9 @@ import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
 
-public class Signup extends Fragment {
+import static nom.cp101.master.master.Main.Common.showToast;
+
+public class SignupFragment extends Fragment implements View.OnClickListener {
 
     public static String URL_INTENT = "/UserInfo";
     private static final String TAG = "Sign up";
@@ -52,12 +54,18 @@ public class Signup extends Fragment {
     // 檢查密碼, 不能有英文數字以外的字符, 且字串長度為 6~16
     private String canPassword = "\\A[a-zA-Z0-9]\\w{5,15}\\z";
 
+    private Context context;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.user_signup, container, false);
-
+        View view = inflater.inflate(R.layout.user_signup_frag, container, false);
+        context = getActivity();
         findView(view);
+
+        // 註冊按鈕監聽 ...
+        signupButtonCancel.setOnClickListener(this);
+        signupRadioOk.setOnClickListener(this);
 
         // 監聽帳號欄位用 ...
         signupTextAccount.addTextChangedListener(new TextWatcher() {
@@ -65,12 +73,15 @@ public class Signup extends Fragment {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // ... 不用寫東西, 刪掉會跳錯
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // ... 不用寫東西, 刪掉會跳錯
             }
+
             @Override
             public void afterTextChanged(Editable s) { // User 每輸入一個字都會執行 ...
+
 
                 checkAccountRepeat = s.toString().toLowerCase(); // 將User輸入的字串存起來 ...
 
@@ -86,22 +97,57 @@ public class Signup extends Fragment {
     }
 
 
-    // 點擊事件處理 ...
-    private Button.OnClickListener signupButton = new Button.OnClickListener() {
+    private void findView(View view) {
+        signupTextAccount = view.findViewById(R.id.signup_ed_account);
+        signupTextPassword = view.findViewById(R.id.signup_ed_password);
+        signupTextName = view.findViewById(R.id.signup_ed_name);
+        signupRadioAccess = view.findViewById(R.id.signup_rg_access);
+        signupRadioMaster = view.findViewById(R.id.signup_rb_master);
+        signupRadioStudent = view.findViewById(R.id.signup_rb_student);
+        signupButtonCancel = view.findViewById(R.id.signup_bt_cancel);
+        signupRadioOk = view.findViewById(R.id.signup_bt_ok);
+    }
+
+
+    // 防止User每輸入一個字就要連接一次DB, 延遲呼叫用 ...
+    private Handler handler = new Handler();
+    private Runnable delayRun = new Runnable() {
         @Override
-        public void onClick(View v) {
+        public void run() {
+            Matcher checkAccount = Pattern.compile(canAccount).matcher(checkAccountRepeat);
+            if (!checkAccount.find()) {
+                signupTextAccount.setError(context.getResources().getString(R.string.errorAccess));
+            } else {
 
-            if (v.getId() == R.id.signup_bt_ok) { // 點擊確認
+                // 開始連接 DB 檢查帳號 ... 回傳布林
+                if (connectionDBCheckAccount(checkAccountRepeat)) {
+                    checkAccountResult = true;
+                    signupTextAccount.setError(context.getResources().getString(R.string.repeatAccount));
+                } else {
+                    checkAccountResult = false;
+                    Drawable errorIcon = getResources().getDrawable(R.drawable.ok_icon);
+                    errorIcon.setBounds(new Rect(0, 0, 62, 62));
+                    signupTextAccount.setError(context.getResources().getString(R.string.canUseAccount), errorIcon);
+                }
+            }
+        }
+    };
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            // 點擊確認
+            case R.id.signup_bt_ok:
                 // 取得User輸入的資料 ...
                 String signupAccount = signupTextAccount.getText().toString().trim().toLowerCase();
                 String signupPassword = signupTextPassword.getText().toString().trim().toLowerCase();
                 String signupName = signupTextName.getText().toString().trim();
 
                 // 拿到身份(數字) ...
-                for(int i = 0 ; i < signupRadioAccess.getChildCount() ; i++) {
-                    RadioButton radioButton = (RadioButton)signupRadioAccess.getChildAt(i);
-                    if(radioButton.isChecked()) {
+                for (int i = 0; i < signupRadioAccess.getChildCount(); i++) {
+                    RadioButton radioButton = (RadioButton) signupRadioAccess.getChildAt(i);
+                    if (radioButton.isChecked()) {
                         signupAccess = i + 1;
                         signupRadioStudent.setError(null);
                     }
@@ -114,84 +160,48 @@ public class Signup extends Fragment {
                 Matcher checkPassword = Pattern.compile(canPassword).matcher(signupPassword);
 
                 if (!checkAccount.find()) {
-                    signupTextAccount.setError("帳號格式不正確");
+                    signupTextAccount.setError(context.getResources().getString(R.string.errorAccount));
                     isValid = false;
-                } if (!checkPassword.find()) {
-                    signupTextPassword.setError("密碼格式不正確");
+                }
+                if (!checkPassword.find()) {
+                    signupTextPassword.setError(context.getResources().getString(R.string.errorPassword));
                     isValid = false;
-                } if (signupName.isEmpty()) {
-                    signupTextName.setError("您的名稱是?");
+                }
+                if (signupName.isEmpty()) {
+                    signupTextName.setError(context.getResources().getString(R.string.errorName));
                     isValid = false;
-                } if (signupAccess == 0) {
-                    signupRadioStudent.setError("你的身份是?");
+                }
+                if (signupAccess == 0) {
+                    signupRadioStudent.setError(context.getResources().getString(R.string.errorAccess));
                     isValid = false;
-                } if (checkAccountResult == true) {
-                    signupTextAccount.setError("此帳號已被使用");
+                }
+                if (checkAccountResult == true) {
+                    signupTextAccount.setError(context.getResources().getString(R.string.repeatAccount));
                     isValid = false;
                 }
 
                 if (isValid) {
-
                     // 創建帳號 ... 回傳int
                     if (setUserData(signupAccount, signupPassword, signupName, signupAccess) == 0) {
-                        Toast.makeText(getActivity(),"註冊失敗, 請與管理員聯絡",Toast.LENGTH_LONG).show();
+                        showToast(context, context.getResources().getString(R.string.registerAccount));
                     } else {
 
                         // 註冊成功, 儲存帳號密碼並返回登入頁面
-                        Toast.makeText(getActivity(),"Welcome!",Toast.LENGTH_LONG).show();
+                        showToast(context, context.getResources().getString(R.string.welcome));
                         // 儲存帳號密碼返回登入頁面, 即自動登入
-                        SharedPreferences preference = getActivity().getSharedPreferences("preference", Context.MODE_PRIVATE);
+                        SharedPreferences preference = context.getSharedPreferences("preference", Context.MODE_PRIVATE);
                         preference.edit().putBoolean("login", true).putString("account", signupAccount).putString("password", signupPassword).apply();
-                        getFragmentManager().popBackStack();
+                        getActivity().finish();
                     }
                 }
-            }
+                break;
 
-            if (v.getId() == R.id.signup_bt_cancel) { // 返回登入頁面 ...
+            // 返回登入頁面 ...
+            case R.id.signup_bt_cancel:
                 getFragmentManager().popBackStack();
-            }
+                break;
         }
-    };
-
-
-    private void findView(View view) {
-        signupTextAccount = view.findViewById(R.id.signup_ed_account);
-        signupTextPassword = view.findViewById(R.id.signup_ed_password);
-        signupTextName = view.findViewById(R.id.signup_ed_name);
-        signupRadioAccess = view.findViewById(R.id.signup_rg_access);
-        signupRadioMaster = view.findViewById(R.id.signup_rb_master);
-        signupRadioStudent = view.findViewById(R.id.signup_rb_student);
-        signupButtonCancel = view.findViewById(R.id.signup_bt_cancel);
-        signupRadioOk = view.findViewById(R.id.signup_bt_ok);
-        // 註冊按鈕監聽 ...
-        signupButtonCancel.setOnClickListener(signupButton);
-        signupRadioOk.setOnClickListener(signupButton);
     }
-
-
-    // 防止User每輸入一個字就要連接一次DB, 延遲呼叫用 ...
-    private Handler handler = new Handler();
-    private Runnable delayRun = new Runnable() {
-        @Override
-        public void run() {
-            Matcher checkAccount = Pattern.compile(canAccount).matcher(checkAccountRepeat);
-            if (!checkAccount.find()) {
-                signupTextAccount.setError("帳號格式不正確");
-            } else {
-
-                // 開始連接 DB 檢查帳號 ... 回傳布林
-                if (connectionDBCheckAccount(checkAccountRepeat)) {
-                    checkAccountResult = true;
-                    signupTextAccount.setError("此帳號已被使用");
-                } else {
-                    checkAccountResult = false;
-                    Drawable errorIcon = getResources().getDrawable(R.drawable.ok_icon);
-                    errorIcon.setBounds(new Rect(0, 0, 62, 62));
-                    signupTextAccount.setError("此帳號可以使用",errorIcon);
-                }
-            }
-        }
-    };
 
 
     // 檢查User帳號是否重複用 ...
@@ -204,14 +214,12 @@ public class Signup extends Fragment {
         boolean isUserValid = false;
         try {
             String jsonIn = signupTask.execute().get();
-            Log.d(TAG, "Input: " + jsonIn);
             isUserValid = new Gson().fromJson(jsonIn, Boolean.class);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
         return isUserValid;
     }
-
 
     // 開始 INSERT 新帳號 ...
     public int setUserData(String userAccount, String userPassword, String userName, int userAccess) {
@@ -226,13 +234,11 @@ public class Signup extends Fragment {
         int signupResult = 0;
         try {
             signupResult = Integer.valueOf(signupTask.execute().get());
-            Log.d(TAG, "Input: " + signupResult);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
         return signupResult;
     }
-
 
     @Override
     public void onStop() {

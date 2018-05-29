@@ -24,8 +24,8 @@ import java.util.List;
 
 import nom.cp101.master.master.Account.AccountFragment;
 import nom.cp101.master.master.CourseArticle.CourseFragment;
-import nom.cp101.master.master.ExperienceArticle.ExperienceArticleFragment;
-import nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleAppendActivity;
+import nom.cp101.master.master.ExperienceArticle.ExperienceFragment;
+import nom.cp101.master.master.ExperienceArticle.ExperienceAppendActivity;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MainService;
 import nom.cp101.master.master.Main.MyTask;
@@ -33,10 +33,12 @@ import nom.cp101.master.master.Message.CLASS.ChatRoomFragment;
 import nom.cp101.master.master.Notification.NotificationFragment;
 import nom.cp101.master.master.R;
 
+import static nom.cp101.master.master.Main.Common.checkUserName;
+
 public class Master extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MasterActivity";
     Toolbar toolbarMaster;
-    BottomNavigationView bnvMaster;
+    public static BottomNavigationView bnvMaster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,6 @@ public class Master extends AppCompatActivity implements BottomNavigationView.On
         setContentView(R.layout.master_main);
         findViews();
         setSupportActionBar(toolbarMaster);
-
 
         bnvMaster.setOnNavigationItemSelectedListener(this);
         initContent();
@@ -56,6 +57,8 @@ public class Master extends AppCompatActivity implements BottomNavigationView.On
         super.onResume();
         Intent ServiceIntent = new Intent(this, MainService.class);
         startService(ServiceIntent);
+
+        bnvMaster.setVisibility(View.VISIBLE);
     }
 
     private void findViews() {
@@ -75,7 +78,7 @@ public class Master extends AppCompatActivity implements BottomNavigationView.On
                 return true;
 
             case R.id.item_experience:
-                fragment = new ExperienceArticleFragment();
+                fragment = new ExperienceFragment();
                 switchFragment(fragment);
                 setTitle(R.string.experience_article);
                 return true;
@@ -93,9 +96,18 @@ public class Master extends AppCompatActivity implements BottomNavigationView.On
                 return true;
 
             case R.id.item_information:
-                fragment = new AccountFragment();
-                switchFragment(fragment);
-                setTitle(R.string.information);
+//                fragment = new AccountFragment();
+//                switchFragment(fragment);
+//                setTitle(R.string.information);
+//                bnvMaster.setVisibility(View.GONE);
+
+
+                if (Common.checkUserName(this, Common.getUserName(this))) {
+                    fragment = new AccountFragment();
+                    switchFragment(fragment);
+                    setTitle(R.string.information);
+                    bnvMaster.setVisibility(View.GONE);
+                }
                 return true;
 
             default:
@@ -174,7 +186,7 @@ public class Master extends AppCompatActivity implements BottomNavigationView.On
 
 
     private void openPost() {
-        Intent intent = new Intent(this, ExperienceArticleAppendActivity.class);
+        Intent intent = new Intent(this, ExperienceAppendActivity.class);
         startActivity(intent);
     }
 

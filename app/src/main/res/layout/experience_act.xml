@@ -8,46 +8,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleActivity">
+    tools:context="nom.cp101.master.master.ExperienceArticle.ExperienceActivity">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabExperience"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:layout_marginTop="30dp"
         app:backgroundTint="?attr/colorPrimaryDark"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="right" />
+        app:layout_anchorGravity="right"
+        app:siShape="@raw/like" >
+
+    </android.support.design.widget.FloatingActionButton>
+
+    <!--<com.sackcentury.shinebuttonlib.ShineButton-->
+        <!--android:id="@+id/sbLaud"-->
+        <!--android:layout_width="35dp"-->
+        <!--android:layout_height="35dp"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:src="@android:color/darker_gray"-->
+        <!--app:allow_random_color="false"-->
+        <!--app:btn_color="@android:color/darker_gray"-->
+        <!--app:btn_fill_color="@color/colorPrimary"-->
+        <!--app:siShape="@raw/like" />-->
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:fitsSystemWindows="true"
+        android:fitsSystemWindows="false"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <!--contentScrim設置縮何時該顯示之顏色-->
         <!--layout_scrollFlags:exitUntilCollapsed設置最小高度-->
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/ctlEAA"
+            android:id="@+id/ctlExperience"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/tbEAA">
+            app:toolbarId="@+id/tbExperience">
 
             <ImageView
-                android:id="@+id/ivEAA"
+                android:id="@+id/ivExperience"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:src="@drawable/a1" />
+                android:src="@drawable/ic_launcher_background" />
 
             <!--app:layout_collapseMode="pin"表toolbar在view縮何時,會固定在頂部-->
             <android.support.v7.widget.Toolbar
-                android:id="@+id/tbEAA"
+                android:id="@+id/tbExperience"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
@@ -58,11 +72,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
-
-
     <include
-        layout="@layout/experience_article_act"
+        layout="@layout/experience_act_item"
         android:id="@+id/item"/>
 
 </android.support.design.widget.CoordinatorLayout>

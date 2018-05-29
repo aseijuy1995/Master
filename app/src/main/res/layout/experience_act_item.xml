@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="nom.cp101.master.master.ExperienceArticleActivity.ExperienceArticleActivity"
-    tools:showIn="@layout/experience_article_tool">
+    tools:context="nom.cp101.master.master.ExperienceArticle.ExperienceActivity"
+    tools:showIn="@layout/experience_act">
 
 
     <LinearLayout
@@ -19,7 +19,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/etMsg"
+            android:id="@+id/etComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -27,11 +27,11 @@
             android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/btnMsg"
+            android:id="@+id/btnComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/comment_send" />
     </LinearLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -71,6 +71,7 @@
                     android:id="@+id/tvTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
                     android:gravity="right"
                     android:text="TextView" />
 
@@ -93,7 +94,7 @@
                 android:layout_marginRight="5dp"/>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvLeaveMsg"
+                android:id="@+id/rvComment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

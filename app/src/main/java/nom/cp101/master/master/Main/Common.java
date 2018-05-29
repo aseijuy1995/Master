@@ -3,12 +3,10 @@ package nom.cp101.master.master.Main;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -25,7 +23,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import nom.cp101.master.master.Account.Login;
+import nom.cp101.master.master.Account.LoginActivity;
 import nom.cp101.master.master.Notification.NotificationSocket;
 import nom.cp101.master.master.R;
 
@@ -256,28 +254,20 @@ public class Common {
 
 
     // 子桓的檢查是否有帳號方法, 傳入 getUserName(getActivity()) 及 getFragmentManager() 回傳布林
-    public static Boolean checkUserName(String userName, FragmentManager fragmentManager) {
-        Boolean result = false;
+    public static Boolean checkUserName(Context context, String userName) {
         if (userName == "" || userName== null) {
-            Fragment fragment = new Login();
-            fragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+            Intent intent=new Intent(context, LoginActivity.class);
+            context.startActivity(intent);
+            return  false;
         } else {
-            result = true;
+            return true;
         }
-        return result;
-    }
-
-    // 存進權限
-    public static void setUserAccess(Context context, int userAccess) {
-        SharedPreferences preferences =
-                context.getSharedPreferences("access", MODE_PRIVATE);
-        preferences.edit().putInt("userAccess", userAccess).apply();
     }
 
     // 拿出權限
     public static int getUserAccess(Context context) {
         SharedPreferences preferences =
-                context.getSharedPreferences("access", MODE_PRIVATE);
+                context.getSharedPreferences("preference", MODE_PRIVATE);
         int userAccess = preferences.getInt("userAccess",0);
         Log.d(TAG, "userAccess = " + userAccess);
         return userAccess;

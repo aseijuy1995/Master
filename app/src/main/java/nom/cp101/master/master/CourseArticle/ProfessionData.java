@@ -5,10 +5,8 @@ import java.util.List;
 
 //包裝各類別對應的項目
 public class ProfessionData implements Serializable {
-
     String profession_category;
     List<String> profession_item;
-
 
     public ProfessionData(String profession_category, List<String> profession_item) {
         this.profession_category = profession_category;

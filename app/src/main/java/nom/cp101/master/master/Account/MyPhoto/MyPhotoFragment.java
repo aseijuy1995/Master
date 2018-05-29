@@ -45,6 +45,10 @@ public class MyPhotoFragment extends Fragment {
 
         // 拿到 User 帳號
         String userAccount = Common.getUserName(getActivity());
+        // 如果沒則跳到登入畫面
+        if (!Common.checkUserName(getActivity(), userAccount)) {
+            return null;
+        }
 
         // 拿到照片ID...
         ArrayList<String> userAllPostId = getUserAllPostId(userAccount);
@@ -131,7 +135,7 @@ public class MyPhotoFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    
+
                     // 點擊跳出文章資訊 ? ...
 
 

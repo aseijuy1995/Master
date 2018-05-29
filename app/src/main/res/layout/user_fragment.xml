@@ -1,269 +1,303 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#F0F0F0" >
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/userAgainLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:srcCompat="@drawable/course_offline" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/userAllInfo"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/user_img_background"
+            android:layout_height="match_parent"
+            android:background="#F0F0F0"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
-                android:scaleType="centerCrop"
-                android:background="#AAAAAA"/>
-            <ImageView
-                android:layout_width="154dp"
-                android:layout_height="154dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="-180dp"
-                android:background="#FFFFFF"/>
-            <ImageView
-                android:id="@+id/user_img_portrait"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="-152dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/user"/>
-        </LinearLayout>
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/user_img_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:background="#AAAAAA"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:layout_width="154dp"
+                    android:layout_height="154dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-180dp"
+                    android:background="#FFFFFF" />
+
+                <ImageView
+                    android:id="@+id/user_img_portrait"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-152dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/user" />
+            </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/user_tv_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="會員名稱"/>
+            <TextView
+                android:id="@+id/user_tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/memberName"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="5dp"
-        android:layout_height="1dp"
-        android:background="#CCCCCC"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#CCCCCC" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/user_bt_modify"
+                    android:layout_alignBottom="@+id/user_bt_modify"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/memberInformation"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/user_bt_modify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/edit"
+                    android:textSize="12dp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#ffffff"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="4"
+                    android:text="@string/identity"
+                    android:textColor="#aaaaaa"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/user_tv_identity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="@string/noDataYet"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#ffffff"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="4"
+                    android:text="@string/gender"
+                    android:textColor="#aaaaaa"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/user_tv_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="@string/noDataYet"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#ffffff"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="4"
+                    android:text="@string/address"
+                    android:textColor="#aaaaaa"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/user_tv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="@string/noDataYet"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#ffffff"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="4"
+                    android:text="@string/phoneNumber"
+                    android:textColor="#aaaaaa"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/user_tv_tel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="@string/noDataYet"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
-                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:text="@string/personalProfile"
                 android:textSize="16dp"
-                android:textStyle="bold"
-                android:text="會員資訊"/>
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/user_tv_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:hint="@string/notYetProfiled"
+                android:padding="10dp"
+                android:textSize="18dp" />
+
+            <!--專業技能開始-->
+
+            <RelativeLayout
+                android:id="@+id/user_layout_profession"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants">
+
+                <TextView
+                    android:id="@+id/recycler_view_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="專業技能"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/user_bt_profession"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/edit"
+                    android:textSize="12dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/user_recycler_profession"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/recycler_view_title"
+                    android:hint="@string/notYetProfiled" />
+
+            </RelativeLayout>
+
+            <!--專業技能結束-->
 
             <Button
-                android:id="@+id/user_bt_modify"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:id="@+id/user_bt_Signout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textSize="12dp"
-                android:text="編輯"/>
+                android:layout_marginTop="20dp"
+                android:text="@string/signOut" />
 
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            android:background="#ffffff">
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
-                android:textSize="14dp"
-                android:textColor="#aaaaaa"
-                android:text="身份"/>
-            <TextView
-                android:id="@+id/user_tv_identity"
+                android:id="@+id/user_tv_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:textSize="16dp"
-                android:hint="尚未擁有資料"/>
+                android:visibility="gone" />
+
+
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            android:background="#ffffff">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
-                android:textSize="14dp"
-                android:textColor="#aaaaaa"
-                android:text="性別"/>
-            <TextView
-                android:id="@+id/user_tv_gender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:textSize="16dp"
-                android:hint="尚未擁有資料"/>
-        </LinearLayout>
-
-        <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="2dp"
-             android:orientation="horizontal"
-             android:background="#ffffff">
-             <TextView
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:layout_weight="4"
-                 android:layout_marginTop="5dp"
-                 android:layout_marginLeft="10dp"
-                 android:textSize="14dp"
-                 android:textColor="#aaaaaa"
-                 android:text="地址"/>
-             <TextView
-                 android:id="@+id/user_tv_address"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_weight="1"
-                 android:layout_marginTop="10dp"
-                 android:layout_marginBottom="10dp"
-                 android:gravity="center"
-                 android:textSize="16dp"
-                 android:hint="尚未擁有資料"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            android:background="#ffffff">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
-                android:textSize="14dp"
-                android:textColor="#aaaaaa"
-                android:text="電話號碼"/>
-            <TextView
-                android:id="@+id/user_tv_tel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:textSize="16dp"
-                android:hint="尚未擁有資料"/>
-        </LinearLayout>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:text="個人簡介"/>
-        <TextView
-            android:id="@+id/user_tv_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:padding="10dp"
-            android:textSize="18dp"
-            android:hint="尚未編輯個人簡介"/>
-
-    <!--專業技能開始-->
-
-    <RelativeLayout
-        android:id="@+id/user_layout_profession"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:descendantFocusability="beforeDescendants">
-
-        <TextView
-            android:id="@+id/recycler_view_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:gravity="center_vertical"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:text="專業技能"/>
-        <Button
-            android:id="@+id/user_bt_profession"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="2dp"
-            android:textSize="12dp"
-            android:text="編輯" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/user_recycler_profession"
-            android:layout_below="@id/recycler_view_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="尚未編輯個人簡介"/>
-
-    </RelativeLayout>
-
-    <!--專業技能結束-->
-
-    <Button
-        android:id="@+id/user_bt_Signout"
-        android:text="登出"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
-    <TextView
-        android:id="@+id/user_tv_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
-
-
-
+    </ScrollView>
 </LinearLayout>
-</ScrollView>

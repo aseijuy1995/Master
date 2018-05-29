@@ -6,6 +6,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -43,6 +44,8 @@ public class CourseViewPagerAdapter extends PagerAdapter {
             bitmap = ConnectionServer.getPhotoImg(courseList, position, (int) (context.getResources().getDisplayMetrics().widthPixels / 5.0f));
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
             iv.setImageBitmap(bitmap);
+
+
             container.addView(iv);
             return iv;
         }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,19 +34,12 @@
             android:layout_height="wrap_content"
             android:textSize="16dp"
             android:text="密碼"/>
-
-        <android.support.design.widget.TextInputLayout
+        <EditText
+            android:id="@+id/signup_ed_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintEnabled="false"
-            app:passwordToggleEnabled="true">
-            <EditText
-                android:id="@+id/signup_ed_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="6~12 碼英文數字 ..."/>
-        </android.support.design.widget.TextInputLayout>
+            android:inputType="textPassword"
+            android:hint="6~12 碼英文數字 ..."/>
 
         <TextView
             android:layout_marginTop="10dp"

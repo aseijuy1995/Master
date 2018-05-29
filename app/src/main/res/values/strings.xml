@@ -278,11 +278,64 @@
     <string name="notification">通知</string>
     <string name="information">關於</string>
 
+    <string name="data_deadline">已截止:</string>
+    <string name="data_start">開始日期:</string>
+    <string name="comment_send">發送</string>
+    <string name="no_camera">There is no camera App</string>
+    <string name="picture_empty">Image can not be empty</string>
+    <string name="content_empty">Content can not be empty</string>
+    <string name="no_device_to_crop">This device doesn\'t support the crop action!</string>
+    <string name="new_article_successed">新增成功</string>
+
+
 
     <!--峻亦結束-->
     <!--////////////////////////////////////////////////////////////////////////////////////////////-->
 
 
+    <!--////////////////////////////////////////////////////////////////////////////////////////////////-->
 
+    <string name="enterAccountPassword">請輸入帳密!</string>
+    <string name="errorAccountPassword">帳號或密碼錯誤!</string>
+    <string name="errorAccount">帳號格式不正確</string>
+    <string name="errorPassword">密碼格式不正確</string>
+    <string name="errorName">您的名稱是?</string>
+    <string name="errorAccess">你的身份是?</string>
+    <string name="repeatAccount">此帳號已被使用</string>
+    <string name="registerAccount">註冊失敗, 請與管理員聯絡</string>
+    <string name="canUseAccount">此帳號可以使用</string>
+    <string name="welcome">Welcome!</string>
+    <string name="memberName">會員名稱</string>
+    <string name="memberInformation">會員資訊</string>
+    <string name="edit">編輯</string>
+    <string name="identity">身份</string>
+    <string name="gender">性別</string>
+    <string name="address">地址</string>
+    <string name="phoneNumber">電話號碼</string>
+    <string name="noDataYet">尚未擁有資料</string>
+    <string name="personalProfile">個人簡介</string>
+    <string name="notYetProfiled">尚未編輯個人簡介</string>
+    <string name="signOut">登出</string>
+    <string name="errorServer">伺服器異常, 無法獲取會員資料, 請聯絡管理員</string>
+    <string name="coach">教練</string>
+    <string name="student">學員</string>
+    <string name="man">男</string>
+    <string name="women">女</string>
+    <string name="noProfessionalSkillsYet">尚未選擇專業技能</string>
+    <string name="userOut">您即將登出</string>
+    <string name="modifyUserImage">修改會員圖像</string>
+    <string name="errorExternalStorage">外部儲存體出錯</string>
+    <string name="cancelChangeImage">取消更改圖片</string>
+    <string name="successUploadImage">圖片上傳成功</string>
+
+    <string-array name="listPortraitStr">
+        <item>拍攝頭像</item>
+        <item>選擇頭像</item>
+        <item>拍攝封面照片</item>
+        <item>選擇封面照片</item>
+    </string-array>
+
+
+    <!--////////////////////////////////////////////////////////////////////////////////////////////////-->
 
 </resources>
