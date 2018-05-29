@@ -295,6 +295,9 @@ public class UserFragment extends Fragment {
 
             String userAccess = "", userGender = "";
 
+            // 儲存權限
+            Common.setUserAccess(getActivity(), user.getUserAccess());
+
             if (user.getUserAccess() == 1) {
                 userAccess =  "教練";
             } else if (user.getUserAccess() == 2) {

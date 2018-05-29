@@ -40,7 +40,6 @@ public class Login extends Fragment {
     private ImageView loginImageView;
     private EditText loginEditAccount, loginEditPassword;
     private Button loginButtonLogin, loginButtonSignup;
-    private TextView loginTextMessage;
     private MyTask task;
     private LinearLayout loginLinearLayout;
     private Boolean noAnimation = false;  // 禁止第一次進入畫面就跑動畫
@@ -50,7 +49,7 @@ public class Login extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.login, container, false);
+        View view = inflater.inflate(R.layout.user_login, container, false);
         findView(view);
 
         // 開始監聽畫面大小變化, 並加入畫面變動
@@ -68,12 +67,11 @@ public class Login extends Fragment {
             if (v.getId() == R.id.login_bt_login) { // 登入 ...
 
                 // 拿到User的帳號密碼 ...
-                String userAccount = loginEditAccount.getText().toString().trim();
-                String userPassword = loginEditPassword.getText().toString().trim();
+                String userAccount = loginEditAccount.getText().toString().trim().toLowerCase();
+                String userPassword = loginEditPassword.getText().toString().trim().toLowerCase();
 
-                // 預計改寫成setError
                 if (userAccount.length() <= 0 || userPassword.length() <= 0) {
-                    loginTextMessage.setText("請輸入帳號密碼!!");
+                    Toast.makeText(getActivity(),"帳號或密碼不能為空白",Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -147,7 +145,6 @@ public class Login extends Fragment {
     private void findView(View view) {
         loginLinearLayout = view.findViewById(R.id.login_linearlayout);
         loginImageView = view.findViewById(R.id.login_image_view);
-        loginTextMessage = view.findViewById(R.id.login_tv_message);
         loginEditAccount = view.findViewById(R.id.login_ed_account);
         loginEditPassword = view.findViewById(R.id.login_ed_password);
         loginButtonLogin = view.findViewById(R.id.login_bt_login);
