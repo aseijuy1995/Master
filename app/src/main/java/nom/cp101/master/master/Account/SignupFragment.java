@@ -191,6 +191,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                         // 儲存帳號密碼返回登入頁面, 即自動登入
                         SharedPreferences preference = context.getSharedPreferences("preference", Context.MODE_PRIVATE);
                         preference.edit().putBoolean("login", true).putString("account", signupAccount).putString("password", signupPassword).apply();
+                        Common.setUserName(context, signupAccount);
                         getActivity().finish();
                     }
                 }

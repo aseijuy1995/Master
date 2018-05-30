@@ -1,12 +1,14 @@
 package nom.cp101.master.master.Account;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -24,11 +26,14 @@ import android.widget.LinearLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import nom.cp101.master.master.Account.MyAccount.UserFragment;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
 
+import static nom.cp101.master.master.Account.AccountFragment.bottomNavigationView;
 import static nom.cp101.master.master.Main.Common.showToast;
+import static nom.cp101.master.master.Master.Master.bnvMaster;
 
 public class LoginFragment extends Fragment implements View.OnClickListener, ViewTreeObserver.OnGlobalLayoutListener{
 
@@ -98,7 +103,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
                     int userAccess = getUserAccess(userAccount);
                     // 儲存權限
                     editor.putInt("userAccess", userAccess).apply();
+
+
                     getActivity().finish();
+                    UserFragment.userAgainLogin.setVisibility(View.GONE);
+                    UserFragment.userAllInfo.setVisibility(View.VISIBLE);
+
                 } else {
                     showToast(context, context.getResources().getString(R.string.errorAccountPassword));
                     return;

@@ -1,6 +1,7 @@
 package nom.cp101.master.master.Account.MyAccount;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,7 +24,9 @@ import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
 
-public class UserModifyDataFragment extends Fragment {
+import static nom.cp101.master.master.Main.Common.showToast;
+
+public class UserModifyDataFragment extends Fragment implements View.OnClickListener{
 
     private static String URL_INTENT = "/UserInfo";
     private static final String TAG = "UserModifyDataFragment";
@@ -34,13 +37,18 @@ public class UserModifyDataFragment extends Fragment {
     private String userModifyAccount; // 存會員ID ...
     private int userModifyGender; // 存會員性別 ...
     private MyTask task;
+    Context context;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.user_modify_data_fragment, container, false);
+        context = getActivity();
+
         findView(view);
+        // 監聽點擊事件 ...
+        userModifyButtonOK.setOnClickListener(this);
+        userModifyButtonCancel.setOnClickListener(this);
 
         // 從會員資訊頁面拿到值 ...
         Bundle bundle = getArguments();
@@ -53,9 +61,9 @@ public class UserModifyDataFragment extends Fragment {
             String getModifyProfile = bundle.getString("profile"); // 拿到簡介
 
             // 判斷傳過來的性別貼在 Radio Button 上 ...
-            if (getModifyGender.equals("Men")) {
+            if (getModifyGender.equals(context.getResources().getString(R.string.man))) {
                 userModifyRadioMen.setChecked(true);
-            } else if (getModifyGender.equals("Women")){
+            } else if (getModifyGender.equals(context.getResources().getString(R.string.women))){
                 userModifyRadioWomen.setChecked(true);
             }
 
@@ -69,18 +77,29 @@ public class UserModifyDataFragment extends Fragment {
         return view;
     }
 
+    private void findView(View view) {
+        userModifyRadioGender = view.findViewById(R.id.user_modify_rb_gender);
+        userModifyRadioMen = view.findViewById(R.id.user_modify_rb_men);
+        userModifyRadioWomen = view.findViewById(R.id.user_modify_rb_women);
+        userModifyTextName = view.findViewById(R.id.user_modify_et_name);
+        userModifyTextAddress = view.findViewById(R.id.user_modify_et_address);
+        userModifyTextTel = view.findViewById(R.id.user_modify_et_tel);
+        userModifyTextProfile = view.findViewById(R.id.user_modify_et_profile);
+        userModifyButtonOK = view.findViewById(R.id.user_modify_bt_ok);
+        userModifyButtonCancel = view.findViewById(R.id.user_modify_bt_cancel);
+    }
 
     // 點擊事件處理 ...
-    private Button.OnClickListener userModifyButton = new Button.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (v.getId() == R.id.user_modify_bt_ok) {  // 跳出警告視窗, 並確認是否修改會員資料 ...
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("即將修改會員資料")
-                        .setPositiveButton("確定", new DialogInterface.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            // 跳出警告視窗, 並確認是否修改會員資料 ...
+            case R.id.user_modify_bt_ok:
+                new AlertDialog.Builder(context)
+                        .setTitle(context.getResources().getString(R.string.modifyUserInformation))
+                        .setPositiveButton(context.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
                                 // 取得資料 ...
                                 String userModifyName = userModifyTextName.getText().toString().trim();
                                 String userModifyAddress = userModifyTextAddress.getText().toString().trim();
@@ -99,55 +118,41 @@ public class UserModifyDataFragment extends Fragment {
                                 // 開始檢查資料是否合法 ...
                                 boolean isValid = true;
                                 if (userModifyName.isEmpty()) {
-                                    userModifyTextName.setError("你的名字是?");
+                                    userModifyTextName.setError(context.getResources().getString(R.string.errorName));
                                     isValid = false;
                                 } if (userModifyAddress.isEmpty()) {
-                                    userModifyTextAddress.setError("你的地址是?");
+                                    userModifyTextAddress.setError(context.getResources().getString(R.string.errorAddress));
                                     isValid = false;
                                 } if (userModifyTel.isEmpty()) {
-                                    userModifyTextTel.setError("你的聯絡號碼是?");
+                                    userModifyTextTel.setError(context.getResources().getString(R.string.errorPhone));
                                     isValid = false;
                                 } if (userModifyTel.isEmpty()) {
-                                    userModifyTextProfile.setError("建議填上個人簡介介紹您自己...");
+                                    userModifyTextProfile.setError(context.getResources().getString(R.string.errorProfile));
                                     isValid = false;
                                 } if (userModifyGender == 0) {
-                                    userModifyRadioWomen.setError("你的性別是?");
+                                    userModifyRadioWomen.setError(context.getResources().getString(R.string.errorGender));
                                     isValid = false;
                                 } if (isValid) {
 
                                     // 開始 Updata ...
                                     if (updataUserInfo(userModifyName, userModifyAddress, userModifyTel, userModifyProfile) == 0) {
-                                        Toast.makeText(getActivity(),"修改失敗...請稍後再試...",Toast.LENGTH_LONG).show();
+                                        showToast(context, context.getResources().getString(R.string.errorModify));
                                     } else {
-                                        Toast.makeText(getActivity(),"修改成功！",Toast.LENGTH_LONG).show();
+                                        showToast(context, context.getResources().getString(R.string.successedModify));
                                         getFragmentManager().popBackStack();
                                     }
                                 }
                             }
                         })
-                        .setNegativeButton("取消", null).show();
-            }
-            if (v.getId() == R.id.user_modify_bt_cancel) { // 按下取消返回會員資訊頁面 ...
+                        .setNegativeButton(context.getResources().getString(R.string.cancel), null).show();
 
+                break;
+
+            // 按下取消返回會員資訊頁面 ...
+            case R.id.user_modify_bt_cancel:
                 getFragmentManager().popBackStack();
-            }
+                break;
         }
-    };
-
-
-    private void findView(View view) {
-        userModifyRadioGender = view.findViewById(R.id.user_modify_rb_gender);
-        userModifyRadioMen = view.findViewById(R.id.user_modify_rb_men);
-        userModifyRadioWomen = view.findViewById(R.id.user_modify_rb_women);
-        userModifyTextName = view.findViewById(R.id.user_modify_et_name);
-        userModifyTextAddress = view.findViewById(R.id.user_modify_et_address);
-        userModifyTextTel = view.findViewById(R.id.user_modify_et_tel);
-        userModifyTextProfile = view.findViewById(R.id.user_modify_et_profile);
-        userModifyButtonOK = view.findViewById(R.id.user_modify_bt_ok);
-        userModifyButtonCancel = view.findViewById(R.id.user_modify_bt_cancel);
-        // 監聽點擊事件 ...
-        userModifyButtonOK.setOnClickListener(userModifyButton);
-        userModifyButtonCancel.setOnClickListener(userModifyButton);
     }
 
 
@@ -167,10 +172,7 @@ public class UserModifyDataFragment extends Fragment {
         task = new MyTask(url, jsonObject.toString());
         try {
             editResult = Integer.valueOf(task.execute().get());
-            Log.d(TAG, "Input: " + editResult);
-        } catch (Exception e) {
-            Log.e(TAG, e.toString());
-        }
+        } catch (Exception e) {}
         return editResult;
     }
 
@@ -182,6 +184,5 @@ public class UserModifyDataFragment extends Fragment {
             task.cancel(true);
         }
     }
-
 
 }

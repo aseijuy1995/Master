@@ -53,11 +53,12 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private Context context;
 
     private Button userButtonModify, userButtonSignOut, userButtonProfession;
-    private ImageView userImagePortrait, userImageBackground, userAgainLogin;
+    private ImageView userImagePortrait, userImageBackground;
     private TextView userTextName, userTextIdentity, userTextGender, userTextAddress, userTextTel, userTextProfile, userTextAccount;
     private MyTask task;
     private RecyclerView userRecyclerProfession;
-    private LinearLayout userAllInfo;
+    public static LinearLayout userAllInfo;
+    public static ImageView userAgainLogin;
 
     // 裝DB撈下來的會員專業
     private List<String> userProfessionResultList;
@@ -114,13 +115,14 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             List<User> userListProfession = new ArrayList<>();
             // 字串陣列接 DB拿下來的會員專業
             userProfessionResultList = getUserProfession(userAccount);
-            User user = new User();
+            User user=null;
             if (userProfessionResultList.size() == 0) {
-
+                 user= new User();
                 user.setUserProfession(context.getResources().getString(R.string.noProfessionalSkillsYet));
                 userListProfession.add(user);
             } else {
                 for (String str : userProfessionResultList) {
+                    user = new User();
                     // 依序拿出來在存進User陣列裡面
                     user.setUserProfession(str);
                     userListProfession.add(user);
@@ -447,14 +449,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                     if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                         // 將儲存路徑轉成 Uri 用來放裁剪好的結果圖片
                         cropImageUri = Uri.fromFile(cropFileUri);
-                        Uri newUri = null;
+                        Uri newUri = Uri.parse(UserPhotoProcessing.getPath(context, data.getData()));;
                         // 判斷 SDK 版本
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             // 若 ... 再做一次處理
                             newUri = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".provider", new File(newUri.getPath()));
-                        } else {
-                            // 解析選擇的圖片, 拿到圖片Uri
-                            newUri = Uri.parse(UserPhotoProcessing.getPath(context, data.getData()));
                         }
                         // 開始裁切圖片 ...
                         cropImageUri(newUri, cropImageUri, aspect_X, aspect_Y, output_X, output_Y);

@@ -327,6 +327,21 @@
     <string name="errorExternalStorage">外部儲存體出錯</string>
     <string name="cancelChangeImage">取消更改圖片</string>
     <string name="successUploadImage">圖片上傳成功</string>
+    <string name="modifyUserInformation">即將修改會員資料</string>
+    <string name="errorAddress">你的地址是?</string>
+    <string name="errorPhone">你的聯絡號碼是?</string>
+    <string name="errorProfile">建議填上個人簡介介紹您自己...</string>
+    <string name="errorGender">你的性別是?</string>
+    <string name="errorModify">修改失敗...請稍後再試...</string>
+    <string name="successedModify">修改成功!</string>
+    <string name="selectProfessionCagegory">選擇專業類別</string>
+    <string name="selectProfessionItem">選擇專業項目</string>
+    <string name="back">back</string>
+    <string name="repeatProfession">專業項目重複選擇</string>
+    <string name="addSuccessed">新增成功</string>
+    <string name="addFailed">新增失敗, 請聯絡管理員或稍後在試</string>
+    <string name="success">成功</string>
+    <string name="failed">失敗</string>
 
     <string-array name="listPortraitStr">
         <item>拍攝頭像</item>

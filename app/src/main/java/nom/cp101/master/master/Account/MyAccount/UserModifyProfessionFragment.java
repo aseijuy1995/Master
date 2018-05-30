@@ -1,6 +1,7 @@
 package nom.cp101.master.master.Account.MyAccount;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,8 +28,9 @@ import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
 
-public class UserModifyProfessionFragment extends Fragment {
+import static nom.cp101.master.master.Main.Common.showToast;
 
+public class UserModifyProfessionFragment extends Fragment implements View.OnClickListener{
     private static String URL_INTENT = "/UserInfo";
     private static final String TAG = "UserModifyProfessionFragment";
     private RecyclerView userModifyProfessionRecyclerShowItem;
@@ -36,27 +38,31 @@ public class UserModifyProfessionFragment extends Fragment {
     private UserProfessionAdapter userProfessionAdapter;
     private String account = ""; // 存放帳號用
     private MyTask task;
+    private Context context;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.user_modify_profession_fragment, container, false);
+        context = getActivity();
+
         findView(view);
 
-        List<User> userModifyProfessionList = new ArrayList<>();
+        // 監聽按鈕
+        userModifyProfessionButtonNewItem.setOnClickListener(this);
+        userModifyProfessionButtonCancel.setOnClickListener(this);
 
+
+        List<User> userModifyProfessionList = new ArrayList<>();
         // 拿到會員頁傳過來的專業陣列
         Bundle bundle = getArguments();
         if (bundle != null) {
-
             // 把傳過來的帳號存起來
             account = bundle.getString("account");
             // 傳過來的專業技能
             ArrayList<String> userProfessionList = bundle.getStringArrayList("profession");
 
             for (String str : userProfessionList) {
-
                 // 依序拿出來並存進User陣列裡面, 並多加入刪除
                 User user = new User();
                 user.setUserProfession(str);
@@ -67,36 +73,37 @@ public class UserModifyProfessionFragment extends Fragment {
 
 
         // Start Recycler View
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        userModifyProfessionRecyclerShowItem.setLayoutManager(linearLayoutManager);
+        userModifyProfessionRecyclerShowItem.setLayoutManager(new LinearLayoutManager(context));
         userProfessionAdapter = new UserProfessionAdapter(userModifyProfessionList, account, getActivity()); // 傳入List
         userModifyProfessionRecyclerShowItem.setAdapter(userProfessionAdapter);
-
         return view;
     }
 
+    // 初始化 BJ4
+    private void findView(View view) {
+        userModifyProfessionButtonCancel = view.findViewById(R.id.user_bt_modify_profession_cancel);
+        userModifyProfessionRecyclerShowItem = view.findViewById(R.id.user_recycler_modify_profession);
+        userModifyProfessionButtonNewItem = view.findViewById(R.id.user_bt_modify_profession_new);
+    }
 
     // 新增會員專業項目
-    private Button.OnClickListener userModifyProfessionButton = new Button.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
             // 新增專業
-            if (v.getId() == R.id.user_bt_modify_profession_new) {
-
+            case R.id.user_bt_modify_profession_new:
                 // 從DB拿到專業大類別
                 ArrayList<String> allProfessionCategory = getAllProfessionCategory();
                 // 轉成陣列
                 final String[] allProfessionCategoryArray = allProfessionCategory.toArray(new String[0]);
 
                 // 開始 AlertDialog
-                AlertDialog.Builder professionCategoryAlertDialog = new AlertDialog.Builder(getActivity());
-                professionCategoryAlertDialog.setTitle("選擇專業類別");
-                professionCategoryAlertDialog.setPositiveButton("取消",null);
+                AlertDialog.Builder professionCategoryAlertDialog = new AlertDialog.Builder(context);
+                professionCategoryAlertDialog.setTitle(context.getResources().getString(R.string.selectProfessionCagegory));
+                professionCategoryAlertDialog.setPositiveButton(context.getResources().getString(R.string.cancel),null);
                 professionCategoryAlertDialog.setItems(allProfessionCategoryArray,new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         // 拿到選擇的專業類別
                         String professionCategoryName = allProfessionCategoryArray[which];
                         // 拿到選擇的專業類別內的項目
@@ -104,19 +111,18 @@ public class UserModifyProfessionFragment extends Fragment {
                         // 轉成字串陣列
                         final String[] allProfessionItemArray = allProfessionItem.toArray(new String[0]);
                         // 再創造一個 AlertDialog
-                        AlertDialog.Builder professionItemAlertDialog = new AlertDialog.Builder(getActivity());
-                        professionItemAlertDialog.setTitle("選擇專業項目");
-                        professionItemAlertDialog.setPositiveButton("取消",null);
-                        professionItemAlertDialog.setNeutralButton("上一頁", new DialogInterface.OnClickListener() {
+                        AlertDialog.Builder professionItemAlertDialog = new AlertDialog.Builder(context);
+                        professionItemAlertDialog.setTitle(context.getResources().getString(R.string.selectProfessionItem));
+                        professionItemAlertDialog.setPositiveButton( context.getResources().getString(R.string.cancel),null);
+                        professionItemAlertDialog.setNeutralButton(context.getResources().getString(R.string.back), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which){
-                                userModifyProfessionButton.onClick(userModifyProfessionButtonNewItem);
+                                UserModifyProfessionFragment.this.onClick(userModifyProfessionButtonNewItem);
                             }
                         });
                         professionItemAlertDialog.setItems(allProfessionItemArray,new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
                                 // 拿出選擇的項目
                                 String selectProfession =  allProfessionItemArray[which];
                                 // 拿出目前User所擁有的項目
@@ -129,28 +135,26 @@ public class UserModifyProfessionFragment extends Fragment {
                                     String result = user.getUserProfession();
                                     // 依序拿出來在存進User陣列裡面
                                     if (result.equals(selectProfession)) {
-
                                         // 重複後的處理 ...
                                         duplicate = false;
-                                        Toast.makeText(getActivity(), "專業項目重複選擇", Toast.LENGTH_SHORT).show();
+                                        showToast(context, context.getResources().getString(R.string.repeatProfession));
                                     }
                                 }
 
                                 // 若沒重複則執行
                                 if (duplicate) {
-
                                     // 開始上傳資料, 傳入帳號和新增的項目
                                     int result = updataUserProfession(account, selectProfession);
 
                                     if (result != 0) {
                                         // 將項目更新至畫面上
-                                        Toast.makeText(getActivity(), "新增成功", Toast.LENGTH_SHORT).show();
+                                        showToast(context, context.getResources().getString(R.string.addSuccessed));
                                         User newUser = new User();
                                         newUser.setUserProfession(selectProfession);
                                         newUser.setDelete("Delete");
                                         userProfessionAdapter.addItem(newUser);
                                     } else {
-                                        Toast.makeText(getActivity(), "新增失敗, 請聯絡管理員或稍後在試", Toast.LENGTH_SHORT).show();
+                                        showToast(context, context.getResources().getString(R.string.addFailed));
                                     }
                                 }
                             }
@@ -171,15 +175,15 @@ public class UserModifyProfessionFragment extends Fragment {
                 WindowManager.LayoutParams params = alertDialog.getWindow().getAttributes();
                 params.width = 800;
                 alertDialog.getWindow().setAttributes(params);
-            }
+
+                break;
 
             // 返回會員資訊畫面
-            if (v.getId() == R.id.user_bt_modify_profession_cancel) {
-
+            case R.id.user_bt_modify_profession_cancel:
                 getFragmentManager().popBackStack();
-            }
+                break;
         }
-    };
+    }
 
 
 
@@ -193,14 +197,10 @@ public class UserModifyProfessionFragment extends Fragment {
         task = new MyTask(url, jsonObject.toString());
         try {
             String jsonIn = task.execute().get();
-            Log.d(TAG, "Input: "+jsonIn);
             result = new Gson().fromJson(jsonIn, ArrayList.class);
-        } catch (Exception e) {
-            Log.e(TAG, e.toString());
-        }
+        } catch (Exception e) {}
         return result;
     }
-
 
 
     // 拿到選擇的所有專業項目
@@ -214,11 +214,8 @@ public class UserModifyProfessionFragment extends Fragment {
         task = new MyTask(url, jsonObject.toString());
         try {
             String jsonIn = task.execute().get();
-            Log.d(TAG, "Input: "+jsonIn);
             result = new Gson().fromJson(jsonIn, ArrayList.class);
-        } catch (Exception e) {
-            Log.e(TAG, e.toString());
-        }
+        } catch (Exception e) {}
         return result;
     }
 
@@ -235,22 +232,9 @@ public class UserModifyProfessionFragment extends Fragment {
         task = new MyTask(url, jsonObject.toString());
         try {
             result = Integer.valueOf(task.execute().get());
-            Log.d(TAG, "Input: " + result);
-        } catch (Exception e) {
-            Log.e(TAG, e.toString());
-        }
+        } catch (Exception e) {}
         return result;
     }
 
-
-    // 初始化 BJ4
-    private void findView(View view) {
-        userModifyProfessionButtonCancel = view.findViewById(R.id.user_bt_modify_profession_cancel);
-        userModifyProfessionRecyclerShowItem = view.findViewById(R.id.user_recycler_modify_profession);
-        userModifyProfessionButtonNewItem = view.findViewById(R.id.user_bt_modify_profession_new);
-        // 監聽按鈕
-        userModifyProfessionButtonNewItem.setOnClickListener(userModifyProfessionButton);
-        userModifyProfessionButtonCancel.setOnClickListener(userModifyProfessionButton);
-
-    }
 }
+
