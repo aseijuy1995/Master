@@ -21,29 +21,31 @@ import nom.cp101.master.master.R;
  */
 //文章列表內專業類別選項與GridView的橋接器
 public class CourseProfessionAdapter extends BaseAdapter {
-    Context context;
-    FragmentManager fm;
-    int[] profession_img;
-    List<ProfessionData> professionDataList;
+    private Context context;
+    private FragmentManager fm;
+    private int[] profession_img;
+    private List<Profession> professionList;
 
     public CourseProfessionAdapter(Context context, FragmentManager fm) {
         this.context = context;
         this.fm = fm;
+        this.profession_img = ConnectionServer.profession_img;
+        this.professionList = ConnectionServer.getProfession();
     }
 
     //依照專業類別筆數實作次數
     @Override
     public int getCount() {
-        if(professionDataList != null){
-            return professionDataList.size();
-        }else{
+        if (professionList != null) {
+            return professionList.size();
+        } else {
             return 0;
         }
     }
 
     @Override
     public Object getItem(int position) {
-        return professionDataList.get(position);
+        return professionList.get(position);
     }
 
     @Override
@@ -57,46 +59,37 @@ public class CourseProfessionAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.course_gridview_item, parent, false);
         }
         //依照position抓取顯示的專業類別內之數據
-        final ProfessionData professionData = professionDataList.get(position);
-
+        final Profession profession = professionList.get(position);
         LinearLayout llGvCourse = (LinearLayout) convertView.findViewById(R.id.llGvCourse);
         ImageView ivGvCourse = (ImageView) convertView.findViewById(R.id.ivGvCourse);
         TextView tvGvCourse = (TextView) convertView.findViewById(R.id.tvGvCourse);
 
-        int width = 0, height = 0;
+        int width = 0;
         //取得屏幕長算出所需長度,以保不失真
-        width = height = context.getResources().getDisplayMetrics().widthPixels / 4;
+        width = context.getResources().getDisplayMetrics().widthPixels / 4;
         convertView.setMinimumWidth(width);
-        convertView.setMinimumHeight(height);
-
         ivGvCourse.setImageResource(profession_img[position]);
-        tvGvCourse.setText(professionData.getProfession_category());
-        //取得gridVie設置其高度
-        ViewGroup.LayoutParams params = parent.getLayoutParams();
-        params.height = height * 2;
+        tvGvCourse.setText(profession.getProfession_category());
 
         llGvCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CourseProfessionFragment courseProfessionFragment = new CourseProfessionFragment();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("professionData", professionData);
+                bundle.putSerializable("profession", profession);
                 courseProfessionFragment.setArguments(bundle);
                 FragmentTransaction ft = fm.beginTransaction();
+                ft.setCustomAnimations(R.anim.right_in,
+                        R.anim.left_out,
+                        R.anim.left_in,
+                        R.anim.right_out);
                 //返回上個fragment
                 ft.addToBackStack(null);
                 fm.popBackStack();
                 ft.replace(R.id.frameMaster, courseProfessionFragment).commit();
             }
         });
-
         return convertView;
     }
-
-    public void setData() {
-        this.profession_img = ConnectionServer.profession_img;
-        this.professionDataList = ConnectionServer.getProfessionData();
-    }
-
 
 }

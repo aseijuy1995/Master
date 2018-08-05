@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--app:actionViewClass表指向某個指定的view文件-->
+    <!--showAsAction表此view在actionBar中隱藏顯示的方式-->
+    <!--<item-->
+        <!--android:id="@+id/searchMaster"-->
+        <!--android:icon="@drawable/master_search"-->
+        <!--android:title="@string/searchData"-->
+        <!--app:actionViewClass="android.support.v7.widget.SearchView"-->
+        <!--app:showAsAction="always|collapseActionView" />-->
+
+    <item
+        android:id="@+id/addTextMaster"
+        android:icon="@drawable/master_add"
+        android:title="@string/addText"
+        app:showAsAction="always|collapseActionView" />
+
+</menu>

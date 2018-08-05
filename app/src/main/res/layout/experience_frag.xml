@@ -1,19 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/experience_article"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/ivAdd"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:src="@drawable/master_add" />
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/master_toolbar_shadow" />
 
     <!--下拉更新SwipeRefreshLayout,於監聽包覆之滑動元件-->
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srlExperience"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#ddd">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvExperience"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_experience" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>
+

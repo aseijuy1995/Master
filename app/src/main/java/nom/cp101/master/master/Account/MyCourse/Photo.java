@@ -1,5 +1,7 @@
 package nom.cp101.master.master.Account.MyCourse;
 
+import java.io.ByteArrayOutputStream;
+
 /**
  * Created by chunyili on 2018/5/1.
  */
@@ -7,10 +9,10 @@ package nom.cp101.master.master.Account.MyCourse;
 public class Photo {
     private int photo_id;
     private String user_id;
-    private String photo;
+    private byte[] photo;
 
 
-    public Photo(int photo_id, String user_id, String photo) {
+    public Photo(int photo_id, String user_id, byte[] photo) {
         super();
         this.photo_id = photo_id;
         this.user_id = user_id;
@@ -33,11 +35,11 @@ public class Photo {
         this.user_id = user_id;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return photo;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.photo = image;
     }
 

@@ -1,48 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/srlCourse"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <!--clipChildren:當子控件高度高於父控間高度時,會完全顯示也不會遭壓縮-->
-    <!--layerType="software"關閉硬體加速,因怕會有渲染錯誤-->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:gravity="center_horizontal"
-        android:layerType="software"
-        android:orientation="vertical">
+        android:layout_height="50dp">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vpCourse"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical"
+            android:text="@string/course_article"
+            android:textColor="#000"
+            android:textSize="20sp" />
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/master_toolbar_shadow" />
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srlCourse"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:clipChildren="false" />
+            android:background="#ddd">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cvCourse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="15dp"
-            app:cardBackgroundColor="#FFDDDD"
-            app:cardElevation="30dp">
+            <!--clipChildren:當子控件高度高於父控間高度時,會完全顯示也不會遭壓縮-->
+            <!--layerType="software"關閉硬體加速,因怕會有渲染錯誤-->
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ddd"
+                android:clipChildren="false"
+                android:gravity="center_horizontal"
+                android:layerType="software"
+                android:orientation="vertical">
 
-            <nom.cp101.master.master.CourseArticle.CourseGridView
-                android:id="@+id/gvCourse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:numColumns="4" />
-        </android.support.v7.widget.CardView>
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vpCourse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:clipChildren="false" />
 
-    </LinearLayout>
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvCourse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="#fff"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="15dp">
 
-</android.support.v4.widget.SwipeRefreshLayout>
+                    <nom.cp101.master.master.CourseArticle.CourseGridView
+                        android:id="@+id/gvCourse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:numColumns="4" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#fff"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/new_user_title" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#ddd" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rvCourse"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        </android.support.v7.widget.RecyclerView>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

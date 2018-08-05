@@ -5,7 +5,7 @@ import android.view.View;
 
 //設置ViewPager動畫呈現
 public class CourseViewPagerTransformer implements ViewPager.PageTransformer {
-    static final float min_scale = 0.85f;
+    private static final float min_scale = 0.85f;
 
     @Override
     public void transformPage(View page, float position) {

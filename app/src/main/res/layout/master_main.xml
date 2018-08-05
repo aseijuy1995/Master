@@ -6,25 +6,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolBarMaster"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-         />
-
     <FrameLayout
         android:id="@+id/frameMaster"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
+    <!--layoutMode定義viewGroup的佈局模式-->
+    <!--clipBounds:默認值,保留subView間邊緣留白-->
+    <!--opticalBounds:使其消除留白效果-->
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bnvMaster"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="bottom"
-        android:layoutMode="opticalBounds"
         android:background="?android:attr/windowBackground"
+        android:layoutMode="clipBounds"
         app:menu="@menu/master_bottom_navigation" />
 
 </LinearLayout>

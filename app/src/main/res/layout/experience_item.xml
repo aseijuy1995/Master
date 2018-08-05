@@ -3,173 +3,192 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:paddingBottom="5dp">
 
-
-    <com.silencedut.expandablelayout.ExpandableLayout
-        android:id="@+id/elExperience"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:background="#fff"
+        android:elevation="30dp">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cvExperience"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_marginTop="10dp"
-            android:elevation="30dp">
+            android:background="#fff"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivHead"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/user" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="3dp"
+                        android:gravity="center_vertical"
+                        android:text="TextView"
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="TextView"
+                        android:textColor="#aaa"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/ivPicture"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/account_add_image" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffeeff"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp">
 
-                <FrameLayout
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/master_favorite" />
+
+                <TextView
+                    android:id="@+id/tvLikes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:editable="false"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvComment"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:gravity="right|center_vertical"
+                    android:text="TextView"
+                    android:textSize="14sp" />
 
-                    <ImageView
-                        android:id="@+id/ivPicture"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        app:srcCompat="@drawable/account_add_image" />
+            </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#90000000"
-                        android:orientation="horizontal">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ddd">
 
-                        <ImageView
-                            android:id="@+id/ivHead"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            app:srcCompat="@drawable/head_img" />
+            </View>
 
-                        <TextView
-                            android:id="@+id/tvHead"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="5dp"
-                            android:text="TextView"
-                            android:textColor="#ffffff"
-                            android:textSize="14sp" />
-
-                    </LinearLayout>
-
-                </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
                     <com.sackcentury.shinebuttonlib.ShineButton
                         android:id="@+id/sbLaud"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_centerInParent="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
                         android:src="@android:color/darker_gray"
                         app:allow_random_color="false"
                         app:btn_color="@android:color/darker_gray"
                         app:btn_fill_color="@color/colorPrimary"
                         app:siShape="@raw/like" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:background="#55000000"
-                        android:orientation="vertical">
-
-                    </View>
-
                     <TextView
-                        android:id="@+id/tvLikes"
-                        android:layout_width="35dp"
+                        android:id="@+id/tvLaud"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:editable="true"
-                        android:gravity="center"
-                        android:text="TextView"
-                        android:textSize="16sp" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
-                        android:background="#55000000"
-                        android:orientation="vertical">
-
-                    </View>
-
-                    <ImageButton
-                        android:id="@+id/ibLeaveMsg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#00ffffff"
-                        app:srcCompat="@drawable/comment_img" />
-
-                    <TextView
-                        android:id="@+id/tvTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:padding="5dp"
-                        android:text="TextView"
-                        android:textColor="#aaaaaa"
+                        android:gravity="center"
+                        android:text="@string/like"
                         android:textSize="14sp" />
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvContent"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/llComment"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginStart="10dp"
-                    android:text="TextView"
-                    android:textSize="16sp" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/master_comment" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/comment_title"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-
-            <EditText
-                android:id="@+id/etComment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
-            <Button
-                android:id="@+id/btnComment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/comment_send" />
         </LinearLayout>
 
-    </com.silencedut.expandablelayout.ExpandableLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>
 

@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import nom.cp101.master.master.Master.Master;
+import nom.cp101.master.master.Master.MasterActivity;
 import nom.cp101.master.master.R;
 
 
@@ -25,7 +25,7 @@ public class NotificationReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-        Intent nf_intent = new Intent(context, Master.class);
+        Intent nf_intent = new Intent(context, MasterActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("type", "Notification");
         nf_intent.putExtras(bundle);

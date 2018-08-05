@@ -21,7 +21,7 @@ public class Course implements Serializable {
     private String course_location;
     private Date course_apply_deadline;
     private int course_people_number;
-//    private int course_applied_number;
+    //    private int course_applied_number;
     private int course_image_id;
     private String course_note;
     private int course_status_id;
@@ -63,7 +63,7 @@ public class Course implements Serializable {
     }
 
     public Course(int course_id, String user_id,
-//                  int profession_id,
+                  int profession_id,
                   int course_category_id, int course_status_id,
                   String course_name, Date course_date,
                   String course_content, int course_price,
@@ -74,7 +74,7 @@ public class Course implements Serializable {
                   int course_image_id, String course_note) {
         this.course_id = course_id;
         this.user_id = user_id;
-//        this.profession_id = profession_id;
+        this.profession_id = profession_id;
         this.course_category_id = course_category_id;
         this.course_status_id = course_status_id;
         this.course_name = course_name;

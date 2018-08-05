@@ -2,12 +2,9 @@ package nom.cp101.master.master.Account.MyAccount;
 
 
 public class User {
-
     private String userId, userName, userPassword, userAddress, userTel, userProfile,
-            userPortraitBase64, userBackgroundBase64, userProfession, delete;
-    private int  userGender, userAccess;
-    private byte[] userPortrait, userBackground, image;
-
+            userPortraitBase64, userBackgroundBase64, userProfession;
+    private int userGender, userAccess;
 
     public User() {
     }
@@ -17,12 +14,9 @@ public class User {
         this.userPortraitBase64 = userPortraitBase64;
     }
 
-    public String getDelete() {
-        return delete;
-    }
-
-    public void setDelete(String delete) {
-        this.delete = delete;
+    public User(String userId, String userName, int type) {
+        this.userId = userId;
+        this.userName = userName;
     }
 
     public String getUserId() {
@@ -103,30 +97,6 @@ public class User {
 
     public void setUserAccess(int userAccess) {
         this.userAccess = userAccess;
-    }
-
-    public byte[] getUserPortrait() {
-        return userPortrait;
-    }
-
-    public void setUserPortrait(byte[] userPortrait) {
-        this.userPortrait = userPortrait;
-    }
-
-    public byte[] getUserBackground() {
-        return userBackground;
-    }
-
-    public void setUserBackground(byte[] userBackground) {
-        this.userBackground = userBackground;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
     }
 
     public String getUserProfession() {

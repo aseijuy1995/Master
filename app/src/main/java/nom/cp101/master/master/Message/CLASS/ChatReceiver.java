@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -16,7 +15,7 @@ import com.google.gson.JsonObject;
 
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
-import nom.cp101.master.master.Master.Master;
+import nom.cp101.master.master.Master.MasterActivity;
 import nom.cp101.master.master.R;
 
 public class ChatReceiver extends BroadcastReceiver {
@@ -36,7 +35,7 @@ public class ChatReceiver extends BroadcastReceiver {
         String sender = chatMessage.getSender();
         String friend_name = findRoomName(Common.getUserName(context), sender, context);
         Log.d(TAG, String.valueOf(atRoom) + "  " + friend_name);
-        Intent nf_intent = new Intent(context, Master.class);
+        Intent nf_intent = new Intent(context, MasterActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, nf_intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (atRoom == 0 && sender.equals(friend_name)) {

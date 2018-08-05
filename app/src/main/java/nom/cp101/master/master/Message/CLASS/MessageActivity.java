@@ -2,7 +2,6 @@ package nom.cp101.master.master.Message.CLASS;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,7 +31,6 @@ import java.util.Map;
 
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
-import nom.cp101.master.master.Master.Master;
 import nom.cp101.master.master.R;
 
 import static nom.cp101.master.master.Main.Common.chatWebSocket;

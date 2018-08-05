@@ -1,111 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="註冊"
-            android:gravity="center"
-            android:textSize="28dp"/>
+    android:layout_height="match_parent"
+    android:background="#aaa"
+    android:orientation="vertical">
 
-        <TextView
-            android:layout_marginTop="10dp"
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:text="帳號"/>
-        <EditText
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/master_back" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/sign_in"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/master_toolbar_shadow" />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff">
+
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/signup_ed_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="6~12 碼英文數字, 開頭為英文 ..."/>
+            android:hint="@string/account"
+            android:textColor="#fff" />
+    </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:text="密碼"/>
-        <EditText
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff">
+
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/signup_ed_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:hint="6~12 碼英文數字 ..."/>
+            android:hint="@string/password"
+            android:textColor="#fff"
+            android:textColorHint="#ffffff" />
+    </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:text="名稱"/>
-        <EditText
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff">
+
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/signup_ed_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="請輸入名稱 ..."/>
+            android:hint="@string/name"
+            android:textColor="#fff"
+            android:textColorHint="#ffffff" />
+    </android.support.design.widget.TextInputLayout>
 
-        <TextView
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/identity"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:id="@+id/signup_rg_access"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/signup_rb_master"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textSize="16dp"
-            android:text="身份"/>
-        <RadioGroup
-            android:id="@+id/signup_rg_access"
+            android:layout_weight="1"
+            android:text="我是教練"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/signup_rb_student"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <RadioButton
-                android:id="@+id/signup_rb_master"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="我是教練"/>
-            <RadioButton
-                android:id="@+id/signup_rb_student"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="我是學員"/>
-        </RadioGroup>
+            android:layout_weight="1"
+            android:text="我是學員"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </RadioGroup>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
 
-
-        <LinearLayout
+        <Button
+            android:id="@+id/signup_bt_ok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/signup_bt_cancel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:textSize="20dp"
-                android:text="取消"/>
-            <Button
-                android:id="@+id/signup_bt_ok"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:textSize="20dp"
-                android:text="確認"/>
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_frame_white_item"
+            android:text="確認"
+            android:textColor="#ffffff"
+            android:textSize="20dp" />
 
-        </LinearLayout>
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="bottom"
+        android:text="@string/sign_in_prompt"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 
-</ScrollView>
+</LinearLayout>

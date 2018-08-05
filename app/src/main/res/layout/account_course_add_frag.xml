@@ -1,56 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/add_course_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/account_add_image"
-            android:layout_marginTop="20dp"/>
+            android:src="@drawable/account_add_image" />
 
         <EditText
             android:id="@+id/add_course_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="@string/course_name" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="60dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/spinner_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="@string/course_category_item"/>
+                android:text="@string/course_category_item"
+                android:textSize="16sp" />
+
             <Spinner
                 android:id="@+id/add_course_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="3dp"
-                />
+                android:layout_marginTop="3dp" />
         </LinearLayout>
 
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            >
+            android:layout_marginTop="10dp">
 
             <EditText
                 android:id="@+id/add_course_detail"
@@ -61,7 +60,7 @@
                 android:gravity="top"
                 android:hint="@string/course_detail"
                 android:inputType="textMultiLine"
-                android:lines="7"
+                android:lines="5"
                 android:padding="8dp" />
         </FrameLayout>
 
@@ -70,7 +69,7 @@
             android:id="@+id/add_course_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:ems="10"
             android:focusable="false"
             android:hint="@string/course_date"
@@ -80,7 +79,7 @@
             android:id="@+id/add_course_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="@string/course_price"
             android:inputType="number" />
@@ -89,7 +88,7 @@
             android:id="@+id/add_course_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="@string/course_location" />
 
@@ -97,7 +96,7 @@
             android:id="@+id/add_course_need"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="@string/course_need" />
 
@@ -105,7 +104,7 @@
             android:id="@+id/add_course_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="@string/course_number"
             android:inputType="number" />
@@ -114,7 +113,7 @@
             android:id="@+id/add_course_qualification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:ems="10"
             android:gravity="top"
             android:hint="@string/course_qualification"
@@ -124,17 +123,17 @@
             android:id="@+id/add_course_apply_deadline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:ems="10"
+            android:focusable="false"
             android:gravity="top"
             android:hint="@string/course_deadline"
-            android:inputType="date"
-            android:focusable="false"/>
+            android:inputType="date" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp">
+            android:layout_marginTop="10dp">
 
             <EditText
                 android:id="@+id/add_course_note"
@@ -145,7 +144,7 @@
                 android:gravity="top"
                 android:hint="@string/course_note"
                 android:inputType="textMultiLine"
-                android:lines="7"
+                android:lines="5"
                 android:padding="8dp" />
         </FrameLayout>
 
@@ -153,10 +152,11 @@
             android:id="@+id/add_course_send"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:textColor="@color/white"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/account_btn_style"
-            android:text="@string/course_send"/>
+            android:text="@string/course_send"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 

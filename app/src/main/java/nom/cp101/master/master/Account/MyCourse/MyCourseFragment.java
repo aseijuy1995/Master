@@ -1,5 +1,6 @@
 package nom.cp101.master.master.Account.MyCourse;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gigamole.infinitecycleviewpager.VerticalInfiniteCycleViewPager;
 import com.google.gson.Gson;
@@ -25,155 +27,149 @@ import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
 
 import static nom.cp101.master.master.Main.Common.COACH_ACCESS;
-import static nom.cp101.master.master.Main.Common.STUDENT_ACCESS;
 
-
-public class MyCourseFragment extends Fragment {
-
-    FloatingActionButton fabBtn;
-    FragmentTransaction transaction;
-    private MyTask courseGetAllTask;
+public class MyCourseFragment extends Fragment implements View.OnClickListener {
     private static String TAG = "MyCourseFragment";
-    VerticalInfiniteCycleViewPager pager;
+    private Context context;
+    private VerticalInfiniteCycleViewPager pager;
+    private FloatingActionButton fabBtn;
+    private ImageView course_didnot_signIn;
+    private TextView course_not_found;
+
     private int access;
     private String user_id;
-    private ImageView course_didnot_signIn;
     private ArrayList<Course> courses;
+    private MyTask courseGetAllTask;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_course_my_course_frag, container, false);
-        pager = (VerticalInfiniteCycleViewPager)view.findViewById(R.id.verticle_cycle);
-        fabBtn = view.findViewById(R.id.fab_btn_add);
-        course_didnot_signIn = view.findViewById(R.id.course_didnot_signIn);
+        pager = (VerticalInfiniteCycleViewPager) view.findViewById(R.id.verticle_cycle);
+        fabBtn = (FloatingActionButton) view.findViewById(R.id.fab_btn_add);
+        course_didnot_signIn = (ImageView) view.findViewById(R.id.course_didnot_signIn);
+        course_not_found = (TextView) view.findViewById(R.id.course_not_found);
+        context = getContext();
         user_id = Common.getUserName(getContext());
-        access = Common.getUserAccess(getContext());
-        if(user_id.isEmpty()){
+        fabBtn.setOnClickListener(this);
+
+        if (!Common.checkUserName(getActivity(), user_id)) {
             course_didnot_signIn.setVisibility(View.VISIBLE);
-            pager.setVisibility(View.INVISIBLE);
-            fabBtn.setVisibility(View.INVISIBLE);
-        }else if(access == COACH_ACCESS){
-            courses = findCourseByCoach("findCourseByCoach",user_id);
-            if(courses != null){
-                pager.setAdapter(new MyAdapter(courses, getContext(),getActivity()));
-            }
-
-        }else if(access == STUDENT_ACCESS){
-
-            courses = findCourseByStudent("findCourseByStudent",user_id);
-            if(courses != null){
-                pager.setAdapter(new MyAdapter(courses, getContext(),getActivity()));
-            }
-
-            fabBtn.setVisibility(View.INVISIBLE);
+            pager.setVisibility(View.GONE);
+            fabBtn.setVisibility(View.GONE);
+            course_not_found.setVisibility(View.GONE);
+            return null;
         }
-        addClick();
         return view;
     }
 
-
-    private void addClick() {
-        fabBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment addCourseFragment = new AddCourseFragment();
-                transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, addCourseFragment).commit();
-                transaction.addToBackStack(null);
-            }
-        });
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab_btn_add:
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.setCustomAnimations(R.anim.right_in,
+                        R.anim.left_out,
+                        R.anim.left_in,
+                        R.anim.right_out)
+                        .replace(R.id.fragment_container, new AddCourseFragment())
+                        .commit();
+                ft.addToBackStack(null);
+                break;
+        }
     }
 
-    private ArrayList<Course> selectAll(String servletStr, String value){
-        if (Common.networkConnected(getActivity())){
-            String url = Common.URL + "/" + servletStr;
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Common.getUserName(context) != null) {
+            course_didnot_signIn.setVisibility(View.GONE);
+            access = Common.getUserAccess(context, user_id);
+
+            if (access == COACH_ACCESS) {
+                fabBtn.setVisibility(View.VISIBLE);
+                courses = findCourseByCoach("findCourseByCoach", user_id);
+                if (courses.size() > 0) {
+                    course_not_found.setVisibility(View.GONE);
+                    pager.setVisibility(View.VISIBLE);
+                    pager.setAdapter(new MyCourseAdapter(courses, getContext()));
+
+                } else {
+                    course_not_found.setVisibility(View.VISIBLE);
+                    pager.setVisibility(View.GONE);
+                }
+
+            } else {
+                fabBtn.setVisibility(View.GONE);
+                courses = findCourseByStudent("findCourseByStudent", user_id);
+                if (courses.size() > 0) {
+                    course_not_found.setVisibility(View.GONE);
+                    pager.setVisibility(View.VISIBLE);
+                    pager.setAdapter(new MyCourseAdapter(courses, getContext()));
+
+                } else {
+                    course_not_found.setVisibility(View.VISIBLE);
+                    pager.setVisibility(View.GONE);
+                }
+            }
+        }
+    }
+
+    private ArrayList<Course> findCourseByCoach(String value, String user_id) {
+        if (Common.networkConnected(getActivity())) {
+            String url = Common.URL + "/finalCourseServlet";
             ArrayList<Course> courses = null;
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action",value);
+            jsonObject.addProperty("action", value);
+            jsonObject.addProperty("user_id", user_id);
             String jsonOut = jsonObject.toString();
-            courseGetAllTask = new MyTask(url,jsonOut);
+            courseGetAllTask = new MyTask(url, jsonOut);
             try {
                 String jsonIn = courseGetAllTask.execute().get();
                 Log.d(TAG, jsonIn);
-                Type listType = new TypeToken<List<Course>>(){ }.getType();
+                Type listType = new TypeToken<List<Course>>() {
+                }.getType();
                 courses = new Gson().fromJson(jsonIn, listType);
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
-            if (courses == null || courses.isEmpty()) {
-                Common.showToast(getActivity(), R.string.msg_NoCoursesFound);
-                return null;
-            } else {
-
-                return courses;
-            }
+            return courses;
         } else {
             Common.showToast(getActivity(), R.string.msg_NoNetwork);
             return null;
         }
     }
 
-    private ArrayList<Course> findCourseByCoach( String value,String user_id){
-        if (Common.networkConnected(getActivity())){
+    private ArrayList<Course> findCourseByStudent(String value, String user_id) {
+        if (Common.networkConnected(getActivity())) {
             String url = Common.URL + "/finalCourseServlet";
             ArrayList<Course> courses = null;
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action",value);
-            jsonObject.addProperty("user_id",user_id);
+            jsonObject.addProperty("action", value);
+            jsonObject.addProperty("user_id", user_id);
             String jsonOut = jsonObject.toString();
-            courseGetAllTask = new MyTask(url,jsonOut);
+            courseGetAllTask = new MyTask(url, jsonOut);
             try {
                 String jsonIn = courseGetAllTask.execute().get();
                 Log.d(TAG, jsonIn);
-                Type listType = new TypeToken<List<Course>>(){ }.getType();
+                Type listType = new TypeToken<List<Course>>() {
+                }.getType();
                 courses = new Gson().fromJson(jsonIn, listType);
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
-            if (courses == null || courses.isEmpty()) {
-                Common.showToast(getActivity(), R.string.msg_NoCoursesFound);
-                return null;
-            } else {
-
-                return courses;
-            }
+            return courses;
         } else {
             Common.showToast(getActivity(), R.string.msg_NoNetwork);
             return null;
         }
     }
 
-
-    private ArrayList<Course> findCourseByStudent( String value,String user_id){
-        if (Common.networkConnected(getActivity())){
-            String url = Common.URL + "/finalCourseServlet";
-            ArrayList<Course> courses = null;
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action",value);
-            jsonObject.addProperty("user_id",user_id);
-            String jsonOut = jsonObject.toString();
-            courseGetAllTask = new MyTask(url,jsonOut);
-            try {
-                String jsonIn = courseGetAllTask.execute().get();
-                Log.d(TAG, jsonIn);
-                Type listType = new TypeToken<List<Course>>(){ }.getType();
-                courses = new Gson().fromJson(jsonIn, listType);
-            } catch (Exception e) {
-                Log.e(TAG, e.toString());
-            }
-            if (courses == null || courses.isEmpty()) {
-                Common.showToast(getActivity(), R.string.msg_NoCoursesFound);
-                return null;
-            } else {
-
-                return courses;
-            }
-        } else {
-            Common.showToast(getActivity(), R.string.msg_NoNetwork);
-            return null;
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (courseGetAllTask != null) {
+            courseGetAllTask.cancel(true);
         }
     }
 }

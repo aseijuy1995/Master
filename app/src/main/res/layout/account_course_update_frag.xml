@@ -8,16 +8,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_margin="20dp"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/update_course_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/account_add_image"
-            android:layout_marginTop="20dp"/>
-            android:text="@string/updateImage" />
+            android:src="@drawable/account_add_image" />
+        android:text="@string/updateImage" />
 
         <EditText
             android:id="@+id/update_course_name"
@@ -53,9 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:ems="10"
+            android:focusable="false"
             android:hint="@string/course_date"
-            android:inputType="date"
-            android:focusable="false"/>
+            android:inputType="date" />
 
         <EditText
             android:id="@+id/update_course_price"
@@ -107,10 +106,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:ems="10"
+            android:focusable="false"
             android:gravity="top"
             android:hint="@string/course_deadline"
-            android:inputType="date"
-            android:focusable="false"/>
+            android:inputType="date" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -135,9 +134,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:textColor="@color/white"
             android:background="@drawable/account_btn_style"
-            android:text="@string/course_update" />
+            android:text="@string/course_update"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 

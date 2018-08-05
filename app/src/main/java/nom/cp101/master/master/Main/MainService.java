@@ -14,7 +14,6 @@ import com.google.gson.JsonObject;
 
 import nom.cp101.master.master.Message.CLASS.ChatReceiver;
 import nom.cp101.master.master.Notification.NotificationReceiver;
-import nom.cp101.master.master.Notification.NotificationSocket;
 
 
 public class MainService extends Service {

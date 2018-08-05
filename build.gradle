@@ -18,8 +18,14 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
+
         jcenter()
+        //所需fb-sdk添加
+        mavenCentral()
+
+
+        google()
+
         //使用LabelView相關空間需添加JitPack倉庫
         //使用NiceSpinner相關空間需添加JitPack倉庫
         maven { url "https://jitpack.io" }

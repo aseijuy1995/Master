@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<nom.cp101.master.master.Account.MyPhoto.SquareRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<nom.cp101.master.master.Main.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="2dp"
-    >
+    android:padding="2dp">
 
     <ImageView
         android:id="@+id/photo_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/master_empty_picture"
+        android:transitionName="shareImg" />
 
-        android:scaleType="centerCrop"
-        android:src="@drawable/account_bulldog"/>
-
-
-</nom.cp101.master.master.Account.MyPhoto.SquareRelativeLayout>
+</nom.cp101.master.master.Main.SquareRelativeLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <GridView
+        android:id="@+id/photoGridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/ivAgainLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/course_offline" />
+
+    <TextView
+        android:id="@+id/tvEmptyPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/empty_photos"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+</LinearLayout>

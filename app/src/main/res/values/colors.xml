@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#64aae7</color>
+    <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#FF4081</color>
     <color name="nf_rv_itemview">#999797</color>
     <color name="mg_rv_itemview">#a3c2c1c1</color>
@@ -17,4 +17,8 @@
     <color name="master">#657CED</color>
 
 
+
+    <!-- colors -->
+    <color name="primary">#785447</color>
+    <color name="primaryDark">#5B3F36</color>
 </resources>

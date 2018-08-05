@@ -44,5 +44,6 @@ public class CourseViewPagerScroller extends Scroller {
             e.printStackTrace();
         }
     }
+
 }
 

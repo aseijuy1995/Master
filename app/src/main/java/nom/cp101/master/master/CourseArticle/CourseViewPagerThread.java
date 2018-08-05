@@ -6,8 +6,8 @@ import android.support.v4.view.ViewPager;
 
 public class CourseViewPagerThread extends Thread {
     //自訂常數給handler判斷msg的key值
-    static final int PAGE_ITEM = 0;
-    ViewPager vp;
+    private static final int PAGE_ITEM = 0;
+    private ViewPager vp;
 
     public CourseViewPagerThread(ViewPager vp) {
         this.vp = vp;

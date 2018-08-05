@@ -97,88 +97,6 @@
         <item>Swift</item>
     </string-array>
 
-    <!--projectImgList-->
-    <array name="waterSportsImg">
-        <item>@drawable/a1</item>
-        <item>@drawable/a2</item>
-        <item>@drawable/a3</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a2</item>
-        <item>@drawable/a3</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a2</item>
-    </array>
-    <array name="extremeSportImg">
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-    </array>
-    <array name="workOutImg">
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-    </array>
-    <array name="ballSportsImg">
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-    </array>
-    <array name="musicalInstrumentImg">
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-    </array>
-    <array name="languageLearningImg">
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-    </array>
-    <array name="leisureTalentImg">
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-    </array>
-    <array name="programmingImg">
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-        <item>@drawable/a1</item>
-    </array>
-
 
     <!--////////////////////////////////////////////////////////////////////////////////////////////-->
 
@@ -195,7 +113,7 @@
     <string name="mg_frag_content">你好你好你好你</string>
     <string name="mg_chatroom_send">send</string>
     <string name="mg_chatroom_etmessage">Enter a message</string>
-    <string name="NoConnection">NoNetworkConnection</string>
+
     <string name="featured">精選</string>
     <string name="title_activity_experience_article">ExperienceArticleActivity</string>
 
@@ -204,7 +122,7 @@
     <!--不准動-->
     <!--警告-->
     <!--////////////////////////////////////////////////////////////////////////////////////////////-->
-    <string name="account">My Account</string>
+
     <string name="photo">My Photo</string>
     <string name="course">My Course</string>
     <string name="Mycourse">COURSE</string>
@@ -212,26 +130,16 @@
     <string name="status">status</string>
     <string name="courseClass">course class</string>
     <string name="addImage">add Image</string>
-    <string name="course_name">Name: </string>
-    <string name="course_detail">Detail: </string>
-    <string name="course_date">Date: </string>
-    <string name="course_number">Number of People: </string>
-    <string name="course_price">Price: </string>
-    <string name="course_location">Location: </string>
-    <string name="course_need">Need: </string>
-    <string name="course_qualification">Qualification: </string>
-    <string name="course_note">Note: </string>
-    <string name="course_send">Send</string>
+
     <string name="course_single">course</string>
     <string name="date">2018-02-18</string>
     <string name="single_name">Diving</string>
     <string name="single_price">$2000</string>
-    <string name="course_deadline">Regiter Deadline</string>
+
     <string name="msg_NoSpotsFound">No Course Found</string>
     <string name="msg_NoNetwork">No NetWork</string>
     <string name="msg_NoCoursesFound">No Courses Found</string>
-    <string name="InsertFail">Fail</string>
-    <string name="InsertSuccess">Success</string>
+
     <string name="msg_NoCourseFound">No Course</string>
     <string name="findSuccess">Find Success</string>
     <string name="msg_DeleteFail">Delete Faild</string>
@@ -240,7 +148,7 @@
     <string name="alert_name">Course Name</string>
     <string name="confirm_content">You want to add a new course in your Course?</string>
     <string name="ok">OK</string>
-    <string name="cancel">CANCEL</string>
+
     <string name="course_update">update</string>
     <string name="updateImage">update Image</string>
     <string name="updateSuccess">update success</string>
@@ -248,45 +156,32 @@
     <string name="student_name">STUDENT</string>
     <string name="register_status">STATUS</string>
     <string name="total">Total 10 People</string>
-    <string name="camera">Camera</string>
-    <string name="albums">Pick from albums</string>
-    <string name="picture">PICTURE</string>
+
+
     <string name="msg_InsertFail">insert fail</string>
     <string name="msg_InsertSuccess">insert Success</string>
     <string name="apply">Apply</string>
     <string name="contectCoach">Contect</string>
-    <string name="courseNotFound">Course Not Found</string>
+
     <string name="checkNetWork">Please check your network</string>
     <string name="insert">Insert Your Name</string>
     <string name="user_name">User Name</string>
     <string name="last_sentance">last santance</string>
     <string name="last_message">last message</string>
     <string name="submit">SUBMIT</string>
-    <string name="input">share your experience</string>
-    <string name="NoNotifications">NoNotificationsFound</string>
+
+
     <string name="nf_newnotificaiton">你有新的通知訊息</string>
     <string name="new_article">Add article</string>
-    <string name="course_category_item">Category</string>
+
     <string name="etMsg_empty">尚未輸入文字</string>
     <string name="successed">留言發布成功</string>
-    <string name="AddArticle">New Article</string>
 
 
-    <string name="course_article">課程</string>
-    <string name="experience_article">心得</string>
-    <string name="message">訊息</string>
-    <string name="notification">通知</string>
-    <string name="information">關於</string>
-
-    <string name="data_deadline">已截止:</string>
-    <string name="data_start">開始日期:</string>
     <string name="comment_send">發送</string>
-    <string name="no_camera">There is no camera App</string>
-    <string name="picture_empty">Image can not be empty</string>
-    <string name="content_empty">Content can not be empty</string>
-    <string name="no_device_to_crop">This device doesn\'t support the crop action!</string>
-    <string name="new_article_successed">新增成功</string>
 
+
+    <string name="no_device_to_crop">This device doesn\'t support the crop action!</string>
 
 
     <!--峻亦結束-->
@@ -295,16 +190,37 @@
 
     <!--////////////////////////////////////////////////////////////////////////////////////////////////-->
 
-    <string name="enterAccountPassword">請輸入帳密!</string>
-    <string name="errorAccountPassword">帳號或密碼錯誤!</string>
-    <string name="errorAccount">帳號格式不正確</string>
-    <string name="errorPassword">密碼格式不正確</string>
-    <string name="errorName">您的名稱是?</string>
-    <string name="errorAccess">你的身份是?</string>
-    <string name="repeatAccount">此帳號已被使用</string>
-    <string name="registerAccount">註冊失敗, 請與管理員聯絡</string>
-    <string name="canUseAccount">此帳號可以使用</string>
-    <string name="welcome">Welcome!</string>
+
+    <!--////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
+    <string name="facebook_app_id">1029355117213161</string>
+    <string name="fb_login_protocol_scheme">fb1029355117213161</string>
+
+
+    <string name="course_article">首頁</string>
+    <string name="experience_article">貼文</string>
+    <string name="message">訊息</string>
+    <string name="notification">通知</string>
+    <string name="information">關於</string>
+    <string name="AddArticle">建立貼文</string>
+    <string name="input">在想些什麼?</string>
+    <string name="addToExperience">新增到貼文</string>
+    <string name="picture_empty">請選擇照片</string>
+    <string name="content_empty">請輸入文字</string>
+    <string name="new_post_success">新增成功</string>
+    <string name="camera_turn_off">相片權限尚未開啟</string>
+    <string name="write_external_storage_turn_off">外存權限尚未開啟</string>
+    <string name="no_camera">沒有支援相機功能</string>
+    <string name="title_for_article_dialog">想要稍後在完成貼文嗎?</string>
+    <string name="msg_for_article_dialog">將內容存為草稿或捨棄</string>
+    <string name="cancel">取消</string>
+    <string name="continue_edit">繼續編輯</string>
+    <string name="give_up_edit">捨棄貼文</string>
+    <string name="store">儲存為草稿</string>
+    <string name="no_related_courses">查無相關課程！</string>
+    <string name="join_count">參加人數: </string>
+
     <string name="memberName">會員名稱</string>
     <string name="memberInformation">會員資訊</string>
     <string name="edit">編輯</string>
@@ -315,42 +231,160 @@
     <string name="noDataYet">尚未擁有資料</string>
     <string name="personalProfile">個人簡介</string>
     <string name="notYetProfiled">尚未編輯個人簡介</string>
+    <string name="professional_skill">專業技能</string>
     <string name="signOut">登出</string>
+    <string name="userOut">確定要登出?</string>
+    <string name="edit_profile">編輯個人檔案</string>
+    <string name="edit_user_name">用戶名稱</string>
+    <string name="determine">確定</string>
+    <string name="modifyUserInformation">確認修改會員資料?</string>
+
+    <string name="errorName">您的名稱是?</string>
+    <string name="errorAccess">您的身份是?</string>
+    <string name="errorGender">你的性別是?</string>
+    <string name="errorAddress">您的地址是?</string>
+    <string name="errorPhone">您的聯絡號碼是?</string>
+    <string name="errorProfile">您的個人簡介是?</string>
+    <string name="enter_name">請輸入名稱...</string>
+    <string name="enter_address">請輸入地址...</string>
+    <string name="enter_phone">請輸入號碼...</string>
+    <string name="enter_profile">請輸入個人簡介...</string>
+    <string name="errorModify">修改失敗,請稍後再試...</string>
+    <string name="successedModify">修改成功!</string>
+    <string name="isSaveOrAdort">是否要保存修改呢?</string>
+    <string name="save">保存</string>
+    <string name="save_success">保存成功</string>
+    <string name="give_up">捨棄</string>
+
+    <string name="edit_profession_skill">編輯專業技能</string>
+    <string name="selectProfessionCagegory">選擇專業類別</string>
+    <string name="selectProfessionItem">選擇專業項目</string>
+    <string name="back">返回</string>
+    <string name="repeatProfession">當前技能已存在</string>
+    <string name="addSuccessed">添加成功</string>
+    <string name="addFailed">添加失敗,請稍後在試</string>
+    <string name="success">移除成功</string>
+    <string name="failed">移除失敗,請稍後在試</string>
+
+    <string name="modifyUserImage">編輯會員照片</string>
+    <string-array name="listPortraitStr">
+        <item>拍攝大頭貼</item>
+        <item>選擇大頭貼</item>
+        <item>拍攝封面照片</item>
+        <item>選擇封面照片</item>
+    </string-array>
+
+    <string name="errorExternalStorage">外部儲存體出錯</string>
+    <string name="successUploadImage">圖片上傳成功</string>
+
+
+    <string name="setProfession">設定>></string>
+    <string name="profession_dialog_text">請給予應用程式相關權限,才可使用以下功能 ! </string>
+
+    <string name="account_empty">帳號不可為空</string>
+    <string name="password_empty">密碼不可為空</string>
+    <string name="errorAccountPassword">帳號,密碼錯誤!</string>
+
+    <string name="account">帳號</string>
+    <string name="password">密碼</string>
+    <string name="log_in">登入</string>
+    <string name="sign_in">註冊</string>
+    <string name="welcome">登入成功 ! </string>
+    <string name="name">姓名</string>
+    <string name="sign_in_prompt">貼心提醒:\n\n\t\t帳號格式：6~12 碼英文數字 , 開頭為英文 ...\n\t\t密碼格式：6~12 碼英文數字 ...\n\t\t</string>
+    <string name="errorAccount">帳號格式不正確</string>
+    <string name="errorPassword">密碼格式不正確</string>
+
+
+    <string name="repeatAccount">此帳號已被使用</string>
+    <string name="registerAccount">註冊失敗,請稍候</string>
+    <string name="canUseAccount">此帳號可以使用</string>
+
+
     <string name="errorServer">伺服器異常, 無法獲取會員資料, 請聯絡管理員</string>
     <string name="coach">教練</string>
     <string name="student">學員</string>
     <string name="man">男</string>
     <string name="women">女</string>
     <string name="noProfessionalSkillsYet">尚未選擇專業技能</string>
-    <string name="userOut">您即將登出</string>
-    <string name="modifyUserImage">修改會員圖像</string>
-    <string name="errorExternalStorage">外部儲存體出錯</string>
-    <string name="cancelChangeImage">取消更改圖片</string>
-    <string name="successUploadImage">圖片上傳成功</string>
-    <string name="modifyUserInformation">即將修改會員資料</string>
-    <string name="errorAddress">你的地址是?</string>
-    <string name="errorPhone">你的聯絡號碼是?</string>
-    <string name="errorProfile">建議填上個人簡介介紹您自己...</string>
-    <string name="errorGender">你的性別是?</string>
-    <string name="errorModify">修改失敗...請稍後再試...</string>
-    <string name="successedModify">修改成功!</string>
-    <string name="selectProfessionCagegory">選擇專業類別</string>
-    <string name="selectProfessionItem">選擇專業項目</string>
-    <string name="back">back</string>
-    <string name="repeatProfession">專業項目重複選擇</string>
-    <string name="addSuccessed">新增成功</string>
-    <string name="addFailed">新增失敗, 請聯絡管理員或稍後在試</string>
-    <string name="success">成功</string>
-    <string name="failed">失敗</string>
+    <string name="photo_title">相片集</string>
+    <string name="comment_count">個留言</string>
+    <string name="photo_save">儲存照片</string>
+    <string name="photo_delete">刪除照片</string>
+    <string name="comment_title">留言</string>
+    <string name="finish">完成</string>
+    <string name="comment_hint">\t留言...</string>
 
-    <string-array name="listPortraitStr">
-        <item>拍攝頭像</item>
-        <item>選擇頭像</item>
-        <item>拍攝封面照片</item>
-        <item>選擇封面照片</item>
+    <string name="comment_empty">尚未輸入文字</string>
+    <string name="comment_success">留言發布成功</string>
+    <string name="like">讚</string>
+    <string name="home">主頁</string>
+    <string name="phone">通話</string>
+    <string name="msg">聊天</string>
+    <string name="refreshing">加載中</string>
+    <string name="refreshing_finish">加載完畢</string>
+    <string name="experience_post_title">的貼文</string>
+    <string name="can_cell_yourself">不能打電話給自己</string>
+
+    <string name="release">發布</string>
+    <string name="delete">刪除</string>
+    <string name="empty_photos">目前相簿無圖片</string>
+    <string name="empty_portrait">尚未設置大頭貼</string>
+    <string name="comments_empty">目前尚無留言</string>
+    <string name="extend">收起</string>
+    <string name="collapse">展開</string>
+
+    <string name="data_deadline">截止日期:</string>
+    <string name="data_start">開始日期:</string>
+    <string name="data_time_out">報名時間已截止</string>
+    <string name="new_user_title">新進用戶</string>
+    <string name="save_photo">照片儲存成功</string>
+    <string name="un_save_photo">照片儲存失敗</string>
+    <string name="empty_phone">尚未設置電話</string>
+
+    <string name="courseNotFound">當前無任何課程</string>
+    <string name="register">報名中</string>
+    <string name="un_register">報名截止</string>
+    <string name="course_name">請輸入課程名稱:</string>
+    <string name="course_category_item">專業項目</string>
+
+    <string name="course_detail">請輸入課程資訊:</string>
+    <string name="course_date">請選擇開課日期</string>
+    <string name="course_number">請輸入課程人數:</string>
+    <string name="course_price">請輸入價格:</string>
+    <string name="course_location">請輸入地點:</string>
+    <string name="course_need">請輸入課前準備:</string>
+    <string name="course_qualification">請輸入具備條件:</string>
+    <string name="course_note">請輸入注意事項:</string>
+    <string name="course_send">建立課程</string>
+    <string name="course_deadline">請選擇截止日期</string>
+
+    <string name="picture">請選擇照片來源</string>
+    <string name="empty_field">欄位不可留空</string>
+    <string name="go_on_msg">繼續</string>
+    <string-array name="listCoursePhoto">
+        <item>拍攝照片</item>
+        <item>開啟相簿</item>
+        <item>取消</item>
     </string-array>
 
+    <string name="InsertFail">建立失敗</string>
+    <string name="InsertSuccess">建立成功</string>
+    <string name="date_title">日期</string>
+    <string name="course_title">課程</string>
+    <string name="content">內容</string>
+    <string name="location">地點</string>
+    <string name="need">課程需求</string>
+    <string name="number">招生人數</string>
+    <string name="qualification">參加資格</string>
+    <string name="note">注意事項</string>
+    <string name="empty_experience">當前無任何貼文</string>
+    <string name="apply_success">報名成功</string>
+    <string name="apply_again">您已經報名此課程</string>
 
-    <!--////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <string name="NoConnection">當前無網路</string>
+    <string name="NoNotifications">當前無任何通知</string>
+    <string name="empty_notification">當前無任何通知</string>
+    <string name="update_course_content">您確定要修改此課程嗎?</string>
 
 </resources>
