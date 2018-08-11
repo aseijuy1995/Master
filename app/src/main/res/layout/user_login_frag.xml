@@ -21,33 +21,37 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        app:mtf_hasFocus="true"
         app:mtf_image="@drawable/master_account_icon"
-        app:mtf_labelColor="#ffffff"
-        app:mtf_openKeyboardOnFocus="true">
+        app:mtf_labelColor="#ffffff">
 
         <EditText
             android:id="@+id/login_ed_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#fff"
             android:hint="@string/account"
             android:inputType="textVisiblePassword"
             android:maxLines="1" />
 
+
     </com.github.florent37.materialtextfield.MaterialTextField>
+
 
     <com.github.florent37.materialtextfield.MaterialTextField
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        app:mtf_hasFocus="true"
         app:mtf_image="@drawable/master_password_icon"
-        app:mtf_labelColor="#ffffff"
-        app:mtf_openKeyboardOnFocus="true">
+        app:mtf_labelColor="#ffffff">
 
         <EditText
             android:id="@+id/login_ed_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#fff"
             android:hint="@string/password"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
@@ -55,13 +59,22 @@
 
     </com.github.florent37.materialtextfield.MaterialTextField>
 
+    <CheckBox
+        android:id="@+id/login_cb_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="30dp"
+        android:text="@string/show_password"
+        android:textColor="#fff" />
+
     <Button
         android:id="@+id/login_bt_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/button_frame_white_item"
         android:text="@string/log_in"
         android:textColor="#ffffff"

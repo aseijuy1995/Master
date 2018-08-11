@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -14,9 +15,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
@@ -178,7 +181,8 @@ public class MyPhotoShowFragment extends Fragment implements View.OnClickListene
                     savePhoto();
                 }
 
-                Common.askPermissionByActivity((Activity) context,
+                Common.askPermissionByFragment((Activity) context,
+                        MyPhotoShowFragment.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         REQUEST_READ_WRITE);
                 break;
@@ -427,6 +431,60 @@ public class MyPhotoShowFragment extends Fragment implements View.OnClickListene
             tv.setText(content);
             tv.setSelected(false);
             tv.setOnClickListener(null);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_READ_WRITE:
+                List<Integer> integerList = new ArrayList<>();
+                for (int grantResult : grantResults) {
+                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                        integerList.add(grantResult);
+                    }
+                }
+                if (grantResults.length > 0 && integerList.size() == 0) {
+                    savePhoto();
+
+                } else {
+                    //shouldShowRequestPermissionRationale第一次會返回true,因使用者未拒絕使用權限
+                    // 接下來如果再次使用功能出現權限dialog,勾選了不在顯示(Don,t ask again!)時,則此method會返回false
+                    // 此時再次要使用功能時,Permission dialog則不在提示,需額外自訂dialog引導使用者開啟權限的介面
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.READ_EXTERNAL_STORAGE)
+                            && !ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                        new AlertDialog.Builder(context)
+                                .setView(R.layout.master_prefession_dialog_item)
+                                .setPositiveButton(context.getResources().getString(R.string.setProfession), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //前往管理權限介面
+                                        Intent localIntent = new Intent();
+                                        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        if (Build.VERSION.SDK_INT >= 9) {
+                                            localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+                                            localIntent.setData(Uri.fromParts("package", context.getPackageName(), null));
+                                            localIntent.setData(Uri.fromParts("package", context.getPackageName(), null));
+                                        } else if (Build.VERSION.SDK_INT <= 8) {
+                                            localIntent.setAction(Intent.ACTION_VIEW);
+                                            localIntent.setClassName("com.android.settings", "com.android.settings.InstalledAppDetails");
+                                            localIntent.putExtra("com.android.settings.ApplicationPkgName", context.getPackageName());
+                                        }
+                                        startActivity(localIntent);
+                                    }
+                                })
+                                .setNegativeButton(context.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .create().show();
+                    }
+                }
+                break;
         }
     }
 

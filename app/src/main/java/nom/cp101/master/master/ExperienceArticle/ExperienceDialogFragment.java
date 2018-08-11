@@ -190,11 +190,10 @@ public class ExperienceDialogFragment extends DialogFragment implements View.OnC
             case R.id.llHome:
             case R.id.ivBackground:
                 if (userId.equals(Common.getUserName(context))) {
+                    getDialog().dismiss();
                     intent = new Intent(context, MasterActivity.class);
                     intent.putExtra(SEND_USER, SEND_USER);
                     context.startActivity(intent);
-                    getActivity().finish();
-                    getDialog().dismiss();
 
                 } else {
                     intent = new Intent(context, ExperienceUserOtherActivity.class);

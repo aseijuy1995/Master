@@ -9,10 +9,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -26,12 +30,13 @@ import nom.cp101.master.master.R;
 import static nom.cp101.master.master.Main.Common.showToast;
 import static nom.cp101.master.master.Master.MasterActivity.LOGIN;
 
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class LoginFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     public static String URL_INTENT = "/UserInfo";
     private EditText loginEditAccount, loginEditPassword;
     private Button loginButtonLogin, loginButtonSignup;
     private MyTask task;
     private Context context;
+    private CheckBox loginCbPassword;
 
     @Nullable
     @Override
@@ -42,6 +47,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         // 註冊按鈕監聽 ...
         loginButtonSignup.setOnClickListener(this);
         loginButtonLogin.setOnClickListener(this);
+        loginCbPassword.setOnCheckedChangeListener(this);
         return view;
     }
 
@@ -50,6 +56,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         loginEditPassword = (EditText) view.findViewById(R.id.login_ed_password);
         loginButtonLogin = (Button) view.findViewById(R.id.login_bt_login);
         loginButtonSignup = (Button) view.findViewById(R.id.login_bt_signup);
+        loginCbPassword = (CheckBox) view.findViewById(R.id.login_cb_password);
     }
 
     // 點擊事件處理 ...
@@ -83,12 +90,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     // 將帳號存起來
                     Common.setUserName(getActivity(), userAccount);
                     // 取得,儲存權限
-                    editor.putInt("userAccess"+userAccount, getUserAccess(userAccount)).apply();
+                    editor.putInt("userAccess" + userAccount, getUserAccess(userAccount)).apply();
 
+                    getActivity().finish();
                     Intent intent = new Intent(context, MasterActivity.class);
                     intent.putExtra(LOGIN, LOGIN);
                     startActivity(intent);
-                    getActivity().finish();
                     showToast(context, context.getResources().getString(R.string.welcome));
 
                 } else {
@@ -152,13 +159,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (task != null) {
             task.cancel(true);
         }
-
-//        // 結束時一定要回收, 不然一定閃退
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//            loginLinearLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-//        }
-
-
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()) {
+            case R.id.login_cb_password:
+                if (isChecked) {
+                    loginEditPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    loginEditPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                break;
+        }
+    }
 }

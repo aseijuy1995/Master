@@ -12,6 +12,7 @@ import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -22,7 +23,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -36,6 +36,7 @@ import com.google.gson.JsonObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -53,8 +54,6 @@ public class ExperienceAppendActivity extends AppCompatActivity implements View.
     private CircleImageView ivHead;
     private ImageView ivPicture, ivClear, ivCamera, ivPictures, ivMap;
     private EditText etContent;
-    private ViewPager vpPicture;
-
     private Context context;
     private final String TAG = "ExperienceAppendActivity";
 
@@ -65,8 +64,9 @@ public class ExperienceAppendActivity extends AppCompatActivity implements View.
     private byte[] image;
     private String user_id;
 
-    private final int PROFESSION_CAMERA_AND_READ_EXTERNAL = 0;
+    private final int PROFESSION_CAMERA_READ_WRITE_EXTERNAL = 0;
     private final int PROFESSION_READ_EXTERNAL = 1;
+    private Bitmap bitmap = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,13 +93,12 @@ public class ExperienceAppendActivity extends AppCompatActivity implements View.
         etContent = (EditText) findViewById(R.id.etContent);
         ivPicture = (ImageView) findViewById(R.id.ivPicture);
         ivClear = (ImageView) findViewById(R.id.ivClear);
-        vpPicture = (ViewPager) findViewById(R.id.vpPicture);
         ivCamera = (ImageView) findViewById(R.id.ivCamera);
         ivPictures = (ImageView) findViewById(R.id.ivPictures);
         ivMap = (ImageView) findViewById(R.id.ivMap);
     }
 
-    //    server取數據
+    //server取數據
     private void setUserData() {
         User user = ConnectionServer.getUserData(user_id);
         if (user.getUserPortraitBase64() != null) {
@@ -136,6 +135,8 @@ public class ExperienceAppendActivity extends AppCompatActivity implements View.
                     int result = insertExperience(user_id, etStr, photo_id);
                     if (result != 0) {
                         showToast(context, context.getString(R.string.new_post_success));
+                        SharedPreferences.Editor edit = getSharedPreferences("save_post", MODE_PRIVATE).edit();
+                        edit.putString("post_img", null).putString("post_edit", null).apply();
                         finish();
                     }
                 }
@@ -151,14 +152,17 @@ public class ExperienceAppendActivity extends AppCompatActivity implements View.
                 // 選擇拍照
                 // 檢查有沒有權限(相機權限, 存取權限)
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-                        && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                     // 已拿取得權限 準備開啟相機
                     cameraTurnOn();
                 }
                 // 第一次申請權限會自動呼叫 onRequestPermissionsResult
                 Common.askPermissionByActivity(this,
-                        new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE},
-                        PROFESSION_CAMERA_AND_READ_EXTERNAL);
+                        new String[]{Manifest.permission.CAMERA,
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PROFESSION_CAMERA_READ_WRITE_EXTERNAL);
                 break;
 
             case R.id.ivPictures:
@@ -276,8 +280,14 @@ public class ExperienceAppendActivity extends AppCompatActivity implements View.
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             //拍照權限
-            case PROFESSION_CAMERA_AND_READ_EXTERNAL:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            case PROFESSION_CAMERA_READ_WRITE_EXTERNAL:
+                List<Integer> integerList = new ArrayList<>();
+                for (int grantResult : grantResults) {
+                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                        integerList.add(grantResult);
+                    }
+                }
+                if (grantResults.length > 0 && integerList.size() == 0) {
                     // 開啟相機
                     cameraTurnOn();
 
@@ -286,7 +296,8 @@ public class ExperienceAppendActivity extends AppCompatActivity implements View.
                     // 接下來如果再次使用功能出現權限dialog,勾選了不在顯示(Don,t ask again!)時,則此method會返回false
                     // 此時再次要使用功能時,Permission dialog則不在提示,需額外自訂dialog引導使用者開啟權限的介面
                     if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                            && !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                            && !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                            && !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                         new AlertDialog.Builder(context)
                                 .setView(R.layout.master_prefession_dialog_item)
                                 .setPositiveButton(context.getResources().getString(R.string.setProfession), new DialogInterface.OnClickListener() {
@@ -362,6 +373,10 @@ public class ExperienceAppendActivity extends AppCompatActivity implements View.
 
     @SuppressLint("LongLogTag")
     private int insertImage(String user_id) {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        ((BitmapDrawable) ivPicture.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, out);
+        image = out.toByteArray();
+
         if (Common.networkConnected(this)) {
             String url = Common.URL + "/photoServlet";
             String imageBase64 = Base64.encodeToString(image, Base64.DEFAULT);
@@ -464,7 +479,8 @@ public class ExperienceAppendActivity extends AppCompatActivity implements View.
         return list.size() > 0;
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
@@ -478,7 +494,6 @@ public class ExperienceAppendActivity extends AppCompatActivity implements View.
                     break;
 
                 case REQ_CROP_PICTURE:
-                    Bitmap bitmap = null;
                     try {
                         bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), cropUri);
                         ivPicture.setVisibility(View.VISIBLE);
@@ -487,9 +502,6 @@ public class ExperienceAppendActivity extends AppCompatActivity implements View.
                         ivPicture.setImageBitmap(bitmap);
                         ivClear.bringToFront();
 
-                        ByteArrayOutputStream out = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-                        image = out.toByteArray();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

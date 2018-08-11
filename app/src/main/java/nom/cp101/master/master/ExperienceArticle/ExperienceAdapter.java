@@ -46,8 +46,6 @@ import nom.cp101.master.master.ExperienceArticle.ExperienceArticleSimple.Experie
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.R;
 
-import static nom.cp101.master.master.Master.MasterActivity.SEND_USER;
-
 public class ExperienceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Activity activity;
     private FragmentManager fm;

@@ -23,6 +23,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import nom.cp101.master.master.CourseArticle.ConnectionServer;
 import nom.cp101.master.master.Main.Common;
@@ -104,9 +106,13 @@ public class ExperienceUserPortraitActivity extends AppCompatActivity implements
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case REQUEST_READ_WRITE:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                List<Integer> integerList = new ArrayList<>();
+                for (int grantResult : grantResults) {
+                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                        integerList.add(grantResult);
+                    }
+                }
+                if (grantResults.length > 0 && integerList.size() == 0) {
                     savePhoto();
 
                 } else {

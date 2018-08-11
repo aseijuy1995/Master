@@ -174,8 +174,6 @@ public class ExperienceFragment extends Fragment implements SwipeRefreshLayout.O
                 }
             }, 500);
         }
-
-
     }
 
     @Override

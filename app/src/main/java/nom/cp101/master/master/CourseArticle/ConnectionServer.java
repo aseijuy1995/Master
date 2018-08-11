@@ -3,6 +3,7 @@ package nom.cp101.master.master.CourseArticle;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -19,6 +20,8 @@ import nom.cp101.master.master.ExperienceArticle.ExperienceComment;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
+
+import static nom.cp101.master.master.Main.Common.showToast;
 
 /**
  * Created by yujie on 2018/5/16.
@@ -381,6 +384,23 @@ public class ConnectionServer {
             myTask.cancel(true);
         }
         return insertOK;
+    }
+
+    public static String findUserNameById(String user_id) {
+        String url = Common.URL + "/chatRoomServlet";
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("action", "findUserNameById");
+        jsonObject.addProperty("user_id", user_id);
+        String name = "";
+        try {
+            name = new MyTask(url, jsonObject.toString()).execute().get();
+        } catch (Exception e) {
+        }
+        if (name != null && !name.equals("")) {
+            return name;
+        } else {
+            return "";
+        }
     }
 
 

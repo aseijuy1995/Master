@@ -17,10 +17,10 @@
         android:icon="@drawable/master_message"
         android:title="@string/message" />
 
-    <item
-        android:id="@+id/item_notification"
-        android:icon="@drawable/master_notification"
-        android:title="@string/notification" />
+    <!--<item-->
+        <!--android:id="@+id/item_notification"-->
+        <!--android:icon="@drawable/master_notification"-->
+        <!--android:title="@string/notification" />-->
 
     <item
         android:id="@+id/item_information"

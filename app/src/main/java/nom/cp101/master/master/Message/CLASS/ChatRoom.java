@@ -5,15 +5,25 @@ package nom.cp101.master.master.Message.CLASS;
  */
 
 public class ChatRoom {
+    String friend_user_id;
     String room_name;
     String room_position;
     String last_message;
 
 
-    public ChatRoom(String room_name, String room_position, String last_message) {
+    public ChatRoom(String friend_user_id, String room_name, String room_position, String last_message) {
+        this.friend_user_id = friend_user_id;
         this.room_name = room_name;
         this.room_position = room_position;
         this.last_message = last_message;
+    }
+
+    public String getFriend_user_id() {
+        return friend_user_id;
+    }
+
+    public void setFriend_user_id(String friend_user_id) {
+        this.friend_user_id = friend_user_id;
     }
 
     public String getRoom_name() {

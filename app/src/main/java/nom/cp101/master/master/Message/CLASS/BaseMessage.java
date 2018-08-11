@@ -6,11 +6,11 @@ package nom.cp101.master.master.Message.CLASS;
 
 public class BaseMessage {
     private String message;
-    private String userName;
+    private String userId;
 
-    public BaseMessage(String message, String userName) {
+    public BaseMessage(String message, String userId) {
         this.message = message;
-        this.userName = userName;
+        this.userId = userId;
     }
 
     public String getMessage() {
@@ -21,11 +21,11 @@ public class BaseMessage {
         this.message = message;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

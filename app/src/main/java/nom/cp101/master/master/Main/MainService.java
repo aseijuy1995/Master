@@ -25,21 +25,21 @@ public class MainService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        handler = new Handler();
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-                Log.d(TAG, "handler");
-                handler.postDelayed(this, 5000);
-                JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("type", "checkNotification");
-                try {
-                    Common.notificationSocket.send(jsonObject.toString());
-                } catch (Exception e) {
-                    Log.e(TAG, e.toString());
-                }
-            }
-        };
+//        handler = new Handler();
+//        runnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                Log.d(TAG, "handler");
+//                handler.postDelayed(this, 5000);
+//                JsonObject jsonObject = new JsonObject();
+//                jsonObject.addProperty("type", "checkNotification");
+//                try {
+//                    Common.notificationSocket.send(jsonObject.toString());
+//                } catch (Exception e) {
+//                    Log.e(TAG, e.toString());
+//                }
+//            }
+//        };
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MainService");
         wakeLock.acquire();

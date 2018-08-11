@@ -45,6 +45,7 @@ import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.MyTask;
 import nom.cp101.master.master.R;
 
+import static android.app.Activity.RESULT_OK;
 import static nom.cp101.master.master.Main.Common.getTimeAsName;
 import static nom.cp101.master.master.Main.Common.showToast;
 
@@ -71,7 +72,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private static final int RESULT_REQUEST = 0xa2;
     // 判斷要改變大頭照還是背景圖
     private Boolean imageSelect = null;
-    private final int PROFESSION_CAMERA_AND_READ_EXTERNAL = 0;
+    private final int PROFESSION_CAMERA_READ_WRITE_EXTERNAL = 0;
     private final int PROFESSION_READ_EXTERNAL = 1;
     private String userAccount;
 
@@ -238,7 +239,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = null;
         Bundle bundle = null;
-
         switch (v.getId()) {
             /* 編輯會員資料 */
             case R.id.user_bt_modify:
@@ -310,15 +310,18 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                                 // 檢查有沒有權限(相機權限, 存取權限)
                                 selectImage(which);
                                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-                                        && ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                                        && ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                                        && ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                                     // 已拿取得權限 準備開啟相機
                                     cameraTurnOn();
                                 }
                                 // 第一次申請權限會自動呼叫 onRequestPermissionsResult
                                 Common.askPermissionByFragment(context,
                                         UserFragment.this,
-                                        new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE},
-                                        PROFESSION_CAMERA_AND_READ_EXTERNAL);
+                                        new String[]{Manifest.permission.CAMERA,
+                                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                        PROFESSION_CAMERA_READ_WRITE_EXTERNAL);
                                 break;
 
                             // 選擇大頭照 or 背景圖
@@ -372,9 +375,14 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
-            case PROFESSION_CAMERA_AND_READ_EXTERNAL:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            case PROFESSION_CAMERA_READ_WRITE_EXTERNAL:
+                List<Integer> integerList = new ArrayList<>();
+                for (int grantResult : grantResults) {
+                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                        integerList.add(grantResult);
+                    }
+                }
+                if (grantResults.length > 0 && integerList.size() == 0) {
                     // 開啟相機
                     cameraTurnOn();
 
@@ -383,7 +391,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                     // 接下來如果再次使用功能出現權限dialog,勾選了不在顯示(Don,t ask again!)時,則此method會返回false
                     // 此時再次要使用功能時,Permission dialog則不在提示,需額外自訂dialog引導使用者開啟權限的介面
                     if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)
-                            && !ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                            && !ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                            && !ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                         new AlertDialog.Builder(context)
                                 .setView(R.layout.master_prefession_dialog_item)
                                 .setPositiveButton(context.getResources().getString(R.string.setProfession), new DialogInterface.OnClickListener() {
@@ -510,39 +519,42 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
             /* 從相簿拿圖片 */
-            case GALLERY_REQUEST:
-                cropImageUri(data.getData());
-                break;
+                case GALLERY_REQUEST:
+                    cropImageUri(data.getData());
+                    break;
 
                 /* 拍照擷取圖片 */
-            case CAMERA_REQUEST:
-                cropImageUri(imageUri);
-                break;
+                case CAMERA_REQUEST:
+                    cropImageUri(imageUri);
+                    break;
 
                 /* 完成後的處理 ... */
-            case RESULT_REQUEST:
-                Bitmap bitmap = null;
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), cropUri);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                if (bitmap != null) {
-                    if (imageSelect) {
-                        // 背景圖
-                        userImageBackground.setImageBitmap(bitmap);
-                    } else {
-                        // 大頭照
-                        userImagePortrait.setImageBitmap(bitmap);
+                case RESULT_REQUEST:
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), cropUri);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    // 開始上傳圖片
-                    updataPhoto(bitmap);
-                }
-                break;
+
+                    if (bitmap != null) {
+                        if (imageSelect) {
+                            // 背景圖
+                            userImageBackground.setImageBitmap(bitmap);
+                        } else {
+                            // 大頭照
+                            userImagePortrait.setImageBitmap(bitmap);
+                        }
+                        // 開始上傳圖片
+                        updataPhoto(bitmap);
+                    }
+                    break;
+            }
         }
+
     }
 
     /* 裁切圖片 */
@@ -558,10 +570,17 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         cropIntent.setDataAndType(uri, "image/*");
         cropIntent.putExtra("crop", "true");
-        cropIntent.putExtra("aspectX", 1200);
-        cropIntent.putExtra("aspectY", 900);
-        cropIntent.putExtra("outputX", 800);
-        cropIntent.putExtra("outputY", 600);
+        if (imageSelect) {
+            cropIntent.putExtra("aspectX", 4);
+            cropIntent.putExtra("aspectY", 3);
+            cropIntent.putExtra("outputX", 800);
+            cropIntent.putExtra("outputY", 600);
+        } else {
+            cropIntent.putExtra("aspectX", 1);
+            cropIntent.putExtra("aspectY", 1);
+            cropIntent.putExtra("outputX", 600);
+            cropIntent.putExtra("outputY", 600);
+        }
         cropIntent.putExtra("scale", true);
         cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, cropUri);
         cropIntent.putExtra("return-data", false);

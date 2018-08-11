@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/sent_image"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher_background" />
-    <TextView
-        android:id="@+id/sent_name"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="user_name"
-        android:textSize="14sp"
-        android:layout_toStartOf="@id/sent_image"
-        android:layout_marginEnd="10dp"/>
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sent_name"
-        android:layout_toStartOf="@+id/sent_image"
-        >
+        <TextView
+            android:id="@+id/sent_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="user_name"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/sent_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="4dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/message_sent"
             android:maxWidth="240dp"
-            android:textSize="16sp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
+            android:padding="5dp"
             android:text="text over hear"
             android:textColor="@color/white"
-            android:background="@drawable/message_sent"/>
+            android:textSize="16sp" />
 
-    </FrameLayout>
+    </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civSent"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/user" />
 
 
-</RelativeLayout>
+</LinearLayout>

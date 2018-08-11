@@ -61,7 +61,7 @@ public class CourseProfessionItemAdapter extends RecyclerView.Adapter<CourseProf
 
         //給予課程文章編號對server端db發出請求,回傳每筆課程之參加人數
         int courseJoin = ConnectionServer.getCourseJoin(course.getCourse_id());
-        if (courseJoin >= 3) {
+        if (courseJoin >= 1) {
             holder.tvLabel.setVisibility(View.VISIBLE);
         } else {
             holder.tvLabel.setVisibility(View.GONE);

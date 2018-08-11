@@ -32,15 +32,16 @@ import java.util.Map;
 import java.util.Set;
 
 import nom.cp101.master.master.Account.AccountMain.LoginActivity;
+import nom.cp101.master.master.CourseArticle.ConnectionServer;
 import nom.cp101.master.master.Notification.NotificationSocket;
 import nom.cp101.master.master.R;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class Common {
-//    public static String URL = "http://10.0.2.2:8080/Master";
+    public static String URL = "http://10.0.2.2:8080/Master";
 
-    public static String URL = "http://172.20.10.2:8080/Master";
+//    public static String URL = "http://172.20.10.2:8080/Master";
 
 //    public static String user_id = "abc123";
 
@@ -146,8 +147,8 @@ public class Common {
         map.put(temp_key, "");
         contectRoot.updateChildren(map);
         int chat_room_id = createRoom(temp_key, context, activity);
-        connectUserRoom(user_id, friend_id, chat_room_id, activity, context);
-        connectUserRoom(friend_id, user_id, chat_room_id, activity, context);
+        connectUserRoom(user_id, ConnectionServer.findUserNameById(friend_id), chat_room_id, activity, context);
+        connectUserRoom(friend_id, ConnectionServer.findUserNameById(user_id), chat_room_id, activity, context);
         return temp_key;
     }
 

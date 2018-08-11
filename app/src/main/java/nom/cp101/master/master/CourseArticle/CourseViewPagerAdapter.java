@@ -1,9 +1,9 @@
 package nom.cp101.master.master.CourseArticle;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.util.LruCache;
@@ -16,6 +16,7 @@ import java.util.List;
 import nom.cp101.master.master.Account.MyCourse.Course;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Master.MasterActivity;
+import nom.cp101.master.master.R;
 
 import static nom.cp101.master.master.Master.MasterActivity.SEND_COURSE;
 
@@ -117,6 +118,7 @@ public class CourseViewPagerAdapter extends PagerAdapter {
                         intent.putExtra(SEND_COURSE, SEND_COURSE);
                         intent.putExtra("course", finalCourse);
                         context.startActivity(intent);
+                        ((Activity) context).overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
                     }
                 }
             });

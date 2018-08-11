@@ -79,7 +79,7 @@ public class AddCourseFragment extends Fragment implements View.OnClickListener,
     private ArrayList<Profession> professions;
     private Context context;
 
-    private final int PERMISSION_CAMERA_READ = 0;
+    private final int PERMISSION_CAMERA_READ_WRITE = 0;
     private final int PERMISSION_READ = 1;
 
     @Nullable
@@ -227,15 +227,17 @@ public class AddCourseFragment extends Fragment implements View.OnClickListener,
                             //Take Picture
                             case 0:
                                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-                                        && ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                                        && ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                                        && ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                                     // 已拿取得權限 準備開啟相機
                                     cameraTurnOn();
                                 }
                                 Common.askPermissionByFragment(context,
                                         AddCourseFragment.this,
                                         new String[]{Manifest.permission.CAMERA,
-                                                Manifest.permission.READ_EXTERNAL_STORAGE},
-                                        PERMISSION_CAMERA_READ);
+                                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                        PERMISSION_CAMERA_READ_WRITE);
                                 break;
 
                             //Pick Picture
@@ -267,8 +269,11 @@ public class AddCourseFragment extends Fragment implements View.OnClickListener,
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
-            case PERMISSION_CAMERA_READ:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            case PERMISSION_CAMERA_READ_WRITE:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
                     cameraTurnOn();
 
                 } else {
@@ -276,7 +281,8 @@ public class AddCourseFragment extends Fragment implements View.OnClickListener,
                     // 接下來如果再次使用功能出現權限dialog,勾選了不在顯示(Don,t ask again!)時,則此method會返回false
                     // 此時再次要使用功能時,Permission dialog則不在提示,需額外自訂dialog引導使用者開啟權限的介面
                     if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)
-                            && !ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                            && !ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                            && !ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                         new AlertDialog.Builder(context)
                                 .setView(R.layout.master_prefession_dialog_item)
                                 .setPositiveButton(context.getResources().getString(R.string.setProfession), new DialogInterface.OnClickListener() {
@@ -540,6 +546,5 @@ public class AddCourseFragment extends Fragment implements View.OnClickListener,
             showToast(context, R.string.InsertFail);
         }
     }
-
 
 }

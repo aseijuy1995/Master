@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import nom.cp101.master.master.CourseArticle.ConnectionServer;
 import nom.cp101.master.master.Main.Common;
 import nom.cp101.master.master.Main.ImageTask;
 import nom.cp101.master.master.Main.MyTask;
@@ -175,17 +176,14 @@ public class SingleCourseFragment extends Fragment implements View.OnClickListen
             case R.id.single_contect:
                 if (access != COACH_ACCESS && user_id != course.getUser_id()) {
                     //coach_id
-                    friend_name = findUserNameById(course.getUser_id());
-                    if (!friend_name.equals("") && friend_name != null) {
-                        //user_id = student_id
-                        room_position = findRoomPosition(user_id, friend_name);
-                        if (checkChatRoom(user_id, friend_name) == true) {
-                            String room_position;
-                            room_position = Common.contectUser(user_id, friend_name, getContext(), getActivity());
-                            enterChatRoom(room_position, user_id, friend_name);
-                        } else {
-                            enterChatRoom(room_position, user_id, friend_name);
-                        }
+                    //user_id = student_id
+                    room_position = findRoomPosition(user_id, ConnectionServer.findUserNameById(course.getUser_id()));
+                    if (checkChatRoom(user_id, ConnectionServer.findUserNameById(course.getUser_id())) == true) {
+                        String room_position;
+                        room_position = Common.contectUser(user_id, course.getUser_id(), getContext(), getActivity());
+                        enterChatRoom(room_position, user_id, course.getUser_id());
+                    } else {
+                        enterChatRoom(room_position, user_id, course.getUser_id());
                     }
                 }
                 break;
@@ -417,13 +415,13 @@ public class SingleCourseFragment extends Fragment implements View.OnClickListen
     }
 
 
-    private void enterChatRoom(String room_position, String user_id, String friend_name) {
+    private void enterChatRoom(String room_position, String user_id, String friend_id) {
         Bundle bundle = new Bundle();
         bundle.putString("room_position", room_position);
-        bundle.putString("userName", user_id);
-        bundle.putString("friendName", friend_name);
+        bundle.putString("user_id", user_id);
+        bundle.putString("friend_id", friend_id);
         Intent intent = new Intent(getContext(), MessageActivity.class);
-        intent.putExtra("bundle", bundle);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -480,9 +478,6 @@ public class SingleCourseFragment extends Fragment implements View.OnClickListen
             return false;
         }
     }
-
-
-
 
 
     List<Apply> findApplyByCourseId(int course_id) {

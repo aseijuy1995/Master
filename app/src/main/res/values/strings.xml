@@ -386,5 +386,9 @@
     <string name="NoNotifications">當前無任何通知</string>
     <string name="empty_notification">當前無任何通知</string>
     <string name="update_course_content">您確定要修改此課程嗎?</string>
+    <string name="show_password">顯示密碼</string>
+    <string name="empty_chatroom">當前無任何聊天室</string>
+    <string name="msg_hint">訊息...</string>
+    <string name="empty_meg">請輸入訊息</string>
 
 </resources>

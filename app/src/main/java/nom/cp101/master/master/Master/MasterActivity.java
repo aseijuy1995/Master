@@ -77,18 +77,14 @@ public class MasterActivity extends AppCompatActivity implements BottomNavigatio
                 return true;
 
             case R.id.item_message:
-                if (Common.checkUserName(this, Common.getUserName(this))) {
-                    fragment = new ChatRoomFragment();
-                    switchFragment(fragment);
-                }
+                fragment = new ChatRoomFragment();
+                switchFragment(fragment);
                 return true;
 
-            case R.id.item_notification:
-                if (Common.checkUserName(this, Common.getUserName(this))) {
-                    fragment = new NotificationFragment();
-                    switchFragment(fragment);
-                }
-                return true;
+//            case R.id.item_notification:
+//                fragment = new NotificationFragment();
+//                switchFragment(fragment);
+//                return true;
 
             case R.id.item_information:
                 if (Common.checkUserName(this, Common.getUserName(this))) {
@@ -145,9 +141,9 @@ public class MasterActivity extends AppCompatActivity implements BottomNavigatio
                         bnvMaster.setSelectedItemId(R.id.item_message);
                         break;
 
-                    case R.id.item_notification:
-                        bnvMaster.setSelectedItemId(R.id.item_notification);
-                        break;
+//                    case R.id.item_notification:
+//                        bnvMaster.setSelectedItemId(R.id.item_notification);
+//                        break;
 
                     case R.id.item_information:
                         bnvMaster.setSelectedItemId(R.id.item_information);
@@ -178,6 +174,32 @@ public class MasterActivity extends AppCompatActivity implements BottomNavigatio
             }
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Fragment fragment;
+        switch (bnvMaster.getSelectedItemId()) {
+//            case R.id.item_course:
+//                fragment = new CourseFragment();
+//                switchFragment(fragment);
+//                break;
+
+            case R.id.item_experience:
+                bnvMaster.setSelectedItemId(R.id.item_experience);
+                break;
+
+            case R.id.item_message:
+                bnvMaster.setSelectedItemId(R.id.item_message);
+                break;
+
+//            case R.id.item_notification:
+//                bnvMaster.setSelectedItemId(R.id.item_notification);
+//                break;
+//            case R.id.item_information:
+//                break;
+        }
     }
 
     private void connecServer() {

@@ -202,7 +202,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener, Te
                         preference.edit().putBoolean("login", true)
                                 .putString("account", signupAccount)
                                 .putString("password", signupPassword)
-                                .putInt("userAccess"+signupAccount, signupAccess)
+                                .putInt("userAccess" + signupAccount, signupAccess)
                                 .apply();
                         Common.setUserName(context, signupAccount);
 
